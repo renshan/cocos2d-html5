@@ -27,9 +27,11 @@
 
 /**
  * Load binary data by url.
+ * 通过url异步加载二进制数据
+ * 
  * @function
- * @param {String} url
- * @param {Function} [cb]
+ * @param {String} url  - url
+ * @param {Function} [cb]  - 回调函数
  */
 
 cc.loader.loadBinary = function (url, cb) {
@@ -39,6 +41,7 @@ cc.loader.loadBinary = function (url, cb) {
     xhr.open("GET", url, true);
     if (/msie/i.test(navigator.userAgent) && !/opera/i.test(navigator.userAgent)) {
         // IE-specific logic here
+        // 针对IE的特殊处理
         xhr.setRequestHeader("Accept-Charset", "x-user-defined");
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
@@ -68,6 +71,8 @@ cc.loader._str2Uint8Array = function (strData) {
 
 /**
  * Load binary data by url synchronously
+ * 通过url同步加载二进制数据
+ * 
  * @function
  * @param {String} url
  * @return {Uint8Array}
@@ -105,6 +110,7 @@ cc.loader.loadBinarySync = function (url) {
 };
 
 //Compatibility with IE9
+//兼容IE9的处理
 var Uint8Array = Uint8Array || Array;
 
 if (/msie/i.test(navigator.userAgent) && !/opera/i.test(navigator.userAgent)) {
@@ -126,6 +132,7 @@ if (/msie/i.test(navigator.userAgent) && !/opera/i.test(navigator.userAgent)) {
     //"</script>\r\n";
 
     // inject VBScript
+    // 注入VBScript
     //document.write(IEBinaryToArray_ByteStr_Script);
     var myVBScript = cc.newElement('script');
     myVBScript.type = "text/vbscript";
@@ -133,6 +140,7 @@ if (/msie/i.test(navigator.userAgent) && !/opera/i.test(navigator.userAgent)) {
     document.body.appendChild(myVBScript);
 
     // helper to convert from responseBody to a "responseText" like thing
+    // 将返回内容转化为文本数据
     cc._convertResponseBodyToText = function (binary) {
         var byteMapping = {};
         for (var i = 0; i < 256; i++) {

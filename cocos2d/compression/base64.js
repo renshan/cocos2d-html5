@@ -16,10 +16,10 @@ cc.Codec.Base64._keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0
  *    cc.Codec.Base64.decode(input[, unicode=false]) -> String (http://en.wikipedia.org/wiki/Base64).
  * </p>
  * @function
- * @param {String} input The base64 encoded string to decode
- * @return {String} Decodes a base64 encoded String
+ * @param {String} 输入要解码的base64编码字符串
+ * @return {String} 解码后的base64编码的字符串
  * @example
- * //decode string
+ * //解码字符串
  * cc.Codec.Base64.decode("U29tZSBTdHJpbmc="); // => "Some String"
  */
 cc.Codec.Base64.decode = function Jacob__Codec__Base64__decode(input) {
@@ -57,15 +57,14 @@ cc.Codec.Base64.decode = function Jacob__Codec__Base64__decode(input) {
 
 /**
  * <p>
- *    Converts an input string encoded in base64 to an array of integers whose<br/>
- *    values represent the decoded string's characters' bytes.
+ *    将一个base64编码的输入字符串转换为整型数组，此整型数组的值为字符串解码后的字节字符
  * </p>
  * @function
- * @param {String} input The String to convert to an array of Integers
+ * @param {String} 输入要转换为整型数组的字符串
  * @param {Number} bytes
  * @return {Array}
  * @example
- * //decode string to array
+ * //将字符串解码为数组
  * var decodeArr = cc.Codec.Base64.decodeAsArray("U29tZSBTdHJpbmc=");
  */
 cc.Codec.Base64.decodeAsArray = function Jacob__Codec__Base64___decodeAsArray(input, bytes) {

@@ -25,7 +25,7 @@
  ****************************************************************************/
 
 /**
- * A fire particle system
+ * 火焰粒子系统
  * @class
  * @extends cc.ParticleSystem
  *
@@ -34,68 +34,68 @@
  */
 cc.ParticleFire = cc.ParticleSystem.extend(/** @lends cc.ParticleFire# */{
     /**
-     * <p>The cc.ParticleFire's constructor. <br/>
-     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.ParticleFire()".<br/>
-     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>
+     * <p>cc.ParticleFire的构造函数 <br/> 
+     * 当使用new方式"var node = new cc.ParticleFire()"创建节点时，这个构造函数会被自动调用。<br/>
+     * 重写该方法扩展行为时，记得在扩展的“ctor”函数里调用“this._super()”。</p>
      */
     ctor:function () {
         cc.ParticleSystem.prototype.ctor.call(this, (cc._renderType === cc._RENDER_TYPE_WEBGL) ? 300 : 150);
     },
 
     /**
-     * initialize a fire particle system with number Of Particles
+     * 初始化一个包含指定数量粒子的火焰粒子系统
      * @param {Number} numberOfParticles
      * @return {Boolean}
      */
     initWithTotalParticles:function (numberOfParticles) {
         if (cc.ParticleSystem.prototype.initWithTotalParticles.call(this, numberOfParticles)) {
-            // duration
+            // 持续时间
             this.setDuration(cc.ParticleSystem.DURATION_INFINITY);
 
-            // Gravity Mode
+            // 重力模式
             this.setEmitterMode(cc.ParticleSystem.MODE_GRAVITY);
 
 
-            // Gravity Mode: gravity
+            // 重力模式：重力
             this.setGravity(cc.p(0, 0));
 
-            // Gravity Mode: radial acceleration
+            // 重力模式：径向加速度
             this.setRadialAccel(0);
             this.setRadialAccelVar(0);
 
-            // Gravity Mode: speed of particles
+            // 重力模式：粒子速度
             this.setSpeed(60);
             this.setSpeedVar(20);
 
-            // starting angle
+            // 开始角度
             this.setAngle(90);
             this.setAngleVar(10);
 
-            // emitter position
+            // 发射器位置
             var winSize = cc.director.getWinSize();
             this.setPosition(winSize.width / 2, 60);
             this.setPosVar(cc.p(40, 20));
 
-            // life of particles
+            // 粒子生命周期
             this.setLife(3);
             this.setLifeVar(0.25);
 
 
-            // size, in pixels
+            // 大小，以像素为单位
             this.setStartSize(54.0);
             this.setStartSizeVar(10.0);
             this.setEndSize(cc.ParticleSystem.START_SIZE_EQUAL_TO_END_SIZE);
 
-            // emits per frame
+            // 每秒发射数
             this.setEmissionRate(this.getTotalParticles() / this.getLife());
 
-            // color of particles
+            // 粒子颜色
             this.setStartColor(cc.color(194,64,31,255));
             this.setStartColorVar(cc.color(0,0,0,0));
             this.setEndColor(cc.color(0,0,0,255));
             this.setEndColorVar(cc.color(0,0,0,0));
 
-            // additive
+            // 加色式混合
             this.setBlendAdditive(true);
             return true;
         }
@@ -104,7 +104,7 @@ cc.ParticleFire = cc.ParticleSystem.extend(/** @lends cc.ParticleFire# */{
 });
 
 /**
- * Create a fire particle system
+ * 创建一个火焰粒子系统
  * @deprecated since v3.0 please use new cc.ParticleFire() instead
  * @return {cc.ParticleFire}
  */
@@ -113,7 +113,7 @@ cc.ParticleFire.create = function () {
 };
 
 /**
- * A fireworks particle system
+ * 烟花粒子系统
  * @class
  * @extends cc.ParticleSystem
  *
@@ -122,65 +122,65 @@ cc.ParticleFire.create = function () {
  */
 cc.ParticleFireworks = cc.ParticleSystem.extend(/** @lends cc.ParticleFireworks# */{
     /**
-     * <p>The cc.ParticleFireworks's constructor. <br/>
-     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.ParticleFireworks()".<br/>
-     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>
+     * <p>cc.ParticleFireworks的构造函数。 <br/>
+     * 当使用new方式"var node = new cc.ParticleFireworks()"创建节点时，这个构造函数会被自动调用。<br/>
+     * 重写该方法扩展行为时，记得在扩展的“ctor”函数里调用“this._super()”。</p>
      */
     ctor:function () {
         cc.ParticleSystem.prototype.ctor.call(this, (cc._renderType === cc._RENDER_TYPE_WEBGL) ? 1500 : 150);
     },
 
     /**
-     * initialize a fireworks particle system with number Of Particles
+     * 初始化一个包含指定数量粒子的烟花粒子系统。
      * @param {Number} numberOfParticles
      * @return {Boolean}
      */
     initWithTotalParticles:function (numberOfParticles) {
         if (cc.ParticleSystem.prototype.initWithTotalParticles.call(this, numberOfParticles)) {
-            // duration
+            // 持续时间
             this.setDuration(cc.ParticleSystem.DURATION_INFINITY);
 
-            // Gravity Mode
+            // 重力模式
             this.setEmitterMode(cc.ParticleSystem.MODE_GRAVITY);
 
-            // Gravity Mode: gravity
+            // 重力模式：重力
             this.setGravity(cc.p(0, -90));
 
-            // Gravity Mode:  radial
+            // 重力模式：径向加速度
             this.setRadialAccel(0);
             this.setRadialAccelVar(0);
 
-            //  Gravity Mode: speed of particles
+            // 重力模式：粒子速度
             this.setSpeed(180);
             this.setSpeedVar(50);
 
-            // emitter position
+            // 发射器位置
             var winSize = cc.director.getWinSize();
             this.setPosition(winSize.width / 2, winSize.height / 2);
 
-            // angle
+            // 角度
             this.setAngle(90);
             this.setAngleVar(20);
 
-            // life of particles
+            // 粒子生命周期
             this.setLife(3.5);
             this.setLifeVar(1);
 
-            // emits per frame
+            // 每秒发射数
             this.setEmissionRate(this.getTotalParticles() / this.getLife());
 
-            // color of particles
+            // 粒子颜色
             this.setStartColor(cc.color(128,128,128,255));
             this.setStartColorVar(cc.color(128,128,128,255));
             this.setEndColor(cc.color(26,26,26,51));
             this.setEndColorVar(cc.color(26,26,26,51));
 
-            // size, in pixels
+            // 大小，以像素为单位
             this.setStartSize(8.0);
             this.setStartSizeVar(2.0);
             this.setEndSize(cc.ParticleSystem.START_SIZE_EQUAL_TO_END_SIZE);
 
-            // additive
+            // 加色式混合
             this.setBlendAdditive(false);
             return true;
         }
@@ -189,7 +189,7 @@ cc.ParticleFireworks = cc.ParticleSystem.extend(/** @lends cc.ParticleFireworks#
 });
 
 /**
- * Create a fireworks particle system
+ * 创建烟花粒子系统
  * @deprecated since v3.0 please use new cc.ParticleFireworks() instead.
  * @return {cc.ParticleFireworks}
  */
@@ -198,7 +198,7 @@ cc.ParticleFireworks.create = function () {
 };
 
 /**
- * A sun particle system
+ * 太阳粒子系统
  * @class
  * @extends cc.ParticleSystem
  *
@@ -207,63 +207,63 @@ cc.ParticleFireworks.create = function () {
  */
 cc.ParticleSun = cc.ParticleSystem.extend(/** @lends cc.ParticleSun# */{
     /**
-     * <p>The cc.ParticleSun's constructor. <br/>
-     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.ParticleSun()".<br/>
-     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>
+     * <p>cc.ParticleSun的构造函数。<br/>
+     * 当使用new方式"var node = new cc.ParticleSun()"创建节点时，这个构造函数会被自动调用。<br/>
+     * 重写该方法扩展行为时，记得在扩展的“ctor”函数里调用“this._super()”</p>
      */
     ctor:function () {
         cc.ParticleSystem.prototype.ctor.call(this, (cc._renderType === cc._RENDER_TYPE_WEBGL) ? 350 : 150);
     },
 
     /**
-     * initialize a sun particle system with number Of Particles
+     * 初始化一个包含指定数量粒子的太阳粒子系统。
      * @param {Number} numberOfParticles
      * @return {Boolean}
      */
     initWithTotalParticles:function (numberOfParticles) {
         if (cc.ParticleSystem.prototype.initWithTotalParticles.call(this, numberOfParticles)) {
-            // additive
+            // 加色式混合
             this.setBlendAdditive(true);
 
-            // duration
+            // 持续时间
             this.setDuration(cc.ParticleSystem.DURATION_INFINITY);
 
-            // Gravity Mode
+            // 重力模式
             this.setEmitterMode(cc.ParticleSystem.MODE_GRAVITY);
 
-            // Gravity Mode: gravity
+            // 重力模式：重力
             this.setGravity(cc.p(0, 0));
 
-            // Gravity mode: radial acceleration
+            // 重力模式：径向加速度
             this.setRadialAccel(0);
             this.setRadialAccelVar(0);
 
-            // Gravity mode: speed of particles
+            // 重力模式：粒子速度
             this.setSpeed(20);
             this.setSpeedVar(5);
 
-            // angle
+            // 角度
             this.setAngle(90);
             this.setAngleVar(360);
 
-            // emitter position
+            // 发射器位置
             var winSize = cc.director.getWinSize();
             this.setPosition(winSize.width / 2, winSize.height / 2);
             this.setPosVar(cc.p(0,0));
 
-            // life of particles
+            // 粒子生命周期
             this.setLife(1);
             this.setLifeVar(0.5);
 
-            // size, in pixels
+            // 大小，以像素为单位
             this.setStartSize(30.0);
             this.setStartSizeVar(10.0);
             this.setEndSize(cc.ParticleSystem.START_SIZE_EQUAL_TO_END_SIZE);
 
-            // emits per seconds
+            // 每秒发射数
             this.setEmissionRate(this.getTotalParticles() / this.getLife());
 
-            // color of particles
+            // 粒子颜色
             this.setStartColor(cc.color(194, 64, 31, 255));
             this.setStartColorVar(cc.color(0, 0, 0, 0));
             this.setEndColor(cc.color(0, 0, 0, 255));
@@ -276,7 +276,7 @@ cc.ParticleSun = cc.ParticleSystem.extend(/** @lends cc.ParticleSun# */{
 });
 
 /**
- * Create a sun particle system
+ * 创建太阳粒子系统
  * @deprecated since v3.0 please use new cc.ParticleSun() instead.
  * @return {cc.ParticleSun}
  */
@@ -284,9 +284,9 @@ cc.ParticleSun.create = function () {
     return new cc.ParticleSun();
 };
 
-//! @brief A  particle system
+//! @brief 星系粒子系统
 /**
- * A galaxy particle system
+ * 星系粒子系统
  * @class
  * @extends cc.ParticleSystem
  *
@@ -295,70 +295,70 @@ cc.ParticleSun.create = function () {
  */
 cc.ParticleGalaxy = cc.ParticleSystem.extend(/** @lends cc.ParticleGalaxy# */{
     /**
-     * <p>The cc.ParticleGalaxy's constructor. <br/>
-     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.ParticleGalaxy()".<br/>
-     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>
+     * <p>cc.ParticleGalaxy的构造函数。<br/>
+     * 当使用new方式"var node = new cc.ParticleGalaxy()"创建节点时，这个构造函数会被自动调用。<br/>
+     * 重写该方法扩展行为时，记得在扩展的“ctor”函数里调用“this._super()”。</p>
      */
     ctor:function () {
         cc.ParticleSystem.prototype.ctor.call(this, (cc._renderType === cc._RENDER_TYPE_WEBGL) ? 200 : 100);
     },
 
     /**
-     * initialize a galaxy particle system with number Of Particles
+     * 初始化一个包含指定数量粒子的星系粒子系统
      * @param {Number} numberOfParticles
      * @return {Boolean}
      */
     initWithTotalParticles:function (numberOfParticles) {
         if (cc.ParticleSystem.prototype.initWithTotalParticles.call(this, numberOfParticles)) {
-            // duration
+            // 持续时间
             this.setDuration(cc.ParticleSystem.DURATION_INFINITY);
 
-            // Gravity Mode
+            // 重力模式
             this.setEmitterMode(cc.ParticleSystem.MODE_GRAVITY);
 
-            // Gravity Mode: gravity
+            // 重力模式：重力
             this.setGravity(cc.p(0, 0));
 
-            // Gravity Mode: speed of particles
+            // 重力模式：粒子速度
             this.setSpeed(60);
             this.setSpeedVar(10);
 
-            // Gravity Mode: radial
+            // 重力模式：径向加速度
             this.setRadialAccel(-80);
             this.setRadialAccelVar(0);
 
-            // Gravity Mode: tangential
+            // 重力模式：切向加速度
             this.setTangentialAccel(80);
             this.setTangentialAccelVar(0);
 
-            // angle
+            // 角度
             this.setAngle(90);
             this.setAngleVar(360);
 
-            // emitter position
+            // 发射器位置
             var winSize = cc.director.getWinSize();
             this.setPosition(winSize.width / 2, winSize.height / 2);
             this.setPosVar(cc.p(0,0));
 
-            // life of particles
+            // 粒子生命周期
             this.setLife(4);
             this.setLifeVar(1);
 
-            // size, in pixels
+            // 大小，以像素为单位
             this.setStartSize(37.0);
             this.setStartSizeVar(10.0);
             this.setEndSize(cc.ParticleSystem.START_SIZE_EQUAL_TO_END_SIZE);
 
-            // emits per second
+            // 每秒发射数
             this.setEmissionRate(this.getTotalParticles() / this.getLife());
 
-            // color of particles
+            // 粒子颜色
             this.setStartColor(cc.color(31, 64, 194, 255));
             this.setStartColorVar(cc.color(0, 0, 0, 0));
             this.setEndColor(cc.color(0, 0, 0, 255));
             this.setEndColorVar(cc.color(0, 0, 0, 0));
 
-            // additive
+            // 加色式混合
             this.setBlendAdditive(true);
             return true;
         }
@@ -366,7 +366,7 @@ cc.ParticleGalaxy = cc.ParticleSystem.extend(/** @lends cc.ParticleGalaxy# */{
     }
 });
 /**
- * Create a galaxy particle system
+ * 创建星系粒子系统
  * @deprecated since v3.0 please use new cc.OarticleGalaxy() instead.
  * @return {cc.ParticleGalaxy}
  */
@@ -375,7 +375,7 @@ cc.ParticleGalaxy.create = function () {
 };
 
 /**
- * A flower particle system
+ * 花粒子系统
  * @class
  * @extends cc.ParticleSystem
  *
@@ -384,70 +384,70 @@ cc.ParticleGalaxy.create = function () {
  */
 cc.ParticleFlower = cc.ParticleSystem.extend(/** @lends cc.ParticleFlower# */{
     /**
-     * <p>The cc.ParticleFlower's constructor. <br/>
-     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.ParticleFlower()".<br/>
-     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>
+     * <p>cc.ParticleFlower的构造函数。<br/>
+     * 当使用new方式"var node = new cc.ParticleFlower()"创建节点时，这个构造函数会被自动调用。<br/>
+     * 重写该方法扩展行为时，记得在扩展的“ctor”函数里调用“this._super()”。</p>
      */
     ctor : function () {
         cc.ParticleSystem.prototype.ctor.call(this, (cc._renderType === cc._RENDER_TYPE_WEBGL) ? 250 : 100);
     },
 
     /**
-     * initialize a flower particle system with number Of Particles
+     * 初始化一个包含指定数量粒子的花粒子系统
      * @param {Number} numberOfParticles
      * @return {Boolean}
      */
     initWithTotalParticles:function (numberOfParticles) {
         if (cc.ParticleSystem.prototype.initWithTotalParticles.call(this, numberOfParticles)) {
-            // duration
+            // 持续时间
             this.setDuration(cc.ParticleSystem.DURATION_INFINITY);
 
-            // Gravity Mode
+            // 重力模式
             this.setEmitterMode(cc.ParticleSystem.MODE_GRAVITY);
 
-            // Gravity Mode: gravity
+            // 重力模式：重力
             this.setGravity(cc.p(0, 0));
 
-            // Gravity Mode: speed of particles
+            // 重力模式：粒子速度
             this.setSpeed(80);
             this.setSpeedVar(10);
 
-            // Gravity Mode: radial
+            // 重力模式：径向加速度
             this.setRadialAccel(-60);
             this.setRadialAccelVar(0);
 
-            // Gravity Mode: tangential
+            // 重力模式：切向加速度
             this.setTangentialAccel(15);
             this.setTangentialAccelVar(0);
 
-            // angle
+            // 角度
             this.setAngle(90);
             this.setAngleVar(360);
 
-            // emitter position
+            // 发射器位置
             var winSize = cc.director.getWinSize();
             this.setPosition(winSize.width / 2, winSize.height / 2);
             this.setPosVar(cc.p(0,0));
 
-            // life of particles
+            // 粒子生命周期
             this.setLife(4);
             this.setLifeVar(1);
 
-            // size, in pixels
+            // 大小，以像素为单位
             this.setStartSize(30.0);
             this.setStartSizeVar(10.0);
             this.setEndSize(cc.ParticleSystem.START_SIZE_EQUAL_TO_END_SIZE);
 
-            // emits per second
+            // 每秒发射数
             this.setEmissionRate(this.getTotalParticles() / this.getLife());
 
-            // color of particles
+            // 粒子颜色
             this.setStartColor(cc.color(128, 128, 128, 255));
             this.setStartColorVar(cc.color(128, 128, 128, 128));
             this.setEndColor(cc.color(0, 0, 0, 255));
             this.setEndColorVar(cc.color(0, 0, 0, 0));
 
-            // additive
+            // 加色式混合
             this.setBlendAdditive(true);
             return true;
         }
@@ -456,7 +456,7 @@ cc.ParticleFlower = cc.ParticleSystem.extend(/** @lends cc.ParticleFlower# */{
 });
 
 /**
- * Create a flower particle system
+ * 创建花粒子系统
  * @deprecated since v3.0 please use new cc.ParticleFlower() instead.
  * @return {cc.ParticleFlower}
  */
@@ -464,9 +464,9 @@ cc.ParticleFlower.create = function () {
     return new cc.ParticleFlower();
 };
 
-//! @brief A meteor particle system
+//! @brief 流星粒子系统
 /**
- * A meteor particle system
+ * 流星粒子系统
  * @class
  * @extends cc.ParticleSystem
  *
@@ -475,70 +475,70 @@ cc.ParticleFlower.create = function () {
  */
 cc.ParticleMeteor = cc.ParticleSystem.extend(/** @lends cc.ParticleMeteor# */{
     /**
-     * <p>The cc.ParticleMeteor's constructor. <br/>
-     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.ParticleMeteor()".<br/>
-     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>
+     * <p>cc.ParticleMeteor的构造函数。<br/>
+     * 当用新的构造函数"var node = new cc.ParticleMeteor()"创建节点时，这个构造函数会被自动调用。<br/>
+     * 重写该方法扩展行为时，记得在扩展的“ctor”函数里调用“this._super()”。</p>
      */
     ctor:function () {
         cc.ParticleSystem.prototype.ctor.call(this, (cc._renderType === cc._RENDER_TYPE_WEBGL) ? 150 : 100);
     },
 
     /**
-     * initialize a meteor particle system with number Of Particles
+     * 初始化一个包含指定数量粒子的流星粒子系统
      * @param {Number} numberOfParticles
      * @return {Boolean}
      */
     initWithTotalParticles:function (numberOfParticles) {
         if (cc.ParticleSystem.prototype.initWithTotalParticles.call(this, numberOfParticles)) {
-            // duration
+            // 持续时间
             this.setDuration(cc.ParticleSystem.DURATION_INFINITY);
 
-            // Gravity Mode
+            // 重力模式
             this.setEmitterMode(cc.ParticleSystem.MODE_GRAVITY);
 
-            // Gravity Mode: gravity
+            // 重力模式：重力
             this.setGravity(cc.p(-200, 200));
 
-            // Gravity Mode: speed of particles
+            // 重力模式：粒子速度
             this.setSpeed(15);
             this.setSpeedVar(5);
 
-            // Gravity Mode: radial
+            // 重力模式：径向加速度
             this.setRadialAccel(0);
             this.setRadialAccelVar(0);
 
-            // Gravity Mode: tangential
+            // 重力模式：切向加速度
             this.setTangentialAccel(0);
             this.setTangentialAccelVar(0);
 
-            // angle
+            // 角度
             this.setAngle(90);
             this.setAngleVar(360);
 
-            // emitter position
+            // 发射器位置
             var winSize = cc.director.getWinSize();
             this.setPosition(winSize.width / 2, winSize.height / 2);
             this.setPosVar(cc.p(0,0));
 
-            // life of particles
+            // 粒子生命周期
             this.setLife(2);
             this.setLifeVar(1);
 
-            // size, in pixels
+            // 大小，以像素为单位
             this.setStartSize(60.0);
             this.setStartSizeVar(10.0);
             this.setEndSize(cc.ParticleSystem.START_SIZE_EQUAL_TO_END_SIZE);
 
-            // emits per second
+            // 每秒发射数
             this.setEmissionRate(this.getTotalParticles() / this.getLife());
 
-            // color of particles
+            // 粒子颜色
             this.setStartColor(cc.color(51, 102, 179));
             this.setStartColorVar(cc.color(0, 0, 51, 26));
             this.setEndColor(cc.color(0, 0, 0, 255));
             this.setEndColorVar(cc.color(0, 0, 0, 0));
 
-            // additive
+            // 加色式混合
             this.setBlendAdditive(true);
             return true;
         }
@@ -547,7 +547,7 @@ cc.ParticleMeteor = cc.ParticleSystem.extend(/** @lends cc.ParticleMeteor# */{
 });
 
 /**
- * Create a meteor particle system
+ * 创建流星粒子系统
  * @deprecated since v3.0 please use new cc.ParticleMeteor() instead.
  * @return {cc.ParticleMeteor}
  */
@@ -556,7 +556,7 @@ cc.ParticleMeteor.create = function () {
 };
 
 /**
- * A spiral particle system
+ * 旋涡粒子系统
  * @class
  * @extends cc.ParticleSystem
  *
@@ -566,70 +566,70 @@ cc.ParticleMeteor.create = function () {
 cc.ParticleSpiral = cc.ParticleSystem.extend(/** @lends cc.ParticleSpiral# */{
 
     /**
-     * <p>The cc.ParticleSpiral's constructor. <br/>
-     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.ParticleSpiral()".<br/>
-     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>
+     * <p>cc.ParticleSpiral的构造函数。<br/>
+     * 当使用new方式"var node = new cc.ParticleSpiral()"创建节点时，这个构造函数会被自动调用。<br/>
+     * 重写该方法扩展行为时，记得在扩展的“ctor”函数里调用“this._super()”。</p>
      */
     ctor:function() {
         cc.ParticleSystem.prototype.ctor.call(this,(cc._renderType === cc._RENDER_TYPE_WEBGL) ? 500 : 100);
     },
 
     /**
-     * initialize a spiral particle system with number Of Particles
+     * 初始化一个包含指定数量粒子的旋涡粒子系统
      * @param {Number} numberOfParticles
      * @return {Boolean}
      */
     initWithTotalParticles:function (numberOfParticles) {
         if (cc.ParticleSystem.prototype.initWithTotalParticles.call(this, numberOfParticles)) {
-            // duration
+            // 持续时间
             this.setDuration(cc.ParticleSystem.DURATION_INFINITY);
 
-            // Gravity Mode
+            // 重力模式
             this.setEmitterMode(cc.ParticleSystem.MODE_GRAVITY);
 
-            // Gravity Mode: gravity
+            // 重力模式：重力
             this.setGravity(cc.p(0, 0));
 
-            // Gravity Mode: speed of particles
+            // 重力模式：粒子速度
             this.setSpeed(150);
             this.setSpeedVar(0);
 
-            // Gravity Mode: radial
+            // 重力模式：径向加速度
             this.setRadialAccel(-380);
             this.setRadialAccelVar(0);
 
-            // Gravity Mode: tangential
+            // 重力模式：切向加速度
             this.setTangentialAccel(45);
             this.setTangentialAccelVar(0);
 
-            // angle
+            // 角度
             this.setAngle(90);
             this.setAngleVar(0);
 
-            // emitter position
+            // 发射器位置
             var winSize = cc.director.getWinSize();
             this.setPosition(winSize.width / 2, winSize.height / 2);
             this.setPosVar(cc.p(0,0));
 
-            // life of particles
+            // 粒子生命周期
             this.setLife(12);
             this.setLifeVar(0);
 
-            // size, in pixels
+            // 大小，以像素为单位
             this.setStartSize(20.0);
             this.setStartSizeVar(0.0);
             this.setEndSize(cc.ParticleSystem.START_SIZE_EQUAL_TO_END_SIZE);
 
-            // emits per second
+            // 每秒发射数
             this.setEmissionRate(this.getTotalParticles() / this.getLife());
 
-            // color of particles
+            // 粒子颜色
             this.setStartColor(cc.color(128,128,128,255));
             this.setStartColorVar(cc.color(128,128,128,0));
             this.setEndColor(cc.color(128,128,128,255));
             this.setEndColorVar(cc.color(128,128,128,0));
 
-            // additive
+            // 加色式混合
             this.setBlendAdditive(false);
             return true;
         }
@@ -638,7 +638,7 @@ cc.ParticleSpiral = cc.ParticleSystem.extend(/** @lends cc.ParticleSpiral# */{
 });
 
 /**
- * Create a spiral particle system
+ * 创建旋涡粒子系统
  * @deprecated since v3.0 please use new cc.ParticleSpiral() instead.
  * @return {cc.ParticleSpiral}
  */
@@ -647,7 +647,7 @@ cc.ParticleSpiral.create = function () {
 };
 
 /**
- * An explosion particle system
+ * 爆炸粒子系统
  * @class
  * @extends cc.ParticleSystem
  *
@@ -656,69 +656,69 @@ cc.ParticleSpiral.create = function () {
  */
 cc.ParticleExplosion = cc.ParticleSystem.extend(/** @lends cc.ParticleExplosion# */{
     /**
-     * <p>The cc.ParticleExplosion's constructor. <br/>
-     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.ParticleExplosion()".<br/>
-     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>
+     * <p>cc.ParticleExplosion的构造函数。<br/>
+     * 当使用new方式"var node = new cc.ParticleExplosion()"创建节点时，这个构造函数会被自动调用。<br/>
+     * 重写该方法扩展行为时，记得在扩展的“ctor”函数里调用“this._super()”。</p>
      */
     ctor:function () {
         cc.ParticleSystem.prototype.ctor.call(this, (cc._renderType === cc._RENDER_TYPE_WEBGL) ? 700 : 300);
     },
 
     /**
-     * initialize an explosion particle system with number Of Particles
+     * 初始化一个包含指定数量粒子的爆炸粒子系统
      * @param {Number} numberOfParticles
      * @return {Boolean}
      */
     initWithTotalParticles:function (numberOfParticles) {
         if (cc.ParticleSystem.prototype.initWithTotalParticles.call(this, numberOfParticles)) {
-            // duration
+            // 持续时间
             this.setDuration(0.1);
 
             this.setEmitterMode(cc.ParticleSystem.MODE_GRAVITY);
 
-            // Gravity Mode: gravity
+            // 重力模式：重力
             this.setGravity(cc.p(0, 0));
 
-            // Gravity Mode: speed of particles
+            // 重力模式：粒子速度
             this.setSpeed(70);
             this.setSpeedVar(40);
 
-            // Gravity Mode: radial
+            // 重力模式：径向加速度
             this.setRadialAccel(0);
             this.setRadialAccelVar(0);
 
-            // Gravity Mode: tangential
+            // 重力模式：切向加速度
             this.setTangentialAccel(0);
             this.setTangentialAccelVar(0);
 
-            // angle
+            // 角度
             this.setAngle(90);
             this.setAngleVar(360);
 
-            // emitter position
+            // 发射器位置
             var winSize = cc.director.getWinSize();
             this.setPosition(winSize.width / 2, winSize.height / 2);
             this.setPosVar(cc.p(0,0));
 
-            // life of particles
+            // 粒子生命周期
             this.setLife(5.0);
             this.setLifeVar(2);
 
-            // size, in pixels
+            // 大小，以像素为单位
             this.setStartSize(15.0);
             this.setStartSizeVar(10.0);
             this.setEndSize(cc.ParticleSystem.START_SIZE_EQUAL_TO_END_SIZE);
 
-            // emits per second
+            // 每秒发射数
             this.setEmissionRate(this.getTotalParticles() / this.getDuration());
 
-            // color of particles
+            // 粒子颜色
             this.setStartColor(cc.color(179, 26, 51, 255));
             this.setStartColorVar(cc.color(128, 128, 128, 0));
             this.setEndColor(cc.color(128, 128, 128, 0));
             this.setEndColorVar(cc.color(128, 128, 128, 0));
 
-            // additive
+            // 加色式混合
             this.setBlendAdditive(false);
             return true;
         }
@@ -727,7 +727,7 @@ cc.ParticleExplosion = cc.ParticleSystem.extend(/** @lends cc.ParticleExplosion#
 });
 
 /**
- * Create an explosion particle system
+ * 创建爆炸粒子系统
  * @deprecated since v3.0 please use new cc.ParticleExplosion() instead.
  * @return {cc.ParticleExplosion}
  */
@@ -736,7 +736,7 @@ cc.ParticleExplosion.create = function () {
 };
 
 /**
- * A smoke particle system
+ * 烟粒子系统
  * @class
  * @extends cc.ParticleSystem
  *
@@ -746,66 +746,66 @@ cc.ParticleExplosion.create = function () {
 cc.ParticleSmoke = cc.ParticleSystem.extend(/** @lends cc.ParticleSmoke# */{
 
     /**
-     * <p>The cc.ParticleSmoke's constructor. <br/>
-     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.ParticleSmoke()".<br/>
-     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>
+     * <p>cc.ParticleSmoke的构造函数。<br/>
+     * 当使用new方式"var node = new cc.ParticleSmoke()"创建节点时，这个构造函数会被自动调用。<br/>
+     * 重写该方法扩展行为时，记得在扩展的“ctor”函数里调用“this._super()”。</p>
      */
     ctor:function () {
         cc.ParticleSystem.prototype.ctor.call(this, (cc._renderType === cc._RENDER_TYPE_WEBGL) ? 200 : 100);
     },
 
     /**
-     * initialize a smoke particle system with number Of Particles
+     * 初始化一个包含指定数量粒子的烟粒子系统
      * @param {Number} numberOfParticles
      * @return {Boolean}
      */
     initWithTotalParticles:function (numberOfParticles) {
         if (cc.ParticleSystem.prototype.initWithTotalParticles.call(this, numberOfParticles)) {
-            // duration
+            // 持续时间
             this.setDuration(cc.ParticleSystem.DURATION_INFINITY);
 
-            // Emitter mode: Gravity Mode
+            // 发射模式：重力模式
             this.setEmitterMode(cc.ParticleSystem.MODE_GRAVITY);
 
-            // Gravity Mode: gravity
+            // 重力模式：重力
             this.setGravity(cc.p(0, 0));
 
-            // Gravity Mode: radial acceleration
+            // 重力模式：径向加速度
             this.setRadialAccel(0);
             this.setRadialAccelVar(0);
 
-            // Gravity Mode: speed of particles
+            // 重力模式：粒子速度
             this.setSpeed(25);
             this.setSpeedVar(10);
 
-            // angle
+            // 角度
             this.setAngle(90);
             this.setAngleVar(5);
 
-            // emitter position
+            // 发射器位置
             var winSize = cc.director.getWinSize();
             this.setPosition(winSize.width / 2, 0);
             this.setPosVar(cc.p(20, 0));
 
-            // life of particles
+            // 粒子生命周期
             this.setLife(4);
             this.setLifeVar(1);
 
-            // size, in pixels
+            // 大小，以像素为单位
             this.setStartSize(60.0);
             this.setStartSizeVar(10.0);
             this.setEndSize(cc.ParticleSystem.START_SIZE_EQUAL_TO_END_SIZE);
 
-            // emits per frame
+            // 每秒发射数
             this.setEmissionRate(this.getTotalParticles() / this.getLife());
 
-            // color of particles
+            // 粒子颜色
             this.setStartColor(cc.color(204, 204, 204, 255));
             this.setStartColorVar(cc.color(5, 5, 5, 0));
             this.setEndColor(cc.color(0, 0, 0, 255));
             this.setEndColorVar(cc.color(0, 0, 0, 0));
 
-            // additive
+            // 加色式混合
             this.setBlendAdditive(false);
             return true;
         }
@@ -814,7 +814,7 @@ cc.ParticleSmoke = cc.ParticleSystem.extend(/** @lends cc.ParticleSmoke# */{
 });
 
 /**
- * Create a smoke particle system
+ * 创建烟粒子系统
  * @deprecated since v3.0 please use new cc.ParticleSmoke() instead.
  * @return {cc.ParticleSmoke}
  */
@@ -823,7 +823,7 @@ cc.ParticleSmoke.create = function () {
 };
 
 /**
- * A snow particle system
+ * 雪粒子系统
  * @class
  * @extends cc.ParticleSystem
  *
@@ -833,70 +833,70 @@ cc.ParticleSmoke.create = function () {
 cc.ParticleSnow = cc.ParticleSystem.extend(/** @lends cc.ParticleSnow# */{
 
     /**
-     * <p>The cc.ParticleSnow's constructor. <br/>
-     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.ParticleSnow()".<br/>
-     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>
+     * <p>cc.ParticleSnow的构造函数。<br/>
+     * 当使用new方式"var node = new cc.ParticleSnow()"创建节点时，这个构造函数会被自动调用。<br/>
+     * 重写该方法扩展行为时，记得在扩展的“ctor”函数里调用“this._super()”。</p>
      */
     ctor:function () {
         cc.ParticleSystem.prototype.ctor.call(this, (cc._renderType === cc._RENDER_TYPE_WEBGL) ? 700 : 250);
     },
 
     /**
-     * initialize a snow particle system with number Of Particles
+     * 初始化一个包含指定数量粒子的雪粒子系统
      * @param {Number} numberOfParticles
      * @return {Boolean}
      */
     initWithTotalParticles:function (numberOfParticles) {
         if (cc.ParticleSystem.prototype.initWithTotalParticles.call(this, numberOfParticles)) {
-            // duration
+            // 持续时间
             this.setDuration(cc.ParticleSystem.DURATION_INFINITY);
 
-            // set gravity mode.
+            // 设置重力模式
             this.setEmitterMode(cc.ParticleSystem.MODE_GRAVITY);
 
-            // Gravity Mode: gravity
+            // 重力模式：重力
             this.setGravity(cc.p(0, -1));
 
-            // Gravity Mode: speed of particles
+            // 重力模式：粒子速度
             this.setSpeed(5);
             this.setSpeedVar(1);
 
-            // Gravity Mode: radial
+            // 重力模式：径向加速度
             this.setRadialAccel(0);
             this.setRadialAccelVar(1);
 
-            // Gravity mode: tangential
+            // 重力模式：切向加速度
             this.setTangentialAccel(0);
             this.setTangentialAccelVar(1);
 
-            // emitter position
+            // 发射器位置
             var winSize = cc.director.getWinSize();
             this.setPosition(winSize.width / 2, winSize.height + 10);
             this.setPosVar(cc.p(winSize.width / 2, 0));
 
-            // angle
+            // 角度
             this.setAngle(-90);
             this.setAngleVar(5);
 
-            // life of particles
+            // 粒子生命周期
             this.setLife(45);
             this.setLifeVar(15);
 
-            // size, in pixels
+            // 大小，以像素为单位
             this.setStartSize(10.0);
             this.setStartSizeVar(5.0);
             this.setEndSize(cc.ParticleSystem.START_SIZE_EQUAL_TO_END_SIZE);
 
-            // emits per second
+            // 每秒发射数
             this.setEmissionRate(10);
 
-            // color of particles
+            // 粒子颜色
             this.setStartColor(cc.color(255, 255, 255, 255));
             this.setStartColorVar(cc.color(0, 0, 0, 0));
             this.setEndColor(cc.color(255, 255, 255, 0));
             this.setEndColorVar(cc.color(0, 0, 0, 0));
 
-            // additive
+            // 加色式混合
             this.setBlendAdditive(false);
             return true;
         }
@@ -905,7 +905,7 @@ cc.ParticleSnow = cc.ParticleSystem.extend(/** @lends cc.ParticleSnow# */{
 });
 
 /**
- * Create a snow particle system
+ * 创建雪粒子系统
  * @deprecated since v3.0 please use new cc.ParticleSnow() instead.
  * @return {cc.ParticleSnow}
  */
@@ -913,9 +913,9 @@ cc.ParticleSnow.create = function () {
     return new cc.ParticleSnow();
 };
 
-//! @brief A rain particle system
+//! @brief 雨粒子系统
 /**
- * A rain particle system
+ * 雨粒子系统
  * @class
  * @extends cc.ParticleSystem
  *
@@ -925,70 +925,70 @@ cc.ParticleSnow.create = function () {
 cc.ParticleRain = cc.ParticleSystem.extend(/** @lends cc.ParticleRain# */{
 
     /**
-     * <p>The cc.ParticleRain's constructor. <br/>
-     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.ParticleRain()".<br/>
-     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>
+     * <p>cc.ParticleRain的构造函数。<br/>
+     * 当使用new方式"var node = new cc.ParticleRain()"创建节点时，这个构造函数会被自动调用。<br/>
+     * 重写该方法扩展行为时，记得在扩展的“ctor”函数里调用“this._super()”。</p>
      */
     ctor:function () {
         cc.ParticleSystem.prototype.ctor.call(this, (cc._renderType === cc._RENDER_TYPE_WEBGL) ? 1000 : 300);
     },
 
     /**
-     * initialize a rain particle system with number Of Particles
+     * 初始化一个包含指定数量粒子的雨粒子系统
      * @param {Number} numberOfParticles
      * @return {Boolean}
      */
     initWithTotalParticles:function (numberOfParticles) {
         if (cc.ParticleSystem.prototype.initWithTotalParticles.call(this, numberOfParticles)) {
-            // duration
+            // 持续时间
             this.setDuration(cc.ParticleSystem.DURATION_INFINITY);
 
             this.setEmitterMode(cc.ParticleSystem.MODE_GRAVITY);
 
-            // Gravity Mode: gravity
+            // 重力模式：重力
             this.setGravity(cc.p(10, -10));
 
-            // Gravity Mode: radial
+            // 重力模式：径向加速度
             this.setRadialAccel(0);
             this.setRadialAccelVar(1);
 
-            // Gravity Mode: tangential
+            // 重力模式：切向加速度
             this.setTangentialAccel(0);
             this.setTangentialAccelVar(1);
 
-            // Gravity Mode: speed of particles
+            // 重力模式：粒子速度
             this.setSpeed(130);
             this.setSpeedVar(30);
 
-            // angle
+            // 角度
             this.setAngle(-90);
             this.setAngleVar(5);
 
 
-            // emitter position
+            // 发射器位置
             var winSize = cc.director.getWinSize();
             this.setPosition(winSize.width / 2, winSize.height);
             this.setPosVar(cc.p(winSize.width / 2, 0));
 
-            // life of particles
+            // 粒子生命周期
             this.setLife(4.5);
             this.setLifeVar(0);
 
-            // size, in pixels
+            // 大小，以像素为单位
             this.setStartSize(4.0);
             this.setStartSizeVar(2.0);
             this.setEndSize(cc.ParticleSystem.START_SIZE_EQUAL_TO_END_SIZE);
 
-            // emits per second
+            // 每秒发射数
             this.setEmissionRate(20);
 
-            // color of particles
+            // 粒子颜色
             this.setStartColor(cc.color(179, 204, 255, 255));
             this.setStartColorVar(cc.color(0, 0, 0, 0));
             this.setEndColor(cc.color(179, 204, 255, 128));
             this.setEndColorVar(cc.color(0, 0, 0, 0));
 
-            // additive
+            // 加色式混合
             this.setBlendAdditive(false);
             return true;
         }
@@ -997,7 +997,7 @@ cc.ParticleRain = cc.ParticleSystem.extend(/** @lends cc.ParticleRain# */{
 });
 
 /**
- * Create a rain particle system
+ * 创建雨粒子系统
  * @deprecated since v3.0 please use cc.ParticleRain() instead.
  * @return {cc.ParticleRain}
  */

@@ -35,11 +35,29 @@
  * @class
  * @name cc.animationCache
  */
+
+/**
+ * <p>
+ *     cc.animationCache 是一个管理动画的单例对象<br/>
+ *     它保存动画在缓存中. 如果你想要保存你的动画到缓存中，可以使用这个类.<br/>
+ * <br/>
+ * 例子<br/>
+ * cc.animationCache.addAnimation(animation,"animation1");<br/>
+ * </p>
+ * @class
+ * @name cc.animationCache
+ */
 cc.animationCache = /** @lends cc.animationCache# */{
 	_animations: {},
 
     /**
      * Adds a cc.Animation with a name.
+     * @param {cc.Animation} animation
+     * @param {String} name
+     */
+    
+     /**
+     * 用名字增加一个cc.Animation.
      * @param {cc.Animation} animation
      * @param {String} name
      */
@@ -49,6 +67,11 @@ cc.animationCache = /** @lends cc.animationCache# */{
 
     /**
      * Deletes a cc.Animation from the cache.
+     * @param {String} name
+     */
+    
+     /**
+     * 从缓存中删除一个cc.Animation.
      * @param {String} name
      */
     removeAnimation:function (name) {
@@ -65,6 +88,16 @@ cc.animationCache = /** @lends cc.animationCache# */{
      *     Returns a cc.Animation that was previously added.<br/>
      *      If the name is not found it will return nil.<br/>
      *      You should retain the returned copy if you are going to use it.</br>
+     * </p>
+     * @param {String} name
+     * @return {cc.Animation}
+     */
+    
+    /**
+     * <p>
+     *     返回之前创建的cc.Animation.<br/>
+     *      如果找不到名字会返回nil.<br/>
+     *      如果你准备使用这个动画，你可以将返回值赋值给一个变量.</br>
      * </p>
      * @param {String} name
      * @return {cc.Animation}
@@ -111,6 +144,14 @@ cc.animationCache = /** @lends cc.animationCache# */{
      * <p>
      *    Adds an animations from a plist file.<br/>
      *    Make sure that the frames were previously loaded in the cc.SpriteFrameCache.
+     * </p>
+     * @param {String} plist
+     */
+    
+    /**
+     * <p>
+     *    从plist文件添加一个动画.<br/>
+     *    应确保动画帧已经事先加载到cc.SpriteFrameCache中.
      * </p>
      * @param {String} plist
      */
@@ -181,7 +222,7 @@ cc.animationCache = /** @lends cc.animationCache# */{
                 continue;
             }
 
-            //Array of AnimationFrames
+            //Array of AnimationFrames          AnimationFrames数组
             var arr = [];
             for (var i = 0; i < frameArray.length; i++) {
                 var entry = frameArray[i];

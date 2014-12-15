@@ -25,8 +25,8 @@
  ****************************************************************************/
 
 /**
- * Parallax Object. <br />
- * Parallax required attributes are stored.
+ * Parallax Object. <br />  Parallax对象
+ * Parallax required attributes are stored. 存储Parallax必须的属性
  * @class
  * @extends cc.Class
  */
@@ -40,15 +40,15 @@ cc.PointObject = cc.Class.extend(/** @lends cc.PointObject# */{
     },
 
     /**
-     * Gets the ratio.
-     * @return  {cc.Point} Not point, this is ratio.
+     * Gets the ratio. 获取比例
+     * @return  {cc.Point} Not point, this is ratio. 不是点，是比例。
      */
     getRatio:function () {
         return this._ratio;
     },
 
     /**
-     * Set the ratio.
+     * Set the ratio. 设置比例
      * @param  {cc.Point} value
      */
     setRatio:function (value) {
@@ -56,7 +56,7 @@ cc.PointObject = cc.Class.extend(/** @lends cc.PointObject# */{
     },
 
     /**
-     * Gets the offset.
+     * Gets the offset. 获取偏移量
      * @return  {cc.Point}
      */
     getOffset:function () {
@@ -64,7 +64,7 @@ cc.PointObject = cc.Class.extend(/** @lends cc.PointObject# */{
     },
 
     /**
-     * Set the offset.
+     * Set the offset. 设置偏移量
      * @param {cc.Point} value
      */
     setOffset:function (value) {
@@ -72,7 +72,7 @@ cc.PointObject = cc.Class.extend(/** @lends cc.PointObject# */{
     },
 
     /**
-     * Gets the child.
+     * Gets the child. 获取子元素
      * @return {cc.Node}
      */
     getChild:function () {
@@ -80,7 +80,7 @@ cc.PointObject = cc.Class.extend(/** @lends cc.PointObject# */{
     },
 
     /**
-     * Set the child.
+     * Set the child. 设置子元素
      * @param  {cc.Node} value
      */
     setChild:function (value) {
@@ -88,9 +88,9 @@ cc.PointObject = cc.Class.extend(/** @lends cc.PointObject# */{
     },
 
     /**
-     * initializes cc.PointObject
-     * @param  {cc.Point} ratio Not point, this is a ratio.
-     * @param  {cc.Point} offset
+     * initializes cc.PointObject 初始化cc.PointObject
+     * @param  {cc.Point} ratio Not point, this is a ratio. 比例，不是点。
+     * @param  {cc.Point} offset 偏移量
      * @return {Boolean}
      */
     initWithCCPoint:function (ratio, offset) {
@@ -102,19 +102,19 @@ cc.PointObject = cc.Class.extend(/** @lends cc.PointObject# */{
 });
 
 /**
- * Create a object to stored parallax data.
- * @param {cc.Point} ratio
- * @param {cc.Point} offset
+ * Create a object to stored parallax data. 创建存储parallax数据的对象
+ * @param {cc.Point} ratio 比例
+ * @param {cc.Point} offset 偏移量
  * @return {cc.PointObject}
- * @deprecated since v3.0 please use new cc.PointObject() instead.
+ * @deprecated since v3.0 please use new cc.PointObject() instead. 自v3.0后请创建 cc.NodeGrid 对象代替。
  */
 cc.PointObject.create = function (ratio, offset) {
     return new cc.PointObject(ratio, offset);
 };
 
 /**
- * <p>cc.ParallaxNode: A node that simulates a parallax scroller<br />
- * The children will be moved faster / slower than the parent according the the parallax ratio. </p>
+ * <p>cc.ParallaxNode: A node that simulates a parallax scroller<br /> ParallaxNode：模拟parallax scroller的节点
+ * The children will be moved faster / slower than the parent according the the parallax ratio. </p> 根据parallax ratio 子元素将会比父元素删除的更快活着更慢。
  * @class
  * @extends cc.Node
  *
@@ -127,7 +127,7 @@ cc.ParallaxNode = cc.Node.extend(/** @lends cc.ParallaxNode# */{
     _className:"ParallaxNode",
 
     /**
-     * Gets the parallax array.
+     * Gets the parallax array. 获取parallax数组
      * @return {Array}
      */
     getParallaxArray:function () {
@@ -135,7 +135,7 @@ cc.ParallaxNode = cc.Node.extend(/** @lends cc.ParallaxNode# */{
     },
 
     /**
-     * Set parallax array.
+     * Set parallax array. 设置parallax数组
      * @param {Array} value
      */
     setParallaxArray:function (value) {
@@ -143,7 +143,7 @@ cc.ParallaxNode = cc.Node.extend(/** @lends cc.ParallaxNode# */{
     },
 
     /**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
+     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.构造器的功能，重写构造器为了扩展构造器行为，记住要调用"this._super()"在扩展的"ctor"函数。
      */
     ctor:function () {
         cc.Node.prototype.ctor.call(this);
@@ -152,8 +152,8 @@ cc.ParallaxNode = cc.Node.extend(/** @lends cc.ParallaxNode# */{
     },
 
     /**
-     * Adds a child to the container with a z-order, a parallax ratio and a position offset
-     * It returns self, so you can chain several addChilds.
+     * Adds a child to the container with a z-order, a parallax ratio and a position offset 在容器里添加一个子元素包含z-order、parallax比例、位置偏移量
+     * It returns self, so you can chain several addChilds. 返回self，你可以链接多个addChilds函数。
      * @param {cc.Node} child
      * @param {Number} z
      * @param {cc.Point} ratio
@@ -179,7 +179,7 @@ cc.ParallaxNode = cc.Node.extend(/** @lends cc.ParallaxNode# */{
     },
 
     /**
-     *  Remove Child
+     *  Remove Child 删除子元素
      * @param {cc.Node} child
      * @param {Boolean} cleanup
      * @example
@@ -199,7 +199,7 @@ cc.ParallaxNode = cc.Node.extend(/** @lends cc.ParallaxNode# */{
     },
 
     /**
-     *  Remove all children with cleanup
+     *  Remove all children with cleanup 删除所有子元素
      * @param {Boolean} cleanup
      */
     removeAllChildren:function (cleanup) {
@@ -208,7 +208,7 @@ cc.ParallaxNode = cc.Node.extend(/** @lends cc.ParallaxNode# */{
     },
 
     /**
-     * Recursive method that visit its children and draw them
+     * Recursive method that visit its children and draw them  访问cc.ParallaxNode子元素和绘制它们的递归方法
      */
     visit:function () {
         var pos = this._absolutePosition();
@@ -252,8 +252,8 @@ cc.ParallaxNode = cc.Node.extend(/** @lends cc.ParallaxNode# */{
 });
 
 /**
- * Create new parallax node.
- * @deprecated since v3.0 please use new cc.ParallaxNode() instead.
+ * Create new parallax node. 创建新的parallax节点
+ * @deprecated since v3.0 please use new cc.ParallaxNode() instead. 自v3.0后请用 new cc.NodeGrid() 代替。
  * @return {cc.ParallaxNode}
  * @example
  * //example

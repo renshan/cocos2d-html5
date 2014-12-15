@@ -28,6 +28,10 @@
  */
 
 /**
+ * 忽略......
+ */
+
+/**
  * @constant
  * @type {number}
  */
@@ -51,6 +55,14 @@ cc.UIInterfaceOrientationPortrait = 0;
 /**
  * <p>
  *  This class manages all events of input. include: touch, mouse, accelerometer, keyboard                                       <br/>
+ * </p>
+ * @class
+ * @name cc.inputManager
+ */
+
+/**
+ * <p>
+ *  这个类管理所有的输入事件. 包括: touch, mouse, accelerometer, keyboard                                       <br/>
  * </p>
  * @class
  * @name cc.inputManager
@@ -90,7 +102,7 @@ cc.inputManager = /** @lends cc.inputManager# */{
             temp >>= 1;
         }
 
-        // all bits are used
+        // all bits are used            使用所有字节
         return -1;
     },
 
@@ -108,6 +120,11 @@ cc.inputManager = /** @lends cc.inputManager# */{
     /**
      * @function
      * @param {Array} touches
+     */
+    
+        /**
+     * @function
+     * @param {Array} 触摸时间数组
      */
     handleTouchesBegin: function (touches) {
         var selTouch, index, curTouch, touchID, handleTouches = [], locTouchIntDict = this._touchesIntegerDict;
@@ -141,6 +158,11 @@ cc.inputManager = /** @lends cc.inputManager# */{
      * @function
      * @param {Array} touches
      */
+    
+        /**
+     * @function
+     * @param {Array} 触摸事件数组
+     */
     handleTouchesMove: function(touches){
         var selTouch, index, touchID, handleTouches = [], locTouches = this._touches;
         for(var i = 0, len = touches.length; i< len; i ++){
@@ -170,6 +192,11 @@ cc.inputManager = /** @lends cc.inputManager# */{
      * @function
      * @param {Array} touches
      */
+    
+        /**
+     * @function
+     * @param {Array} 触摸时间数组
+     */
     handleTouchesEnd: function(touches){
         var handleTouches = this.getSetOfTouchesEndOrCancel(touches);
         if(handleTouches.length > 0) {
@@ -183,6 +210,11 @@ cc.inputManager = /** @lends cc.inputManager# */{
     /**
      * @function
      * @param {Array} touches
+     */
+    
+        /**
+     * @function
+     * @param {Array} 触摸事件数组
      */
     handleTouchesCancel: function(touches){
         var handleTouches = this.getSetOfTouchesEndOrCancel(touches);
@@ -198,6 +230,12 @@ cc.inputManager = /** @lends cc.inputManager# */{
      * @function
      * @param {Array} touches
      * @returns {Array}
+     */
+    
+        /**
+     * @function
+     * @param {Array} 触摸事件数组
+     * @返回 {Array}
      */
     getSetOfTouchesEndOrCancel: function(touches) {
         var selTouch, index, touchID, handleTouches = [], locTouches = this._touches, locTouchesIntDict = this._touchesIntegerDict;
@@ -224,6 +262,12 @@ cc.inputManager = /** @lends cc.inputManager# */{
      * @function
      * @param {HTMLElement} element
      * @return {Object}
+     */
+    
+        /**
+     * @function
+     * @param {HTMLElement} HTML元素
+     * @返回 {Object}
      */
     getHTMLElementPosition: function (element) {
         var docElem = document.documentElement;
@@ -261,6 +305,12 @@ cc.inputManager = /** @lends cc.inputManager# */{
      * @param {cc.Touch} touch
      * @return {cc.Touch}
      */
+    
+        /**
+     * @function
+     * @param {cc.Touch} 触摸事件
+     * @返回 {cc.Touch}
+     */
     getPreTouch: function(touch){
         var preTouch = null;
         var locPreTouchPool = this._preTouchPool;
@@ -279,6 +329,11 @@ cc.inputManager = /** @lends cc.inputManager# */{
     /**
      * @function
      * @param {cc.Touch} touch
+     */
+    
+        /**
+     * @function
+     * @param {cc.Touch} 触摸事件
      */
     setPreTouch: function(touch){
         var find = false;
@@ -308,6 +363,14 @@ cc.inputManager = /** @lends cc.inputManager# */{
      * @param {cc.Point} pos
      * @return {cc.Touch}
      */
+    
+        /**
+     * @function
+     * @param {Number} 触摸点的X坐标
+     * @param {Number} 触摸点的Y坐标
+     * @param {cc.Point} 位置
+     * @返回 {cc.Touch}
+     */
     getTouchByXY: function(tx, ty, pos){
         var locPreTouch = this._preTouchPoint;
         var location = this._glView.convertToLocationInView(tx, ty, pos);
@@ -324,6 +387,14 @@ cc.inputManager = /** @lends cc.inputManager# */{
      * @param {cc.Point} pos
      * @param {Number} eventType
      * @returns {cc.EventMouse}
+     */
+    
+        /**
+     * @function
+     * @param {cc.Point} 鼠标点击坐标
+     * @param {cc.Point} 位置
+     * @param {Number} 事件类型
+     * @返回 {cc.EventMouse}
      */
     getMouseEvent: function(location, pos, eventType){
         var locPreMouse = this._prevMousePoint;
@@ -342,6 +413,13 @@ cc.inputManager = /** @lends cc.inputManager# */{
      * @param {cc.Point} pos
      * @return {cc.Point}
      */
+    
+        /**
+     * @function
+     * @param {Touch} 事件
+     * @param {cc.Point} 位置
+     * @返回 {cc.Point}
+     */
     getPointByEvent: function(event, pos){
         if (event.pageX != null)  //not avalable in <= IE8
             return {x: event.pageX, y: event.pageY};
@@ -356,6 +434,13 @@ cc.inputManager = /** @lends cc.inputManager# */{
      * @param {Touch} event
      * @param {cc.Point} pos
      * @returns {Array}
+     */
+    
+        /**
+     * @function
+     * @param {Touch} 事件
+     * @param {cc.Point} 位置
+     * @返回 {Array}
      */
     getTouchesByEvent: function(event, pos){
         var touchArr = [], locView = this._glView;
@@ -373,7 +458,7 @@ cc.inputManager = /** @lends cc.inputManager# */{
                     location = locView.convertToLocationInView(touch_event.clientX, touch_event.clientY, pos);
                 if (touch_event.identifier != null) {
                     touch = new cc.Touch(location.x, location.y, touch_event.identifier);
-                    //use Touch Pool
+                    //use Touch Pool        使用触摸事件池
                     preLocation = this.getPreTouch(touch).getLocation();
                     touch._setPrevPoint(preLocation.x, preLocation.y);
                     this.setPreTouch(touch);
@@ -393,6 +478,11 @@ cc.inputManager = /** @lends cc.inputManager# */{
      * @function
      * @param {HTMLElement} element
      */
+    
+        /**
+     * @function
+     * @param {HTMLElement} HTML元素
+     */
     registerSystemEvent: function(element){
         if(this._isRegisterEvent) return;
 
@@ -400,7 +490,7 @@ cc.inputManager = /** @lends cc.inputManager# */{
         var selfPointer = this;
         var supportMouse = ('mouse' in cc.sys.capabilities), supportTouches = ('touches' in cc.sys.capabilities);
 
-        //register touch event
+        //register touch event          注册触摸事件
         if (supportMouse) {
             cc._addEventListener(window, 'mousedown', function () {
                 selfPointer._mousePressed = true;
@@ -425,7 +515,7 @@ cc.inputManager = /** @lends cc.inputManager# */{
                 }
             }, false);
 
-            //register canvas mouse event
+            //register canvas mouse event           注册canvas鼠标点击事件
             cc._addEventListener(element,"mousedown", function (event) {
                 selfPointer._mousePressed = true;
 
@@ -495,7 +585,7 @@ cc.inputManager = /** @lends cc.inputManager# */{
                 event.preventDefault();
             }, false);
 
-            /* firefox fix */
+            /* firefox fix          火狐浏览器的修复*/
             cc._addEventListener(element, "DOMMouseScroll", function(event) {
                 var pos = selfPointer.getHTMLElementPosition(element);
                 var location = selfPointer.getPointByEvent(event, pos);
@@ -533,7 +623,7 @@ cc.inputManager = /** @lends cc.inputManager# */{
         }
 
         if(supportTouches) {
-            //register canvas touch event
+            //register canvas touch event       注册所有canvas的触摸事件
             cc._addEventListener(element,"touchstart", function (event) {
                 if (!event.changedTouches) return;
 
@@ -580,10 +670,10 @@ cc.inputManager = /** @lends cc.inputManager# */{
             }, false);
         }
 
-        //register keyboard event
+        //register keyboard event           注册键盘事件
         this._registerKeyboardEvent();
 
-        //register Accelerometer event
+        //register Accelerometer event          注册加速剂事件
         this._registerAccelerometerEvent();
 
         this._isRegisterEvent = true;
@@ -596,6 +686,11 @@ cc.inputManager = /** @lends cc.inputManager# */{
     /**
      * @function
      * @param {Number} dt
+     */
+    
+    /**
+     * @function
+     * @param {Number} 时间
      */
     update:function(dt){
         if(this._accelCurTime > this._accelInterval){

@@ -532,7 +532,7 @@
          * @deprecated since v3.0, please use getNodeToParentTransform instead
          */
         /**
-         * @自v3.0弃用,使用 getNodeToParentTransform 代替
+         * @deprecated 自v3.0弃用,使用 getNodeToParentTransform 代替
          */
         nodeToParentTransform: function(){
             return this.getNodeToParentTransform();
@@ -677,7 +677,7 @@
      */
     /**
      * 通过文件名和矩形创建一个PhysicsSprite
-     * @自v3.0弃用, 使用新的 cc.PhysicsSprite(fileName, rect) 代替
+     * @deprecated 自v3.0弃用, 使用new cc.PhysicsSprite(fileName, rect) 代替
      * @param {String|cc.Texture2D|cc.SpriteFrame} fileName
      * @param {cc.Rect} rect
      * @return {cc.PhysicsSprite}
@@ -691,7 +691,7 @@
      * @type {Function}
      */
     /**
-     * @自v3.0弃用, 使用新的 cc.PhysicsSprite(spriteFrameName) 代替
+     * @deprecated 自v3.0弃用, 使用new cc.PhysicsSprite(spriteFrameName) 代替
      * @type {Function}
      */
     cc.PhysicsSprite.createWithSpriteFrameName = cc.PhysicsSprite.create;
@@ -701,7 +701,7 @@
      * @type {Function}
      */
     /**
-     * @自v3.0弃用, 使用新的 cc.PhysicsSprite(spriteFrame) 代替
+     * @deprecated 自v3.0弃用, 使用new cc.PhysicsSprite(spriteFrame) 代替
      * @type {Function}
      */
     cc.PhysicsSprite.createWithSpriteFrame = cc.PhysicsSprite.create;

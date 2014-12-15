@@ -28,7 +28,7 @@
 
 /**
  * <p>
- A 4x4 matrix                         </br>
+ A 4x4 matrix                         </br>    4x4矩阵
  </br>
  mat =                                 </br>
  | 0   4   8  12 |                     </br>
@@ -45,10 +45,10 @@ cc.kmMat4 = function () {
 };
 
 /**
- * Fills a kmMat4 structure with the values from a 16 element array of floats
- * @Params pOut - A pointer to the destination matrix
- * @Params pMat - A 16 element array of floats
- * @Return Returns pOut so that the call can be nested
+ * Fills a kmMat4 structure with the values from a 16 element array of floats    将一个包含16个floats元素的数组赋值给一个kmMat4结构
+ * @Params pOut - A pointer to the destination matrix    一个指向目标举证的指针
+ * @Params pMat - A 16 element array of floats    一个包含16个floats元素的数组
+ * @Return Returns pOut so that the call can be nested    返回pOut以便调用能够被嵌套
  */
 cc.kmMat4Fill = function (pOut, pMat) {
     pOut.mat[0] = pOut.mat[1] = pOut.mat[2] =pOut.mat[3] =
@@ -58,9 +58,9 @@ cc.kmMat4Fill = function (pOut, pMat) {
 };
 
 /**
- * Sets pOut to an identity matrix returns pOut
- * @Params pOut - A pointer to the matrix to set to identity
- * @Return Returns pOut so that the call can be nested
+ * Sets pOut to an identity matrix returns pOut    将pOut赋值给单位矩阵并返回pOut
+ * @Params pOut - A pointer to the matrix to set to identity    一个指向单位矩阵的指针
+ * @Return Returns pOut so that the call can be nested    返回pOut以便调用能够被嵌套
  */
 cc.kmMat4Identity = function (pOut) {
     pOut.mat[1] = pOut.mat[2] = pOut.mat[3]
@@ -85,7 +85,7 @@ cc.kmMat4._swap = function (pIn, r1, c1, r2, c2) {
     cc.kmMat4._set(pIn, r2, c2, tmp);
 };
 
-//Returns an upper and a lower triangular matrix which are L and R in the Gauss algorithm
+//Returns an upper and a lower triangular matrix which are L and R in the Gauss algorithm    返回在高斯算法中左边最上的三角矩阵和右边最下的三角矩阵
 cc.kmMat4._gaussj = function (a, b) {
     var i, icol = 0, irow = 0, j, k, l, ll, n = 4, m = 4;
     var big, dum, pivinv;
@@ -144,7 +144,7 @@ cc.kmMat4._gaussj = function (a, b) {
             }
         }
     }
-//    This is the end of the main loop over columns of the reduction. It only remains to unscram-
+//    This is the end of the main loop over columns of the reduction. It only remains to unscram-  这个是最后通过递减遍历列的主循环。它仅仅是交换列的视图方法。当序列被创建的时候，我们通过反序遍历来交换两列。
 //    ble the solution in view of the column interchanges. We do this by interchanging pairs of
 //    columns in the reverse order that the permutation was built up.
     for (l = n - 1; l >= 0; l--) {
@@ -163,9 +163,9 @@ cc.kmMat4._identity =
         0.0, 0.0, 0.0, 1.0]);
 
 /**
- * Calculates the inverse of pM and stores the result in
+ * Calculates the inverse of pM and stores the result in    计算pM的倒数并将结果存储在pOut中
  * pOut.
- * @Return Returns NULL if there is no inverse, else pOut
+ * @Return Returns NULL if there is no inverse, else pOut    如果没有倒数返回NULL，否则返回pOut
  */
 cc.kmMat4Inverse = function (pOut, pM) {
     var inv = new cc.kmMat4();
@@ -182,7 +182,7 @@ cc.kmMat4Inverse = function (pOut, pM) {
 };
 
 /**
- * Returns KM_TRUE if pIn is an identity matrix
+ * Returns KM_TRUE if pIn is an identity matrix    如果pIn是一个单位矩阵返回KM_TRUE，否则返回KM_FALSE
  * KM_FALSE otherwise
  */
 cc.kmMat4IsIdentity = function (pIn) {
@@ -194,7 +194,7 @@ cc.kmMat4IsIdentity = function (pIn) {
 };
 
 /**
- * Sets pOut to the transpose of pIn, returns pOut
+ * Sets pOut to the transpose of pIn, returns pOut    将pIn转置后赋值给pOut，并返回pOut
  */
 cc.kmMat4Transpose = function (pOut, pIn) {
     var x, z, outArr = pOut.mat,inArr = pIn.mat;
@@ -206,10 +206,10 @@ cc.kmMat4Transpose = function (pOut, pIn) {
 };
 
 /**
- * Multiplies pM1 with pM2, stores the result in pOut, returns pOut
+ * Multiplies pM1 with pM2, stores the result in pOut, returns pOut    将pM1乘以pM2，将结果存储在pOut中，并返回pOut
  */
 cc.kmMat4Multiply = function (pOut, pM1, pM2) {
-    // Cache the matrix values (makes for huge speed increases!)
+    // Cache the matrix values (makes for huge speed increases!)    缓存矩阵数据（为了大幅度提高速度！）
     var  outArray = pOut.mat;
     var a00 = pM1.mat[0], a01 = pM1.mat[1], a02 = pM1.mat[2], a03 = pM1.mat[3];
     var a10 = pM1.mat[4], a11 = pM1.mat[5], a12 = pM1.mat[6], a13 = pM1.mat[7];
@@ -295,7 +295,7 @@ cc.getMat4MultiplyWithMat4 = function (pM1, pM2, swapMat) {
 };
 
 /**
- * Assigns the value of pIn to pOut
+ * Assigns the value of pIn to pOut    将pIn赋值给pOut
  */
 cc.kmMat4Assign = function (pOut, pIn) {
     if(pOut == pIn) {
@@ -329,7 +329,7 @@ cc.kmMat4Assign = function (pOut, pIn) {
 };
 
 /**
- * Returns KM_TRUE if the 2 matrices are equal (approximately)
+ * Returns KM_TRUE if the 2 matrices are equal (approximately)    如果两个矩阵相等返回KM_TRUE（约等于）
  */
 cc.kmMat4AreEqual = function (pMat1, pMat2) {
     if(pMat1 == pMat2){
@@ -347,7 +347,7 @@ cc.kmMat4AreEqual = function (pMat1, pMat2) {
 };
 
 /**
- * Builds an X-axis rotation matrix and stores it in pOut, returns pOut
+ * Builds an X-axis rotation matrix and stores it in pOut, returns pOut   建立一个通过根据X轴旋转的矩阵而且存储在pOut中，并返回pOut
  */
 cc.kmMat4RotationX = function (pOut, radians) {
     /*
@@ -382,7 +382,7 @@ cc.kmMat4RotationX = function (pOut, radians) {
 };
 
 /**
- * Builds a rotation matrix using the rotation around the Y-axis
+ * Builds a rotation matrix using the rotation around the Y-axis    建立一个通过根据Y轴旋转的矩阵，将结果存储在pOut中，并返回pOut
  * The result is stored in pOut, pOut is returned.
  */
 cc.kmMat4RotationY = function (pOut, radians) {
@@ -416,7 +416,7 @@ cc.kmMat4RotationY = function (pOut, radians) {
 };
 
 /**
- * Builds a rotation matrix around the Z-axis. The resulting
+ * Builds a rotation matrix around the Z-axis. The resulting    建立一个通过根据Z轴旋转的矩阵，将结果存储在pOut中，并返回pOut
  * matrix is stored in pOut. pOut is returned.
  */
 cc.kmMat4RotationZ = function (pOut, radians) {
@@ -450,7 +450,7 @@ cc.kmMat4RotationZ = function (pOut, radians) {
 };
 
 /**
- * Builds a rotation matrix from pitch, yaw and roll. The resulting
+ * Builds a rotation matrix from pitch, yaw and roll. The resulting    通过pitch，yaw和roll建立一个旋转矩阵，将结果存储在pOut中并返回pOut
  * matrix is stored in pOut and pOut is returned
  */
 cc.kmMat4RotationPitchYawRoll = function (pOut, pitch, yaw, roll) {
@@ -481,7 +481,7 @@ cc.kmMat4RotationPitchYawRoll = function (pOut, pitch, yaw, roll) {
     return pOut;
 };
 
-/** Converts a quaternion to a rotation matrix,
+/** Converts a quaternion to a rotation matrix,    将一个旋转角度转换成旋转矩阵，将结果存储在pOut中，并返回pOut
  * the result is stored in pOut, returns pOut
  */
 cc.kmMat4RotationQuaternion = function (pOut, pQ) {
@@ -490,19 +490,19 @@ cc.kmMat4RotationQuaternion = function (pOut, pQ) {
     pOut.mat[2] = 2.0 * (pQ.x * pQ.z - pQ.y * pQ.w);
     pOut.mat[3] = 0.0;
 
-    // Second row
+    // Second row    第二行
     pOut.mat[4] = 2.0 * ( pQ.x * pQ.y - pQ.z * pQ.w );
     pOut.mat[5] = 1.0 - 2.0 * ( pQ.x * pQ.x + pQ.z * pQ.z );
     pOut.mat[6] = 2.0 * (pQ.z * pQ.y + pQ.x * pQ.w );
     pOut.mat[7] = 0.0;
 
-    // Third row
+    // Third row    第三行
     pOut.mat[8] = 2.0 * ( pQ.x * pQ.z + pQ.y * pQ.w );
     pOut.mat[9] = 2.0 * ( pQ.y * pQ.z - pQ.x * pQ.w );
     pOut.mat[10] = 1.0 - 2.0 * ( pQ.x * pQ.x + pQ.y * pQ.y );
     pOut.mat[11] = 0.0;
 
-    // Fourth row
+    // Fourth row    第四行
     pOut.mat[12] = 0;
     pOut.mat[13] = 0;
     pOut.mat[14] = 0;
@@ -511,7 +511,7 @@ cc.kmMat4RotationQuaternion = function (pOut, pQ) {
     return pOut;
 };
 
-/** Build a 4x4 OpenGL transformation matrix using a 3x3 rotation matrix,
+/** Build a 4x4 OpenGL transformation matrix using a 3x3 rotation matrix,    通过一个3x3的旋转矩阵和一个三维向量平移来建立一个4x4的OpenGL变换矩阵，将结果赋值给pOut，并返回pOut
  * and a 3d vector representing a translation. Assign the result to pOut,
  * pOut is also returned.
  */
@@ -539,7 +539,7 @@ cc.kmMat4RotationTranslation = function (pOut, rotation, translation) {
     return pOut;
 };
 
-/** Builds a scaling matrix */
+/** Builds a scaling matrix     创建一个缩放的矩阵*/
 cc.kmMat4Scaling = function (pOut, x, y, z) {
     pOut.mat[0] = x;
     pOut.mat[5] = y;
@@ -553,11 +553,11 @@ cc.kmMat4Scaling = function (pOut, x, y, z) {
 };
 
 /**
- * Builds a translation matrix. All other elements in the matrix
+ * Builds a translation matrix. All other elements in the matrix    创建一个变换矩阵。除了那些对角线等于1.0的元素以外的其他矩阵中的元素都会被设为零
  * will be set to zero except for the diagonal which is set to 1.0
  */
 cc.kmMat4Translation = function (pOut, x, y, z) {
-    //FIXME: Write a test for this
+    //FIXME: Write a test for this    FIXME：在这里写一个测试
     pOut.mat[0] = pOut.mat[5] = pOut.mat[10] = pOut.mat[15] = 1.0;
     pOut.mat[1] = pOut.mat[2] = pOut.mat[3] =
         pOut.mat[4] = pOut.mat[6] = pOut.mat[7] =
@@ -569,7 +569,7 @@ cc.kmMat4Translation = function (pOut, x, y, z) {
 };
 
 /**
- * Get the up vector from a matrix. pIn is the matrix you
+ * Get the up vector from a matrix. pIn is the matrix you    从一个矩阵中获取向上的向量。pIn是获取向量的矩阵，pOut是一个指向包含结果向量kmVec3结构的指针
  * wish to extract the vector from. pOut is a pointer to the
  * kmVec3 structure that should hold the resulting vector
  */
@@ -581,7 +581,7 @@ cc.kmMat4GetUpVec3 = function (pOut, pIn) {
     return pOut;
 };
 
-/** Extract the right vector from a 4x4 matrix. The result is
+/** Extract the right vector from a 4x4 matrix. The result is   从4x4矩阵中提取向右的向量，将结果赋值给pOut，并返回pOut
  * stored in pOut. Returns pOut.
  */
 cc.kmMat4GetRightVec3 = function (pOut, pIn) {
@@ -593,7 +593,7 @@ cc.kmMat4GetRightVec3 = function (pOut, pIn) {
 };
 
 /**
- * Extract the forward vector from a 4x4 matrix. The result is
+ * Extract the forward vector from a 4x4 matrix. The result is    从4x4矩阵中提取向前的向量，将结果赋值给pOut，并返回pOut
  * stored in pOut. Returns pOut.
  */
 cc.kmMat4GetForwardVec3 = function (pOut, pIn) {
@@ -605,7 +605,7 @@ cc.kmMat4GetForwardVec3 = function (pOut, pIn) {
 };
 
 /**
- * Creates a perspective projection matrix in the
+ * Creates a perspective projection matrix in the    通过类似于gluPerspective的方法来创建一个透视投影矩阵
  * same way as gluPerspective
  */
 cc.kmMat4PerspectiveProjection = function (pOut, fovY, aspect, zNear, zFar) {
@@ -630,7 +630,7 @@ cc.kmMat4PerspectiveProjection = function (pOut, fovY, aspect, zNear, zFar) {
     return pOut;
 };
 
-/** Creates an orthographic projection matrix like glOrtho */
+/** Creates an orthographic projection matrix like glOrtho 通过类似于glOrtho的方法来创建一个投影矩阵*/
 cc.kmMat4OrthographicProjection = function (pOut, left, right, bottom, top, nearVal, farVal) {
     cc.kmMat4Identity(pOut);
     pOut.mat[0] = 2 / (right - left);
@@ -643,7 +643,7 @@ cc.kmMat4OrthographicProjection = function (pOut, left, right, bottom, top, near
 };
 
 /**
- * Builds a translation matrix in the same way as gluLookAt()
+ * Builds a translation matrix in the same way as gluLookAt()    通过类似于gluLookAt()的方法来创建一个变换矩阵，将结果存储在pOut中，并返回pOut
  * the resulting matrix is stored in pOut. pOut is returned.
  */
 cc.kmMat4LookAt = function (pOut, pEye, pCenter, pUp) {
@@ -683,7 +683,7 @@ cc.kmMat4LookAt = function (pOut, pEye, pCenter, pUp) {
 };
 
 /**
- * Build a rotation matrix from an axis and an angle. Result is stored in pOut.
+ * Build a rotation matrix from an axis and an angle. Result is stored in pOut.    通过轴和角创建一个变换矩阵，将结果存储在pOut中，并返回pOut
  * pOut is returned.
  */
 cc.kmMat4RotationAxisAngle = function (pOut, axis, radians) {
@@ -717,7 +717,7 @@ cc.kmMat4RotationAxisAngle = function (pOut, axis, radians) {
 };
 
 /**
- * Extract a 3x3 rotation matrix from the input 4x4 transformation.
+ * Extract a 3x3 rotation matrix from the input 4x4 transformation.    通过输入4x4变换提取出一个3x3的变换矩阵，将结果存储在pOut中，并返回pOut
  * Stores the result in pOut, returns pOut
  */
 cc.kmMat4ExtractRotation = function (pOut, pIn) {
@@ -791,7 +791,7 @@ cc.kmMat4ExtractPlane = function (pOut, pIn, plane) {
 };
 
 /**
- * Take the rotation from a 4x4 transformation matrix, and return it as an axis and an angle (in radians)
+ * Take the rotation from a 4x4 transformation matrix, and return it as an axis and an angle (in radians)    从一个4x4的变换矩阵中获取旋转角度，并通过轴和角（以弧度形式）返回，返回输出的轴
  * returns the output axis.
  */
 cc.kmMat4RotationToAxisAngle = function (pAxis, radians, pIn) {

@@ -28,7 +28,7 @@
  ****************************************************************************/
 
 /**
- * cc.tiffReader is a singleton object, it's a tiff file reader, it can parse byte array to draw into a canvas
+ * cc.tiffReader是个单例对象，是一个TIFF格式的文件读取器，能够解析字节数组并绘制到canvas中。
  * @class
  * @name cc.tiffReader
  */
@@ -72,7 +72,7 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
     },
 
     hasTowel: function () {
-        // Check for towel.
+        // 检查towel
         if (this.getUint16(2) !== 42) {
             throw RangeError("You forgot your towel!");
             return false;
@@ -119,7 +119,7 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
         var fieldValueSize = fieldTypeLength * typeCount;
 
         if (fieldValueSize <= 4) {
-            // The value is stored at the big end of the valueOffset.
+            // 值存储在valueOffset的big-end
             if (this.littleEndian === false)
                 fieldValues.push(valueOffset >>> ((4 - fieldTypeLength) * 8));
             else
@@ -129,9 +129,9 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
                 var indexOffset = fieldTypeLength * i;
                 if (fieldTypeLength >= 8) {
                     if (['RATIONAL', 'SRATIONAL'].indexOf(fieldTypeName) !== -1) {
-                        // Numerator
+                        // 分子
                         fieldValues.push(this.getUint32(valueOffset + indexOffset));
-                        // Denominator
+                        // 分母
                         fieldValues.push(this.getUint32(valueOffset + indexOffset + 4));
                     } else {
                         cc.log("Can't handle this field type or size");
@@ -292,13 +292,13 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
         var stripOffsetValues = fileDirectory['StripOffsets'].values;
         var numStripOffsetValues = stripOffsetValues.length;
 
-        // StripByteCounts is supposed to be required, but see if we can recover anyway.
+        // 应当存在StripByteCounts，不过此处先检查一下是不是需要恢复。
         if (fileDirectory['StripByteCounts']) {
             var stripByteCountValues = fileDirectory['StripByteCounts'].values;
         } else {
             cc.log("Missing StripByteCounts!");
 
-            // Infer StripByteCounts, if possible.
+            // 如果可能的话，推断出StripByteCounts
             if (numStripOffsetValues === 1) {
                 var stripByteCountValues = [Math.ceil((imageWidth * imageLength * bitsPerPixel) / 8)];
             } else {
@@ -306,24 +306,24 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
             }
         }
 
-        // Loop through strips and decompress as necessary.
+        // 遍历条带（strip），必要时解压
         for (var i = 0; i < numStripOffsetValues; i++) {
             var stripOffset = stripOffsetValues[i];
             strips[i] = [];
 
             var stripByteCount = stripByteCountValues[i];
 
-            // Loop through pixels.
+            // 遍历像素
             for (var byteOffset = 0, bitOffset = 0, jIncrement = 1, getHeader = true, pixel = [], numBytes = 0, sample = 0, currentSample = 0;
                  byteOffset < stripByteCount; byteOffset += jIncrement) {
-                // Decompress strip.
+                // 解压条带（strip）
                 switch (compression) {
-                    // Uncompressed
+                    // 未压缩
                     case 1:
-                        // Loop through samples (sub-pixels).
+                        // 遍历采样（sample）
                         for (var m = 0, pixel = []; m < samplesPerPixel; m++) {
                             if (sampleProperties[m].hasBytesPerSample) {
-                                // XXX: This is wrong!
+                                // XXX：这里错了！
                                 var sampleOffset = sampleProperties[m].bytesPerSample * m;
                                 pixel.push(this.getBytes(sampleProperties[m].bytesPerSample, stripOffset + byteOffset + sampleOffset));
                             } else {
@@ -348,64 +348,64 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
 
                     // CITT Group 3 1-Dimensional Modified Huffman run-length encoding
                     case 2:
-                        // XXX: Use PDF.js code?
+                        // XXX：使用PDF.js代码？
                         break;
 
                     // Group 3 Fax
                     case 3:
-                        // XXX: Use PDF.js code?
+                        // XXX：使用PDF.js代码？
                         break;
 
                     // Group 4 Fax
                     case 4:
-                        // XXX: Use PDF.js code?
+                        // XXX：使用PDF.js代码？
                         break;
 
                     // LZW
                     case 5:
-                        // XXX: Use PDF.js code?
+                        // XXX：使用PDF.js代码？
                         break;
 
                     // Old-style JPEG (TIFF 6.0)
                     case 6:
-                        // XXX: Use PDF.js code?
+                        // XXX：使用PDF.js代码？
                         break;
 
                     // New-style JPEG (TIFF Specification Supplement 2)
                     case 7:
-                        // XXX: Use PDF.js code?
+                        // XXX：使用PDF.js代码?
                         break;
 
                     // PackBits
                     case 32773:
-                        // Are we ready for a new block?
+                        // 准备好新的块（block）了吗？
                         if (getHeader) {
                             getHeader = false;
 
                             var blockLength = 1;
                             var iterations = 1;
 
-                            // The header byte is signed.
+                            // 头字节是有符号数
                             var header = this.getInt8(stripOffset + byteOffset);
 
-                            if ((header >= 0) && (header <= 127)) { // Normal pixels.
+                            if ((header >= 0) && (header <= 127)) { // 一般像素
                                 blockLength = header + 1;
-                            } else if ((header >= -127) && (header <= -1)) { // Collapsed pixels.
+                            } else if ((header >= -127) && (header <= -1)) { // 折叠像素
                                 iterations = -header + 1;
-                            } else /*if (header === -128)*/ { // Placeholder byte?
+                            } else /*if (header === -128)*/ { // 占位字节？
                                 getHeader = true;
                             }
                         } else {
                             var currentByte = this.getUint8(stripOffset + byteOffset);
 
-                            // Duplicate bytes, if necessary.
+                            // 如果有必要的话，复制字节
                             for (var m = 0; m < iterations; m++) {
                                 if (sampleProperties[sample].hasBytesPerSample) {
-                                    // We're reading one byte at a time, so we need to handle multi-byte samples.
+                                    // 因为每次只读取一个字节，这里需要处理多字节采样。
                                     currentSample = (currentSample << (8 * numBytes)) | currentByte;
                                     numBytes++;
 
-                                    // Is our sample complete?
+                                    // 采样读完了吗？
                                     if (numBytes === sampleProperties[sample].bytesPerSample) {
                                         pixel.push(currentSample);
                                         currentSample = numBytes = 0;
@@ -415,7 +415,7 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
                                     throw RangeError("Cannot handle sub-byte bits per sample");
                                 }
 
-                                // Is our pixel complete?
+                                // 像素读完了吗？
                                 if (sample === samplesPerPixel) {
                                     strips[i].push(pixel);
                                     pixel = [];
@@ -425,7 +425,7 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
 
                             blockLength--;
 
-                            // Is our block complete?
+                            // 块读完了吗？
                             if (blockLength === 0) {
                                 getHeader = true;
                             }
@@ -434,9 +434,9 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
                         jIncrement = 1;
                         break;
 
-                    // Unknown compression algorithm
+                    // 未知的压缩算法
                     default:
-                        // Do not attempt to parse the image data.
+                        // 不要尝试解析图片数据
                         break;
                 }
             }
@@ -445,10 +445,10 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
         if (canvas.getContext) {
             var ctx = this.canvas.getContext("2d");
 
-            // Set a default fill style.
+            // 设置默认填充样式
             ctx.fillStyle = "rgba(255, 255, 255, 0)";
 
-            // If RowsPerStrip is missing, the whole image is in one strip.
+            // 如果没有RowsperStrip，整个图片就在一个条带（strip）上。
             var rowsPerStrip = fileDirectory['RowsPerStrip'] ? fileDirectory['RowsPerStrip'].values[0] : imageLength;
 
             var numStrips = strips.length;
@@ -474,9 +474,9 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
                 var colorMapSampleSize = Math.pow(2, sampleProperties[0].bitsPerSample);
             }
 
-            // Loop through the strips in the image.
+            // 图片中遍历条带（strip）
             for (var i = 0; i < numStrips; i++) {
-                // The last strip may be short.
+                // 最后一个条带可能较短
                 if ((i + 1) === numStrips) {
                     numRowsInStrip = rowsInLastStrip;
                 }
@@ -484,9 +484,9 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
                 var numPixels = strips[i].length;
                 var yPadding = numRowsInPreviousStrip * i;
 
-                // Loop through the rows in the strip.
+                // 条带中遍历行（row）
                 for (var y = 0, j = 0; y < numRowsInStrip, j < numPixels; y++) {
-                    // Loop through the pixels in the row.
+                    // 行中遍历像素
                     for (var x = 0; x < imageWidth; x++, j++) {
                         var pixelSamples = strips[i][j];
 
@@ -498,7 +498,7 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
                         if (numExtraSamples > 0) {
                             for (var k = 0; k < numExtraSamples; k++) {
                                 if (extraSamplesValues[k] === 1 || extraSamplesValues[k] === 2) {
-                                    // Clamp opacity to the range [0,1].
+                                    // 限制透明度在[0,1]区间
                                     opacity = pixelSamples[3 + k] / 256;
 
                                     break;
@@ -507,32 +507,32 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
                         }
 
                         switch (photometricInterpretation) {
-                            // Bilevel or Grayscale
-                            // WhiteIsZero
+                            // 黑白或灰度
+                            // 白为零
                             case 0:
                                 if (sampleProperties[0].hasBytesPerSample) {
                                     var invertValue = Math.pow(0x10, sampleProperties[0].bytesPerSample * 2);
                                 }
 
-                                // Invert samples.
+                                // 反转采样
                                 pixelSamples.forEach(function (sample, index, samples) {
                                     samples[index] = invertValue - sample;
                                 });
 
-                            // Bilevel or Grayscale
-                            // BlackIsZero
+                            // 黑白或灰度
+                            // 黑为零
                             case 1:
                                 red = green = blue = this.clampColorSample(pixelSamples[0], sampleProperties[0].bitsPerSample);
                                 break;
 
-                            // RGB Full Color
+                            // RGB全色彩
                             case 2:
                                 red = this.clampColorSample(pixelSamples[0], sampleProperties[0].bitsPerSample);
                                 green = this.clampColorSample(pixelSamples[1], sampleProperties[1].bitsPerSample);
                                 blue = this.clampColorSample(pixelSamples[2], sampleProperties[2].bitsPerSample);
                                 break;
 
-                            // RGB Color Palette
+                            // RGB调色板
                             case 3:
                                 if (colorMapValues === undefined) {
                                     throw Error("Palette image missing color map");
@@ -545,7 +545,7 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
                                 blue = this.clampColorSample(colorMapValues[(2 * colorMapSampleSize) + colorMapIndex], 16);
                                 break;
 
-                            // Unknown Photometric Interpretation
+                            // 未知的光度解释
                             default:
                                 throw RangeError('Unknown Photometric Interpretation:', photometricInterpretation);
                                 break;
@@ -563,8 +563,8 @@ cc.tiffReader = /** @lends cc.tiffReader# */{
         return this.canvas;
     },
 
-    // See: http://www.digitizationguidelines.gov/guidelines/TIFF_Metadata_Final.pdf
-    // See: http://www.digitalpreservation.gov/formats/content/tiff_tags.shtml
+    // 参见: http://www.digitizationguidelines.gov/guidelines/TIFF_Metadata_Final.pdf
+    // 参见: http://www.digitalpreservation.gov/formats/content/tiff_tags.shtml
     fieldTagNames: {
         // TIFF Baseline
         0x013B: 'Artist',

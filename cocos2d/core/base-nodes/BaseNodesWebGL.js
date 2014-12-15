@@ -64,6 +64,7 @@ cc._tmp.WebGLCCNode = function () {
     _p.visit = function () {
         var _t = this;
         // quick return if not visible
+        // 如果不可见则立即返回
         if (!_t._visible)
             return;
 
@@ -73,6 +74,7 @@ cc._tmp.WebGLCCNode = function () {
         var context = cc._renderContext, i, currentStack = cc.current_stack;
 
         //optimize performance for javascript
+        //javascript 性能优化
         currentStack.stack.push(currentStack.top);
         cc.kmMat4Assign(_t._stackMatrix, currentStack.top);
         currentStack.top = _t._stackMatrix;
@@ -85,6 +87,7 @@ cc._tmp.WebGLCCNode = function () {
             var childLen = locChildren.length;
             _t.sortAllChildren();
             // draw children zOrder < 0
+            // 如果Z轴的值小0 则进行绘制
             for (i = 0; i < childLen; i++) {
                 if (locChildren[i] && locChildren[i]._localZOrder < 0)
                     locChildren[i].visit();
@@ -94,6 +97,7 @@ cc._tmp.WebGLCCNode = function () {
             if(this._rendererCmd)
                 cc.renderer.pushRenderCommand(this._rendererCmd);
             // draw children zOrder >= 0
+            // 如果Z轴的值大于等于0 则进行绘制
             for (; i < childLen; i++) {
                 if (locChildren[i]) {
                     locChildren[i].visit();
@@ -105,6 +109,7 @@ cc._tmp.WebGLCCNode = function () {
         }
 
         //optimize performance for javascript
+        //javascript 性能优化
         currentStack.top = currentStack.stack.pop();
     };
 
@@ -113,7 +118,8 @@ cc._tmp.WebGLCCNode = function () {
             parentMatrix = pMatrix || (this._parent ? this._parent._stackMatrix : cc.current_stack.top);
 
         // Convert 3x3 into 4x4 matrix
-        var trans = this.getNodeToParentTransform();
+        // 将3x3矩阵转换为4x4矩阵
+        var trans = this.nodeToParentTransform();
         var t4x4Mat = t4x4.mat;
         t4x4Mat[0] = trans.a;
         t4x4Mat[4] = trans.c;
@@ -123,12 +129,15 @@ cc._tmp.WebGLCCNode = function () {
         t4x4Mat[13] = trans.ty;
 
         // Update Z vertex manually
+        // 更新Z轴顶点
         t4x4Mat[14] = this._vertexZ;
 
         //optimize performance for Javascript
+        //javascript 性能优化
         cc.kmMat4Multiply(stackMatrix, parentMatrix, t4x4);
 
         // XXX: Expensive calls. Camera should be integrated into the cached affine matrix
+        // XXX: 高代价调用.摄像机需要集成到缓存中的仿射矩阵中
         if (this._camera != null && !(this.grid != null && this.grid.isActive())) {
             var apx = this._anchorPointInPoints.x, apy = this._anchorPointInPoints.y;
             var translate = (apx !== 0.0 || apy !== 0.0);
@@ -165,10 +174,12 @@ cc._tmp.WebGLCCNode = function () {
     _p.transform = function () {
         var _t = this;
         //optimize performance for javascript
+        //javascript 性能优化
         var t4x4 = _t._transform4x4, topMat4 = cc.current_stack.top;
 
         // Convert 3x3 into 4x4 matrix
-        var trans = _t.getNodeToParentTransform();
+        // 将3x3矩阵转换为4x4矩阵
+        var trans = _t.nodeToParentTransform();
         var t4x4Mat = t4x4.mat;
         t4x4Mat[0] = trans.a;
         t4x4Mat[4] = trans.c;
@@ -178,12 +189,15 @@ cc._tmp.WebGLCCNode = function () {
         t4x4Mat[13] = trans.ty;
 
         // Update Z vertex manually
+        // 更新Z轴顶点
         t4x4Mat[14] = _t._vertexZ;
 
         //optimize performance for Javascript
+        //javascript 性能优化
         cc.kmMat4Multiply(topMat4, topMat4, t4x4);
 
         // XXX: Expensive calls. Camera should be integrated into the cached affine matrix
+        // XXX: 高代价调用.摄像机需要集成到缓存中的仿射矩阵中
         if (_t._camera != null && !(_t.grid != null && _t.grid.isActive())) {
             var apx = _t._anchorPointInPoints.x, apy = _t._anchorPointInPoints.y;
             var translate = (apx !== 0.0 || apy !== 0.0);

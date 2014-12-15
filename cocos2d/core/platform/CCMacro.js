@@ -35,6 +35,11 @@ cc.INVALID_INDEX = -1;
  * @constant
  * @type Number
  */
+/**
+ * PI是圆的周长和半径的比率
+ * @constant
+ * @type Number
+ */
 cc.PI = Math.PI;
 
 /**
@@ -66,6 +71,11 @@ cc.DEG = 180 / cc.PI;
  * @constant
  * @type Number
  */
+ /**
+ * 无符号整形数的最大值
+ * @constant
+ * @type Number
+ */
 cc.UINT_MAX = 0xffffffff;
 
 /**
@@ -79,6 +89,17 @@ cc.UINT_MAX = 0xffffffff;
  * @param {Object} ref
  * @function
  * @deprecated since v3.0
+ */
+/**
+ * <p>
+ * 简单的宏，交换一个对象的两个成员变量<br/>
+ * 从C++宏修改，需要传入x，y两个变量的字符串名，以及整个对象的引用<br/>
+ * </p>
+ * @param {String} x
+ * @param {String} y
+ * @param {Object} ref
+ * @function
+ * @deprecated 自v3.0
  */
 cc.swap = function (x, y, ref) {
     if (cc.isObject(ref) && !cc.isUndefined(ref.x) && !cc.isUndefined(ref.y)) {
@@ -101,12 +122,29 @@ cc.swap = function (x, y, ref) {
  * cc.lerp(2,10,0.5)//returns 6<br/>
  * cc.lerp(2,10,0.2)//returns 3.6
  */
+/**
+ * <p>
+ *     在两个数之前线形插值，比例表示在两个终点之间偏斜多少
+ * </p>
+ * @param {Number} a 数字 A
+ * @param {Number} b 数字 B
+ * @param {Number} r 比例 取值范围0到1之间
+ * @function
+ * @example
+ * cc.lerp(2,10,0.5)//returns 6<br/>
+ * cc.lerp(2,10,0.2)//returns 3.6
+ */
 cc.lerp = function (a, b, r) {
     return a + (b - a) * r;
 };
 
 /**
  * get a random number from 0 to 0xffffff
+ * @function
+ * @returns {number}
+ */
+/**
+ * 在 0 到 0xffffff 之间返回一个随机数
  * @function
  * @returns {number}
  */
@@ -119,6 +157,11 @@ cc.rand = function () {
  * @return {Number}
  * @function
  */
+/**
+ * 在 -1 到 1 之间返回一个随机浮点数
+ * @return {Number}
+ * @function
+ */
 cc.randomMinus1To1 = function () {
     return (Math.random() - 0.5) * 2;
 };
@@ -128,10 +171,21 @@ cc.randomMinus1To1 = function () {
  * @return {Number}
  * @function
  */
+/**
+ * 在 0 到 1 之间返回一个随机浮点数
+ * @return {Number}
+ * @function
+ */
 cc.random0To1 = Math.random;
 
 /**
  * converts degrees to radians
+ * @param {Number} angle
+ * @return {Number}
+ * @function
+ */
+/**
+ * 角度转换为弧度
  * @param {Number} angle
  * @return {Number}
  * @function
@@ -146,11 +200,23 @@ cc.degreesToRadians = function (angle) {
  * @return {Number}
  * @function
  */
+/**
+ * 弧度转换为角度
+ * @param {Number} angle
+ * @return {Number}
+ * @function
+ */
 cc.radiansToDegrees = function (angle) {
     return angle * cc.DEG;
 };
 /**
  * converts radians to degrees
+ * @param {Number} angle
+ * @return {Number}
+ * @function
+ */
+/**
+ * 弧度转换为角度，增加log
  * @param {Number} angle
  * @return {Number}
  * @function
@@ -171,10 +237,15 @@ cc.REPEAT_FOREVER = Number.MAX_VALUE - 1;
  * @constant
  * @type Number
  */
+/**
+ * 默认 OpenGL blend src 方法。 兼容包含阿尔法通道（premultiplied alpha）的图片。
+ * @constant
+ * @type Number
+ */
 cc.BLEND_SRC = cc.OPTIMIZE_BLEND_FUNC_FOR_PREMULTIPLIED_ALPHA ? 1 : 0x0302;
 
 /**
- * default gl blend dst function. Compatible with premultiplied alpha images.
+ * 默认 OpenGL blend dst 方法。 兼容包含阿尔法通道（premultiplied alpha）的图片。
  * @constant
  * @type Number
  */
@@ -182,6 +253,11 @@ cc.BLEND_DST = 0x0303;
 
 /**
  * Helpful macro that setups the GL server state, the correct GL program and sets the Model View Projection matrix
+ * @param {cc.Node} node setup node
+ * @function
+ */
+/**
+ * 用于初始化OpenGL服务状态、正确的OpenGL程序、设置模型-视图投影矩阵的宏
  * @param {cc.Node} node setup node
  * @function
  */
@@ -197,6 +273,16 @@ cc.nodeDrawSetup = function (node) {
 /**
  * <p>
  *     GL states that are enabled:<br/>
+ *       - GL_TEXTURE_2D<br/>
+ *       - GL_VERTEX_ARRAY<br/>
+ *       - GL_TEXTURE_COORD_ARRAY<br/>
+ *       - GL_COLOR_ARRAY<br/>
+ * </p>
+ * @function
+ */
+/**
+ * <p>
+ *     启用下列OpenGL状态：<br/>
  *       - GL_TEXTURE_2D<br/>
  *       - GL_VERTEX_ARRAY<br/>
  *       - GL_TEXTURE_COORD_ARRAY<br/>
@@ -222,6 +308,15 @@ cc.enableDefaultGLStates = function () {
  * </p>
  * @function
  */
+/**
+ * <p>
+ *  禁用下列OpenGL状态：<br/>
+ *     - GL_TEXTURE_2D<br/>
+ *     - GL_TEXTURE_COORD_ARRAY<br/>
+ *     - GL_COLOR_ARRAY<br/>
+ * </p>
+ * @function
+ */
 cc.disableDefaultGLStates = function () {
     //TODO OPENGL
     /*
@@ -236,6 +331,14 @@ cc.disableDefaultGLStates = function () {
  * <p>
  *  Increments the GL Draws counts by one.<br/>
  *  The number of calls per frame are displayed on the screen when the CCDirector's stats are enabled.<br/>
+ * </p>
+ * @param {Number} addNumber
+ * @function
+ */
+/**
+ * <p>
+ *  增加OpenGL绘图计数<br/>
+ *  在CCDirector的stats启用时，计数会显示在屏幕<br/>
  * </p>
  * @param {Number} addNumber
  * @function
@@ -258,6 +361,14 @@ cc.FLT_EPSILON = 0.0000001192092896;
  * @return {Number}
  * @function
  */
+/**
+ * <p>
+ *     在Mac上返回1<br/>
+ *     iPhone上如果视网膜屏显示模式（RetinaDisplay）开时返回2，否则返回1
+ * </p>
+ * @return {Number}
+ * @function
+ */
 cc.contentScaleFactor = cc.IS_RETINA_DISPLAY_SUPPORTED ? function () {
     return cc.director.getContentScaleFactor();
 } : function () {
@@ -270,6 +381,12 @@ cc.contentScaleFactor = cc.IS_RETINA_DISPLAY_SUPPORTED ? function () {
  * @return {cc.Point}
  * @function
  */
+/**
+ * 将一个点转换为像素点
+ * @param {cc.Point} points
+ * @return {cc.Point}
+ * @function
+ */
 cc.pointPointsToPixels = function (points) {
     var scale = cc.contentScaleFactor();
     return cc.p(points.x * scale, points.y * scale);
@@ -277,6 +394,12 @@ cc.pointPointsToPixels = function (points) {
 
 /**
  * Converts a Point in pixels to points
+ * @param {cc.Rect} pixels
+ * @return {cc.Point}
+ * @function
+ */
+/**
+ * 将一个像素点转换为点
  * @param {cc.Rect} pixels
  * @return {cc.Point}
  * @function
@@ -298,6 +421,12 @@ cc._pointPixelsToPointsOut = function(pixels, outPoint){
  * @return {cc.Size}
  * @function
  */
+/**
+ * 点尺寸转换为像素尺寸
+ * @param {cc.Size} sizeInPoints
+ * @return {cc.Size}
+ * @function
+ */
 cc.sizePointsToPixels = function (sizeInPoints) {
     var scale = cc.contentScaleFactor();
     return cc.size(sizeInPoints.width * scale, sizeInPoints.height * scale);
@@ -305,6 +434,12 @@ cc.sizePointsToPixels = function (sizeInPoints) {
 
 /**
  * Converts a size in pixels to points
+ * @param {cc.Size} sizeInPixels
+ * @return {cc.Size}
+ * @function
+ */
+/**
+ * 像素尺寸转换为点尺寸
  * @param {cc.Size} sizeInPixels
  * @return {cc.Size}
  * @function
@@ -326,6 +461,12 @@ cc._sizePixelsToPointsOut = function (sizeInPixels, outSize) {
  * @return {cc.Rect}
  * @function
  */
+/**
+ * 矩形像素转换为矩形点
+ * @param {cc.Rect} pixel
+ * @return {cc.Rect}
+ * @function
+ */
 cc.rectPixelsToPoints = cc.IS_RETINA_DISPLAY_SUPPORTED ? function (pixel) {
     var scale = cc.contentScaleFactor();
     return cc.rect(pixel.x / scale, pixel.y / scale,
@@ -336,6 +477,12 @@ cc.rectPixelsToPoints = cc.IS_RETINA_DISPLAY_SUPPORTED ? function (pixel) {
 
 /**
  * Converts a rect in points to pixels
+ * @param {cc.Rect} point
+ * @return {cc.Rect}
+ * @function
+ */
+/**
+ * 矩形点转换为矩形像素
  * @param {cc.Rect} point
  * @return {cc.Rect}
  * @function
@@ -432,10 +579,20 @@ cc.ONE_MINUS_CONSTANT_COLOR	= 0x8002;
  * @constant
  * @type Number
  */
+/**
+ * 为纹理设置的常量，与gl.LINEAR相等
+ * @constant
+ * @type Number
+ */
 cc.LINEAR	= 0x2601;
 
 /**
  * the constant variable equals gl.REPEAT for texture
+ * @constant
+ * @type Number
+ */
+/**
+ * 为纹理设置的常量，与gl.REPEAT相等
  * @constant
  * @type Number
  */
@@ -446,10 +603,20 @@ cc.REPEAT	= 0x2901;
  * @constant
  * @type Number
  */
+/**
+ * 为纹理设置的常量，与gl.CLAMP_TO_EDGE相等
+ * @constant
+ * @type Number
+ */
 cc.CLAMP_TO_EDGE	= 0x812f;
 
 /**
  * the constant variable equals gl.MIRRORED_REPEAT for texture
+ * @constant
+ * @type Number
+ */
+/**
+ * 为纹理设置的常量，与gl.MIRRORED_REPEAT相等
  * @constant
  * @type Number
  */
@@ -474,10 +641,20 @@ cc.checkGLErrorDebug = function () {
  * @constant
  * @type Number
  */
+/**
+ * 设备竖向，home键在底部(UIDeviceOrientationPortrait)
+ * @constant
+ * @type Number
+ */
 cc.DEVICE_ORIENTATION_PORTRAIT = 0;
 
 /**
  * Device oriented horizontally, home button on the right (UIDeviceOrientationLandscapeLeft)
+ * @constant
+ * @type Number
+ */
+/**
+ * 设备横向，home键在右侧(UIDeviceOrientationLandscapeLeft)
  * @constant
  * @type Number
  */
@@ -488,6 +665,11 @@ cc.DEVICE_ORIENTATION_LANDSCAPE_LEFT = 1;
  * @constant
  * @type Number
  */
+/**
+ * 设备竖向，home键在上(UIDeviceOrientationPortraitUpsideDown)
+ * @constant
+ * @type Number
+ */
 cc.DEVICE_ORIENTATION_PORTRAIT_UPSIDE_DOWN = 2;
 
 /**
@@ -495,10 +677,20 @@ cc.DEVICE_ORIENTATION_PORTRAIT_UPSIDE_DOWN = 2;
  * @constant
  * @type Number
  */
+/**
+ * 设备横向，home键在左侧(UIDeviceOrientationLandscapeRight)
+ * @constant
+ * @type Number
+ */
 cc.DEVICE_ORIENTATION_LANDSCAPE_RIGHT = 3;
 
 /**
  * In browsers, we only support 2 orientations by change window size.
+ * @constant
+ * @type Number
+ */
+/**
+ * 在浏览器中，我们仅支持由于窗口尺寸的变化产生的两种方向
  * @constant
  * @type Number
  */
@@ -720,10 +912,20 @@ cc.ATTRIBUTE_NAME_TEX_COORD = "a_texCoord";
  * @constant
  * @type Number
  */
+/**
+ * 字高的默认值
+ * @constant
+ * @type Number
+ */
 cc.ITEM_SIZE = 32;
 
 /**
  * default tag for current item
+ * @constant
+ * @type Number
+ */
+/**
+ * 当前项的默认标记
  * @constant
  * @type Number
  */
@@ -733,9 +935,19 @@ cc.CURRENT_ITEM = 0xc0c05001;
  * @constant
  * @type Number
  */
+/**
+ * 缩放操作的默认标记
+ * @constant
+ * @type Number
+ */
 cc.ZOOM_ACTION_TAG = 0xc0c05002;
 /**
  * default tag for normal
+ * @constant
+ * @type Number
+ */
+/**
+ * 正常状态的默认标记
  * @constant
  * @type Number
  */
@@ -746,10 +958,20 @@ cc.NORMAL_TAG = 8801;
  * @constant
  * @type Number
  */
+/**
+ * 选中的默认标记
+ * @constant
+ * @type Number
+ */
 cc.SELECTED_TAG = 8802;
 
 /**
  * default disabled tag
+ * @constant
+ * @type Number
+ */
+/**
+ * 禁用的默认标记
  * @constant
  * @type Number
  */
@@ -760,6 +982,13 @@ cc.DISABLE_TAG = 8803;
 
 /**
  * Verify Array's Type
+ * @param {Array} arr
+ * @param {function} type
+ * @return {Boolean}
+ * @function
+ */
+/**
+ * 检查数组中元素的类型
  * @param {Array} arr
  * @param {function} type
  * @return {Boolean}
@@ -783,6 +1012,12 @@ cc.arrayVerifyType = function (arr, type) {
  * @param {Array} arr Source Array
  * @param {*} delObj  remove object
  */
+/**
+ * 搜索数组中与传入参数相同的第一个元素，并且移除它，如果没有找到，则不做任何处理
+ * @function
+ * @param {Array} arr 原数组
+ * @param {*} delObj  需要移除的对象
+ */
 cc.arrayRemoveObject = function (arr, delObj) {
     for (var i = 0, l = arr.length; i < l; i++) {
         if (arr[i] == delObj) {
@@ -798,6 +1033,12 @@ cc.arrayRemoveObject = function (arr, delObj) {
  * @param {Array} arr Source Array
  * @param {Array} minusArr minus Array
  */
+/**
+ * 在原数组中搜索移除元素数组的每一个元素，找到第一个匹配的元素以后，从原数组中移除
+ * @function
+ * @param {Array} arr 原数组
+ * @param {Array} minusArr 移除元素数组
+ */
 cc.arrayRemoveArray = function (arr, minusArr) {
     for (var i = 0, l = minusArr.length; i < l; i++) {
         cc.arrayRemoveObject(arr, minusArr[i]);
@@ -812,6 +1053,14 @@ cc.arrayRemoveArray = function (arr, minusArr) {
  * @param {Number} index
  * @return {Array}
  */
+/**
+ * 在序列号处插入元素
+ * @function
+ * @param {Array} arr
+ * @param {Array} addObjs
+ * @param {Number} index
+ * @return {Array}
+ */
 cc.arrayAppendObjectsToIndex = function(arr, addObjs,index){
     arr.splice.apply(arr, [index, 0].concat(addObjs));
     return arr;
@@ -819,6 +1068,11 @@ cc.arrayAppendObjectsToIndex = function(arr, addObjs,index){
 
 /**
  * Copy an array's item to a new array (its performance is better than Array.slice)
+ * @param {Array} arr
+ * @return {Array}
+ */
+/**
+ * 拷贝一个数组的所有元素到一个新数组（性能比Array.slice好）
  * @param {Array} arr
  * @return {Array}
  */

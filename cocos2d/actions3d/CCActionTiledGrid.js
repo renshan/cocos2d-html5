@@ -4,7 +4,7 @@
  Copyright (c) 2013-2014 Chukong Technologies Inc.
 
  http://www.cocos2d-x.org
-
+ 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
@@ -26,7 +26,7 @@
 
 /**
  * cc.ShakyTiles3D action. <br />
- * Reference the test cases (Effects Test)
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @class
  * @extends cc.TiledGrid3DAction
  * @param {Number} duration
@@ -39,8 +39,8 @@ cc.ShakyTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.ShakyTiles3D# */{
     _shakeZ:false,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * Creates the action with a range, whether or not to shake Z vertices, a grid size, and duration.
+     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />          构造函数，重写此函数去继承构造函数的方法，记得在继承的"ctor"函数里调用"this._super()"
+	 * Creates the action with a range, whether or not to shake Z vertices, a grid size, and duration.         用范围、是否设置晃动的Z顶点坐标、网格大小和时长创建一个action
 	 * @param {Number} duration
 	 * @param {cc.Size} gridSize
 	 * @param {Number} range
@@ -52,7 +52,7 @@ cc.ShakyTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.ShakyTiles3D# */{
     },
 
     /**
-     * Initializes the action with a range, whether or not to shake Z vertices, a grid size, and duration.
+     * Initializes the action with a range, whether or not to shake Z vertices, a grid size, and duration.          用范围、是否设置晃动的Z顶点坐标、网格大小和时长初始化action
      * @param {Number} duration
      * @param {cc.Size} gridSize
      * @param {Number} range
@@ -69,7 +69,7 @@ cc.ShakyTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.ShakyTiles3D# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.  <br />
+     * Called once per frame. Time is the number of seconds of a frame interval.  <br />         每帧调用一次，时间参数是设置两帧之间的时长间隔的
      * @param {Number}  dt
      */
     update:function (dt) {
@@ -107,8 +107,8 @@ cc.ShakyTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.ShakyTiles3D# */{
 });
 
 /**
- * Creates the action with a range, whether or not to shake Z vertices, a grid size, and duration. <br />
- * Reference the test cases (Effects Test)
+ * Creates the action with a range, whether or not to shake Z vertices, a grid size, and duration. <br />           用范围、是否设置晃动的Z顶点坐标、网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @function
  * @param {Number} duration
  * @param {cc.Size} gridSize
@@ -121,9 +121,9 @@ cc.shakyTiles3D = function (duration, gridSize, range, shakeZ) {
 };
 
 /**
- * Please use cc.shakyTiles3D instead. <br />
- * creates the action with a range, whether or not to shake Z vertices, a grid size, and duration. <br />
- * Reference the test cases (Effects Test)
+ * Please use cc.shakyTiles3D instead. <br />               3.0后的版本用cc.shakyTiles3D代替
+ * creates the action with a range, whether or not to shake Z vertices, a grid size, and duration. <br />       用范围、是否设置晃动的Z顶点坐标、网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @param {Number} duration
  * @param {cc.Size} gridSize
  * @param {Number} range
@@ -136,7 +136,7 @@ cc.ShakyTiles3D.create = cc.shakyTiles3D;
 
 /**
  * cc.ShatteredTiles3D action. <br />
- * Reference the test cases (Effects Test)
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @class
  * @extends cc.TiledGrid3DAction
  * @param {Number} duration
@@ -150,8 +150,8 @@ cc.ShatteredTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.ShatteredTiles3D
     _shatterZ:false,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * Creates the action with a range, whether of not to shatter Z vertices, a grid size and duration.
+     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />          构造函数，重写此函数去继承构造函数的方法，记得在继承的"ctor"函数里调用"this._super()"
+	 * Creates the action with a range, whether of not to shatter Z vertices, a grid size and duration.        用范围、是否设置晃动的Z顶点坐标、网格大小和时长创建一个action
 	 * @param {Number} duration
 	 * @param {cc.Size} gridSize
 	 * @param {Number} range
@@ -163,7 +163,7 @@ cc.ShatteredTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.ShatteredTiles3D
     },
 
     /**
-     * Initializes the action with a range, whether or not to shatter Z vertices, a grid size and duration. <br />
+     * Initializes the action with a range, whether or not to shatter Z vertices, a grid size and duration. <br />          用范围、是否设置晃动的Z顶点坐标、网格大小和时长初始化action
      * @param {Number} duration
      * @param {cc.Size} gridSize
      * @param {Number} range
@@ -181,7 +181,7 @@ cc.ShatteredTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.ShatteredTiles3D
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval. <br />
+     * Called once per frame. Time is the number of seconds of a frame interval. <br />         每帧调用一次，时间参数是设置两帧之间的时长间隔的
      * @param {Number}  dt
      */
     update:function (dt) {
@@ -221,8 +221,8 @@ cc.ShatteredTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.ShatteredTiles3D
 });
 
 /**
- * Creates the action with a range, whether of not to shatter Z vertices, a grid size and duration. <br />
- * Reference the test cases (Effects Test)
+ * Creates the action with a range, whether of not to shatter Z vertices, a grid size and duration. <br />          用范围、是否设置晃动的Z顶点坐标、网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @function
  * @param {Number} duration
  * @param {cc.Size} gridSize
@@ -235,9 +235,9 @@ cc.shatteredTiles3D = function (duration, gridSize, range, shatterZ) {
 };
 
 /**
- * Please use cc.shatteredTiles3D instead. <br />
- * Creates the action with a range, whether of not to shatter Z vertices, a grid size and duration. <br />
- * Reference the test cases (Effects Test)
+ * Please use cc.shatteredTiles3D instead. <br />       3.0后的版本用cc.shatteredTiles3D代替
+ * Creates the action with a range, whether of not to shatter Z vertices, a grid size and duration. <br />          用范围、是否设置晃动的Z顶点坐标、网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @param {Number} duration
  * @param {cc.Size} gridSize
  * @param {Number} range
@@ -249,7 +249,7 @@ cc.shatteredTiles3D = function (duration, gridSize, range, shatterZ) {
 cc.ShatteredTiles3D.create = cc.shatteredTiles3D;
 
 /**
- * A Tile composed of position, startPosition and delta.
+ * A Tile composed of position, startPosition and delta.        由位置组成的瓦片 ，开始位置和位置变量
  * @Class
  * @constructor
  * @param {cc.Point} [position=cc.p(0,0)]
@@ -263,8 +263,8 @@ cc.Tile = function (position, startPosition, delta) {
 };
 
 /**
- * cc.ShuffleTiles action, Shuffle the tiles in random order. <br />
- * Reference the test cases (Effects Test)
+ * cc.ShuffleTiles action, Shuffle the tiles in random order. <br />        cc.ShuffleTiles action，随机打乱瓦片的位置
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @class
  * @extends cc.TiledGrid3DAction
  * @param {Number} duration
@@ -278,8 +278,8 @@ cc.ShuffleTiles = cc.TiledGrid3DAction.extend(/** @lends cc.ShuffleTiles# */{
     _tiles:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * Creates the action with a random seed, the grid size and the duration.
+     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />          构造函数，重写此函数去继承构造函数的方法，记得在继承的"ctor"函数里调用"this._super()"
+	 * Creates the action with a random seed, the grid size and the duration.          用随机数、网格大小和时长创建一个action
 	 * @param {Number} duration
 	 * @param {cc.Size} gridSize
 	 * @param {Number} seed
@@ -293,7 +293,7 @@ cc.ShuffleTiles = cc.TiledGrid3DAction.extend(/** @lends cc.ShuffleTiles# */{
     },
 
     /**
-     * Initializes the action with a random seed, the grid size and the duration.
+     * Initializes the action with a random seed, the grid size and the duration.       用随机数、网格大小和时长初始化action
      * @param {Number} duration
      * @param {cc.Size} gridSize
      * @param {Number} seed
@@ -310,7 +310,7 @@ cc.ShuffleTiles = cc.TiledGrid3DAction.extend(/** @lends cc.ShuffleTiles# */{
     },
 
     /**
-     * Shuffle
+     * Shuffle          打乱
      * @param {Array} array
      * @param {Number} len
      */
@@ -324,7 +324,7 @@ cc.ShuffleTiles = cc.TiledGrid3DAction.extend(/** @lends cc.ShuffleTiles# */{
     },
 
     /**
-     * Get Delta
+     * Get Delta        获取变动的位置
      * @param {cc.Size} pos
      */
     getDelta:function (pos) {
@@ -335,7 +335,7 @@ cc.ShuffleTiles = cc.TiledGrid3DAction.extend(/** @lends cc.ShuffleTiles# */{
     },
 
     /**
-     * Place Tile
+     * Place Tile       放置瓦片
      * @param {cc.Point} pos
      * @param {cc.Tile} tile
      */
@@ -360,7 +360,7 @@ cc.ShuffleTiles = cc.TiledGrid3DAction.extend(/** @lends cc.ShuffleTiles# */{
     },
 
     /**
-     * Start with target
+     * Start with target        开始目标
      * @param {cc.Node} target
      */
     startWithTarget:function (target) {
@@ -372,8 +372,8 @@ cc.ShuffleTiles = cc.TiledGrid3DAction.extend(/** @lends cc.ShuffleTiles# */{
         locTilesOrder.length = 0;
 
         /**
-         * Use k to loop. Because m_nTilesCount is unsigned int,
-         * and i is used later for int.
+         * Use k to loop. Because m_nTilesCount is unsigned int,        m_nTilesCount是一个无符号整型值，用k值去做循环
+         * and i is used later for int.         
          */
         for (var k = 0; k < this._tilesCount; ++k)
             locTilesOrder[k] = k;
@@ -396,7 +396,7 @@ cc.ShuffleTiles = cc.TiledGrid3DAction.extend(/** @lends cc.ShuffleTiles# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
+     * Called once per frame. Time is the number of seconds of a frame interval.             每帧调用一次，时间参数是设置两帧之间的时长间隔的
      * @param {Number}  dt
      */
     update:function (dt) {
@@ -417,8 +417,8 @@ cc.ShuffleTiles = cc.TiledGrid3DAction.extend(/** @lends cc.ShuffleTiles# */{
 });
 
 /**
- * Creates the action with a random seed, the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * Creates the action with a random seed, the grid size and the duration. <br />        用随机数、网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @function
  * @param {Number} duration
  * @param {cc.Size} gridSize
@@ -430,9 +430,9 @@ cc.shuffleTiles = function (duration, gridSize, seed) {
 };
 
 /**
- * Please use cc.shuffleTiles instead. <br />
- * Creates the action with a random seed, the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * Please use cc.shuffleTiles instead. <br />       3.0后的版本用cc.shuffleTiles代替
+ * Creates the action with a random seed, the grid size and the duration. <br />        用随机数、网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @param {Number} duration
  * @param {cc.Size} gridSize
  * @param {Number} seed
@@ -443,14 +443,14 @@ cc.shuffleTiles = function (duration, gridSize, seed) {
 cc.ShuffleTiles.create = cc.shuffleTiles;
 
 /**
- * cc.FadeOutTRTiles action. Fades out the tiles in a Top-Right direction. <br />
+ * cc.FadeOutTRTiles action. Fades out the tiles in a Top-Right direction. <br />           cc.FadeOutTRTiles action，瓦片往右上角方向淡去
  * Reference the test cases (Effects Test)
  * @class
  * @extends cc.TiledGrid3DAction
  */
 cc.FadeOutTRTiles = cc.TiledGrid3DAction.extend(/** @lends cc.FadeOutTRTiles# */{
     /**
-     * Test function
+     * Test function        测试函数
      * @param {cc.Size} pos
      * @param {Number} time
      */
@@ -463,7 +463,7 @@ cc.FadeOutTRTiles = cc.TiledGrid3DAction.extend(/** @lends cc.FadeOutTRTiles# */
     },
 
     /**
-     * Turn on Tile
+     * Turn on Tile         打开瓦片
      * @param {cc.Point} pos
      */
     turnOnTile:function (pos) {
@@ -471,7 +471,7 @@ cc.FadeOutTRTiles = cc.TiledGrid3DAction.extend(/** @lends cc.FadeOutTRTiles# */
     },
 
     /**
-     * Turn Off Tile
+     * Turn Off Tile        关掉瓦片
      * @param {cc.Point} pos
      */
     turnOffTile:function (pos) {
@@ -479,7 +479,7 @@ cc.FadeOutTRTiles = cc.TiledGrid3DAction.extend(/** @lends cc.FadeOutTRTiles# */
     },
 
     /**
-     * Transform tile
+     * Transform tile       转换瓦片
      * @param {cc.Point} pos
      * @param {Number} distance
      */
@@ -503,7 +503,7 @@ cc.FadeOutTRTiles = cc.TiledGrid3DAction.extend(/** @lends cc.FadeOutTRTiles# */
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
+     * Called once per frame. Time is the number of seconds of a frame interval.             每帧调用一次，时间参数是设置两帧之间的时长间隔的
      * @param {Number}  dt
      */
     update:function (dt) {
@@ -528,8 +528,8 @@ cc.FadeOutTRTiles = cc.TiledGrid3DAction.extend(/** @lends cc.FadeOutTRTiles# */
 });
 
 /**
- * Creates the action with the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * Creates the action with the grid size and the duration. <br />       用网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @function
  * @param duration
  * @param gridSize
@@ -540,7 +540,7 @@ cc.fadeOutTRTiles = function (duration, gridSize) {
 };
 
 /**
- * Please use cc.fadeOutTRTiles instead. <br />
+ * Please use cc.fadeOutTRTiles instead. <br />         3.0后的版本用cc.fadeOutTRTiles代替
  * Creates the action with the grid size and the duration. <br />
  * Reference the test cases (Effects Test)
  * @param duration
@@ -552,14 +552,14 @@ cc.fadeOutTRTiles = function (duration, gridSize) {
 cc.FadeOutTRTiles.create = cc.fadeOutTRTiles;
 
 /**
- * cc.FadeOutBLTiles action. Fades out the tiles in a Bottom-Left direction. <br />
- * Reference the test cases (Effects Test)
+ * cc.FadeOutBLTiles action. Fades out the tiles in a Bottom-Left direction. <br />         cc.FadeOutBLTiles action，使瓦片往左下角方向淡去
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @class
  * @extends cc.FadeOutTRTiles
  */
 cc.FadeOutBLTiles = cc.FadeOutTRTiles.extend(/** @lends cc.FadeOutBLTiles# */{
     /**
-     * Test function
+     * Test function        测试函数
      * @param {cc.Size} pos
      * @param {Number} time
      */
@@ -574,8 +574,8 @@ cc.FadeOutBLTiles = cc.FadeOutTRTiles.extend(/** @lends cc.FadeOutBLTiles# */{
 });
 
 /**
- * Creates the action with the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * Creates the action with the grid size and the duration. <br />       用网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)              参考示例（Effects Test）
  * @function
  * @param duration
  * @param gridSize
@@ -586,7 +586,7 @@ cc.fadeOutBLTiles = function (duration, gridSize) {
 };
 
 /**
- * Please use cc.fadeOutBLTiles instead. <br />
+ * Please use cc.fadeOutBLTiles instead. <br />         3.0后的版本用cc.fadeOutBLTiles代替
  * Creates the action with the grid size and the duration. <br />
  * Reference the test cases (Effects Test)
  * @param duration
@@ -598,8 +598,8 @@ cc.fadeOutBLTiles = function (duration, gridSize) {
 cc.FadeOutBLTiles.create = cc.fadeOutBLTiles;
 
 /**
- * cc.FadeOutUpTiles action. Fades out the tiles in upwards direction. <br />
- * Reference the test cases (Effects Test)
+ * cc.FadeOutUpTiles action. Fades out the tiles in upwards direction. <br />           cc.FadeOutUpTiles action.，使瓦片从上方淡去
+ * Reference the test cases (Effects Test)              参考示例（Effects Test）
  * @class
  * @extends cc.FadeOutTRTiles
  */
@@ -625,8 +625,8 @@ cc.FadeOutUpTiles = cc.FadeOutTRTiles.extend(/** @lends cc.FadeOutUpTiles# */{
 });
 
 /**
- * Creates the action with the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * Creates the action with the grid size and the duration. <br />       用网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @function
  * @param {Number} duration
  * @param {cc.Size} gridSize
@@ -637,9 +637,9 @@ cc.fadeOutUpTiles = function (duration, gridSize) {
 };
 
 /**
- * Please use cc.fadeOutUpTiles instead. <br />
- * Creates the action with the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * Please use cc.fadeOutUpTiles instead. <br />             3.0后的版本用cc.fadeOutUpTiles代替
+ * Creates the action with the grid size and the duration. <br />       用网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @param {Number} duration
  * @param {cc.Size} gridSize
  * @return {cc.FadeOutUpTiles}
@@ -649,8 +649,8 @@ cc.fadeOutUpTiles = function (duration, gridSize) {
 cc.FadeOutUpTiles.create = cc.fadeOutUpTiles;
 
 /**
- * cc.FadeOutDownTiles action. Fades out the tiles in downwards direction. <br />
- * Reference the test cases (Effects Test)
+ * cc.FadeOutDownTiles action. Fades out the tiles in downwards direction. <br />       cc.FadeOutDownTiles action，使瓦片从下方淡去
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @class
  * @extends cc.FadeOutUpTiles
  */
@@ -664,8 +664,8 @@ cc.FadeOutDownTiles = cc.FadeOutUpTiles.extend(/** @lends cc.FadeOutDownTiles# *
 });
 
 /**
- * Creates the action with the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * Creates the action with the grid size and the duration. <br />       用网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)              参考示例（Effects Test）
  * @function
  * @param {Number} duration
  * @param {cc.Size} gridSize
@@ -675,9 +675,9 @@ cc.fadeOutDownTiles = function (duration, gridSize) {
     return new cc.FadeOutDownTiles(duration, gridSize);
 };
 /**
- * Please use cc.fadeOutDownTiles instead. <br />
- * Creates the action with the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * Please use cc.fadeOutDownTiles instead. <br />       3.0后的版本用cc.fadeOutDownTiles代替
+ * Creates the action with the grid size and the duration. <br />       用网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @param {Number} duration
  * @param {cc.Size} gridSize
  * @return {cc.FadeOutDownTiles}
@@ -688,18 +688,18 @@ cc.FadeOutDownTiles.create = cc.fadeOutDownTiles;
 
 /**
  * cc.TurnOffTiles action.<br/>
- * Turn off the files in random order. <br />
- * Reference the test cases (Effects Test)
+ * Turn off the files in random order. <br />           按随机顺序关闭瓦片
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @class
  * @extends cc.TiledGrid3DAction
  * @param {Number} duration
  * @param {cc.Size} gridSize
  * @param {Number|Null} [seed=0]
  * @example
- * // turnOffTiles without seed
+ * // turnOffTiles without seed         没有设置随机种子数
  * var toff = new cc.TurnOffTiles(this._duration, cc.size(x, y));
  *
- * // turnOffTiles with seed
+ * // turnOffTiles with seed          设置随机种子数
  * var toff = new cc.TurnOffTiles(this._duration, cc.size(x, y), 0);
  */
 cc.TurnOffTiles = cc.TiledGrid3DAction.extend(/** @lends cc.TurnOffTiles# */{
@@ -708,8 +708,8 @@ cc.TurnOffTiles = cc.TiledGrid3DAction.extend(/** @lends cc.TurnOffTiles# */{
     _tilesOrder:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * Creates the action with a random seed, the grid size and the duration.
+     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />          构造函数，重写此函数去继承构造函数的方法，记得在"ctor"函数里调用"this._super()"
+	 * Creates the action with a random seed, the grid size and the duration.          用随机数、网格大小和时长创建一个action
 	 * @param {Number} duration
 	 * @param {cc.Size} gridSize
 	 * @param {Number|Null} [seed=0]
@@ -722,7 +722,7 @@ cc.TurnOffTiles = cc.TiledGrid3DAction.extend(/** @lends cc.TurnOffTiles# */{
     },
 
     /**
-     * Initializes the action with a random seed, the grid size and the duration.
+     * Initializes the action with a random seed, the grid size and the duration.       用随机数、网格大小和时长初始化action
      * @param {Number} duration
      * @param {cc.Size} gridSize
      * @param {Number|Null} [seed=0]
@@ -738,7 +738,7 @@ cc.TurnOffTiles = cc.TiledGrid3DAction.extend(/** @lends cc.TurnOffTiles# */{
     },
 
     /**
-     * Shuffle
+     * Shuffle          打乱顺序
      * @param {Array} array
      * @param {Number} len
      */
@@ -752,7 +752,7 @@ cc.TurnOffTiles = cc.TiledGrid3DAction.extend(/** @lends cc.TurnOffTiles# */{
     },
 
     /**
-     * Turn on tile.
+     * Turn on tile.        打开瓦片
      * @param {cc.Point} pos
      */
     turnOnTile:function (pos) {
@@ -760,7 +760,7 @@ cc.TurnOffTiles = cc.TiledGrid3DAction.extend(/** @lends cc.TurnOffTiles# */{
     },
 
     /**
-     * Turn off title.
+     * Turn off title.          关闭瓦片
      * @param {cc.Point} pos
      */
     turnOffTile:function (pos) {
@@ -768,7 +768,7 @@ cc.TurnOffTiles = cc.TiledGrid3DAction.extend(/** @lends cc.TurnOffTiles# */{
     },
 
     /**
-     * called before the action start. It will also set the target.
+     * called before the action start. It will also set the target.         在action开始之前调用，同时设置目标
      * @param {cc.Node} target
      */
     startWithTarget:function (target) {
@@ -783,7 +783,7 @@ cc.TurnOffTiles = cc.TiledGrid3DAction.extend(/** @lends cc.TurnOffTiles# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
+     * Called once per frame. Time is the number of seconds of a frame interval.        每帧调用一次，时间参数是设置两帧之间的时长间隔的
      * @param {Number}  dt
      */
     update:function (dt) {
@@ -802,8 +802,8 @@ cc.TurnOffTiles = cc.TiledGrid3DAction.extend(/** @lends cc.TurnOffTiles# */{
 });
 
 /**
- * Creates the action with a random seed, the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * Creates the action with a random seed, the grid size and the duration. <br />        用随机数、网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @function
  * @param {Number} duration
  * @param {cc.Size} gridSize
@@ -811,19 +811,19 @@ cc.TurnOffTiles = cc.TiledGrid3DAction.extend(/** @lends cc.TurnOffTiles# */{
  * @return {cc.TurnOffTiles}
  * @example
  * // example
- * // turnOffTiles without seed
+ * // turnOffTiles without seed         没有设置随机种子数的turnOffTiles函数
  * var toff = cc.turnOffTiles(this._duration, cc.size(x, y));
  *
- * // turnOffTiles with seed
+ * // turnOffTiles with seed                设置了随机种子数的turnOffTiles函数
  * var toff = cc.turnOffTiles(this._duration, cc.size(x, y), 0);
  */
 cc.turnOffTiles = function (duration, gridSize, seed) {
     return new cc.TurnOffTiles(duration, gridSize, seed);
 };
 /**
- * Please use cc.turnOffTiles instead. <br />
- * Creates the action with a random seed, the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * Please use cc.turnOffTiles instead. <br />       3.0后的版本用cc.turnOffTiles代替
+ * Creates the action with a random seed, the grid size and the duration. <br />        用随机数、网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @param {Number} duration
  * @param {cc.Size} gridSize
  * @param {Number|Null} [seed=0]
@@ -835,7 +835,7 @@ cc.TurnOffTiles.create = cc.turnOffTiles;
 
 /**
  * cc.WavesTiles3D action. <br />
- * Reference the test cases (Effects Test)
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @class
  * @extends cc.TiledGrid3DAction
  * @param {Number} duration
@@ -849,8 +849,8 @@ cc.WavesTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.WavesTiles3D# */{
     _amplitudeRate:0,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * creates the action with a number of waves, the waves amplitude, the grid size and the duration.
+     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />          构造函数，重写此函数去继承构造函数的方法，记得在"ctor"函数里调用"this._super()"
+	 * creates the action with a number of waves, the waves amplitude, the grid size and the duration.         用波的数量、波的振幅、网格大小和时长创建一个action
 	 * @param {Number} duration
 	 * @param {cc.Size} gridSize
 	 * @param {Number} waves
@@ -862,7 +862,7 @@ cc.WavesTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.WavesTiles3D# */{
     },
 
     /**
-     * get amplitude of waves
+     * get amplitude of waves       获取波的振幅
      * @return {Number}
      */
     getAmplitude:function () {
@@ -870,7 +870,7 @@ cc.WavesTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.WavesTiles3D# */{
     },
 
     /**
-     * set amplitude of waves
+     * set amplitude of waves       设置波的振幅
      * @param {Number} amplitude
      */
     setAmplitude:function (amplitude) {
@@ -878,7 +878,7 @@ cc.WavesTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.WavesTiles3D# */{
     },
 
     /**
-     * get amplitude rate of waves
+     * get amplitude rate of waves          获取波的振幅速率
      * @return {Number}
      */
     getAmplitudeRate:function () {
@@ -886,7 +886,7 @@ cc.WavesTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.WavesTiles3D# */{
     },
 
     /**
-     * set amplitude rate of waves
+     * set amplitude rate of waves          设置波的振幅速率
      * @param {Number} amplitudeRate
      */
     setAmplitudeRate:function (amplitudeRate) {
@@ -894,7 +894,7 @@ cc.WavesTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.WavesTiles3D# */{
     },
 
     /**
-     * initializes the action with a number of waves, the waves amplitude, the grid size and the duration
+     * initializes the action with a number of waves, the waves amplitude, the grid size and the duration       用波的数量、波的振幅、网格大小和时长初始化action
      * @param {Number} duration
      * @param {cc.Size} gridSize
      * @param {Number} waves
@@ -912,7 +912,7 @@ cc.WavesTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.WavesTiles3D# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
+     * Called once per frame. Time is the number of seconds of a frame interval.        每帧调用一次，时间参数是设置两帧之间的时长间隔的
      * @param {Number}  dt
      */
     update:function (dt) {
@@ -935,8 +935,8 @@ cc.WavesTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.WavesTiles3D# */{
 });
 
 /**
- * creates the action with a number of waves, the waves amplitude, the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * creates the action with a number of waves, the waves amplitude, the grid size and the duration. <br />       用波的数量、波的振幅、网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @function
  * @param {Number} duration
  * @param {cc.Size} gridSize
@@ -948,9 +948,9 @@ cc.wavesTiles3D = function (duration, gridSize, waves, amplitude) {
     return new cc.WavesTiles3D(duration, gridSize, waves, amplitude);
 };
 /**
- * Please use cc.wavesTiles3D instead
- * creates the action with a number of waves, the waves amplitude, the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * Please use cc.wavesTiles3D instead           3.0后的版本用cc.wavesTiles3D代替
+ * creates the action with a number of waves, the waves amplitude, the grid size and the duration. <br />       用波的数量、波的振幅、网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @param {Number} duration
  * @param {cc.Size} gridSize
  * @param {Number} waves
@@ -962,8 +962,8 @@ cc.wavesTiles3D = function (duration, gridSize, waves, amplitude) {
 cc.WavesTiles3D.create = cc.wavesTiles3D;
 
 /**
- * cc.JumpTiles3D action.  A sin function is executed to move the tiles across the Z axis. <br />
- * Reference the test cases (Effects Test)
+ * cc.JumpTiles3D action.  A sin function is executed to move the tiles across the Z axis. <br />       cc.JumpTiles3D action，一个用于移动瓦片Z轴的正弦函数
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @class
  * @extends cc.TiledGrid3DAction
  * @param {Number} duration
@@ -977,8 +977,8 @@ cc.JumpTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.JumpTiles3D# */{
     _amplitudeRate:0,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * creates the action with the number of jumps, the sin amplitude, the grid size and the duration.
+     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />          构造函数，重写此函数去继承构造函数的方法，记得在"ctor"函数里调用"this._super()"
+	 * creates the action with the number of jumps, the sin amplitude, the grid size and the duration.         用跳动数、正弦振幅、网格大小和时长创建一个action
 	 * @param {Number} duration
 	 * @param {cc.Size} gridSize
 	 * @param {Number} numberOfJumps
@@ -990,7 +990,7 @@ cc.JumpTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.JumpTiles3D# */{
     },
 
     /**
-     * get amplitude of the sin
+     * get amplitude of the sin         获取正弦振幅
      * @return {Number}
      */
     getAmplitude:function () {
@@ -998,7 +998,7 @@ cc.JumpTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.JumpTiles3D# */{
     },
 
     /**
-     * set amplitude of the sin
+     * set amplitude of the sin         设置正弦振幅
      * @param {Number} amplitude
      */
     setAmplitude:function (amplitude) {
@@ -1006,7 +1006,7 @@ cc.JumpTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.JumpTiles3D# */{
     },
 
     /**
-     * get amplitude rate
+     * get amplitude rate       获取振幅速率
      * @return {Number}
      */
     getAmplitudeRate:function () {
@@ -1014,7 +1014,7 @@ cc.JumpTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.JumpTiles3D# */{
     },
 
     /**
-     * set amplitude rate
+     * set amplitude rate       设置振幅速率
      * @param amplitudeRate
      */
     setAmplitudeRate:function (amplitudeRate) {
@@ -1022,7 +1022,7 @@ cc.JumpTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.JumpTiles3D# */{
     },
 
     /**
-     * initializes the action with the number of jumps, the sin amplitude, the grid size and the duration
+     * initializes the action with the number of jumps, the sin amplitude, the grid size and the duration       用跳动数、正弦振幅、网格大小和时长初始化action
      * @param {Number} duration
      * @param {cc.Size} gridSize
      * @param {Number} numberOfJumps
@@ -1039,7 +1039,7 @@ cc.JumpTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.JumpTiles3D# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
+     * Called once per frame. Time is the number of seconds of a frame interval.         每帧调用一次，时间参数是设置两帧之间的时长间隔的
      * @param {Number}  dt
      */
     update:function (dt) {
@@ -1053,7 +1053,7 @@ cc.JumpTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.JumpTiles3D# */{
             for (var j = 0; j < locGridSize.height; j++) {
                 locPos.x = i;
                 locPos.y = j;
-                //hack for html5
+                //hack for html5        在HTML5中去掉
                 //var coords = this.originalTile(cc.p(i, j));
                 coords = locGrid.originalTile(locPos);
 
@@ -1068,7 +1068,7 @@ cc.JumpTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.JumpTiles3D# */{
                     coords.tl.z += sinz2;
                     coords.tr.z += sinz2;
                 }
-                //hack for html5
+                //hack for html5        在HTML5中去掉
                 //this.setTile(cc.p(i, j), coords);
                 locGrid.setTile(locPos, coords);
             }
@@ -1077,8 +1077,8 @@ cc.JumpTiles3D = cc.TiledGrid3DAction.extend(/** @lends cc.JumpTiles3D# */{
 });
 
 /**
- * creates the action with the number of jumps, the sin amplitude, the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * creates the action with the number of jumps, the sin amplitude, the grid size and the duration. <br />       用跳动数、正弦振幅、网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @function
  * @param {Number} duration
  * @param {cc.Size} gridSize
@@ -1091,9 +1091,9 @@ cc.jumpTiles3D = function (duration, gridSize, numberOfJumps, amplitude) {
 };
 
 /**
- * Please use cc.jumpTiles3D instead
- * creates the action with the number of jumps, the sin amplitude, the grid size and the duration. <br />
- * Reference the test cases (Effects Test)
+ * Please use cc.jumpTiles3D instead            3.0后的版本用cc.jumpTiles3D代替
+ * creates the action with the number of jumps, the sin amplitude, the grid size and the duration. <br />       用跳动数、正弦振幅、网格大小和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @param {Number} duration
  * @param {cc.Size} gridSize
  * @param {Number} numberOfJumps
@@ -1106,7 +1106,7 @@ cc.JumpTiles3D.create = cc.jumpTiles3D;
 
 /**
  * cc.SplitRows action. <br />
- * Reference the test cases (Effects Test)
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @class
  * @extends cc.TiledGrid3DAction
  * @param {Number} duration
@@ -1117,8 +1117,8 @@ cc.SplitRows = cc.TiledGrid3DAction.extend(/** @lends cc.SplitRows# */{
     _winSize:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * creates the action with the number of rows to split and the duration.
+     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />          构造函数，重写此函数去继承构造函数的方法，记得在"ctor"函数里调用"this._super()"
+	 * creates the action with the number of rows to split and the duration.       用分隔开的行数和时长创建一个action
 	 * @param {Number} duration
 	 * @param {Number} rows
 	 */
@@ -1128,7 +1128,7 @@ cc.SplitRows = cc.TiledGrid3DAction.extend(/** @lends cc.SplitRows# */{
     },
 
     /**
-     * initializes the action with the number of rows to split and the duration
+     * initializes the action with the number of rows to split and the duration         用分隔开的行数和时长初始化个action
      * @param {Number} duration
      * @param {Number} rows
      * @return {Boolean}
@@ -1139,7 +1139,7 @@ cc.SplitRows = cc.TiledGrid3DAction.extend(/** @lends cc.SplitRows# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
+     * Called once per frame. Time is the number of seconds of a frame interval.        每帧调用一次，时间参数是设置两帧之间的时长间隔的
      * @param {Number}  dt
      */
     update:function (dt) {
@@ -1163,7 +1163,7 @@ cc.SplitRows = cc.TiledGrid3DAction.extend(/** @lends cc.SplitRows# */{
     },
 
     /**
-     * called before the action start. It will also set the target.
+     * called before the action start. It will also set the target.         在action开始前调用，同时设置目标
      * @param {cc.Node} target
      */
     startWithTarget:function (target) {
@@ -1173,8 +1173,8 @@ cc.SplitRows = cc.TiledGrid3DAction.extend(/** @lends cc.SplitRows# */{
 });
 
 /**
- * creates the action with the number of rows to split and the duration. <br />
- * Reference the test cases (Effects Test)
+ * creates the action with the number of rows to split and the duration. <br />         用分隔开的行数和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Te）
  * @function
  * @param {Number} duration
  * @param {Number} rows
@@ -1185,9 +1185,9 @@ cc.splitRows = function (duration, rows) {
 };
 
 /**
- * Please use cc.splitRows instead
- * creates the action with the number of rows to split and the duration. <br />
- * Reference the test cases (Effects Test)
+ * Please use cc.splitRows instead          3.0后的版本用cc.splitRows代替
+ * creates the action with the number of rows to split and the duration. <br />         用分隔开的行数和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @param {Number} duration
  * @param {Number} rows
  * @return {cc.SplitRows}
@@ -1198,7 +1198,7 @@ cc.SplitRows.create = cc.splitRows;
 
 /**
  * cc.SplitCols action. <br />
- * Reference the test cases (Effects Test)
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @class
  * @extends cc.TiledGrid3DAction
  * @param {Number} duration
@@ -1209,8 +1209,8 @@ cc.SplitCols = cc.TiledGrid3DAction.extend(/** @lends cc.SplitCols# */{
     _winSize:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * Creates the action with the number of columns to split and the duration.
+     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />          构造函数，重写此函数去继承构造函数的方法，记得在"ctor"函数里调用"this._super()"
+	 * Creates the action with the number of columns to split and the duration.        用分隔开的列数和时长创建一个action
 	 * @param {Number} duration
 	 * @param {Number} cols
 	 */
@@ -1219,7 +1219,7 @@ cc.SplitCols = cc.TiledGrid3DAction.extend(/** @lends cc.SplitCols# */{
 		cols !== undefined && this.initWithDuration(duration, cols);
     },
     /**
-     * initializes the action with the number of columns to split and the duration
+     * initializes the action with the number of columns to split and the duration          用分隔开的列数和时长初始化action
      * @param {Number} duration
      * @param {Number} cols
      * @return {Boolean}
@@ -1230,7 +1230,7 @@ cc.SplitCols = cc.TiledGrid3DAction.extend(/** @lends cc.SplitCols# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
+     * Called once per frame. Time is the number of seconds of a frame interval.        每帧调用一次，时间参数是设置两帧之间的时长间隔的
      * @param {Number}  dt
      */
     update:function (dt) {
@@ -1255,7 +1255,7 @@ cc.SplitCols = cc.TiledGrid3DAction.extend(/** @lends cc.SplitCols# */{
     },
 
     /**
-     * called before the action start. It will also set the target.
+     * called before the action start. It will also set the target.         在action开始前调用，同时设置目标
      * @param {cc.Node} target
      */
     startWithTarget:function (target) {
@@ -1265,8 +1265,8 @@ cc.SplitCols = cc.TiledGrid3DAction.extend(/** @lends cc.SplitCols# */{
 });
 
 /**
- * creates the action with the number of columns to split and the duration.  <br />
- * Reference the test cases (Effects Test)
+ * creates the action with the number of columns to split and the duration.  <br />         用分隔开的列数和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @function
  * @param {Number} duration
  * @param {Number} cols
@@ -1277,9 +1277,9 @@ cc.splitCols = function (duration, cols) {
 };
 
 /**
- * Please use cc.splitCols instead.
- * creates the action with the number of columns to split and the duration.  <br />
- * Reference the test cases (Effects Test)
+ * Please use cc.splitCols instead.         3.0后的版本用cc.splitCols代替
+ * creates the action with the number of columns to split and the duration.  <br />          用分隔开的列数和时长创建一个action
+ * Reference the test cases (Effects Test)          参考示例（Effects Test）
  * @param {Number} duration
  * @param {Number} cols
  * @return {cc.SplitCols}

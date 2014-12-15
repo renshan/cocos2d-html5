@@ -48,7 +48,7 @@ cc.kmPIUnder180 = 57.295779;
 cc.kmEpsilon = 1.0 / 64.0;
 
 /**
- * Returns the square of s (e.g. s*s)
+ * Returns the square of s (e.g. s*s)    返回s的平方（例如 s*s）
  * @param {Number} s
  */
 cc.kmSQR = function(s){

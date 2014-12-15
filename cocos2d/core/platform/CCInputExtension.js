@@ -30,6 +30,12 @@ var _p = cc.inputManager;
  * @function
  * @param {Boolean} isEnable
  */
+
+/**
+ * 是否开启加速器事件
+ * @function
+ * @param {Boolean} isEnable
+ */
 _p.setAccelerometerEnabled = function(isEnable){
     var _t = this;
     if(_t._accelEnabled === isEnable)
@@ -50,6 +56,12 @@ _p.setAccelerometerEnabled = function(isEnable){
  * set accelerometer interval value
  * @function
  * @param {Number} interval
+ */
+
+/**
+ * 设置加速剂的时间间隔值
+ * @function
+ * @param {Number} 时间间隔
  */
 _p.setAccelerometerInterval = function(interval){
     if (this._accelInterval !== interval) {
@@ -75,7 +87,7 @@ _p._registerAccelerometerEvent = function(){
     _t._acceleration = new cc.Acceleration();
     _t._accelDeviceEvent = w.DeviceMotionEvent || w.DeviceOrientationEvent;
 
-    //TODO fix DeviceMotionEvent bug on QQ Browser version 4.1 and below.
+    //TODO fix DeviceMotionEvent bug on QQ Browser version 4.1 and below.           修复QQ浏览器4.1及以下版本的DeviceMotionEvent漏洞
     if (cc.sys.browserType == cc.sys.BROWSER_TYPE_MOBILE_QQ)
         _t._accelDeviceEvent = window.DeviceOrientationEvent;
 

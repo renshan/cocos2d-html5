@@ -28,7 +28,7 @@
  */
 
 /**
- * paticle default capacity
+ * 默认粒子容量
  * @constant
  * @type Number
  */
@@ -36,37 +36,51 @@ cc.PARTICLE_DEFAULT_CAPACITY = 500;
 
 /**
  * <p>
- *    cc.ParticleBatchNode is like a batch node: if it contains children, it will draw them in 1 single OpenGL call  <br/>
+ *    cc.ParticleBatchNode is like a batch node: if it contains children, it will draw them in 1 single OpenGL call  <br/> 
+ *    cc.ParticleBatchNode 像一个批处理节点：如果包含子元素，会调用独立的OpenGL绘制它们。
  *    (often known as "batch draw").  </br>
+ *    （通常被称之为“批量绘制”）
  *
  *    A cc.ParticleBatchNode can reference one and only one texture (one image file, one texture atlas).<br/>
+ *    一个cc.ParticleBatchNode对象能且只能引用一个纹理（一个图片文件，一个纹理地图集）。
  *    Only the cc.ParticleSystems that are contained in that texture can be added to the cc.SpriteBatchNode.<br/>
+ *    只有被包含在纹理对象中的cc.ParticleSystems才能被添加到cc.SpriteBatchNode。
  *    All cc.ParticleSystems added to a cc.SpriteBatchNode are drawn in one OpenGL ES draw call.<br/>
+ *    所有被添加到cc.SpriteBatchNode的 cc.ParticleSystems 被OpenGL ES 绘制调用绘制一次。
  *    If the cc.ParticleSystems are not added to a cc.ParticleBatchNode then an OpenGL ES draw call will be needed for each one, which is less efficient.</br>
+ *    如果cc.ParticleSystems没有被添加到cc.ParticleBatchNode那么OpenGL ES绘制方法将会被cc.ParticleSystems依次调用，这样做效率很低。
  *
  *    Limitations:<br/>
+ *    局限性：
  *    - At the moment only cc.ParticleSystem is supported<br/>
+ *    -目前为止只有cc.ParticleSystem被支持
  *    - All systems need to be drawn with the same parameters, blend function, aliasing, texture<br/>
+ *    -所有系统需要被同样的参数绘制，blend function，aliasing，texture
  *
  *    Most efficient usage<br/>
+ *    最有效的用法：
  *    - Initialize the ParticleBatchNode with the texture and enough capacity for all the particle systems<br/>
+ *    -对于所有的粒子系统，使用纹理和足够的容量初始化ParticleBatchNode
  *    - Initialize all particle systems and add them as child to the batch node<br/>
+ *    -初始化所有粒子系统并且把它们作为子元素添加到批处理节点
  * </p>
  * @class
  * @extends cc.ParticleSystem
  * @param {String|cc.Texture2D} fileImage
  * @param {Number} capacity
  *
- * @property {cc.Texture2D|HTMLImageElement|HTMLCanvasElement}  texture         - The used texture
- * @property {cc.TextureAtlas}                                  textureAtlas    - The texture atlas used for drawing the quads
+ * @property {cc.Texture2D|HTMLImageElement|HTMLCanvasElement}  texture         - The used texture 使用的纹理
+ * @property {cc.TextureAtlas}                                  textureAtlas    - The texture atlas used for drawing the quads 用来绘制quads的纹理地图集
  *
  * @example
  * 1.
  * //Create a cc.ParticleBatchNode with image path  and capacity
+ * //用图片路径和容量作为参数创建cc.ParticleBatchNode对象
  * var particleBatchNode = new cc.ParticleBatchNode("res/grossini_dance.png",30);
  *
  * 2.
  * //Create a cc.ParticleBatchNode with a texture and capacity
+ * //用纹理对象和容量作为参数创建cc.ParticleBatchNode对象
  * var texture = cc.TextureCache.getInstance().addImage("res/grossini_dance.png");
  * var particleBatchNode = new cc.ParticleBatchNode(texture, 30);
  */
@@ -80,16 +94,19 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 
     /**
      * initializes the particle system with the name of a file on disk (for a list of supported formats look at the cc.Texture2D class), a capacity of particles
+     * 用磁盘上的文件名称（支持的列表格式请查阅cc.Texture2D类）和particles的容量作为参数初始化粒子系统
      * Constructor of cc.ParticleBatchNode
      * @param {String|cc.Texture2D} fileImage
      * @param {Number} capacity
      * @example
      * 1.
      * //Create a cc.ParticleBatchNode with image path  and capacity
+     * //用图片路径和容量作为参数创建cc.ParticleBatchNode对象
      * var particleBatchNode = new cc.ParticleBatchNode("res/grossini_dance.png",30);
      *
      * 2.
      * //Create a cc.ParticleBatchNode with a texture and capacity
+     * //用纹理对象和容量作为参数创建cc.ParticleBatchNode对象
      * var texture = cc.TextureCache.getInstance().addImage("res/grossini_dance.png");
      * var particleBatchNode = new cc.ParticleBatchNode(texture, 30);
      */
@@ -105,6 +122,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 
     /**
      * initializes the particle system with cc.Texture2D, a capacity of particles
+     * 用cc.Texture2D对象和粒子容量作为参数初始化粒子系统
      * @param {cc.Texture2D|HTMLImageElement|HTMLCanvasElement} texture
      * @param {Number} capacity
      * @return {Boolean}
@@ -123,6 +141,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 
     /**
      * initializes the particle system with the name of a file on disk (for a list of supported formats look at the cc.Texture2D class), a capacity of particles
+     * 用磁盘上的文件名称（支持的列表格式请查阅cc.Texture2D类）和particles的容量作为参数初始化粒子系统
      * @param {String} fileImage
      * @param {Number} capacity
      * @return {Boolean}
@@ -134,6 +153,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 
     /**
      * initializes the particle system with the name of a file on disk (for a list of supported formats look at the cc.Texture2D class), a capacity of particles
+     * 用磁盘上的文件名称（支持的列表格式请查阅cc.Texture2D类）和particles的容量作为参数初始化粒子系统
      * @param {String} fileImage
      * @param {Number} capacity
      * @return {Boolean}
@@ -145,6 +165,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 
     /**
      * Add a child into the cc.ParticleBatchNode
+     * 添加cc.ParticleBatchNode的子元素
      * @param {cc.ParticleSystem} child
      * @param {Number} zOrder
      * @param {Number} tag
@@ -160,7 +181,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
         if(child.getTexture() != this.textureAtlas.texture)
             throw "cc.ParticleSystem.addChild() : the child is not using the same texture id";
 
-        // If this is the 1st children, then copy blending function
+        // If this is the 1st children, then copy blending function 如果是第一个子元素，拷贝blending函数
         var childBlendFunc = child.getBlendFunc();
         if (this._children.length === 0)
             this.setBlendFunc(childBlendFunc);
@@ -171,7 +192,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
             }
         }
 
-        //no lazy sorting, so don't call super addChild, call helper instead
+        //no lazy sorting, so don't call super addChild, call helper instead 不是懒排序，所以调用helper而不是父类的addChild
         var pos = this._addChildHelper(child, zOrder, tag);
 
         //get new atlasIndex
@@ -185,12 +206,13 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 
         this.insertChild(child, atlasIndex);
 
-        // update quad info
+        // update quad info 更新quad信息
         child.setBatchNode(this);
     },
 
     /**
      * Inserts a child into the cc.ParticleBatchNode
+     * 给cc.ParticleBatchNode插入一个子元素
      * @param {cc.ParticleSystem} pSystem
      * @param {Number} index
      */
@@ -202,14 +224,17 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
         if (totalQuads + totalParticles > locTextureAtlas.getCapacity()) {
             this._increaseAtlasCapacityTo(totalQuads + totalParticles);
             // after a realloc empty quads of textureAtlas can be filled with gibberish (realloc doesn't perform calloc), insert empty quads to prevent it
+            //当重新分配一个空的纹理地图集的quads之后能被无用数据填充（realloc不执行calloc），插入空的quads展现
             locTextureAtlas.fillWithEmptyQuadsFromIndex(locTextureAtlas.getCapacity() - totalParticles, totalParticles);
         }
 
         // make room for quads, not necessary for last child
+        // 给quads让出地方，最后一个子元素不用
         if (pSystem.getAtlasIndex() + totalParticles != totalQuads)
             locTextureAtlas.moveQuadsFromIndex(index, index + totalParticles);
 
         // increase totalParticles here for new particles, update method of particlesystem will fill the quads
+        // 为新的粒子增加totalParticles，particlesystem的更新方法将会填充quads
         locTextureAtlas.increaseTotalQuadsWith(totalParticles);
         this._updateAllAtlasIndexes();
     },
@@ -219,7 +244,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
      * @param {Boolean} cleanup
      */
     removeChild:function (child, cleanup) {
-        // explicit nil handling
+        // explicit nil handling 明确为空处理
         if (child == null)
             return;
 
@@ -233,13 +258,13 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
         cc.Node.prototype.removeChild.call(this, child, cleanup);
 
         var locTextureAtlas = this.textureAtlas;
-        // remove child helper
+        // remove child helper 移除子元素的helper方法
         locTextureAtlas.removeQuadsAtIndex(child.getAtlasIndex(), child.getTotalParticles());
 
-        // after memmove of data, empty the quads at the end of array
+        // after memmove of data, empty the quads at the end of array  当数据的块拷贝之后，清空数组最后的quads
         locTextureAtlas.fillWithEmptyQuadsFromIndex(locTextureAtlas.totalQuads, child.getTotalParticles());
 
-        // paticle could be reused for self rendering
+        // paticle could be reused for self rendering 粒子能够被重用为了自我渲染
         child.setBatchNode(null);
 
         this._updateAllAtlasIndexes();
@@ -247,6 +272,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 
     /**
      * Reorder will be done in this function, no "lazy" reorder to particles
+     * 在这个函数中重新排序会被完成，particles没有懒排序
      * @param {cc.ParticleSystem} child
      * @param {Number} zOrder
      */
@@ -263,7 +289,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
         if (zOrder == child.zIndex)
             return;
 
-        // no reordering if only 1 child
+        // no reordering if only 1 child 如果只有一个子元素不用重新排序
         if (this._children.length > 1) {
             var getIndexes = this._getCurrentIndex(child, zOrder);
 
@@ -272,13 +298,13 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
                 this._children.splice(getIndexes.oldIndex, 1)
                 this._children.splice(getIndexes.newIndex, 0, child);
 
-                // save old altasIndex
+                // save old altasIndex 保存旧的地图集索引
                 var oldAtlasIndex = child.getAtlasIndex();
 
-                // update atlas index
+                // update atlas index 更新地图集索引
                 this._updateAllAtlasIndexes();
 
-                // Find new AtlasIndex
+                // Find new AtlasIndex 查找新的地图集索引
                 var newAtlasIndex = 0;
                 var locChildren = this._children;
                 for (var i = 0; i < locChildren.length; i++) {
@@ -289,7 +315,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
                     }
                 }
 
-                // reorder textureAtlas quads
+                // reorder textureAtlas quads 重新排序纹理地图集的quads
                 this.textureAtlas.moveQuadsFromIndex(oldAtlasIndex, child.getTotalParticles(), newAtlasIndex);
 
                 child.updateWithNoTime();
@@ -320,6 +346,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 
     /**
      * disables a particle by inserting a 0'd quad into the texture atlas
+     * 禁用一个particle 通过插入一个0'd quad 到纹理地图集
      * @param {Number} particleIndex
      */
     disableParticle:function (particleIndex) {
@@ -331,6 +358,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 
     /**
      * Render function using the canvas 2d context or WebGL context, internal usage only, please do not call this function
+     * 渲染函数使用canvas 2d 上下文或者WebGL 上下文，如果只有内部调用，请不要调用此函数
      * @function
      * @param {CanvasRenderingContext2D | WebGLRenderingContext} ctx The render context
      */
@@ -358,13 +386,14 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
     },
 
     /**
-     * sets a new texture. it will be retained
+     * sets a new texture. it will be retained 设置新的纹理，将会被保留
      * @param {cc.Texture2D|HTMLImageElement|HTMLCanvasElement} texture
      */
     setTexture:function (texture) {
         this.textureAtlas.texture = texture;
 
-        // If the new texture has No premultiplied alpha, AND the blendFunc hasn't been changed, then update it
+        // If the new texture has No premultiplied alpha, AND the blendFunc hasn't been changed, then update it 
+        // 如果新的纹理没有阿尔法通道并且blend函数没有变化，那么更新blend函数
         var locBlendFunc = this._blendFunc;
         if (texture && !texture.hasPremultipliedAlpha() && ( locBlendFunc.src == cc.BLEND_SRC && locBlendFunc.dst == cc.BLEND_DST )) {
             locBlendFunc.src = cc.SRC_ALPHA;
@@ -374,6 +403,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 
     /**
      * set the blending function used for the texture
+     * 设置供texture使用的blending函数
      * @param {Number|Object} src
      * @param {Number} dst
      */
@@ -390,16 +420,18 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 
     /**
      * returns the blending function used for the texture
+     * 返回供texture使用的blending函数
      * @return {cc.BlendFunc}
      */
     getBlendFunc:function () {
         return {src:this._blendFunc.src, dst:this._blendFunc.dst};
     },
 
-    // override visit.
-    // Don't call visit on it's children
+    // override visit. 重写visit函数
+    // Don't call visit on it's children 不要在它的子元素里调用visit函数
     /**
      * Recursive method that visit its children and draw them
+     * 访问CCParticleBatchNode子元素和绘制它们的递归方法
      * @function
      * @param {CanvasRenderingContext2D|WebGLRenderingContext} ctx
      */
@@ -407,12 +439,12 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
         if (cc._renderType === cc._RENDER_TYPE_CANVAS)
             return;
 
-        // CAREFUL:
-        // This visit is almost identical to cc.Node#visit
-        // with the exception that it doesn't call visit on it's children
+        // CAREFUL: 注意：
+        // This visit is almost identical to cc.Node#visit visit函数几乎和cc.Node的visit函数一样
+        // with the exception that it doesn't call visit on it's children 除了不要在它的子元素里调用visit函数
         //
-        // The alternative is to have a void cc.Sprite#visit, but
-        // although this is less mantainable, is faster
+        // The alternative is to have a void cc.Sprite#visit, but 尽管还有一个返回值是void的cc.Sprite的visit函数可选
+        // although this is less mantainable, is faster 但是这个是更少的维护，更快的函数。
         //
         if (!this._visible)
             return;
@@ -498,9 +530,13 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
     //
     // <p>
     //     don't use lazy sorting, reordering the particle systems quads afterwards would be too complex                                    <br/>
+    //     不要用懒排序，渲染粒子系统的quads会变得太复杂
     //     XXX research whether lazy sorting + freeing current quads and calloc a new block with size of capacity would be faster           <br/>
+    //	   XXX 调查显示不管懒排序+释放当前quads并且分配一个新的一定容量的内存块会更快点
     //     XXX or possibly using vertexZ for reordering, that would be fastest                                                              <br/>
+    //     XXX 还是用vertexZ 渲染可能更快
     //     this helper is almost equivalent to CCNode's addChild, but doesn't make use of the lazy sorting                                  <br/>
+    //     这个helper函数几乎和CCNode's的addChild函数一样，但是不要利用懒排序
     // </p>
     // @param {cc.ParticleSystem} child
     // @param {Number} z
@@ -542,7 +578,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
     },
 
     /**
-     * return the texture atlas used for drawing the quads
+     * return the texture atlas used for drawing the quads 返回为绘制quads使用的纹理地图集
      * @return {cc.TextureAtlas}
      */
     getTextureAtlas:function () {
@@ -550,7 +586,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
     },
 
     /**
-     * set the texture atlas used for drawing the quads
+     * set the texture atlas used for drawing the quads 设置为绘制quads使用的纹理地图集
      * @param {cc.TextureAtlas} textureAtlas
      */
     setTextureAtlas:function (textureAtlas) {
@@ -565,7 +601,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 
 var _p = cc.ParticleBatchNode.prototype;
 
-// Extended properties
+// Extended properties 扩展属性
 /** @expose */
 _p.texture;
 cc.defineGetterSetter(_p, "texture", _p.getTexture, _p.setTexture);
@@ -573,7 +609,8 @@ cc.defineGetterSetter(_p, "texture", _p.getTexture, _p.setTexture);
 
 /**
  * initializes the particle system with the name of a file on disk (for a list of supported formats look at the cc.Texture2D class), a capacity of particles
- * @deprecated since v3.0 please use new cc.ParticleBatchNode(filename, capacity) instead.
+ * 用磁盘上的文件名称（支持的列表格式请查阅cc.Texture2D类）和particles的容量作为参数初始化粒子系统
+ * @deprecated since v3.0 please use new cc.ParticleBatchNode(filename, capacity) instead. 自v3.0后请用 new cc.ParticleBatchNode(filename, capacity) 代替。
  * @param {String|cc.Texture2D} fileImage
  * @param {Number} capacity
  * @return {cc.ParticleBatchNode}

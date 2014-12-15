@@ -26,26 +26,26 @@
  ****************************************************************************/
 
 /**
- * the value of stencil bits.
+ * 模板位的值。
  * @type Number
  */
 cc.stencilBits = -1;
 
 /**
  * <p>
- *     cc.ClippingNode is a subclass of cc.Node.                                                            <br/>
- *     It draws its content (children) clipped using a stencil.                                               <br/>
- *     The stencil is an other cc.Node that will not be drawn.                                               <br/>
- *     The clipping is done using the alpha part of the stencil (adjusted with an alphaThreshold).
+ *     cc.ClippingNode是cc.Node的一个子类。<br/>
+ *     利用裁剪模板绘制可裁剪的内容（子节点）。<br/>
+ *     裁剪模板是另一个cc.Node节点，且不会被绘制。<br/>
+ *     利用模板的透明部分完成裁剪过程（由透明度阈值alphaThreshold调整）
  * </p>
  * @class
  * @extends cc.Node
  * @param {cc.Node} [stencil=null]
  *
- * @property {Number}   alphaThreshold  - Threshold for alpha value.
- * @property {Boolean}  inverted        - Indicate whether in inverted mode.
+ * @property {Number}   alphaThreshold  - alpha透明度阈值
+ * @property {Boolean}  inverted        - 表明是否为反转模式
  */
-//@property {cc.Node}  stencil         - he cc.Node to use as a stencil to do the clipping.
+//@property {cc.Node}  stencil         - 裁剪使用的cc.Node模板
 cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
     alphaThreshold: 0,
     inverted: false,
@@ -75,7 +75,7 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
 
     /**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
+     * 构造函数。扩展构造行为重写该函数时，请在继承的"ctor"函数中调用"this._super()"。
      * @param {cc.Node} [stencil=null]
      */
     ctor: function (stencil) {
@@ -100,7 +100,7 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
     },
 
     /**
-     * Initialization of the node, please do not call this function by yourself, you should pass the parameters to constructor to initialize it .
+     * 初始化节点，请不要擅自调用该函数，初始化时应该传参数给构造函数。
      * @function
      * @param {cc.Node} [stencil=null]
      */
@@ -113,7 +113,7 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
         this.alphaThreshold = 1;
         this.inverted = false;
-        // get (only once) the number of bits of the stencil buffer
+        //获取裁剪模板缓冲区的位数（仅一次）
         cc.ClippingNode._init_once = true;
         if (cc.ClippingNode._init_once) {
             cc.stencilBits = cc._renderContext.getParameter(cc._renderContext.STENCIL_BITS);
@@ -133,10 +133,10 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
     /**
      * <p>
-     *     Event callback that is invoked every time when node enters the 'stage'.                                   <br/>
-     *     If the CCNode enters the 'stage' with a transition, this event is called when the transition starts.        <br/>
-     *     During onEnter you can't access a "sister/brother" node.                                                    <br/>
-     *     If you override onEnter, you must call its parent's onEnter function with this._super().
+     *     每当节点进入舞台时触发的回调函数。<br/>
+     *     如果此CCNode节点伴随转换（transition）进入舞台，这个事件会在转换开始时被调用。<br/>
+     *     onEnter中不允许访问兄弟节点。<br/>
+     *     如果你重写onEnter，应该用this.super()调用它的父类onEnter函数。
      * </p>
      * @function
      */
@@ -147,9 +147,9 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
     /**
      * <p>
-     *     Event callback that is invoked when the node enters in the 'stage'.                                                        <br/>
-     *     If the node enters the 'stage' with a transition, this event is called when the transition finishes.                       <br/>
-     *     If you override onEnterTransitionDidFinish, you shall call its parent's onEnterTransitionDidFinish with this._super()
+     *     每当节点进入舞台时触发的回调函数。<br/>
+     *     如果此CCNode节点伴随转换（transition）进入舞台，这个事件会在转换结束时被调用。<br/>
+     *     如果你重写onEnterTransitionDidFinish，应该用this.super()调用它的父类onEnterTransitionDidFinish函数。
      * </p>
      * @function
      */
@@ -160,9 +160,9 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
     /**
      * <p>
-     *     callback that is called every time the node leaves the 'stage'.  <br/>
-     *     If the node leaves the 'stage' with a transition, this callback is called when the transition starts. <br/>
-     *     If you override onExitTransitionDidStart, you shall call its parent's onExitTransitionDidStart with this._super()
+     *     每当节点离开舞台时触发的回调函数。<br/>                                                     
+     *     如果此CCNode节点伴随转换（transition）离开舞台，这个事件会在转换开始时被调用。<br/>
+     *     如果你重写onExitTransitionDidStart，应该用this.super()调用它的父类onExitTransitionDidStart函数。
      * </p>
      * @function
      */
@@ -173,10 +173,10 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
     /**
      * <p>
-     * callback that is called every time the node leaves the 'stage'. <br/>
-     * If the node leaves the 'stage' with a transition, this callback is called when the transition finishes. <br/>
-     * During onExit you can't access a sibling node.                                                             <br/>
-     * If you override onExit, you shall call its parent's onExit with this._super().
+     *     每当节点离开舞台时触发的回调函数。<br/>
+     *     如果此CCNode节点伴随转换（transition）离开舞台，这个事件会在转换结束时被调用。<br/>
+     *     onExit中不允许访问兄弟节点。<br/>
+     *     如果你重写onExit，应该用this.super()调用它的父类onExit函数。
      * </p>
      * @function
      */
@@ -186,7 +186,7 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
     },
 
     /**
-     * Recursive method that visit its children and draw them
+     * 遍历并绘制子节点的递归函数。
      * @function
      * @param {CanvasRenderingContext2D|WebGLRenderingContext} ctx
      */
@@ -195,16 +195,16 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
     _visitForWebGL: function (ctx) {
         var gl = ctx || cc._renderContext;
 
-        // if stencil buffer disabled
+        // 如果模板缓冲区不可用
         if (cc.stencilBits < 1) {
-            // draw everything, as if there where no stencil
+            // 就如没有裁剪模板一样，完全绘制
             cc.Node.prototype.visit.call(this, ctx);
             return;
         }
 
         if (!this._stencil || !this._stencil.visible) {
             if (this.inverted)
-                cc.Node.prototype.visit.call(this, ctx);   // draw everything
+                cc.Node.prototype.visit.call(this, ctx);   // 完全绘制
             return;
         }
 
@@ -214,14 +214,14 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
                 cc.log("Nesting more than " + cc.stencilBits + "stencils is not supported. Everything will be drawn without stencil for this node and its children.");
                 cc.ClippingNode._visit_once = false;
             }
-            // draw everything, as if there where no stencil
+            // 就如没有裁剪模板一样，完全绘制
             cc.Node.prototype.visit.call(this, ctx);
             return;
         }
 
         cc.renderer.pushRenderCommand(this._beforeVisitCmd);
 
-        //optimize performance for javascript
+        // javascript性能优化
         var currentStack = cc.current_stack;
         currentStack.stack.push(currentStack.top);
         cc.kmMat4Assign(this._stackMatrix, currentStack.top);
@@ -233,12 +233,12 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
         cc.renderer.pushRenderCommand(this._afterDrawStencilCmd);
 
-        // draw (according to the stencil test func) this node and its children
+        // （根据模板测试函数）绘制节点及其子节点
         var locChildren = this._children;
         if (locChildren && locChildren.length > 0) {
             var childLen = locChildren.length;
             this.sortAllChildren();
-            // draw children zOrder < 0
+            // 绘制 zOrder<0 的子节点
             for (var i = 0; i < childLen; i++) {
                 if (locChildren[i] && locChildren[i]._localZOrder < 0)
                     locChildren[i].visit();
@@ -247,7 +247,7 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
             }
             if(this._rendererCmd)
                 cc.renderer.pushRenderCommand(this._rendererCmd);
-            // draw children zOrder >= 0
+            // 绘制 zOrder>=0 的子节点
             for (; i < childLen; i++) {
                 if (locChildren[i]) {
                     locChildren[i].visit();
@@ -260,26 +260,26 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
         cc.renderer.pushRenderCommand(this._afterVisitCmd);
 
-        //optimize performance for javascript
+        // javascript性能优化
         currentStack.top = currentStack.stack.pop();
     },
 
     _onBeforeVisit: function(ctx){
         var gl = ctx || cc._renderContext;
         ///////////////////////////////////
-        // INIT
+        // 初始化
 
-        // increment the current layer
+        // 增加当前图层
         cc.ClippingNode._layer++;
 
-        // mask of the current layer (ie: for layer 3: 00000100)
+        // 当前图层掩码（以图层3为例：00000100）
         var mask_layer = 0x1 << cc.ClippingNode._layer;
-        // mask of all layers less than the current (ie: for layer 3: 00000011)
+        // 所有小于当前图层的图层掩码（以图层3为例：00000011）
         var mask_layer_l = mask_layer - 1;
-        // mask of all layers less than or equal to the current (ie: for layer 3: 00000111)
+        // 所有小于或等于当前图层的图层掩码（以图层3为例：00000111）
         //var mask_layer_le = mask_layer | mask_layer_l;
         this._mask_layer_le = mask_layer | mask_layer_l;
-        // manually save the stencil state
+        // 手动保存模板状态
         this._currentStencilEnabled = gl.isEnabled(gl.STENCIL_TEST);
         this._currentStencilWriteMask = gl.getParameter(gl.STENCIL_WRITEMASK);
         this._currentStencilFunc = gl.getParameter(gl.STENCIL_FUNC);
@@ -289,67 +289,66 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
         this._currentStencilPassDepthFail = gl.getParameter(gl.STENCIL_PASS_DEPTH_FAIL);
         this._currentStencilPassDepthPass = gl.getParameter(gl.STENCIL_PASS_DEPTH_PASS);
 
-        // enable stencil use
+        // 启用模板
         gl.enable(gl.STENCIL_TEST);
-        // check for OpenGL error while enabling stencil test
+        // 启用模板测试时检查OpenGL错误
         //cc.checkGLErrorDebug();
 
-        // all bits on the stencil buffer are readonly, except the current layer bit,
-        // this means that operation like glClear or glStencilOp will be masked with this value
+        // 除了当前图层位以外，模板缓冲区的其余所有位均为只读。
+        // 这意味着glClear或glStencliOp这类操作将会被该值遮罩。
         gl.stencilMask(mask_layer);
 
-        // manually save the depth test state
+        // 手动保存深度测试状态
         //GLboolean currentDepthTestEnabled = GL_TRUE;
         //currentDepthTestEnabled = glIsEnabled(GL_DEPTH_TEST);
         //var currentDepthWriteMask = gl.getParameter(gl.DEPTH_WRITEMASK);
         this._currentDepthWriteMask = gl.getParameter(gl.DEPTH_WRITEMASK);
-        // disable depth test while drawing the stencil
+        // 绘制模板时禁用深度测试
         //glDisable(GL_DEPTH_TEST);
-        // disable update to the depth buffer while drawing the stencil,
-        // as the stencil is not meant to be rendered in the real scene,
-        // it should never prevent something else to be drawn,
-        // only disabling depth buffer update should do
+        // 绘制模板时禁止更新深度缓冲区
+        // 因为模板在实际场景中不被渲染
+        // 它不应妨碍其他内容的绘制
+        // 只有禁止深度缓冲区更新才可满足需求
         gl.depthMask(false);
 
         ///////////////////////////////////
-        // CLEAR STENCIL BUFFER
+        // 清空模板模板缓存
 
-        // manually clear the stencil buffer by drawing a fullscreen rectangle on it
-        // setup the stencil test func like this:
-        // for each pixel in the fullscreen rectangle
-        //     never draw it into the frame buffer
-        //     if not in inverted mode: set the current layer value to 0 in the stencil buffer
-        //     if in inverted mode: set the current layer value to 1 in the stencil buffer
+        // 通过在它上面绘制一个全屏大小的矩形手动清除模板缓存
+        // 以下是创建模板测试函数的方法：
+        // 对于全屏矩形中的每一个像素
+        //     禁止把它绘制到帧缓存中
+        //     如果不是反转模式，在模板缓存中将当前图层值置0
+        //     如果是反转模式，在模板缓存中将当前图层值置1
         gl.stencilFunc(gl.NEVER, mask_layer, mask_layer);
         gl.stencilOp(!this.inverted ? gl.ZERO : gl.REPLACE, gl.KEEP, gl.KEEP);
 
         this._drawFullScreenQuadClearStencil();
 
-        // DRAW CLIPPING STENCIL
-        // setup the stencil test func like this:
-        // for each pixel in the stencil node
-        //     never draw it into the frame buffer
-        //     if not in inverted mode: set the current layer value to 1 in the stencil buffer
-        //     if in inverted mode: set the current layer value to 0 in the stencil buffer
+        // 绘制裁剪模板
+        // 以下是创建模板测试函数的方法：
+        // 对于模板节点中的每个像素
+        //     禁止把它绘制到帧缓存中
+        //     如果不是反转模式，在模板缓存中将当前图层值置1
+        //     如果是反转模式，在模板缓存中将当前图层值置0
         gl.stencilFunc(gl.NEVER, mask_layer, mask_layer);
         gl.stencilOp(!this.inverted ? gl.REPLACE : gl.ZERO, gl.KEEP, gl.KEEP);
 
         if (this.alphaThreshold < 1) {            //TODO desktop
-            // since glAlphaTest do not exists in OES, use a shader that writes
-            // pixel only if greater than an alpha threshold
+            // OES中不存在glAlphaTest，使用一个仅写入高于alpha透明度阈值的像素的shader
             var program = cc.shaderCache.programForKey(cc.SHADER_POSITION_TEXTURECOLORALPHATEST);
             var alphaValueLocation = gl.getUniformLocation(program.getProgram(), cc.UNIFORM_ALPHA_TEST_VALUE_S);
-            // set our alphaThreshold
+            // set our alphaThreshold 设置alphaThreshold
             cc.glUseProgram(program.getProgram());
             program.setUniformLocationWith1f(alphaValueLocation, this.alphaThreshold);
-            // we need to recursively apply this shader to all the nodes in the stencil node
-            // XXX: we should have a way to apply shader to all nodes without having to do this
+            // 我们应该对模板节点中的所有节点应递归使用这个shader
+            // XXX：我们应该有不必这样也能对所有节点使用shader的办法
             cc.setProgram(this._stencil, program);
         }
     },
 
     _drawFullScreenQuadClearStencil: function () {
-        // draw a fullscreen solid rectangle to clear the stencil buffer
+        // 绘制一个全屏纯色矩形来清除模板缓存
         cc.kmGLMatrixMode(cc.KM_GL_PROJECTION);
         cc.kmGLPushMatrix();
         cc.kmGLLoadIdentity();
@@ -365,23 +364,23 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
     _onAfterDrawStencil: function(ctx){
         var gl = ctx || cc._renderContext;
-        // restore alpha test state
+        // 恢复alpha测试状态
         //if (this.alphaThreshold < 1) {
-        // XXX: we need to find a way to restore the shaders of the stencil node and its children
+        // XXX：我们需要找到一种恢复模板节点和它子节点的shader的方法
         //}
 
-        // restore the depth test state
+        // 恢复深度测试状态
         gl.depthMask(this._currentDepthWriteMask);
 
         ///////////////////////////////////
-        // DRAW CONTENT
+        // 绘制内容
 
-        // setup the stencil test func like this:
-        // for each pixel of this node and its childs
-        //     if all layers less than or equals to the current are set to 1 in the stencil buffer
-        //         draw the pixel and keep the current layer in the stencil buffer
-        //     else
-        //         do not draw the pixel but keep the current layer in the stencil buffer
+        // 以下是创建模板测试函数的方法：
+        // 对于该节点与其子节点的每个像素
+        //     如果模板缓存中所有不大于当前图层的图层位都被设为1
+        //         绘制像素并保持模板缓存中的当前图层
+        //     否则 
+        //         不绘制像素但保持模板缓存中的当前图层
         gl.stencilFunc(gl.EQUAL, this._mask_layer_le, this._mask_layer_le);
         gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
     },
@@ -389,21 +388,21 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
     _onAfterVisit: function(ctx){
         var gl = ctx || cc._renderContext;
         ///////////////////////////////////
-        // CLEANUP
+        // 清理
 
-        // manually restore the stencil state
+        // 手动恢复模板状态
         gl.stencilFunc(this._currentStencilFunc, this._currentStencilRef, this._currentStencilValueMask);
         gl.stencilOp(this._currentStencilFail, this._currentStencilPassDepthFail, this._currentStencilPassDepthPass);
         gl.stencilMask(this._currentStencilWriteMask);
         if (!this._currentStencilEnabled)
             gl.disable(gl.STENCIL_TEST);
 
-        // we are done using this layer, decrement
+        // 这个图层搞定，自减
         cc.ClippingNode._layer--;
     },
 
     _visitForCanvas: function (ctx) {
-        // Composition mode, costy but support texture stencil
+        // 组合模式，开销大但支持贴图模板
         this._clipElemType = (this._cangodhelpme() || this._stencil instanceof cc.Sprite);
 
         var context = ctx || cc._renderContext;
@@ -411,7 +410,7 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
         if (!this._stencil || !this._stencil.visible) {
             if (this.inverted)
-                cc.Node.prototype.visit.call(this, ctx);   // draw everything
+                cc.Node.prototype.visit.call(this, ctx);   // 绘制所有内容
             return;
         }
 
@@ -420,7 +419,7 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
         if(this._clipElemType){
 
-            // Draw everything first using node visit function
+            // 先利用节点遍历函数绘制所有内容
             cc.Node.prototype.visit.call(this, context);
         }else{
             this._stencil.visit(context);
@@ -434,13 +433,13 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
         if(this._clipElemType){
             this._stencil.visit();
         }else{
-            // Clip mode doesn't support recusive stencil, so once we used a clip stencil,
-            // so if it has ClippingNode as a child, the child must uses composition stencil.
+            // 裁剪模式不支持递归模板，所以一旦使用裁剪模板
+            // 如果存在ClippingNode作为子节点，这个子节点必须使用组合模板
             this._cangodhelpme(true);
             var len = children.length;
             if (len > 0) {
                 this.sortAllChildren();
-                // draw children zOrder < 0
+                // 绘制 zOrder < 0 的子节点
                 for (i = 0; i < len; i++) {
                     locChild = children[i];
                     if (locChild._localZOrder < 0)
@@ -465,8 +464,8 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
     },
 
     /**
-     * The cc.Node to use as a stencil to do the clipping.                                   <br/>
-     * The stencil node will be retained. This default to nil.
+     * 裁剪使用的cc.Node模板。<br/>
+     * 模板节点将会被保留，默认值为nil。
      * @return {cc.Node}
      */
     getStencil: function () {
@@ -474,7 +473,7 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
     },
 
     /**
-     * Set stencil.
+     * 设置模板
      * @function
      * @param {cc.Node} stencil
      */
@@ -499,11 +498,11 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
             }
         }
         var locContext = cc._renderContext;
-        // For texture stencil, use the sprite itself
+        // 对于贴图模板，使用精灵自身
         //if (stencil instanceof cc.Sprite) {
         //    return;
         //}
-        // For shape stencil, rewrite the draw of stencil ,only init the clip path and draw nothing.
+        // 对于形状模板，重写模板的draw，仅初始化裁剪路径，不绘制
         //else
         if (stencil instanceof cc.DrawNode) {
             stencil._rendererCmd.rendering = function (ctx, scaleX, scaleY) {
@@ -532,11 +531,11 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
     /**
      * <p>
-     * The alpha threshold.                                                                                   <br/>
-     * The content is drawn only where the stencil have pixel with alpha greater than the alphaThreshold.     <br/>
-     * Should be a float between 0 and 1.                                                                     <br/>
-     * This default to 1 (so alpha test is disabled).
-     * </P>
+     * alpha透明度阈值。<br/>
+     * 只有模板中像素alpha透明度高于阈值的地方才会绘制内容。<br/>
+     * 应为0-1之间的float型浮点数。<br/>
+     * 默认值为1。(此时alpha test不可用)
+     * </p>
      * @return {Number}
      */
     getAlphaThreshold: function () {
@@ -544,7 +543,7 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
     },
 
     /**
-     * set alpha threshold.
+     * 设置alpha透明度阈值。
      * @param {Number} alphaThreshold
      */
     setAlphaThreshold: function (alphaThreshold) {
@@ -553,9 +552,8 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
     /**
      * <p>
-     *     Inverted. If this is set to YES,                                                                 <br/>
-     *     the stencil is inverted, so the content is drawn where the stencil is NOT drawn.                 <br/>
-     *     This default to NO.
+     *     设为YES时为反转模式，此时模板反转，模板没有绘制的地方才会绘制内容。<br/>
+     *     默认值为NO。
      * </p>
      * @return {Boolean}
      */
@@ -564,7 +562,7 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
     },
 
     /**
-     * set whether or not invert of stencil
+     * 设置模板是否反转。
      * @param {Boolean} inverted
      */
     setInverted: function (inverted) {
@@ -597,7 +595,7 @@ if (cc._renderType === cc._RENDER_TYPE_WEBGL) {
     _p.setStencil = _p._setStencilForCanvas;
 }
 
-// Extended properties
+// 扩展属性
 cc.defineGetterSetter(_p, "stencil", _p.getStencil, _p.setStencil);
 /** @expose */
 _p.stencil;
@@ -613,13 +611,13 @@ cc.ClippingNode._getSharedCache = function () {
 };
 
 /**
- * Creates and initializes a clipping node with an other node as its stencil. <br/>
- * The stencil node will be retained.
- * @deprecated since v3.0, please use "new cc.ClippingNode(stencil)" instead
+ * 创建并初始化一个以指定节点为模板的裁剪节点。<br/>
+ * 模板节点会被保留。
+ * @deprecated since v3.0 ，建议使用"new cc.ClippingNode(stencil)"替代
  * @param {cc.Node} [stencil=null]
  * @return {cc.ClippingNode}
  * @example
- * //example
+ * //示例
  * new cc.ClippingNode(stencil);
  */
 cc.ClippingNode.create = function (stencil) {

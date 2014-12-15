@@ -25,20 +25,16 @@
  ****************************************************************************/
 
 /**
- * <p>cc.TileMapAtlas is a subclass of cc.AtlasNode.</p>
- *
- * <p>It knows how to render a map based of tiles.<br/>
- * The tiles must be in a .PNG format while the map must be a .TGA file. </p>
- *
- * <p>For more information regarding the format, please see this post: <br/>
+ * <p>cc.TileMapAtlas is a subclass of cc.AtlasNode.</p>                            <p>cc.TileMapAtlas 是一个 cc.AtlasNode的子类.
+ * <p>It knows how to render a map based of tiles.<br/>                             <p>它知道如何基于瓦片渲染地图. <br/>
+ * The tiles must be in a .PNG format while the map must be a .TGA file. </p>       Tile必须是.PNG格式，地图必须是.TGA文件</p>
+ * <p>For more information regarding the format, please see this post: <br/>        <p>了解更多关于格式的信息，请看这个地址: <br />
  * http://www.cocos2d-iphone.org/archives/27 </p>
- *
- * <p>All features from cc.AtlasNode are valid in cc.TileMapAtlas</p>
- *
- * <p>IMPORTANT: <br/>
- * This class is deprecated. It is maintained for compatibility reasons only.<br/>
- * You SHOULD not use this class. <br/>
- * Instead, use the newer TMX file format: cc.TMXTiledMap </p>
+ * <p>All features from cc.AtlasNode are valid in cc.TileMapAtlas</p>               <p>所有CCAtlasNode的特性在CCTileMapAtlas都是有效的</p>
+ * <p>IMPORTANT: <br/>                                                              <p>重要提示: <br/>
+ * This class is deprecated. It is maintained for compatibility reasons only.<br/>  这个类已经被弃用, 只是为了兼容性才去维护<br/>
+ * You SHOULD not use this class. <br/>                                             不应该再继续用不用这个类 <br/>
+ * Instead, use the newer TMX file format: cc.TMXTiledMap </p>                      请使用更新的TMX文件格式: CCTMXTiledMap </p>
  * @class
  * @extends cc.AtlasNode
  *
@@ -48,16 +44,17 @@ cc.TileMapAtlas = cc.AtlasNode.extend(/** @lends cc.TileMapAtlas# */{
     tgaInfo:null,
 
 	indices:null,
-    //numbers of tiles to render
+    //numbers of tiles to render 需要渲染的tiles数
     _itemsToRender:0,
     //x,y to altas dictionary
+    //x,y 的纹理映射
     _posToAtlasIndex:null,
     _className:"TileMapAtlas",
 
     /**
-     * <p>Creates a cc.TileMap with a tile file (atlas) with a map file and the width and height of each tile in points.<br />
-     * The tile file will be loaded using the TextureMgr. <br/>
-     * Constructor of cc.TileMapAtlas
+     * <p>Creates a cc.TileMap with a tile file (atlas) with a map file and the width and height of each tile in points.<br />      <p>用一个在地图文件里指定宽、高的瓦片文件（贴图集）来初始化cc.TileMap 
+     * The tile file will be loaded using the TextureMgr. <br/>                                                                     使用TextureMgr，瓦片文件将被加载. <br/>
+     * Constructor of cc.TileMapAtlas                                                                                               cc.TileMapAtlas的构造函数
      * </p>
      *
      * @param {String} tile
@@ -89,8 +86,8 @@ cc.TileMapAtlas = cc.AtlasNode.extend(/** @lends cc.TileMapAtlas# */{
     },
 
     /**
-     * Initializes a cc.TileMap with a tile file (atlas) with a map file and the width and height of each tile in points.<br />
-     * The file will be loaded using the TextureMgr.
+     * Initializes a cc.TileMap with a tile file (atlas) with a map file and the width and height of each tile in points.<br />   用一个在地图文件里指定宽、高的瓦片文件（贴图集）来初始化cc.TileMap<br/>
+     * The file will be loaded using the TextureMgr.                                                                              通过使用TextureMgr，文件将被加载
      * @param {String} tile
      * @param {String} mapFile
      * @param {Number} tileWidth
@@ -115,8 +112,8 @@ cc.TileMapAtlas = cc.AtlasNode.extend(/** @lends cc.TileMapAtlas# */{
     },
 
     /**
-     * <p>Returns a tile from position x,y.<br />
-     * For the moment only channel R is used. </p>
+     * <p>Returns a tile from position x,y.<br />      <p>通过x,y位置返回一个瓦片.<br />
+     * For the moment only channel R is used. </p>     此时只有R通道被使用</p>
      * @param {cc.Point} position
      * @return {cc.Color}
      */
@@ -134,8 +131,8 @@ cc.TileMapAtlas = cc.AtlasNode.extend(/** @lends cc.TileMapAtlas# */{
     },
 
     /**
-     * Sets a tile at position x,y.
-     * For the moment only channel R is used
+     * Sets a tile at position x,y.          在x,y位置设置一个瓦片
+     * For the moment only channel R is used 此时只有R通道被使用
      * @param {cc.Color} tile
      * @param {cc.Point} position
      */
@@ -168,6 +165,7 @@ cc.TileMapAtlas = cc.AtlasNode.extend(/** @lends cc.TileMapAtlas# */{
 
     /**
      * Dealloc the map from memory
+     * 释放内存
      */
     releaseMap:function () {
         if (this.tgaInfo) {
@@ -290,9 +288,9 @@ cc.TileMapAtlas = cc.AtlasNode.extend(/** @lends cc.TileMapAtlas# */{
 });
 
 /**
- * <p>Creates a cc.TileMap with a tile file (atlas) with a map file and the width and height of each tile in points.<br />
- * The tile file will be loaded using the TextureMgr. </p>
- * @deprecated since v3.0 please use new cc.TileMapAtlas(tile, mapFile, tileWidth, tileHeight) instead.
+ * <p>Creates a cc.TileMap with a tile file (atlas) with a map file and the width and height of each tile in points.<br />   <p> 用一个在地图文件里指定宽、高的瓦片文件（贴图集）来初始化cc.TileMap
+ * The tile file will be loaded using the TextureMgr. </p>                                                                    通过使用TextureMgr，瓦片文件将被加载 </p>
+ * @deprecated since v3.0 please use new cc.TileMapAtlas(tile, mapFile, tileWidth, tileHeight) instead.                      从v3.0之用请使用cc.TileMapAtlas(tile, mapFile, tileWidth, tileHeight)替代
  * @param {String} tile
  * @param {String} mapFile
  * @param {Number} tileWidth

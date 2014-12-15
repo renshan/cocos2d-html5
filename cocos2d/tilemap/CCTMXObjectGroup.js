@@ -25,12 +25,11 @@
  ****************************************************************************/
 
 /**
- * cc.TMXObjectGroup represents the TMX object group.
+ * cc.TMXObjectGroup represents the TMX object group.                                                    TMXObjectGroup代表TMX对象组
  * @class
  * @extends cc.Class
- *
- * @property {Array}    properties  - Properties from the group. They can be added using tilemap editors
- * @property {String}   groupName   - Name of the group
+ * @property {Array}    properties  - Properties from the group. They can be added using tilemap editors 来自对象组的属性, 可以使用tilemap编辑器添加
+ * @property {String}   groupName   - Name of the group                                                  对象组的名称
  */
 cc.TMXObjectGroup = cc.Class.extend(/** @lends cc.TMXObjectGroup# */{
 	properties: null,
@@ -40,9 +39,9 @@ cc.TMXObjectGroup = cc.Class.extend(/** @lends cc.TMXObjectGroup# */{
     _objects: null,
 
     /**
-     * <p>The cc.TMXObjectGroup's constructor. <br/>
-     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.TMXObjectGroup()".<br/>
-     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>
+     * <p>The cc.TMXObjectGroup's constructor. <br/>                                                                                          <p>TMXObjectGroup的构造函数 <br/>
+     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.TMXObjectGroup()".<br/>  当使用新的node构造方式时("var node = new cc.TMXObjectGroup()"), 这个函数会自动的调用<br/>
+     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>                               覆盖和拓展了功能, 记得在ctor函数中调用this._super();
      */
     ctor:function () {
         this.groupName = "";
@@ -52,7 +51,7 @@ cc.TMXObjectGroup = cc.Class.extend(/** @lends cc.TMXObjectGroup# */{
     },
 
     /**
-     * Offset position of child objects
+     * Offset position of child objects   获取chiles对象的偏移位置
      * @return {cc.Point}
      */
     getPositionOffset:function () {
@@ -60,7 +59,7 @@ cc.TMXObjectGroup = cc.Class.extend(/** @lends cc.TMXObjectGroup# */{
     },
 
     /**
-     * Offset position of child objects
+     * Offset position of child objects   设置chiles对象的偏移位置
      * @param {cc.Point} offset
      */
     setPositionOffset:function (offset) {
@@ -69,7 +68,7 @@ cc.TMXObjectGroup = cc.Class.extend(/** @lends cc.TMXObjectGroup# */{
     },
 
     /**
-     * List of properties stored in a dictionary
+     * List of properties stored in a dictionary   获取在字典中排列好的属性
      * @return {Array}
      */
     getProperties:function () {
@@ -77,7 +76,7 @@ cc.TMXObjectGroup = cc.Class.extend(/** @lends cc.TMXObjectGroup# */{
     },
 
     /**
-     * List of properties stored in a dictionary
+     * List of properties stored in a dictionary   设置在字典中排列好的属性
      * @param {object} Var
      */
     setProperties:function (Var) {
@@ -85,7 +84,7 @@ cc.TMXObjectGroup = cc.Class.extend(/** @lends cc.TMXObjectGroup# */{
     },
 
     /**
-     * Gets the Group name.
+     * Gets the Group name. 获取对象组名
      * @return {String}
      */
     getGroupName:function () {
@@ -93,7 +92,7 @@ cc.TMXObjectGroup = cc.Class.extend(/** @lends cc.TMXObjectGroup# */{
     },
 
     /**
-     * Set the Group name
+     * Set the Group name  设置对象组名
      * @param {String} groupName
      */
     setGroupName:function (groupName) {
@@ -101,7 +100,7 @@ cc.TMXObjectGroup = cc.Class.extend(/** @lends cc.TMXObjectGroup# */{
     },
 
     /**
-     * Return the value for the specific property name
+     * Return the value for the specific property name  返回指定属性名的值
      * @param {String} propertyName
      * @return {object}
      */
@@ -110,8 +109,8 @@ cc.TMXObjectGroup = cc.Class.extend(/** @lends cc.TMXObjectGroup# */{
     },
 
     /**
-     * <p>Return the dictionary for the specific object name. <br />
-     * It will return the 1st object found on the array for the given name.</p>
+     * <p>Return the dictionary for the specific object name. <br />              <p>返回指定属性名的值. <br />
+     * It will return the 1st object found on the array for the given name.</p>   会返回数组中第一个被命名的对象</p>
      * @param {String} objectName
      * @return {object|Null}
      */
@@ -129,7 +128,7 @@ cc.TMXObjectGroup = cc.Class.extend(/** @lends cc.TMXObjectGroup# */{
     },
 
     /**
-     * Gets the objects.
+     * Gets the objects.   获取对象组
      * @return {Array}
      */
     getObjects:function () {
@@ -137,7 +136,7 @@ cc.TMXObjectGroup = cc.Class.extend(/** @lends cc.TMXObjectGroup# */{
     },
 
     /**
-     * Set the objects.
+     * Set the objects.   设置对象组
      * @param {object} objects
      */
     setObjects:function (objects) {

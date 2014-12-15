@@ -24,7 +24,7 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-/** Default Action tag
+/**默认的动作标签
  * @constant
  * @type {Number}
  * @default
@@ -32,14 +32,17 @@
 cc.ACTION_TAG_INVALID = -1;
 
 /**
- * Base class for cc.Action objects.
+ * cc.Action是所有动作对象的基类
  * @class
  *
  * @extends cc.Class
  *
- * @property {cc.Node}  target          - The target will be set with the 'startWithTarget' method. When the 'stop' method is called, target will be set to nil.
- * @property {cc.Node}  originalTarget  - The original target of the action.
- * @property {Number}   tag             - The tag of the action, can be used to find the action.
+ * @property {cc.Node}  target          - 此参数会被startWithTarget方法用来设置成员变量target.当stop方法已经被调用,则此参数对象会被设置成null.
+                                        
+ * @property {cc.Node}  originalTarget  - 此参数设置动作的原始对象,即动作的发出者.
+                                       
+ * @property {Number}   tag             - 此参数设置动作的标签, 可以通过这个标签找到这个动作.
+                                       
  */
 cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     //***********variables*************
@@ -50,7 +53,7 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     //**************Public Functions***********
 
     /**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
+     * 构造函数, 通过重载这个函数来实现拓展构建行为, 记得在拓展的ctor函数里调用this._super(),他会调用父类的构造函数
      */
     ctor:function () {
         this.originalTarget = null;
@@ -59,11 +62,9 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     },
 
     /**
-     * to copy object with deep copy.
-     *
-     * @deprecated since v3.0 please use .clone
-     *
-     * @return {cc.Action}
+     * 用深拷贝复制一个对象
+     * 在v3.0 以后的版本 请使用 .clone
+     * return {cc.Action}
      */
     copy:function () {
         cc.log("copy is deprecated. Please use clone instead.");
@@ -71,8 +72,7 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     },
 
     /**
-     * to copy object with deep copy.
-     * returns a clone of action.
+     * 深拷贝一个对象, 返回这个动作的副本
      *
      * @return {cc.Action}
      */
@@ -85,7 +85,7 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     },
 
     /**
-     * return true if the action has finished.
+     * 当动作已经执行完毕的时候返回true
      *
      * @return {Boolean}
      */
@@ -94,8 +94,7 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     },
 
     /**
-     * called before the action start. It will also set the target.
-     *
+     * 在动作开始前调用此方法.该方法仍然会设置这个对象.
      * @param {cc.Node} target
      */
     startWithTarget:function (target) {
@@ -104,16 +103,16 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     },
 
     /**
-     * called after the action has finished. It will set the 'target' to nil. <br />
-     * IMPORTANT: You should never call "action stop" manually. Instead, use: "target.stopAction(action);"
+     * 在动作执行完毕以后调用会将成员target设为nil.
+     * 重要提示:你绝不应当手动调用此函数,而应该使用 "target.stopAction(action);"来代替
      */
     stop:function () {
         this.target = null;
     },
 
     /**
-     * called every frame with it's delta time. <br />
-     * DON'T override unless you know what you are doing.
+     * 此函数随着间隔时间每一帧都会被调用.
+     * 不要重载此函数,除非你知道你在做什么.
      *
      * @param {Number} dt
      */
@@ -122,8 +121,7 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     *
+     * 每一帧被调用. 时间单位是每一帧所持续的时间秒数.
      * @param {Number}  dt
      */
     update:function (dt) {
@@ -131,8 +129,7 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     },
 
     /**
-     * get the target.
-     *
+     * 获得此动作的对象.
      * @return {cc.Node}
      */
     getTarget:function () {
@@ -140,8 +137,7 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     },
 
     /**
-     * The action will modify the target properties.
-     *
+     * 这个动作会修改对象的属性.
      * @param {cc.Node} target
      */
     setTarget:function (target) {
@@ -149,8 +145,7 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     },
 
     /**
-     * get the original target.
-     *
+     * 获取原始的对象.
      * @return {cc.Node}
      */
     getOriginalTarget:function () {
@@ -158,10 +153,9 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     },
 
     /**
-     * Set the original target, since target can be nil. <br/>
-     * Is the target that were used to run the action.  <br/>
-     * Unless you are doing something complex, like cc.ActionManager, you should NOT call this method. <br/>
-     * The target is 'assigned', it is not 'retained'. <br/>
+     * 设置原始对象, 此对象是被用来执行动作的对象. 这个对象可以为空. <br/>
+     * 除非你正在实现向cc.ActionManager这样复杂的的动作,否则你不应使用这个方法. <br/>
+     * 此对象是被'assigned'而不是被'retained'. <br/>
      * @param {cc.Node} originalTarget
      */
     setOriginalTarget:function (originalTarget) {
@@ -169,7 +163,7 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     },
 
     /**
-     * get tag number.
+     * 获取标签
      * @return {Number}
      */
     getTag:function () {
@@ -177,7 +171,7 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     },
 
     /**
-     * set tag number.
+     * 设置标签
      * @param {Number} tag
      */
     setTag:function (tag) {
@@ -185,24 +179,24 @@ cc.Action = cc.Class.extend(/** @lends cc.Action# */{
     },
 
     /**
-     * Currently JavaScript Bindigns (JSB), in some cases, needs to use retain and release. This is a bug in JSB, <br/>
-     * and the ugly workaround is to use retain/release. So, these 2 methods were added to be compatible with JSB. <br/>
-     * This is a hack, and should be removed once JSB fixes the retain/release bug.
+     * 当前的JavaScript Bindings在某些情况下需要使用retain(保留)和release(释放).这是JSB的BUG <br/>
+     * 只能通过retain/release这种拙劣的方式解决,所以为了兼容JSB这两个方法被加进来了.<br/>
+     * 这是一种非常规手段,一旦修复JSB的这个bug,该方法就会被删除.<br/>
      */
     retain:function () {
     },
 
     /**
-     * Currently JavaScript Bindigns (JSB), in some cases, needs to use retain and release. This is a bug in JSB, <br/>
-     * and the ugly workaround is to use retain/release. So, these 2 methods were added to be compatible with JSB. <br/>
-     * This is a hack, and should be removed once JSB fixes the retain/release bug.
+     * 当前的JavaScript Bindings在某些情况下需要使用retain(保留)和release(释放).这是JSB的BUG <br/>
+     * 只能通过retain/release这种拙劣的方式解决,所以为了兼容JSB这两个方法被加进来了.<br/>
+     * 这是一种非常规手段,一旦修复JSB的这个bug,该方法就会被删除.<br/>
      */
     release:function () {
     }
 });
 
 /**
- * Allocates and initializes the action.
+ * 分配和初始化这个动作
  *
  * @function cc.action
  * @static
@@ -217,10 +211,10 @@ cc.action = function () {
 };
 
 /**
- * Please use cc.action instead. <br/>
- * Allocates and initializes the action.
+ * 分配和初始化动作<br/>
+ * 请使用cc.action代替此方法
  *
- * @deprecated since v3.0 please use cc.action() instead.
+ * 自v3.0版本以后请使用cc.action()代替此方法
  * @static
  * @returns {cc.Action}
  */
@@ -228,12 +222,12 @@ cc.Action.create = cc.action;
 
 
 /**
- * Base class actions that do have a finite time duration. <br/>
- * Possible actions: <br/>
- * - An action with a duration of 0 seconds. <br/>
- * - An action with a duration of 35.5 seconds.
+ * 具有一段时间的动作基类
+ * 可能的动作:
+ * -一个只持续0秒的动作
+ * -一个持续35.5秒的动作
  *
- * Infinite time actions are valid
+ * 无限时长也是有效的
  * @class
  * @extends cc.Action
  */
@@ -242,7 +236,8 @@ cc.FiniteTimeAction = cc.Action.extend(/** @lends cc.FiniteTimeAction# */{
     _duration:0,
 
     /**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
+     *
+     * 构造函数, 通过重载这个函数来实现拓展构建行为, 记得在拓展的ctor函数里调用this._super(),它会调用父类的构造函数
      */
     ctor:function () {
         cc.Action.prototype.ctor.call(this);
@@ -250,7 +245,7 @@ cc.FiniteTimeAction = cc.Action.extend(/** @lends cc.FiniteTimeAction# */{
     },
 
     /**
-     * get duration of the action. (seconds)
+     * 获取动作持续时间(秒)
      *
      * @return {Number}
      */
@@ -259,7 +254,7 @@ cc.FiniteTimeAction = cc.Action.extend(/** @lends cc.FiniteTimeAction# */{
     },
 
     /**
-     * set duration of the action. (seconds)
+     * 设置动作持续时间(秒)
      *
      * @param {Number} duration
      */
@@ -268,11 +263,11 @@ cc.FiniteTimeAction = cc.Action.extend(/** @lends cc.FiniteTimeAction# */{
     },
 
     /**
-     * Returns a reversed action. <br />
-     * For example: <br />
-     * - The action will be x coordinates of 0 move to 100. <br />
-     * - The reversed action will be x of 100 move to 0.
-     * - Will be rewritten
+     * 返回动作的逆动作 <br />
+     * 例如:<br />
+     * 一个动作x坐标从0移动到100<br />
+     * 它的逆动作就会从100移动到0<br />
+     * 这个函数可以被重写
      *
      * @return {Null}
      */
@@ -282,8 +277,7 @@ cc.FiniteTimeAction = cc.Action.extend(/** @lends cc.FiniteTimeAction# */{
     },
 
     /**
-     * to copy object with deep copy.
-     * returns a clone of action.
+     * 深拷贝一个对象 返回一个动作的克隆
      *
      * @return {cc.FiniteTimeAction}
      */
@@ -293,11 +287,10 @@ cc.FiniteTimeAction = cc.Action.extend(/** @lends cc.FiniteTimeAction# */{
 });
 
 /**
- * Changes the speed of an action, making it take longer (speed > 1)
- * or less (speed < 1) time. <br/>
- * Useful to simulate 'slow motion' or 'fast forward' effect.
+ * 更改动作的速度,使它更长(速度大于1)或更少(速度小于1)<br/>
+ * 这对模拟慢速或者快速向前效果非常有效
  *
- * @warning This action can't be Sequenceable because it is not an cc.IntervalAction
+ * @注意: 这个动作不能序列化因为它不是持续性动作
  * @class
  * @extends cc.Action
  * @param {cc.ActionInterval} action
@@ -308,7 +301,8 @@ cc.Speed = cc.Action.extend(/** @lends cc.Speed# */{
     _innerAction:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
+         * 构造函数, 通过重载这个函数来实现拓展构建行为, 记得在拓展的ctor函数里调用this._super(),它会调用父类的构造函数
+         * 
 	 * @param {cc.ActionInterval} action
 	 * @param {Number} speed
 	 */
@@ -321,8 +315,9 @@ cc.Speed = cc.Action.extend(/** @lends cc.Speed# */{
     },
 
     /**
-     * Gets the current running speed. <br />
      * Will get a percentage number, compared to the original speed.
+     * 获取当前运行的速度 <br />
+     * 返回的是一个和原速度相比的百分比
      *
      * @return {Number}
      */
@@ -331,7 +326,7 @@ cc.Speed = cc.Action.extend(/** @lends cc.Speed# */{
     },
 
     /**
-     * alter the speed of the inner function in runtime.
+     * 在运行时修改速度的内部功能
      *
      * @param {Number} speed
      */
@@ -340,7 +335,7 @@ cc.Speed = cc.Action.extend(/** @lends cc.Speed# */{
     },
 
     /**
-     * initializes the action.
+     * 初始化动作
      *
      * @param {cc.ActionInterval} action
      * @param {Number} speed
@@ -356,9 +351,8 @@ cc.Speed = cc.Action.extend(/** @lends cc.Speed# */{
     },
 
     /**
-     * to copy object with deep copy.
-     * returns a clone of action.
-     *
+     * 深拷贝一个对象,返回它的克隆
+     * 
      * @returns {cc.Speed}
      */
     clone:function () {
@@ -368,7 +362,7 @@ cc.Speed = cc.Action.extend(/** @lends cc.Speed# */{
     },
 
     /**
-     * called before the action start. It will also set the target.
+     * 在动作开始前调用.它仍然会设置这个对象.
      *
      * @param {cc.Node} target
      */
@@ -378,7 +372,7 @@ cc.Speed = cc.Action.extend(/** @lends cc.Speed# */{
     },
 
     /**
-     *  Stop the action.
+     *  Stop the action. 停止动作
      */
     stop:function () {
         this._innerAction.stop();
@@ -386,8 +380,7 @@ cc.Speed = cc.Action.extend(/** @lends cc.Speed# */{
     },
 
     /**
-     * called every frame with it's delta time. <br />
-     * DON'T override unless you know what you are doing.
+     * 随着时间此函数被每帧调用, 请不要重载此函数,除非你知道你正在做什么.
      *
      * @param {Number} dt
      */
@@ -396,7 +389,7 @@ cc.Speed = cc.Action.extend(/** @lends cc.Speed# */{
     },
 
     /**
-     * return true if the action has finished.
+     * 当动作执行完毕的时候返回TRUE.
      *
      * @return {Boolean}
      */
@@ -405,12 +398,12 @@ cc.Speed = cc.Action.extend(/** @lends cc.Speed# */{
     },
 
     /**
-     * returns a reversed action. <br />
-     * For example: <br />
-     * - The action will be x coordinates of 0 move to 100. <br />
-     * - The reversed action will be x of 100 move to 0.
-     * - Will be rewritten
-     *
+     * 返回动作的逆动作<br />
+     * 例如:<br />
+     * 一个动作x坐标从0移动到100<br />
+     * 它的逆动作就会从100移动到0<br />
+     * 这个函数可以被重写
+     * 
      * @return {cc.Speed}
      */
     reverse:function () {
@@ -418,7 +411,7 @@ cc.Speed = cc.Action.extend(/** @lends cc.Speed# */{
     },
 
     /**
-     * Set inner Action.
+     * 设置内部动作
      * @param {cc.ActionInterval} action
      */
     setInnerAction:function (action) {
@@ -428,7 +421,7 @@ cc.Speed = cc.Action.extend(/** @lends cc.Speed# */{
     },
 
     /**
-     * Get inner Action.
+     * 获取内部动作
      *
      * @return {cc.ActionInterval}
      */
@@ -438,7 +431,7 @@ cc.Speed = cc.Action.extend(/** @lends cc.Speed# */{
 });
 
 /**
- * creates the speed action.
+ * 创建一个speed动作
  *
  * @function cc.speed
  * @param {cc.ActionInterval} action
@@ -450,39 +443,37 @@ cc.speed = function (action, speed) {
 };
 
 /**
- * Please use cc.speed instead.
- * creates the action.
+ * 创建一个 cc.speed动作 请用cc.speed代替
  *
  * @param {cc.ActionInterval} action
  * @param {Number} speed
  * @return {cc.Speed}
  * @static
- * @deprecated since v3.0 please use cc.speed() instead.
+ * 在v3.0版本以后请使用cc.speed()代替
  */
 cc.Speed.create = cc.speed;
 
 /**
- * cc.Follow is an action that "follows" a node.
- *
+ * cc.Follow是一个"跟随"节点的动作
  * @example
- * //example
- * //Instead of using cc.Camera as a "follower", use this action instead.
  * layer.runAction(cc.follow(hero));
+ * 当使用cc.Camera来实现跟随效果的时候,可以使用此动作代替.
  *
- * @property {Number}  leftBoundary - world leftBoundary.
- * @property {Number}  rightBoundary - world rightBoundary.
- * @property {Number}  topBoundary - world topBoundary.
- * @property {Number}  bottomBoundary - world bottomBoundary.
+ * @property {Number}  leftBoundary   -世界左边界.
+ * @property {Number}  rightBoundary  -世界右边界.
+ * @property {Number}  topBoundary    -世界上边界.
+ * @property {Number}  bottomBoundary -世界下边界.
  *
  * @param {cc.Node} followedNode
  * @param {cc.Rect} rect
  * @example
- * // creates the action with a set boundary
+ * 创建一个带边界的动作
  * var sprite = new cc.Sprite("spriteFileName");
  * var followAction = new cc.Follow(sprite, cc.rect(0, 0, s.width * 2 - 100, s.height));
  * this.runAction(followAction);
+ * 
  *
- * // creates the action with no boundary set
+ * 创建一个无边界动作
  * var sprite = new cc.Sprite("spriteFileName");
  * var followAction = new cc.Follow(sprite);
  * this.runAction(followAction);
@@ -491,13 +482,13 @@ cc.Speed.create = cc.speed;
  * @extends cc.Action
  */
 cc.Follow = cc.Action.extend(/** @lends cc.Follow# */{
-    // node to follow
+    // 用来跟随的节点
     _followedNode:null,
-    // whether camera should be limited to certain area
+    //是否限制相机在特定区域
     _boundarySet:false,
-    // if screen size is bigger than the boundary - update not needed
+    //如果屏幕尺寸大于边界就无需更新
     _boundaryFullyCovered:false,
-    // fast access to the screen dimensions
+    //快速读取屏幕尺寸
     _halfScreenSize:null,
     _fullScreenSize:null,
     _worldRect:null,
@@ -508,9 +499,9 @@ cc.Follow = cc.Action.extend(/** @lends cc.Follow# */{
     bottomBoundary:0.0,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * creates the action with a set boundary. <br/>
-	 * creates the action with no boundary set.
+     * 构造函数, 通过重载这个函数来实现拓展构建行为, 记得在拓展的ctor函数里调用this._super(),他会调用父类的构造函数
+     * 创建一个带边界的动作
+     * 创建一个不带边界的动作
      * @param {cc.Node} followedNode
      * @param {cc.Rect} rect
 	 */
@@ -535,9 +526,7 @@ cc.Follow = cc.Action.extend(/** @lends cc.Follow# */{
     },
 
     /**
-     * to copy object with deep copy.
-     * returns a clone of action.
-     *
+     *  深拷贝对象,返回此动作的克隆
      * @return {cc.Follow}
      */
     clone:function () {
@@ -549,7 +538,7 @@ cc.Follow = cc.Action.extend(/** @lends cc.Follow# */{
     },
 
     /**
-     * Get whether camera should be limited to certain area.
+     * 获得是否应该限制相机在特定的区域.
      *
      * @return {Boolean}
      */
@@ -558,7 +547,7 @@ cc.Follow = cc.Action.extend(/** @lends cc.Follow# */{
     },
 
     /**
-     * alter behavior - turn on/off boundary.
+     * 修改行为 - 开关边界
      *
      * @param {Boolean} value
      */
@@ -567,7 +556,7 @@ cc.Follow = cc.Action.extend(/** @lends cc.Follow# */{
     },
 
     /**
-     * initializes the action with a set boundary.
+     * 初始化一个带边界的动作.
      *
      * @param {cc.Node} followedNode
      * @param {cc.Rect} [rect=]
@@ -614,8 +603,7 @@ cc.Follow = cc.Action.extend(/** @lends cc.Follow# */{
     },
 
     /**
-     * called every frame with it's delta time. <br />
-     * DON'T override unless you know what you are doing.
+     * 随着时间每帧被调用, 不要重载此函数除非你知道在做什么.
      *
      * @param {Number} dt
      */
@@ -637,7 +625,7 @@ cc.Follow = cc.Action.extend(/** @lends cc.Follow# */{
     },
 
     /**
-     * Return true if the action has finished.
+     * 如果动作结束会返回TRUE.
      *
      * @return {Boolean}
      */
@@ -646,7 +634,7 @@ cc.Follow = cc.Action.extend(/** @lends cc.Follow# */{
     },
 
     /**
-     * Stop the action.
+     *停止动作
      */
     stop:function () {
         this.target = null;
@@ -655,21 +643,20 @@ cc.Follow = cc.Action.extend(/** @lends cc.Follow# */{
 });
 
 /**
- * creates the action with a set boundary. <br/>
- * creates the action with no boundary set.
+ * 创建一个带边界的动作. <br/>
+ * 创建一个无边界的动作
  *
  * @function
  * @param {cc.Node} followedNode
  * @param {cc.Rect} rect
- * @return {cc.Follow|Null} returns the cc.Follow object on success
+ * @return {cc.Follow|Null}  成功返回cc.Follow对象
  * @example
- * // example
- * // creates the action with a set boundary
+ * 创建一个带边界动作
  * var sprite = new cc.Sprite("spriteFileName");
  * var followAction = cc.follow(sprite, cc.rect(0, 0, s.width * 2 - 100, s.height));
  * this.runAction(followAction);
  *
- * // creates the action with no boundary set
+ * 创建一个无边界动作
  * var sprite = new cc.Sprite("spriteFileName");
  * var followAction = cc.follow(sprite);
  * this.runAction(followAction);
@@ -679,13 +666,13 @@ cc.follow = function (followedNode, rect) {
 };
 
 /**
- * Please use cc.follow instead.
- * creates the action with a set boundary. <br/>
- * creates the action with no boundary set.
+ * 请使用cc.follow代替. <br/>
+ * 创建一个带边界动作. <br/>
+ * 创建一个无边界的动作. <br/>
  * @param {cc.Node} followedNode
  * @param {cc.Rect} rect
- * @return {cc.Follow|Null} returns the cc.Follow object on success
+ * @return {cc.Follow|Null}  如果创建成功就返回cc.Follow对象
  * @static
- * @deprecated since v3.0 please cc.follow() instead.
+ * 在3.0版本之后请使用cc.follow()代替.
  */
 cc.Follow.create = cc.follow;

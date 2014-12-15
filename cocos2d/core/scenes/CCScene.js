@@ -27,13 +27,15 @@
 
 /**
  * <p>cc.Scene is a subclass of cc.Node that is used only as an abstract concept.</p>
- *  <p>cc.Scene an cc.Node are almost identical with the difference that cc.Scene has it's
+ * <p>cc.Scene继承自cc.Node并且只作为抽象类使用</p>
+ * <p>cc.Scene an cc.Node are almost identical with the difference that cc.Scene has it's
  * anchor point (by default) at the center of the screen.</p>
- *
+ * <p>cc.Scene 和 cc.Node 除了cc.Scene的锚点默认在屏幕中心以外几乎相同</p>
  * <p>For the moment cc.Scene has no other logic than that, but in future releases it might have
  * additional logic.</p>
- *
+ * <p>目前cc.Scene没有比cc.Node多出额外的逻辑，但是未来可能会加入</p>
  * <p>It is a good practice to use and cc.Scene as the parent of all your nodes.</p>
+ * <p>将你的节点继承自cc.Sence是一个很好的实践方法(自己的节点集成自cc.Sence总是好的)</p>
  * @class
  * @extends cc.Node
  * @example
@@ -42,6 +44,7 @@
 cc.Scene = cc.Node.extend(/** @lends cc.Scene# */{
     /**
      * Constructor of cc.Scene
+     * cc.Scene的构造函数
      */
     _className:"Scene",
     ctor:function () {
@@ -54,6 +57,7 @@ cc.Scene = cc.Node.extend(/** @lends cc.Scene# */{
 
 /**
  * creates a scene
+ * 创建一个场景类
  * @deprecated since v3.0,please use new cc.Scene() instead.
  * @return {cc.Scene}
  */

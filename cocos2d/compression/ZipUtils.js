@@ -10,18 +10,18 @@
 cc.Codec = {name:'Jacob__Codec'};
 
 /**
- * Unpack a gzipped byte array
- * @param {Array} input Byte array
- * @returns {String} Unpacked byte string
+ * 解压一个压缩的字节型数组
+ * @param {Array} 输入字节型数组
+ * @returns {String} 解压过的字节型字符串
  */
 cc.unzip = function () {
     return cc.Codec.GZip.gunzip.apply(cc.Codec.GZip, arguments);
 };
 
 /**
- * Unpack a gzipped byte string encoded as base64
- * @param {String} input Byte string encoded as base64
- * @returns {String} Unpacked byte string
+ * 解压base64编码的压缩的字节型字符串
+ * @param {String} 输入base64编码的字节型字符串
+ * @returns {String} 解压的字节字符串
  */
 cc.unzipBase64 = function () {
     var tmpInput = cc.Codec.Base64.decode.apply(cc.Codec.Base64, arguments);
@@ -29,10 +29,10 @@ cc.unzipBase64 = function () {
 };
 
 /**
- * Unpack a gzipped byte string encoded as base64
- * @param {String} input Byte string encoded as base64
- * @param {Number} bytes Bytes per array item
- * @returns {Array} Unpacked byte array
+ * 解压base64编码的压缩的字节型字符串
+ * @param {String} 输入base64编码的字节型字符串
+ * @param {Number} 每一数组存储字节的个数
+ * @returns {Array} 解压的字节数组
  */
 cc.unzipBase64AsArray = function (input, bytes) {
     bytes = bytes || 1;
@@ -49,10 +49,10 @@ cc.unzipBase64AsArray = function (input, bytes) {
 };
 
 /**
- * Unpack a gzipped byte array
- * @param {Array} input Byte array
- * @param {Number} bytes Bytes per array item
- * @returns {Array} Unpacked byte array
+ * 解压一个压缩的字节数组
+ * @param {Array} 输入字节数组
+ * @param {Number} 每一数组存储字节的个数
+ * @returns {Array} 解压的字节数组
  */
 cc.unzipAsArray = function (input, bytes) {
     bytes = bytes || 1;
@@ -69,9 +69,9 @@ cc.unzipAsArray = function (input, bytes) {
 };
 
 /**
- * string to array
- * @param {String} input
- * @returns {Array} array
+ * 字符串转换数组
+ * @param {String} input 
+ * @returns {Array} array 
  */
 cc.StringToArray = function (input) {
     var tmp = input.split(","), ar = [], i;

@@ -24,7 +24,9 @@
  ****************************************************************************/
 /**
  * <p>cc.LoaderScene is a scene that you can load it when you loading files</p>
+ * <p>cc.LoaderScene 是一个用来载入文件的场景类</p>
  * <p>cc.LoaderScene can present thedownload progress </p>
+ * <p>cc.LoaderScene 用来显示动态更新过程(做热更新用)</p>
  * @class
  * @extends cc.Scene
  * @example
@@ -36,6 +38,7 @@ cc.LoaderScene = cc.Scene.extend({
     _className:"LoaderScene",
     /**
      * Contructor of cc.LoaderScene
+     * cc.LoaderScene的构造函数
      * @returns {boolean}
      */
     init : function(){
@@ -46,6 +49,7 @@ cc.LoaderScene = cc.Scene.extend({
         var logoHeight = 200;
 
         // bg
+        // 背景层
         var bgLayer = self._bgLayer = new cc.LayerColor(cc.color(32, 32, 32, 255));
         self.addChild(bgLayer, 0);
 
@@ -53,6 +57,7 @@ cc.LoaderScene = cc.Scene.extend({
         var fontSize = 24, lblHeight =  -logoHeight / 2 + 100;
         if(cc._loaderImage){
             //loading logo
+            //载入logo
             cc.loader.loadImg(cc._loaderImage, {isCrossOrigin : false }, function(err, img){
                 logoWidth = img.width;
                 logoHeight = img.height;
@@ -62,6 +67,7 @@ cc.LoaderScene = cc.Scene.extend({
             lblHeight = -logoHeight / 2 - 10;
         }
         //loading percent
+        //显示载入进度
         var label = self._label = new cc.LabelTTF("Loading... 0%", "Arial", fontSize);
         label.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, lblHeight)));
         label.setColor(cc.color(180, 180, 180));
@@ -82,6 +88,7 @@ cc.LoaderScene = cc.Scene.extend({
     },
     /**
      * custom onEnter
+     * 自定义 onEnter
      */
     onEnter: function () {
         var self = this;
@@ -90,6 +97,7 @@ cc.LoaderScene = cc.Scene.extend({
     },
     /**
      * custom onExit
+     * 自定义 onExit
      */
     onExit: function () {
         cc.Node.prototype.onExit.call(this);
@@ -99,6 +107,7 @@ cc.LoaderScene = cc.Scene.extend({
 
     /**
      * init with resources
+     * 初始化资源
      * @param {Array} resources
      * @param {Function|String} cb
      */
@@ -126,7 +135,9 @@ cc.LoaderScene = cc.Scene.extend({
 });
 /**
  * <p>cc.LoaderScene.preload can present a loaderScene with download progress.</p>
+ * <p>cc.LoaderScene.preload用来显示一个载入场景的下载进度</p>
  * <p>when all the resource are downloaded it will invoke call function</p>
+ * <p>当下载完所有资源就会调用它的回调函数</p>
  * @param resources
  * @param cb
  * @returns {cc.LoaderScene|*}

@@ -103,7 +103,7 @@ cc.kmVec3TransformNormal = function(pOut, pV, pM){
      b = (a×M)T
      Out = (bx, by, bz)
      */
-    //Omits the translation, only scaling + rotating
+    //Omits the translation, only scaling + rotating    省略平移，仅仅只是缩放+旋转
     pOut.x = pV.x * pM.mat[0] + pV.y * pM.mat[4] + pV.z * pM.mat[8];
     pOut.y = pV.x * pM.mat[1] + pV.y * pM.mat[5] + pV.z * pM.mat[9];
     pOut.z = pV.x * pM.mat[2] + pV.y * pM.mat[6] + pV.z * pM.mat[10];

@@ -25,7 +25,7 @@
  ****************************************************************************/
 
 /**
- * Canvas of DrawingPrimitive implement version use for WebGlMode
+ * Canvas of DrawingPrimitive implement version use for WebGlMode  DrawingPrimitive的Canvas实现了WebGlMode
  * @class
  * @extends cc.Class
  */
@@ -38,7 +38,7 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     _pointSizeLocation:-1,
     _pointSize:-1,
     /**
-     * contructor of cc.DrawingPrimitiveWebGL
+     * contructor of cc.DrawingPrimitiveWebGL   cc.DrawingPrimitiveWebGL的构造方法
      * @param ctx rendercontext
      */
     ctor:function (ctx) {
@@ -56,7 +56,7 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
         var _t = this;
         if (!_t._initialized) {
             //
-            // Position and 1 color passed as a uniform (to similate glColor4ub )
+            // Position and 1 color passed as a uniform (to similate glColor4ub )  位置和颜色作为一个整体传递（为了模拟glColor4ub）
             //
             _t._shader = cc.shaderCache.programForKey(cc.SHADER_POSITION_UCOLOR);
             _t._colorLocation = _t._renderContext.getUniformLocation(_t._shader.getProgram(), "u_color");
@@ -67,15 +67,15 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     },
 
     /**
-     * initlialize context
+     * initlialize context  初始化环境
      */
     drawInit:function () {
         this._initialized = false;
     },
 
     /**
-     * draws a point given x and y coordinate measured in points
-     * @param {cc.Point} point
+     * draws a point given x and y coordinate measured in points  给定x和y坐标系的值绘制一个点，x和y的值的坐标单位为点
+     * @param {cc.Point} point 点
      */
     drawPoint:function (point) {
         this.lazy_init();
@@ -99,9 +99,9 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     },
 
     /**
-     * draws an array of points.
-     * @param {Array} points point of array
-     * @param {Number} numberOfPoints
+     * draws an array of points.  绘制一个数组的点
+     * @param {Array} points point of array 数组中的点
+     * @param {Number} numberOfPoints  点的数量
      */
     drawPoints:function (points, numberOfPoints) {
         if (!points || points.length == 0)
@@ -137,9 +137,9 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     },
 
     /**
-     * draws a line given the origin and destination point measured in points
-     * @param {cc.Point} origin
-     * @param {cc.Point} destination
+     * draws a line given the origin and destination point measured in points  给定一条线的起点和终点绘制该条线，起点和终点的单位为点
+     * @param {cc.Point} origin 起点
+     * @param {cc.Point} destination 终点
      */
     drawLine:function (origin, destination) {
         this.lazy_init();
@@ -162,9 +162,9 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     },
 
     /**
-     * draws a rectangle given the origin and destination point measured in points.
-     * @param {cc.Point} origin
-     * @param {cc.Point} destination
+     * draws a rectangle given the origin and destination point measured in points.  给定一个矩形的起点和终点绘制该矩形，起点和终点的单位为点
+     * @param {cc.Point} origin  起点
+     * @param {cc.Point} destination  终点
      */
     drawRect:function (origin, destination) {
         this.drawLine(cc.p(origin.x, origin.y), cc.p(destination.x, origin.y));
@@ -174,10 +174,10 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     },
 
     /**
-     * draws a solid rectangle given the origin and destination point measured in points.
-     * @param {cc.Point} origin
-     * @param {cc.Point} destination
-     * @param {cc.Color} color
+     * draws a solid rectangle given the origin and destination point measured in points.  根据一个实心矩形的起点、终点和颜色绘制该实心矩形，起点和终点的单位为points（注：起点和终点为矩形对角线的顶点）
+     * @param {cc.Point} origin  起点
+     * @param {cc.Point} destination  终点
+     * @param {cc.Color} color  颜色
      */
     drawSolidRect:function (origin, destination, color) {
         var vertices = [
@@ -191,10 +191,10 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     },
 
     /**
-     * draws a polygon given a pointer to cc.Point coordiantes and the number of vertices measured in points.
-     * @param {Array} vertices a pointer to cc.Point coordiantes
-     * @param {Number} numOfVertices the number of vertices measured in points
-     * @param {Boolean} closePolygon The polygon can be closed or open
+     * draws a polygon given a pointer to cc.Point coordiantes and the number of vertices measured in points.  根据一个指向多边形的顶点集合的指针和顶点的个数绘制该多边形，顶点的单位为point
+     * @param {Array} vertices a pointer to cc.Point coordiantes  vertices是一个指向顶点数组的指针
+     * @param {Number} numOfVertices the number of vertices measured in points vertices中顶点的数量
+     * @param {Boolean} closePolygon The polygon can be closed or open 多边形是否闭合
      */
     drawPoly:function (vertices, numOfVertices, closePolygon) {
         this.lazy_init();
@@ -220,10 +220,10 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     },
 
     /**
-     * draws a solid polygon given a pointer to CGPoint coordiantes, the number of vertices measured in points, and a color.
-     * @param {Array} poli
-     * @param {Number} numberOfPoints
-     * @param {cc.Color} color
+     * draws a solid polygon given a pointer to CGPoint coordiantes, the number of vertices measured in points, and a color.  根据一个指向实心多边形CGPoint类型的顶点的指针、顶点的个数和颜色绘制该实心多边形，顶点的单位为point
+     * @param {Array} poli  指向顶点数组的指针
+     * @param {Number} numberOfPoints  顶点的数量
+     * @param {cc.Color} color  颜色
      */
     drawSolidPoly:function (poli, numberOfPoints, color) {
         this.lazy_init();
@@ -247,12 +247,12 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     },
 
     /**
-     * draws a circle given the center, radius and number of segments.
-     * @param {cc.Point} center center of circle
-     * @param {Number} radius
-     * @param {Number} angle angle in radians
-     * @param {Number} segments
-     * @param {Boolean} drawLineToCenter
+     * draws a circle given the center, radius and number of segments.  根据一个圆的圆心、半径和弦绘制该圆
+     * @param {cc.Point} center center of circle  圆心
+     * @param {Number} radius  半径
+     * @param {Number} angle angle in radians  弧度
+     * @param {Number} segments 曲线段数
+     * @param {Boolean} drawLineToCenter 是否需要绘制弦
      */
     drawCircle:function (center, radius, angle, segments, drawLineToCenter) {
         this.lazy_init();
@@ -296,11 +296,11 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     },
 
     /**
-     * draws a quad bezier path
-     * @param {cc.Point} origin
-     * @param {cc.Point} control
-     * @param {cc.Point} destination
-     * @param {Number} segments
+     * draws a quad bezier path  绘制四次方贝塞尔曲线
+     * @param {cc.Point} origin  起点
+     * @param {cc.Point} control 控制点
+     * @param {cc.Point} destination 终点
+     * @param {Number} segments  曲线段数
      */
     drawQuadBezier:function (origin, control, destination, segments) {
         this.lazy_init();
@@ -334,12 +334,12 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     },
 
     /**
-     * draws a cubic bezier path
-     * @param {cc.Point} origin
-     * @param {cc.Point} control1
-     * @param {cc.Point} control2
-     * @param {cc.Point} destination
-     * @param {Number} segments
+     * draws a cubic bezier path  绘制三次方贝塞尔曲线
+     * @param {cc.Point} origin 起点
+     * @param {cc.Point} control1 控制点1
+     * @param {cc.Point} control2 控制点2
+     * @param {cc.Point} destination 终点
+     * @param {Number} segments 曲线段数
      */
     drawCubicBezier:function (origin, control1, control2, destination, segments) {
         this.lazy_init();
@@ -372,19 +372,19 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     },
 
     /**
-     * draw a catmull rom line
-     * @param {Array} points
-     * @param {Number} segments
+     * draw a catmull rom line  绘制一条差值曲线
+     * @param {Array} points 点的数组
+     * @param {Number} segments 段的个数
      */
     drawCatmullRom:function (points, segments) {
         this.drawCardinalSpline(points, 0.5, segments);
     },
 
     /**
-     * draw a cardinal spline path
-     * @param {Array} config
-     * @param {Number} tension
-     * @param {Number} segments
+     * draw a cardinal spline path  绘制一个基数样条路径
+     * @param {Array} config 参数
+     * @param {Number} tension 张力
+     * @param {Number} segments 曲线段数
      */
     drawCardinalSpline:function (config, tension, segments) {
         this.lazy_init();
@@ -394,7 +394,7 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
         for (var i = 0; i < segments + 1; i++) {
             var dt = i / segments;
 
-            // border
+            // border  边
             if (dt == 1) {
                 p = config.length - 1;
                 lt = 1;
@@ -432,11 +432,11 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     },
 
     /**
-     * set the drawing color with 4 unsigned bytes
-     * @param {Number} r red value (0 to 255)
-     * @param {Number} g green value (0 to 255)
-     * @param {Number} b blue value (0 to 255)
-     * @param {Number} a Alpha value (0 to 255)
+     * set the drawing color with 4 unsigned bytes  根据四个无符号的比特数绘制颜色
+     * @param {Number} r red value (0 to 255) 红色值（0到255）
+     * @param {Number} g green value (0 to 255) 绿色值（0到255）
+     * @param {Number} b blue value (0 to 255) 蓝色值（0到255）
+     * @param {Number} a Alpha value (0 to 255) 透明度值（0到255）
      */
     setDrawColor:function (r, g, b, a) {
         this._colorArray[0] = r / 255.0;
@@ -446,16 +446,16 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
     },
 
     /**
-     * set the point size in points. Default 1.
-     * @param {Number} pointSize
+     * set the point size in points. Default 1.  设定点的大小.默认值为1.
+     * @param {Number} pointSize  点的大小
      */
     setPointSize:function (pointSize) {
         this._pointSize = pointSize * cc.contentScaleFactor();
     },
 
     /**
-     * set the line width. Default 1.
-     * @param {Number} width
+     * set the line width. Default 1.    设定线的宽度.默认值为1.
+     * @param {Number} width  线的宽度
      */
     setLineWidth:function (width) {
         if(this._renderContext.lineWidth)

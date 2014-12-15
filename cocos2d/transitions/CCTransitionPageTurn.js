@@ -25,13 +25,13 @@
  ****************************************************************************/
 
 /**
- *<p> A transition which peels back the bottom right hand corner of a scene<br/>
- * to transition to the scene beneath it simulating a page turn.<br/></p>
+ *<p> A transition which peels back the bottom right hand corner of a scene<br/> <p>一个转场效果这个剥落卷页场景的右下角 <br/>
+ * to transition to the scene beneath it simulating a page turn.<br/></p>            转场到场景下方模拟翻页<br/></p>
  *
- * <p>This uses a 3DAction so it's strongly recommended that depth buffering<br/>
- * is turned on in cc.director using:</p>
+ * <p>This uses a 3DAction so it's strongly recommended that depth buffering<br/> <p>这将使用一个3DAction,所以强烈建议在 <br/>
+ * is turned on in cc.director using:</p>                                             cc.director中开启深度缓冲区用法</p>
  *
- * <p>cc.director.setDepthBufferFormat(kDepthBuffer16);</p>
+ * <p>cc.director.setDepthBufferFormat(kDepthBuffer16);</p>                       <p>cc.director.setDepthBufferFormat(kDepthBuffer16);</p>
  * @class
  * @extends cc.TransitionScene
  * @param {Number} t time in seconds
@@ -43,7 +43,7 @@
 cc.TransitionPageTurn = cc.TransitionScene.extend(/** @lends cc.TransitionPageTurn# */{
 
     /**
-     * @param {Number} t time in seconds
+     * @param {Number} t time in seconds 持续时间(秒)
      * @param {cc.Scene} scene
      * @param {Boolean} backwards
      */
@@ -61,10 +61,10 @@ cc.TransitionPageTurn = cc.TransitionScene.extend(/** @lends cc.TransitionPageTu
     _className:"TransitionPageTurn",
 
     /**
-     * Creates a base transition with duration and incoming scene.<br/>
-     * If back is true then the effect is reversed to appear as if the incoming<br/>
-     * scene is being turned from left over the outgoing scene.
-     * @param {Number} t time in seconds
+     * Creates a base transition with duration and incoming scene.<br/>               使用持续时间、传入的场景初始化一个基础转场.<br/>
+     * If back is true then the effect is reversed to appear as if the incoming<br/>  如果返回 true 传入效果会反转.<br/>
+     * scene is being turned from left over the outgoing scene.                       从左覆盖传出场景
+     * @param {Number} t time in seconds 持续时间(秒)
      * @param {cc.Scene} scene
      * @param {Boolean} backwards
      * @return {Boolean}
@@ -85,13 +85,13 @@ cc.TransitionPageTurn = cc.TransitionScene.extend(/** @lends cc.TransitionPageTu
      */
     actionWithSize:function (vector) {
         if (this._back)
-            return cc.reverseTime(cc.pageTurn3D(this._duration, vector));        // Get hold of the PageTurn3DAction
+            return cc.reverseTime(cc.pageTurn3D(this._duration, vector));        // Get hold of the PageTurn3DAction 得到PageTurn3DAction
         else
-            return cc.pageTurn3D(this._duration, vector);     // Get hold of the PageTurn3DAction
+            return cc.pageTurn3D(this._duration, vector);     // Get hold of the PageTurn3DAction 得到PageTurn3DAction
     },
 
     /**
-     * custom on enter
+     * custom on enter 自定义onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
@@ -114,7 +114,7 @@ cc.TransitionPageTurn = cc.TransitionScene.extend(/** @lends cc.TransitionPageTu
         } else {
             gridProxy.setTarget(this._inScene);
             gridProxy.onEnter();
-            // to prevent initial flicker
+            // to prevent initial flicker   保持最初的频率
             this._inScene.visible = false;
             gridProxy.runAction(
                 cc.sequence(action, cc.callFunc(this.finish, this), cc.stopGrid())
@@ -138,10 +138,10 @@ cc.TransitionPageTurn = cc.TransitionScene.extend(/** @lends cc.TransitionPageTu
 });
 
 /**
- * Creates a base transition with duration and incoming scene.<br/>
- * If back is true then the effect is reversed to appear as if the incoming<br/>
- * scene is being turned from left over the outgoing scene.
- * @deprecated since v3.0,please use new cc.TransitionPageTurn(t, scene, backwards) instead.
+ * Creates a base transition with duration and incoming scene.<br/>                 使用 duration、传入的场景创建一个基础转场.<br/>
+ * If back is true then the effect is reversed to appear as if the incoming<br/>    如果返回 true 传入效果会反转 .<br/>
+ * scene is being turned from left over the outgoing scene.                         场景从左覆盖传出场景
+ * @deprecated since v3.0,please use new cc.TransitionPageTurn(t, scene, backwards) instead.  从v3.0之后请使用new cc.TransitionPageTurn(t, scene, backwards)替代
  * @param {Number} t time in seconds
  * @param {cc.Scene} scene
  * @param {Boolean} backwards

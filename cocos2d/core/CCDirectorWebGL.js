@@ -28,13 +28,13 @@
 cc._tmp.DirectorWebGL = function () {
 
     /**
-     * OpenGL projection protocol
+     * OpenGL projection protocol  OpenGL投影协议
      * @class
      * @extends cc.Class
      */
     cc.DirectorDelegate = cc.Class.extend(/** @lends cc.DirectorDelegate# */{
         /**
-         * Called by CCDirector when the projection is updated, and "custom" projection is used
+         * Called by CCDirector when the projection is updated, and "custom" projection is used  当投影更新的时候被CCDirector调用，接着自定义投影被使用
          */
         updateProjection: function () {
         }
@@ -127,12 +127,12 @@ cc._tmp.DirectorWebGL = function () {
         conf.gatherGPUInfo();
         conf.dumpInfo();
 
-        // set size
+        // set size 设定size
         //_t._winSizeInPoints = _t._openGLView.getDesignResolutionSize();
         //_t._winSizeInPixels = cc.size(_t._winSizeInPoints.width * _t._contentScaleFactor, _t._winSizeInPoints.height * _t._contentScaleFactor);
 
         //if (_t._openGLView != openGLView) {
-        // because EAGLView is not kind of CCObject
+        // because EAGLView is not kind of CCObject  因为EAGLView不是CCObject类型
 
         _t._createStatsLabel();
 
@@ -177,16 +177,16 @@ cc._tmp.DirectorWebGL = function () {
 
         /*
          We want to use an image which is stored in the file named ccFPSImage.c
-         for any design resolutions and all resource resolutions.
-
-         To achieve this,
-
-         Firstly, we need to ignore 'contentScaleFactor' in 'CCAtlasNode' and 'CCLabelAtlas'.
-         So I added a new method called 'setIgnoreContentScaleFactor' for 'CCAtlasNode',
-         this is not exposed to game developers, it's only used for displaying FPS now.
-
-         Secondly, the size of this image is 480*320, to display the FPS label with correct size,
-         a factor of design resolution ratio of 480x320 is also needed.
+         for any design resolutions and all resource resolutions.   我们想要在任何分辨率下和所有解决方案中都能够使用一张存储在ccFPSImage.c文件中的图片.
+         
+         To achieve this,   为了达到这样的效果，
+        
+         Firstly, we need to ignore 'contentScaleFactor' in 'CCAtlasNode' and 'CCLabelAtlas'.  首先，我们需要忽略'CCAtlasNode'和'CCLabelAtlas'中的'contentScaleFactor'变量.
+         So I added a new method called 'setIgnoreContentScaleFactor' for 'CCAtlasNode',  所以我为'CCAtlasNode'添加了新的名为'setIgnoreContentScaleFactor'的方法，
+         this is not exposed to game developers, it's only used for displaying FPS now.  这个方法没有暴露给游戏开发者，它现在仅仅用来显示FPS。
+         
+         Secondly, the size of this image is 480*320, to display the FPS label with correct size,  其次，这张图片的分辨率为480*320，为了能够以正确的大小显示FPS标签，
+         a factor of design resolution ratio of 480x320 is also needed.  我们需要一个480*320比例的分辨率系数。
          */
         var factor = cc.view.getDesignResolutionSize().height / 320.0;
         if (factor === 0)
@@ -218,8 +218,9 @@ cc._tmp.DirectorWebGL = function () {
 
     _p._createStatsLabelForCanvas = function () {
         var _t = this;
-        //The original _createStatsLabelForCanvas method
-        //Because the referenced by a cc.Director.prototype._createStatsLabel
+        //The original _createStatsLabelForCanvas method  原始的_createStatsLabelForCanvas方法
+        //Because the referenced by a cc.Director.prototype._createStatsLabel  因为被cc.Director.prototype._createStatsLabel引用
+
         var fontSize = 0;
         if (_t._winSizeInPoints.width > _t._winSizeInPoints.height)
             fontSize = 0 | (_t._winSizeInPoints.height / 320 * 24);
@@ -260,7 +261,7 @@ cc._tmp.DirectorWebGL = function () {
         cc.GLToClipTransform(transform);
 
         var clipCoord = new cc.kmVec3();
-        // Need to calculate the zero depth from the transform.
+        // Need to calculate the zero depth from the transform.  需要从变形计算0的深度
         var glCoord = new cc.kmVec3(glPoint.x, glPoint.y, 0.0);
         cc.kmVec3TransformCoord(clipCoord, glCoord, transform);
 
@@ -316,12 +317,12 @@ cc._tmp.DirectorWebGL = function () {
     _p.setGLDefaultValues = function () {
         var _t = this;
         _t.setAlphaBlending(true);
-        // XXX: Fix me, should enable/disable depth test according the depth format as cocos2d-iphone did
+        // XXX: Fix me, should enable/disable depth test according the depth format as cocos2d-iphone did  XXX：如果要修改这部分，应该使得根据深度初始化测试深度的方法有效/失效，参照cocos2d-iphone
         // [self setDepthTest: view_.depthFormat];
         _t.setDepthTest(false);
         _t.setProjection(_t._projection);
 
-        // set other opengl default values
+        // set other opengl default values  设定其他opengl默认值
         cc._renderContext.clearColor(0.0, 0.0, 0.0, 1.0);
     };
 }

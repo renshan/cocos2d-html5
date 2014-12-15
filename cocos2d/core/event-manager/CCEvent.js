@@ -24,14 +24,14 @@
  ****************************************************************************/
 
 /**
- * Base class of all kinds of events.
+ * Base class of all kinds of events. 所有时间的基础类。
  * @class
  * @extends cc.Class
  */
 cc.Event = cc.Class.extend(/** @lends cc.Event# */{
-    _type: 0,                                   //  Event type
-    _isStopped: false,                         //< whether the event has been stopped.
-    _currentTarget: null,                       //< Current target
+    _type: 0,                                   //  Event type 时间类型
+    _isStopped: false,                         //< whether the event has been stopped. 事件是否被停止。
+    _currentTarget: null,                       //< Current target 当前目标
 
     _setCurrentTarget: function (target) {
         this._currentTarget = target;
@@ -42,7 +42,7 @@ cc.Event = cc.Class.extend(/** @lends cc.Event# */{
     },
 
     /**
-     * Gets the event type
+     * Gets the event type 获取时间类型
      * @function
      * @returns {Number}
      */
@@ -51,7 +51,7 @@ cc.Event = cc.Class.extend(/** @lends cc.Event# */{
     },
 
     /**
-     * Stops propagation for current event
+     * Stops propagation for current event 停止当前事件的传播
      * @function
      */
     stopPropagation: function () {
@@ -59,7 +59,7 @@ cc.Event = cc.Class.extend(/** @lends cc.Event# */{
     },
 
     /**
-     * Checks whether the event has been stopped
+     * Checks whether the event has been stopped 检查事件是否被停止
      * @function
      * @returns {boolean}
      */
@@ -69,9 +69,9 @@ cc.Event = cc.Class.extend(/** @lends cc.Event# */{
 
     /**
      * <p>
-     *     Gets current target of the event                                                            <br/>
-     *     note: It only be available when the event listener is associated with node.                <br/>
-     *          It returns 0 when the listener is associated with fixed priority.
+     *     Gets current target of the event 获取事件的当前目标                                                           <br/>
+     *     note: It only be available when the event listener is associated with node. 注意：当前目标仅在事件监听者与节点关联的时候才可用。              <br/>
+     *          It returns 0 when the listener is associated with fixed priority. 当监听者有固定的优先权时，返回0.
      * </p>
      * @function
      * @returns {cc.Node}  The target with which the event associates.
@@ -81,46 +81,46 @@ cc.Event = cc.Class.extend(/** @lends cc.Event# */{
     }
 });
 
-//event type
+//event type 事件类型
 /**
- * The type code of Touch event.
+ * The type code of Touch event. 触摸事件的类型代码。
  * @constant
  * @type {number}
  */
 cc.Event.TOUCH = 0;
 /**
- * The type code of Keyboard event.
+ * The type code of Keyboard event. 键盘事件的类型代码。
  * @constant
  * @type {number}
  */
 cc.Event.KEYBOARD = 1;
 /**
- * The type code of Acceleration event.
+ * The type code of Acceleration event. 加速事件的类型代码。
  * @constant
  * @type {number}
  */
 cc.Event.ACCELERATION = 2;
 /**
- * The type code of Mouse event.
+ * The type code of Mouse event. 鼠标事件的类型代码。
  * @constant
  * @type {number}
  */
 cc.Event.MOUSE = 3;
 /**
- * The type code of Custom event.
+ * The type code of Custom event. 自定义事件的类型代码。
  * @constant
  * @type {number}
  */
 cc.Event.CUSTOM = 4;
 
 /**
- * The Custom event
+ * The Custom event 自定义事件
  * @class
  * @extends cc.Event
  */
 cc.EventCustom = cc.Event.extend(/** @lends cc.EventCustom# */{
     _eventName: null,
-    _userData: null,                                 // User data
+    _userData: null,                                 // User data 用户数据
 
     ctor: function (eventName) {
         cc.Event.prototype.ctor.call(this, cc.Event.CUSTOM);
@@ -128,7 +128,7 @@ cc.EventCustom = cc.Event.extend(/** @lends cc.EventCustom# */{
     },
 
     /**
-     * Sets user data
+     * Sets user data 设置用户数据
      * @param {*} data
      */
     setUserData: function (data) {
@@ -136,7 +136,7 @@ cc.EventCustom = cc.Event.extend(/** @lends cc.EventCustom# */{
     },
 
     /**
-     * Gets user data
+     * Gets user data 获取用户数据
      * @returns {*}
      */
     getUserData: function () {
@@ -144,7 +144,7 @@ cc.EventCustom = cc.Event.extend(/** @lends cc.EventCustom# */{
     },
 
     /**
-     * Gets event name
+     * Gets event name 获取事件名字
      * @returns {String}
      */
     getEventName: function () {
@@ -153,7 +153,7 @@ cc.EventCustom = cc.Event.extend(/** @lends cc.EventCustom# */{
 });
 
 /**
- * The mouse event
+ * The mouse event 鼠标事件
  * @class
  * @extends cc.Event
  */
@@ -173,7 +173,7 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     },
 
     /**
-     * Sets scroll data
+     * Sets scroll data 设置滚动数据
      * @param {number} scrollX
      * @param {number} scrollY
      */
@@ -183,7 +183,7 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     },
 
     /**
-     * Returns the x axis scroll value
+     * Returns the x axis scroll value 返回X轴的翻滚值
      * @returns {number}
      */
     getScrollX: function () {
@@ -191,7 +191,7 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     },
 
     /**
-     * Returns the y axis scroll value
+     * Returns the y axis scroll value 返回Y轴的翻滚值
      * @returns {number}
      */
     getScrollY: function () {
@@ -199,7 +199,7 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     },
 
     /**
-     * Sets cursor location
+     * Sets cursor location 设置光标位置
      * @param {number} x
      * @param {number} y
      */
@@ -209,7 +209,7 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     },
 
 	/**
-	 * Returns cursor location
+	 * Returns cursor location 返回光标位置
 	 * @return {cc.Point} location
 	 */
     getLocation: function () {
@@ -217,7 +217,7 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     },
 
 	/**
-	 * Returns the current cursor location in screen coordinates
+	 * Returns the current cursor location in screen coordinates 返回当前光标在屏幕坐标系中的位置
 	 * @return {cc.Point}
 	 */
 	getLocationInView: function() {
@@ -230,7 +230,7 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     },
 
     /**
-     * Returns the delta distance from the previous location to current location
+     * Returns the delta distance from the previous location to current location 返回从前一个位置到当前位置的距离增量
      * @return {cc.Point}
      */
     getDelta: function () {
@@ -238,7 +238,7 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     },
 
     /**
-     * Returns the X axis delta distance from the previous location to current location
+     * Returns the X axis delta distance from the previous location to current location 返回从前一个位置到当前位置的X轴的距离增量
      * @return {Number}
      */
     getDeltaX: function () {
@@ -246,7 +246,7 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     },
 
     /**
-     * Returns the Y axis delta distance from the previous location to current location
+     * Returns the Y axis delta distance from the previous location to current location 返回从前一个位置到当前位置的Y轴的距离增量
      * @return {Number}
      */
     getDeltaY: function () {
@@ -254,7 +254,7 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     },
 
     /**
-     * Sets mouse button
+     * Sets mouse button 设置鼠标按钮
      * @param {number} button
      */
     setButton: function (button) {
@@ -262,7 +262,7 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     },
 
     /**
-     * Returns mouse button
+     * Returns mouse button 返回鼠标按钮
      * @returns {number}
      */
     getButton: function () {
@@ -270,7 +270,7 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     },
 
     /**
-     * Returns location X axis data
+     * Returns location X axis data 返回X轴的位置数据
      * @returns {number}
      */
     getLocationX: function () {
@@ -278,7 +278,7 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     },
 
     /**
-     * Returns location Y axis data
+     * Returns location Y axis data 返回Y轴的位置数据
      * @returns {number}
      */
     getLocationY: function () {
@@ -286,96 +286,96 @@ cc.EventMouse = cc.Event.extend(/** @lends cc.EventMouse# */{
     }
 });
 
-//Different types of MouseEvent
+//Different types of MouseEvent 不同类型的鼠标事件
 /**
- * The none event code of  mouse event.
+ * The none event code of  mouse event. 没有事件代码的鼠标事件
  * @constant
  * @type {number}
  */
 cc.EventMouse.NONE = 0;
 /**
- * The event type code of mouse down event.
+ * The event type code of mouse down event. 鼠标向下移动事件的事件类型代码
  * @constant
  * @type {number}
  */
 cc.EventMouse.DOWN = 1;
 /**
- * The event type code of mouse up event.
+ * The event type code of mouse up event. 鼠标向上移动事件的事件类型代码
  * @constant
  * @type {number}
  */
 cc.EventMouse.UP = 2;
 /**
- * The event type code of mouse move event.
+ * The event type code of mouse move event. 鼠标移动事件的事件类型代码
  * @constant
  * @type {number}
  */
 cc.EventMouse.MOVE = 3;
 /**
- * The event type code of mouse scroll event.
+ * The event type code of mouse scroll event. 鼠标滚动事件的事件类型代码
  * @constant
  * @type {number}
  */
 cc.EventMouse.SCROLL = 4;
 
 /**
- * The tag of Mouse left button
+ * The tag of Mouse left button 鼠标左按钮标签
  * @constant
  * @type {Number}
  */
 cc.EventMouse.BUTTON_LEFT = 0;
 
 /**
- * The tag of Mouse right button  (The right button number is 2 on browser)
+ * The tag of Mouse right button  (The right button number is 2 on browser) 鼠标右按钮标签（在浏览器上，右按钮的数字是2）
  * @constant
  * @type {Number}
  */
 cc.EventMouse.BUTTON_RIGHT = 2;
 
 /**
- * The tag of Mouse middle button  (The right button number is 1 on browser)
+ * The tag of Mouse middle button  (The middle button number is 1 on browser) 鼠标中间按钮标签（在浏览器上，中间按钮的数字是1）
  * @constant
  * @type {Number}
  */
 cc.EventMouse.BUTTON_MIDDLE = 1;
 
 /**
- * The tag of Mouse button 4
+ * The tag of Mouse button 4 鼠标4的标签
  * @constant
  * @type {Number}
  */
 cc.EventMouse.BUTTON_4 = 3;
 
 /**
- * The tag of Mouse button 5
+ * The tag of Mouse button 5 鼠标5的标签
  * @constant
  * @type {Number}
  */
 cc.EventMouse.BUTTON_5 = 4;
 
 /**
- * The tag of Mouse button 6
+ * The tag of Mouse button 6 鼠标6的标签
  * @constant
  * @type {Number}
  */
 cc.EventMouse.BUTTON_6 = 5;
 
 /**
- * The tag of Mouse button 7
+ * The tag of Mouse button 7 鼠标7的标签
  * @constant
  * @type {Number}
  */
 cc.EventMouse.BUTTON_7 = 6;
 
 /**
- * The tag of Mouse button 8
+ * The tag of Mouse button 8 鼠标8的标签
  * @constant
  * @type {Number}
  */
 cc.EventMouse.BUTTON_8 = 7;
 
 /**
- * The touch event
+ * The touch event 触摸事件
  * @class
  * @extends cc.Event
  */
@@ -389,7 +389,7 @@ cc.EventTouch = cc.Event.extend(/** @lends cc.EventTouch# */{
     },
 
     /**
-     * Returns event code
+     * Returns event code 返回事件代码
      * @returns {number}
      */
     getEventCode: function () {
@@ -397,7 +397,7 @@ cc.EventTouch = cc.Event.extend(/** @lends cc.EventTouch# */{
     },
 
     /**
-     * Returns touches of event
+     * Returns touches of event 返回事件的触摸
      * @returns {Array}
      */
     getTouches: function () {
@@ -414,7 +414,7 @@ cc.EventTouch = cc.Event.extend(/** @lends cc.EventTouch# */{
 });
 
 /**
- * The maximum touch numbers
+ * The maximum touch numbers 触摸数的最大值
  * @constant
  * @type {Number}
  */

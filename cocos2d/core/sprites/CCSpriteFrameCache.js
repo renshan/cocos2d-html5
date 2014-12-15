@@ -35,6 +35,18 @@
  * @class
  * @name cc.spriteFrameCache
  */
+ 
+/**
+ * <p>
+ * cc.spriteFrameCache是一个处理精灵帧加载的单例，它存储在精灵帧的缓存中<br/>
+ * <br/>
+ * example<br/>
+ * // 用plist文件将精灵帧加入精灵帧缓存<br/>
+ * cc.spriteFrameCache.addSpriteFrames(s_grossiniPlist);<br/>
+ * </p>
+ * @class
+ * @name cc.spriteFrameCache
+ */
 cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
     _CCNS_REG1 : /^\s*\{\s*([\-]?\d+[.]?\d*)\s*,\s*([\-]?\d+[.]?\d*)\s*\}\s*$/,
     _CCNS_REG2 : /^\s*\{\s*\{\s*([\-]?\d+[.]?\d*)\s*,\s*([\-]?\d+[.]?\d*)\s*\}\s*,\s*\{\s*([\-]?\d+[.]?\d*)\s*,\s*([\-]?\d+[.]?\d*)\s*\}\s*\}\s*$/,
@@ -66,7 +78,7 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
 
         cc.assert(dict, cc._LogInfos.spriteFrameCache__getFrameConfig_2, url);
 
-        cc.loader.release(url);//release it in loader
+        cc.loader.release(url);//release it in loader 在加载器中发布
         if(dict._inited){
             this._frameConfigCache[url] = dict;
             return dict;
@@ -74,7 +86,7 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
         var tempFrames = dict["frames"], tempMeta = dict["metadata"] || dict["meta"];
         var frames = {}, meta = {};
         var format = 0;
-        if(tempMeta){//init meta
+        if(tempMeta){//init meta 初始化元数据
             var tmpFormat = tempMeta["format"];
             format = (tmpFormat.length <= 1) ? parseInt(tmpFormat) : tmpFormat;
             meta.image = tempMeta["textureFileName"] || tempMeta["textureFileName"] || tempMeta["image"];
@@ -104,7 +116,7 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
                 tempFrame.offset = this._pointFromString(frameDict["offset"]);
                 tempFrame.size = this._sizeFromString(frameDict["sourceSize"]);
             } else if (format == 3) {
-                // get values
+                // get values 获取值
                 var spriteSize = this._sizeFromString(frameDict["spriteSize"]);
                 var textureRect = this._rectFromString(frameDict["textureRect"]);
                 if (spriteSize) {
@@ -146,10 +158,25 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
      * cc.spriteFrameCache.addSpriteFrames(s_grossiniPlist);
      * cc.spriteFrameCache.addSpriteFrames(s_grossiniJson);
      */
+	 
+	/**
+     * <p>
+     *   从plist或者json文件中获取多个精灵帧<br/>
+     *   纹理将会被自动加载，在纹理的名称中将会用.png代替.plist和.json<br/>
+     *   如果需要另外一个纹理，应当使用addSpriteFrames:texture方法<br/>
+     * </p>
+     * @param {String} url file path
+     * @param {HTMLImageElement|cc.Texture2D|string} texture
+     * @example
+     * // 用plist或者json文件把精灵帧加入到精灵帧缓存中
+     * cc.spriteFrameCache.addSpriteFrames(s_grossiniPlist);
+     * cc.spriteFrameCache.addSpriteFrames(s_grossiniJson);
+     */
     addSpriteFrames: function (url, texture) {
         cc.assert(url, cc._LogInfos.spriteFrameCache_addSpriteFrames_2);
 
         //Is it a SpriteFrame plist?
+		//这里是精灵帧的plist文件么？
         var dict = this._frameConfigCache[url] || cc.loader.getRes(url);
         if(!dict || !dict["frames"])
             return;
@@ -162,14 +189,14 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
             var texturePath = cc.path.changeBasename(url, meta.image || ".png");
             texture = cc.textureCache.addImage(texturePath);
         }else if(texture instanceof cc.Texture2D){
-            //do nothing
+            //do nothing 什么都不做
         }else if(cc.isString(texture)){//string
             texture = cc.textureCache.addImage(texture);
         }else{
             cc.assert(0, cc._LogInfos.spriteFrameCache_addSpriteFrames_3);
         }
 
-        //create sprite frames
+        //create sprite frames 新建精灵帧
         var spAliases = self._spriteFramesAliases, spriteFrames = self._spriteFrames;
         for (var key in frames) {
             var frame = frames[key];
@@ -177,7 +204,7 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
             if (!spriteFrame) {
                 spriteFrame = new cc.SpriteFrame(texture, frame.rect, frame.rotated, frame.offset, frame.size);
                 var aliases = frame.aliases;
-                if(aliases){//set aliases
+                if(aliases){//set aliases 设置锯齿处理
                     for(var i = 0, li = aliases.length; i < li; i++){
                         var alias = aliases[i];
                         if (spAliases[alias]) {
@@ -188,7 +215,7 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
                 }
 
                 if (cc._renderType === cc._RENDER_TYPE_CANVAS && spriteFrame.isRotated()) {
-                    //clip to canvas
+                    //clip to canvas 放在画布上
                     var locTexture = spriteFrame.getTexture();
                     if (locTexture.isLoaded()) {
                         var tempElement = spriteFrame.getTexture().getHtmlElementObj();
@@ -209,6 +236,7 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
     },
 
     // Function to check if frames to add exists already, if so there may be name conflit that must be solved
+	// 判断帧是否已经存在，如果存在那可能会导致名称冲突，则必须要进行处理
     _checkConflict: function (dictionary) {
         var framesDict = dictionary["frames"];
 
@@ -221,8 +249,9 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
 
     /**
      * <p>
-     *  Adds an sprite frame with a given name.<br/>
+     *  Adds an sprite frame with a given name.<br/>指定帧名称来添加一个精灵帧<br/>
      *  If the name already exists, then the contents of the old name will be replaced with the new one.
+	 *  如果名称已经存在，那么旧的内容将会被新的内容覆盖
      * </p>
      * @param {cc.SpriteFrame} frame
      * @param {String} frameName
@@ -240,22 +269,34 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
      *   In the long term: it will be the same.<br/>
      * </p>
      */
+	 
+	/**
+     * <p>
+     *   清除加载精灵帧的字典<br/>
+     *   如果收到“内存警告”，可以调用此方法<br/>
+     *   短期内它会释放一些资源，保证你的app不会被系统杀死<br/>
+     *   中期会分配更多的资源<br/>
+     *   长期他会是相同的<br/>
+     * </p>
+     */
     removeSpriteFrames: function () {
         this._spriteFrames = {};
         this._spriteFramesAliases = {};
     },
 
     /**
-     * Deletes an sprite frame from the sprite frame cache.
+     * Deletes an sprite frame from the sprite frame cache. 从精灵帧缓存中删除一个精灵帧
      * @param {String} name
      */
     removeSpriteFrameByName: function (name) {
         // explicit nil handling
+		// 为空判断
         if (!name) {
             return;
         }
 
         // Is this an alias ?
+		// 是否是一个锯齿
         if (this._spriteFramesAliases[name]) {
             delete(this._spriteFramesAliases[name]);
         }
@@ -263,6 +304,7 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
             delete(this._spriteFrames[name]);
         }
         // XXX. Since we don't know the .plist file that originated the frame, we must remove all .plist from the cache
+		// 因为不知道.plist文件中的起始帧，所以必须从缓存中移除所有.plist文件
     },
 
     /**
@@ -270,6 +312,15 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
      *     Removes multiple Sprite Frames from a plist file.<br/>
      *     Sprite Frames stored in this file will be removed.<br/>
      *     It is convinient to call this method when a specific texture needs to be removed.<br/>
+     * </p>
+     * @param {String} url Plist filename
+     */
+	 
+    /**
+     * <p>
+     *     从plist文件中移除多个精灵帧<br/>
+     *     存储在这个文件中的精灵帧将会被移除<br/>
+     *     当指定的纹理需要被移除的时候，使用这个函数很方便<br/>
      * </p>
      * @param {String} url Plist filename
      */
@@ -281,7 +332,7 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
         for (var key in frames) {
             if (spriteFrames[key]) {
                 delete(spriteFrames[key]);
-                for (var alias in aliases) {//remove alias
+                for (var alias in aliases) {//remove alias 移除锯齿
                     if(aliases[alias] == key) delete aliases[alias];
                 }
             }
@@ -292,6 +343,14 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
      * <p>
      *    Removes all Sprite Frames associated with the specified textures.<br/>
      *    It is convenient to call this method when a specific texture needs to be removed.
+     * </p>
+     * @param {HTMLImageElement|HTMLCanvasElement|cc.Texture2D} texture
+     */
+	 
+	/**
+     * <p>
+     *    移除所有和指定纹理相关联的精灵帧<br/>
+     *    当指定的纹理需要被移除的时候，使用这个函数很方便
      * </p>
      * @param {HTMLImageElement|HTMLCanvasElement|cc.Texture2D} texture
      */
@@ -320,10 +379,24 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
      * //get a SpriteFrame by name
      * var frame = cc.spriteFrameCache.getSpriteFrame("grossini_dance_01.png");
      */
+	
+	/**
+     * <p>
+     *   返回之前添加的那个精灵帧<br/>
+     *   如果名称没有找到，那么将会返回nil<br/>
+     *   如果想使用这个精灵帧的话，应当重新得到一份拷贝<br/>
+     * </p>
+     * @param {String} name name of SpriteFrame 精灵帧的名称
+     * @return {cc.SpriteFrame}
+     * @example
+     * //get a SpriteFrame by name 通过名称来得到精灵帧
+     * var frame = cc.spriteFrameCache.getSpriteFrame("grossini_dance_01.png");
+     */
     getSpriteFrame: function (name) {
         var self = this, frame = self._spriteFrames[name];
         if (!frame) {
             // try alias dictionary
+			// 尝试锯齿字典
             var key = self._spriteFramesAliases[name];
             if (key) {
                 frame = self._spriteFrames[key.toString()];

@@ -27,6 +27,7 @@
 
 /**
  * convert an affine transform object to a kmMat4 object
+ * 将一个仿射变换对象转换成一个kmMat4对象
  * @param {cc.AffineTransform} trans
  * @param {cc.kmMat4} mat
  * @function
@@ -48,6 +49,7 @@ cc.CGAffineToGL = function (trans, mat) {
 
 /**
  * Convert a kmMat4 object to an affine transform object
+ * 将一个kmMat4对象转换成一个仿射变换对象
  * @param {cc.kmMat4} mat
  * @param {cc.AffineTransform} trans
  * @function

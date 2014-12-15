@@ -7,8 +7,61 @@
 翻译要求：
 
 1. 翻译时请保留原英文注释；
-2. @后的参数不用翻译；
-3. commit以及提交pr时，请用英文注释，不要用中文。
+2. @后的参数不用翻译；（PS：是说参数参数不翻译，而不是说@后一整行/段都不翻译。也就是说，@后的解释和注释还是需要翻译的。）
+3. 翻译的中文中请保留```<p></p></br>```....等等字段；
+4. 翻译的中文中请/*   *   */等字段；
+5. 翻译的中文中同时保留原文的@class，@param{ XXX } XXXX.......等等；
+
+下面是一段标准的翻译样式：
+
+```
+/**   
+ * Unpack a gzipped byte array  <br/>           
+ * @param {Array} input Byte array           
+ * @param {Number} bytes Bytes per array item           
+ * @returns {Array} Unpacked byte array           
+*/           
+```
+     
+一期翻译为：
+
+```
+/**         
+ * Unpack a gzipped byte array  <br/>    解压一个压缩的字节数组  <br/>              
+ * @param {Array} input Byte array     @param {Array}  输入字节数组      
+ * @param {Number} bytes Bytes per array item     @param {Number} 每一数组存储字节的个数     
+ * @returns {Array} Unpacked byte array    @returns {Array}   解压的字节数组      
+*/
+```
+或：
+
+```
+/**   
+ * Unpack a gzipped byte array  <br/>             
+ * @param {Array} input Byte array           
+ * @param {Number} bytes Bytes per array item           
+ * @returns {Array} Unpacked byte array           
+*/ 
+
+/**         
+ * 解压一个压缩的字节数组  <br/>              
+ * @param {Array}  输入字节数组      
+ * @param {Number} 每一数组存储字节的个数     
+ * @returns {Array}   解压的字节数组      
+*/ 
+```
+
+二期review后我们会删除原来的英文段，即最终将是：
+
+```
+/**         
+ * 解压一个压缩的字节数组  <br/>              
+ * @param {Array}  输入字节数组      
+ * @param {Number} 每一数组存储字节的个数     
+ * @returns {Array}   解压的字节数组      
+*/ 
+```
+
 
 术语：（此部分请大家把不知道怎样翻译的词汇加入以下列表，我们大家一起翻译维护。这样不知道的专业术语就可以在下面查找了。）
 
@@ -74,6 +127,7 @@
 - Generics in action, 泛型实战
 
 ## H
+- Homogeneous Coordinate 齐次坐标 
 
 ## I
 
@@ -89,10 +143,12 @@
 
 ## L
 
+- listener， 监听器
 
 ## M
 
 - markup	标记
+- macro 宏
 
 ## N
 
@@ -137,6 +193,8 @@
 - triple	三元组	
 - Tuples, 元组
 - the set, 集合
+- texture 纹理
+- transition  转场
 
 ## U
 

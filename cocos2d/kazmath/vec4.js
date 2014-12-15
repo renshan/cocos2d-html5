@@ -110,11 +110,11 @@ cc.kmVec4Transform = function(outVec, vec,mat4Obj){
 
 cc.kmVec4TransformArray = function(outVec,outStride,vecObj,stride,mat4Obj,count){
     var i = 0;
-    //Go through all of the vectors
+    //Go through all of the vectors    检查所有向量
     while (i < count) {
-        var currIn = vecObj + (i * stride); //Get a pointer to the current input
-        var out = outVec + (i * outStride); //and the current output
-        cc.kmVec4Transform(out, currIn, mat4Obj); //Perform transform on it
+        var currIn = vecObj + (i * stride); //Get a pointer to the current input    通过当前输入获取一个指针
+        var out = outVec + (i * outStride); //and the current output    并获取当前输出
+        cc.kmVec4Transform(out, currIn, mat4Obj); //Perform transform on it    将它执行变换
         ++i;
     }
 

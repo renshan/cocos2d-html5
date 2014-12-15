@@ -56,13 +56,13 @@ cc._tmp.WebGLLabelTTF = function () {
         if (!cc.Sprite.prototype.init.call(this))
             return false;
 
-        // shader program
+        // shader program着色器程序
         this.shaderProgram = cc.shaderCache.programForKey(cc.LabelTTF._SHADER_PROGRAM);
 
-        // prepare everything needed to render the label
+        // prepare everything needed to render the label准备标签需要渲染的所有元素
         this._updateWithTextDefinition(textDefinition, false);
 
-        // set the string
+        // set the string设置字符串
         this.string = text;
 
         return true;
@@ -106,7 +106,7 @@ cc._tmp.WebGLLabelTTF = function () {
         }
 
         if (cc.SPRITE_DEBUG_DRAW === 1) {
-            // draw bounding box
+            // draw bounding box画出绑定区域
             var locQuad = this._quad;
             var verticesG1 = [
                 cc.p(locQuad.tl.vertices.x, locQuad.tl.vertices.y),
@@ -116,7 +116,7 @@ cc._tmp.WebGLLabelTTF = function () {
             ];
             cc._drawingUtil.drawPoly(verticesG1, 4, true);
         } else if (cc.SPRITE_DEBUG_DRAW === 2) {
-            // draw texture box
+            // draw texture box画出纹理区域
             var drawSizeG2 = this.getTextureRect();
             var offsetPixG2X = this.offsetX, offsetPixG2Y = this.offsetY;
             var verticesG2 = [cc.p(offsetPixG2X, offsetPixG2Y), cc.p(offsetPixG2X + drawSizeG2.width, offsetPixG2Y),

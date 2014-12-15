@@ -90,21 +90,25 @@ cc._tmp.WebGLSprite = function () {
         _t._blendFunc.dst = cc.BLEND_DST;
 
         // update texture (calls _updateBlendFunc)
+		// 更新纹理 （调用 _updateBlendFunc）
         _t.texture = null;
         _t._textureLoaded = true;
         _t._flippedX = _t._flippedY = false;
 
         // default transform anchor: center
+		// 默认中心点为变形锚定点
         _t.anchorX = 0.5;
         _t.anchorY = 0.5;
 
         // zwoptex default values
+		// Zwoptex工具的默认值
         _t._offsetPosition.x = 0;
         _t._offsetPosition.y = 0;
 
         _t._hasChildren = false;
 
         // Atlas: Color
+		// 颜色
         var tempColor = {r: 255, g: 255, b: 255, a: 255};
         _t._quad.bl.colors = tempColor;
         _t._quad.br.colors = tempColor;
@@ -113,7 +117,9 @@ cc._tmp.WebGLSprite = function () {
         _t._quadDirty = true;
 
         // updated in "useSelfRender"
+		// 在"useSelfRender"中更新
         // Atlas: TexCoords
+		// 纹理坐标
         _t.setTextureRect(cc.rect(0, 0, 0, 0), false, cc.size(0, 0));
         return true;
     };
@@ -140,15 +146,18 @@ cc._tmp.WebGLSprite = function () {
         _t._flippedX = _t._flippedY = false;
 
         // default transform anchor: center
+		// 默认中心点为转换锚定点
         _t.anchorX = 0.5;
         _t.anchorY = 0.5;
 
         // zwoptex default values
+		// Zwoptex工具的默认值
         _t._offsetPosition.x = 0;
         _t._offsetPosition.y = 0;
         _t._hasChildren = false;
 
         // Atlas: Color
+		// 颜色
         var tmpColor = cc.color(255, 255, 255, 255);
         var locQuad = _t._quad;
         locQuad.bl.colors = tmpColor;
@@ -198,6 +207,8 @@ cc._tmp.WebGLSprite = function () {
 
         // by default use "Self Render".
         // if the sprite is added to a batchnode, then it will automatically switch to "batchnode Render"
+		// 默认使用“自身渲染”方式
+		// 如果精灵加入到一个批处理结点，将会自动转换为“批量渲染”方式
         _t.batchNode = null;
         _t._quadDirty = true;
         return true;
@@ -222,6 +233,8 @@ cc._tmp.WebGLSprite = function () {
 
         // by default use "Self Render".
         // if the sprite is added to a batchnode, then it will automatically switch to "batchnode Render"
+		// 默认使用“自身渲染”方式
+		// 如果精灵加入到一个批处理结点，将会自动转换为“批量渲染”方式
         _t.batchNode = _t._batchNode;
         _t._quadDirty = true;
         _t.dispatchEvent("load");
@@ -246,18 +259,23 @@ cc._tmp.WebGLSprite = function () {
         _t._offsetPosition.y = relativeOffset.y + (_t._contentSize.height - locRect.height) / 2;
 
         // rendering using batch node
+		// 使用批处理结点渲染
         if (_t._batchNode) {
             // update dirty, don't update _recursiveDirty
+			// 更新这里的drity值，而不要更新_recursiveDirty值
             _t.dirty = true;
         } else {
             // self rendering
+			// 自身渲染
             // Atlas: Vertex
+			// 顶点
             var x1 = _t._offsetPosition.x;
             var y1 = _t._offsetPosition.y;
             var x2 = x1 + locRect.width;
             var y2 = y1 + locRect.height;
 
             // Don't update Z.
+			// 不要更新Z轴坐标
             var locQuad = _t._quad;
             locQuad.bl.vertices = {x:x1, y:y1, z:0};
             locQuad.br.vertices = {x:x2, y:y1, z:0};
@@ -273,9 +291,11 @@ cc._tmp.WebGLSprite = function () {
         //cc.assert(_t._batchNode, "updateTransform is only valid when cc.Sprite is being rendered using an cc.SpriteBatchNode");
 
         // recaculate matrix only if it is dirty
+		// 当且仅当该对象标识为dirty的时候再重新计算矩阵
         if (_t.dirty) {
             var locQuad = _t._quad, locParent = _t._parent;
             // If it is not visible, or one of its ancestors is not visible, then do nothing:
+			// 如果不可见，或者他的某一个父节点不可见，则不做任何处理
             if (!_t._visible || ( locParent && locParent != _t._batchNode && locParent._shouldBeHidden)) {
                 locQuad.br.vertices = locQuad.tl.vertices = locQuad.tr.vertices = locQuad.bl.vertices = {x: 0, y: 0, z: 0};
                 _t._shouldBeHidden = true;
@@ -291,7 +311,7 @@ cc._tmp.WebGLSprite = function () {
 
                 //
                 // calculate the Quad based on the Affine Matrix
-                //
+                // 基于仿射矩阵计算Quad
                 var locTransformToBatch = _t._transformToBatch;
                 var rect = _t._rect;
                 var x1 = _t._offsetPosition.x;
@@ -340,11 +360,13 @@ cc._tmp.WebGLSprite = function () {
         }
 
         // recursively iterate over children
+		// 递归迭代子节点
         if (_t._hasChildren)
             _t._arrayMakeObjectsPerformSelector(_t._children, cc.Node._stateCallbackType.updateTransform);
 
         if (cc.SPRITE_DEBUG_DRAW) {
             // draw bounding box
+			// 绘出绑定区域
             var vertices = [
                 cc.p(_t._quad.bl.vertices.x, _t._quad.bl.vertices.y),
                 cc.p(_t._quad.br.vertices.x, _t._quad.br.vertices.y),
@@ -374,12 +396,14 @@ cc._tmp.WebGLSprite = function () {
                 cc.log(cc._LogInfos.Sprite_addChild_2);
 
             //put it in descendants array of batch node
+			//把本身放入批处理结点的孩子结点数组中
             _t._batchNode.appendChild(child);
             if (!_t._reorderChildDirty)
                 _t._setReorderChildDirtyRecursively();
         }
 
         //cc.Node already sets isReorderChildDirty_ so _t needs to be after batchNode check
+		//cc.Node已经设置了isReorderChildDirty_，所以_t需要加在批处理结点之后
         cc.Node.prototype.addChild.call(_t, child, localZOrder, tag);
         _t._hasChildren = true;
     };
@@ -426,10 +450,12 @@ cc._tmp.WebGLSprite = function () {
             }, _t);
         }
         // update texture before updating texture rect
+		// 在更新纹理区域之前更新纹理
         if (pNewTexture != _t._texture)
             _t.texture = pNewTexture;
 
         // update rect
+		// 更新纹理区域
         _t._rectRotated = newFrame.isRotated();
         _t.setTextureRect(newFrame.getRect(), _t._rectRotated, newFrame.getOriginalSize());
     };
@@ -441,9 +467,10 @@ cc._tmp.WebGLSprite = function () {
 
     _p.setBatchNode = function (spriteBatchNode) {
         var _t = this;
-        _t._batchNode = spriteBatchNode; // weak reference
+        _t._batchNode = spriteBatchNode; // weak reference 弱引用
 
         // self render
+		// 自身渲染
         if (!_t._batchNode) {
             _t.atlasIndex = cc.Sprite.INDEX_NOT_INITIALIZED;
             _t.textureAtlas = null;
@@ -463,6 +490,7 @@ cc._tmp.WebGLSprite = function () {
             _t._quadDirty = true;
         } else {
             // using batch
+			// 使用批处理渲染
             _t._transformToBatch = cc.affineTransformIdentity();
             _t.textureAtlas = _t._batchNode.textureAtlas; // weak ref
         }
@@ -478,6 +506,7 @@ cc._tmp.WebGLSprite = function () {
             var size = texture.getContentSize();
             _t.setTextureRect(cc.rect(0,0, size.width, size.height));
             //If image isn't loaded. Listen for the load event.
+			//如果图像没有被加载，则监听load事件
             if(!texture._isLoaded){
                 texture.addEventListener("load", function(){
                     var size = texture.getContentSize();
@@ -487,10 +516,11 @@ cc._tmp.WebGLSprite = function () {
             return;
         }
         // CCSprite: setTexture doesn't work when the sprite is rendered using a CCSpriteSheet
-
+		// 当使用CCSpriteSheet渲染精灵的时候，setTexture不会工作
         cc.assert(!texture || (texture instanceof cc.Texture2D), cc._LogInfos.Sprite_setTexture_2);
 
         // If batchnode, then texture id should be the same
+		// 如果是批处理结点，那么纹理id应当相同
         if(_t._batchNode && _t._batchNode.texture != texture) {
             cc.log(cc._LogInfos.Sprite_setTexture);
             return;
@@ -522,6 +552,7 @@ cc._tmp.WebGLSprite = function () {
 
                 cc.glBlendFunc(_t._blendFunc.src, _t._blendFunc.dst);
                 //optimize performance for javascript
+				//为javascript优化性能
                 cc.glBindTexture2DN(0, locTexture);                   // = cc.glBindTexture2D(locTexture);
                 cc.glEnableVertexAttribs(cc.VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
 
@@ -560,6 +591,7 @@ cc._tmp.WebGLSprite = function () {
 
         if (cc.SPRITE_DEBUG_DRAW === 1 || _t._showNode) {
             // draw bounding box
+			// 绘制绑定区域
             var locQuad = _t._quad;
             var verticesG1 = [
                 cc.p(locQuad.tl.vertices.x, locQuad.tl.vertices.y),
@@ -570,6 +602,7 @@ cc._tmp.WebGLSprite = function () {
             cc._drawingUtil.drawPoly(verticesG1, 4, true);
         } else if (cc.SPRITE_DEBUG_DRAW === 2) {
             // draw texture box
+			// 绘制纹理区域
             var drawRectG2 = _t.getTextureRect();
             var offsetPixG2 = _t.getOffsetPosition();
             var verticesG2 = [cc.p(offsetPixG2.x, offsetPixG2.y), cc.p(offsetPixG2.x + drawRectG2.width, offsetPixG2.y),

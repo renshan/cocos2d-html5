@@ -27,6 +27,12 @@
  * @class
  * @extend cc.Sprite
  */
+
+/**
+ * cc.BakeSprite是会缓存的一种精灵.
+ * @class
+ * @继承 cc.Sprite
+ */
 cc.BakeSprite = cc.Sprite.extend(/** @lends cc.BakeSprite# */{
     _cacheCanvas: null,
     _cacheContext: null,
@@ -57,6 +63,12 @@ cc.BakeSprite = cc.Sprite.extend(/** @lends cc.BakeSprite# */{
      * @param {cc.Size|Number} sizeOrWidth  size or width
      * @param {Number} [height]
      */
+    
+    /**
+     * 从新设置缓存canvas的大小
+     * @param {cc.Size|Number} sizeOrWidth  尺寸或者宽度
+     * @param {Number} [height]
+     */
     resetCanvasSize: function(sizeOrWidth, height){
         if(height === undefined){
             height = sizeOrWidth.height;
@@ -64,7 +76,7 @@ cc.BakeSprite = cc.Sprite.extend(/** @lends cc.BakeSprite# */{
         }
         var locCanvas = this._cacheCanvas;
         locCanvas.width = sizeOrWidth;
-        locCanvas.height = height;   //TODO note baidu browser      reset the context after set width or height
+        locCanvas.height = height;   //TODO note baidu browser      reset the context after set width or height             百度浏览器注意，在设置宽度和高度后要重新设置context
         this.getTexture().handleLoadedTexture();
         this.setTextureRect(cc.rect(0,0, sizeOrWidth, height), false);
     }
