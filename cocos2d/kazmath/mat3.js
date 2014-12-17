@@ -50,7 +50,7 @@ cc.kmMat3Adjugate = function (pOut, pIn) {
     pOut.mat[5] = pIn.mat[2] * pIn.mat[3] - pIn.mat[0] * pIn.mat[5];
     pOut.mat[6] = pIn.mat[3] * pIn.mat[7] - pIn.mat[4] * pIn.mat[6];
 
-    // XXX: pIn.mat[9] is invalid!    XXX: pIn.mat[9]是无效的！
+    // XXX: pIn.mat[9]是无效的！
 //    pOut.mat[7] = pIn.mat[1] * pIn.mat[6] - pIn.mat[9] * pIn.mat[7];
     pOut.mat[8] = pIn.mat[0] * pIn.mat[4] - pIn.mat[1] * pIn.mat[3];
 
@@ -105,12 +105,12 @@ cc.kmMat3Transpose = function (pOut, pIn) {
 cc.kmMat3Determinant = function (pIn) {
     var output;
     /*
-     calculating the determinant following the rule of sarus,    计算遵循sarus规则的行列式
+     计算遵循sarus规则的行列式
      | 0  3  6 | 0  3 |
      m = | 1  4  7 | 1  4 |
      | 2  5  8 | 2  5 |
-     now sum up the products of the diagonals going to the right (i.e. 0,4,8)   正确算出对角线乘积的总和
-     and substract the products of the other diagonals (i.e. 2,4,6)    并减去其他对角线乘积的总和
+     算出向右的对角线乘积的总和 (即 0,4,8)   
+     并减去剩下的对角线乘积的总和 (即 2,4,6)    
      */
 
     output = pIn.mat[0] * pIn.mat[4] * pIn.mat[8] + pIn.mat[1] * pIn.mat[5] * pIn.mat[6] + pIn.mat[2] * pIn.mat[3] * pIn.mat[7];
@@ -297,17 +297,17 @@ cc.kmMat3RotationQuaternion = function (pOut, pIn) {
     if (!pIn || !pOut)
         return null;
 
-    // First row    第一行
+    // 第一行
     pOut.mat[0] = 1.0 - 2.0 * (pIn.y * pIn.y + pIn.z * pIn.z);
     pOut.mat[1] = 2.0 * (pIn.x * pIn.y - pIn.w * pIn.z);
     pOut.mat[2] = 2.0 * (pIn.x * pIn.z + pIn.w * pIn.y);
 
-    // Second row   第二行
+    // 第二行
     pOut.mat[3] = 2.0 * (pIn.x * pIn.y + pIn.w * pIn.z);
     pOut.mat[4] = 1.0 - 2.0 * (pIn.x * pIn.x + pIn.z * pIn.z);
     pOut.mat[5] = 2.0 * (pIn.y * pIn.z - pIn.w * pIn.x);
 
-    // Third row   第三行
+    // 第三行
     pOut.mat[6] = 2.0 * (pIn.x * pIn.z - pIn.w * pIn.y);
     pOut.mat[7] = 2.0 * (pIn.y * pIn.z + pIn.w * pIn.x);
     pOut.mat[8] = 1.0 - 2.0 * (pIn.x * pIn.x + pIn.y * pIn.y);
@@ -316,7 +316,7 @@ cc.kmMat3RotationQuaternion = function (pOut, pIn) {
 };
 
 cc.kmMat3RotationToAxisAngle = function (pAxis, radians, pIn) {
-    /*Surely not this easy?    确定不会如此简单？*/
+    /*确定不会如此简单？*/
     var temp;
     cc.kmQuaternionRotationMatrix(temp, pIn);
     cc.kmQuaternionToAxisAngle(temp, pAxis, radians);

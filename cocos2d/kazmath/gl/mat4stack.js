@@ -34,8 +34,8 @@ cc.km_mat4_stack = function(capacity, item_count, top, stack){
 cc.km_mat4_stack.INITIAL_SIZE = 30;
 
 cc.km_mat4_stack_initialize = function(stack){
-    stack.stack = [];                                   //allocate the memory    分配内存
-    stack.top = null;                                   //Set the top to NULL    设置顶层为NULL
+    stack.stack = [];                                   //分配内存
+    stack.top = null;                                   //设置栈顶元素指针为空
 };
 
 cc.km_mat4_stack_push = function(stack, item){
