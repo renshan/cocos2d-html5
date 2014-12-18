@@ -316,7 +316,7 @@ cc.kmMat3RotationQuaternion = function (pOut, pIn) {
 };
 
 cc.kmMat3RotationToAxisAngle = function (pAxis, radians, pIn) {
-    /*确定不会如此简单？*/
+    /*真的没这么简单吗?*/
     var temp;
     cc.kmQuaternionRotationMatrix(temp, pIn);
     cc.kmQuaternionToAxisAngle(temp, pAxis, radians);
