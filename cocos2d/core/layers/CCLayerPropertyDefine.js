@@ -26,14 +26,14 @@
 
 cc._tmp.PrototypeLayerColor = function () {
     var _p = cc.LayerColor.prototype;
-    // Override properties
+    // 覆盖属性
     cc.defineGetterSetter(_p, "width", _p._getWidth, _p._setWidth);
     cc.defineGetterSetter(_p, "height", _p._getHeight, _p._setHeight);
 };
 
 cc._tmp.PrototypeLayerGradient = function () {
     var _p = cc.LayerGradient.prototype;
-    // Extended properties
+    // 扩展属性
     /** @expose */
     _p.startColor;
     cc.defineGetterSetter(_p, "startColor", _p.getStartColor, _p.setStartColor);
