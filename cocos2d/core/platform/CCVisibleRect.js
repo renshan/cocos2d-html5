@@ -25,20 +25,20 @@
  ****************************************************************************/
 
 /**
- * cc.visibleRect is a singleton object which defines the actual visible rect of the current view,  cc.visibleRect是定义了当前view实际可见矩形区域的一个单例对象
- * it should represent the same rect as cc.view.getViewportRect()  它与cc.view.getViewportRect()代表的是同一个矩形区域
+ * cc.visibleRect是定义了当前view实际可见矩形区域的一个单例对象
+ * 它与cc.view.getViewportRect()代表的是同一个矩形区域
  *
- * @property {cc.Point}     topLeft         - Top left coordinate of the screen related to the game scene 	游戏场景左上角的屏幕坐标
- * @property {cc.Point}     topRight        - Top right coordinate of the screen related to the game scene 	 游戏场景右上角的屏幕坐标
- * @property {cc.Point}     top             - Top center coordinate of the screen related to the game scene   游戏场景顶端中间的屏幕坐标
- * @property {cc.Point}     bottomLeft      - Bottom left coordinate of the screen related to the game scene   游戏场景左下角的屏幕坐标
- * @property {cc.Point}     bottomRight     - Bottom right coordinate of the screen related to the game scene   游戏场景右下角的屏幕坐标
- * @property {cc.Point}     bottom          - Bottom center coordinate of the screen related to the game scene   游戏场景底部中间的屏幕坐标
- * @property {cc.Point}     center          - Center coordinate of the screen related to the game scene   游戏场景中心点的屏幕坐标
- * @property {cc.Point}     left            - Left center coordinate of the screen related to the game scene   游戏场景左边中点的屏幕坐标
- * @property {cc.Point}     right           - Right center coordinate of the screen related to the game scene   游戏场景右边中点的屏幕坐标
- * @property {Number}       width           - Width of the screen   屏幕宽度
- * @property {Number}       height          - Height of the screen   屏幕高度
+ * @property {cc.Point}     topLeft         - 游戏场景左上角的屏幕坐标
+ * @property {cc.Point}     topRight        - 游戏场景右上角的屏幕坐标
+ * @property {cc.Point}     top             - 游戏场景顶端中间的屏幕坐标
+ * @property {cc.Point}     bottomLeft      - 游戏场景左下角的屏幕坐标
+ * @property {cc.Point}     bottomRight     - 游戏场景右下角的屏幕坐标
+ * @property {cc.Point}     bottom          - 游戏场景底部中间的屏幕坐标
+ * @property {cc.Point}     center          - 游戏场景中心点的屏幕坐标
+ * @property {cc.Point}     left            - 游戏场景左边中点的屏幕坐标
+ * @property {cc.Point}     right           - 游戏场景右边中点的屏幕坐标
+ * @property {Number}       width           - 屏幕宽度
+ * @property {Number}       height          - 屏幕高度
  *
  * @class
  * @name cc.visibleRect
