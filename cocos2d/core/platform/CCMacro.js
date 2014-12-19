@@ -31,11 +31,6 @@
 cc.INVALID_INDEX = -1;
 
 /**
- * PI is the ratio of a circle's circumference to its diameter.
- * @constant
- * @type Number
- */
-/**
  * PI是圆的周长和半径的比率
  * @constant
  * @type Number
@@ -66,11 +61,6 @@ cc.RAD = cc.PI / 180;
  */
 cc.DEG = 180 / cc.PI;
 
-/**
- * maximum unsigned int value
- * @constant
- * @type Number
- */
  /**
  * 无符号整形数的最大值
  * @constant
@@ -78,18 +68,6 @@ cc.DEG = 180 / cc.PI;
  */
 cc.UINT_MAX = 0xffffffff;
 
-/**
- * <p>
- * simple macro that swaps 2 variables<br/>
- *  modified from c++ macro, you need to pass in the x and y variables names in string, <br/>
- *  and then a reference to the whole object as third variable
- * </p>
- * @param {String} x
- * @param {String} y
- * @param {Object} ref
- * @function
- * @deprecated since v3.0
- */
 /**
  * <p>
  * 简单的宏，交换一个对象的两个成员变量<br/>
@@ -112,19 +90,7 @@ cc.swap = function (x, y, ref) {
 
 /**
  * <p>
- *     Linear interpolation between 2 numbers, the ratio sets how much it is biased to each end
- * </p>
- * @param {Number} a number A
- * @param {Number} b number B
- * @param {Number} r ratio between 0 and 1
- * @function
- * @example
- * cc.lerp(2,10,0.5)//returns 6<br/>
- * cc.lerp(2,10,0.2)//returns 3.6
- */
-/**
- * <p>
- *     在两个数之前线形插值，比例表示在两个终点之间偏斜多少
+ *     在两个数之间线形插值，比例表示在两个终点之间偏斜多少
  * </p>
  * @param {Number} a 数字 A
  * @param {Number} b 数字 B
@@ -139,11 +105,6 @@ cc.lerp = function (a, b, r) {
 };
 
 /**
- * get a random number from 0 to 0xffffff
- * @function
- * @returns {number}
- */
-/**
  * 在 0 到 0xffffff 之间返回一个随机数
  * @function
  * @returns {number}
@@ -152,11 +113,6 @@ cc.rand = function () {
 	return Math.random() * 0xffffff;
 };
 
-/**
- * returns a random float between -1 and 1
- * @return {Number}
- * @function
- */
 /**
  * 在 -1 到 1 之间返回一个随机浮点数
  * @return {Number}
@@ -167,23 +123,12 @@ cc.randomMinus1To1 = function () {
 };
 
 /**
- * returns a random float between 0 and 1
- * @return {Number}
- * @function
- */
-/**
  * 在 0 到 1 之间返回一个随机浮点数
  * @return {Number}
  * @function
  */
 cc.random0To1 = Math.random;
 
-/**
- * converts degrees to radians
- * @param {Number} angle
- * @return {Number}
- * @function
- */
 /**
  * 角度转换为弧度
  * @param {Number} angle
@@ -195,12 +140,6 @@ cc.degreesToRadians = function (angle) {
 };
 
 /**
- * converts radians to degrees
- * @param {Number} angle
- * @return {Number}
- * @function
- */
-/**
  * 弧度转换为角度
  * @param {Number} angle
  * @return {Number}
@@ -209,12 +148,7 @@ cc.degreesToRadians = function (angle) {
 cc.radiansToDegrees = function (angle) {
     return angle * cc.DEG;
 };
-/**
- * converts radians to degrees
- * @param {Number} angle
- * @return {Number}
- * @function
- */
+
 /**
  * 弧度转换为角度，增加log
  * @param {Number} angle
@@ -233,29 +167,19 @@ cc.radiansToDegress = function (angle) {
 cc.REPEAT_FOREVER = Number.MAX_VALUE - 1;
 
 /**
- * default gl blend src function. Compatible with premultiplied alpha images.
- * @constant
- * @type Number
- */
-/**
- * 默认 OpenGL blend src 方法。 兼容包含阿尔法通道（premultiplied alpha）的图片。
+ * 默认 OpenGL 混合源方法。 兼容包含预乘阿尔法通道（premultiplied alpha）的图片。
  * @constant
  * @type Number
  */
 cc.BLEND_SRC = cc.OPTIMIZE_BLEND_FUNC_FOR_PREMULTIPLIED_ALPHA ? 1 : 0x0302;
 
 /**
- * 默认 OpenGL blend dst 方法。 兼容包含阿尔法通道（premultiplied alpha）的图片。
+ * 默认 OpenGL 混合源方法。 兼容包含预乘阿尔法通道（premultiplied alpha）的图片。
  * @constant
  * @type Number
  */
 cc.BLEND_DST = 0x0303;
 
-/**
- * Helpful macro that setups the GL server state, the correct GL program and sets the Model View Projection matrix
- * @param {cc.Node} node setup node
- * @function
- */
 /**
  * 用于初始化OpenGL服务状态、正确的OpenGL程序、设置模型-视图投影矩阵的宏
  * @param {cc.Node} node setup node
@@ -270,16 +194,7 @@ cc.nodeDrawSetup = function (node) {
     }
 };
 
-/**
- * <p>
- *     GL states that are enabled:<br/>
- *       - GL_TEXTURE_2D<br/>
- *       - GL_VERTEX_ARRAY<br/>
- *       - GL_TEXTURE_COORD_ARRAY<br/>
- *       - GL_COLOR_ARRAY<br/>
- * </p>
- * @function
- */
+
 /**
  * <p>
  *     启用下列OpenGL状态：<br/>
@@ -301,15 +216,6 @@ cc.enableDefaultGLStates = function () {
 
 /**
  * <p>
- *   Disable default GL states:<br/>
- *     - GL_TEXTURE_2D<br/>
- *     - GL_TEXTURE_COORD_ARRAY<br/>
- *     - GL_COLOR_ARRAY<br/>
- * </p>
- * @function
- */
-/**
- * <p>
  *  禁用下列OpenGL状态：<br/>
  *     - GL_TEXTURE_2D<br/>
  *     - GL_TEXTURE_COORD_ARRAY<br/>
@@ -329,15 +235,7 @@ cc.disableDefaultGLStates = function () {
 
 /**
  * <p>
- *  Increments the GL Draws counts by one.<br/>
- *  The number of calls per frame are displayed on the screen when the CCDirector's stats are enabled.<br/>
- * </p>
- * @param {Number} addNumber
- * @function
- */
-/**
- * <p>
- *  增加OpenGL绘图计数<br/>
+ *  OpenGL绘图计数加1<br/>
  *  在CCDirector的stats启用时，计数会显示在屏幕<br/>
  * </p>
  * @param {Number} addNumber
@@ -355,16 +253,8 @@ cc.FLT_EPSILON = 0.0000001192092896;
 
 /**
  * <p>
- *     On Mac it returns 1;<br/>
- *     On iPhone it returns 2 if RetinaDisplay is On. Otherwise it returns 1
- * </p>
- * @return {Number}
- * @function
- */
-/**
- * <p>
  *     在Mac上返回1<br/>
- *     iPhone上如果视网膜屏显示模式（RetinaDisplay）开时返回2，否则返回1
+ *     iPhone上如果是视网膜屏显示模式（RetinaDisplay）开时返回2，否则返回1
  * </p>
  * @return {Number}
  * @function
@@ -376,12 +266,6 @@ cc.contentScaleFactor = cc.IS_RETINA_DISPLAY_SUPPORTED ? function () {
 };
 
 /**
- * Converts a Point in points to pixels
- * @param {cc.Point} points
- * @return {cc.Point}
- * @function
- */
-/**
  * 将一个点转换为像素点
  * @param {cc.Point} points
  * @return {cc.Point}
@@ -392,12 +276,6 @@ cc.pointPointsToPixels = function (points) {
     return cc.p(points.x * scale, points.y * scale);
 };
 
-/**
- * Converts a Point in pixels to points
- * @param {cc.Rect} pixels
- * @return {cc.Point}
- * @function
- */
 /**
  * 将一个像素点转换为点
  * @param {cc.Rect} pixels
@@ -416,12 +294,6 @@ cc._pointPixelsToPointsOut = function(pixels, outPoint){
 };
 
 /**
- * Converts a Size in points to pixels
- * @param {cc.Size} sizeInPoints
- * @return {cc.Size}
- * @function
- */
-/**
  * 点尺寸转换为像素尺寸
  * @param {cc.Size} sizeInPoints
  * @return {cc.Size}
@@ -432,12 +304,6 @@ cc.sizePointsToPixels = function (sizeInPoints) {
     return cc.size(sizeInPoints.width * scale, sizeInPoints.height * scale);
 };
 
-/**
- * Converts a size in pixels to points
- * @param {cc.Size} sizeInPixels
- * @return {cc.Size}
- * @function
- */
 /**
  * 像素尺寸转换为点尺寸
  * @param {cc.Size} sizeInPixels
@@ -456,12 +322,6 @@ cc._sizePixelsToPointsOut = function (sizeInPixels, outSize) {
 };
 
 /**
- * Converts a rect in pixels to points
- * @param {cc.Rect} pixel
- * @return {cc.Rect}
- * @function
- */
-/**
  * 矩形像素转换为矩形点
  * @param {cc.Rect} pixel
  * @return {cc.Rect}
@@ -476,12 +336,6 @@ cc.rectPixelsToPoints = cc.IS_RETINA_DISPLAY_SUPPORTED ? function (pixel) {
 };
 
 /**
- * Converts a rect in points to pixels
- * @param {cc.Rect} point
- * @return {cc.Rect}
- * @function
- */
-/**
  * 矩形点转换为矩形像素
  * @param {cc.Rect} point
  * @return {cc.Rect}
@@ -495,7 +349,7 @@ cc.rectPointsToPixels = cc.IS_RETINA_DISPLAY_SUPPORTED ? function (point) {
     return p;
 };
 
-//some gl constant variable
+//一些 gl 常量变量
 /**
  * @constant
  * @type Number
@@ -575,22 +429,12 @@ cc.ONE_MINUS_CONSTANT_ALPHA	= 0x8004;
 cc.ONE_MINUS_CONSTANT_COLOR	= 0x8002;
 
 /**
- * the constant variable equals gl.LINEAR for texture
- * @constant
- * @type Number
- */
-/**
  * 为纹理设置的常量，与gl.LINEAR相等
  * @constant
  * @type Number
  */
 cc.LINEAR	= 0x2601;
 
-/**
- * the constant variable equals gl.REPEAT for texture
- * @constant
- * @type Number
- */
 /**
  * 为纹理设置的常量，与gl.REPEAT相等
  * @constant
@@ -599,22 +443,12 @@ cc.LINEAR	= 0x2601;
 cc.REPEAT	= 0x2901;
 
 /**
- * the constant variable equals gl.CLAMP_TO_EDGE for texture
- * @constant
- * @type Number
- */
-/**
  * 为纹理设置的常量，与gl.CLAMP_TO_EDGE相等
  * @constant
  * @type Number
  */
 cc.CLAMP_TO_EDGE	= 0x812f;
 
-/**
- * the constant variable equals gl.MIRRORED_REPEAT for texture
- * @constant
- * @type Number
- */
 /**
  * 为纹理设置的常量，与gl.MIRRORED_REPEAT相等
  * @constant
@@ -623,7 +457,7 @@ cc.CLAMP_TO_EDGE	= 0x812f;
 cc.MIRRORED_REPEAT   = 0x8370;
 
 /**
- * Check webgl error.Error will be shown in console if exists.
+ * 检查 webgl error.Error是否存在，存在则通过console显示。
  * @function
  */
 cc.checkGLErrorDebug = function () {
@@ -635,12 +469,7 @@ cc.checkGLErrorDebug = function () {
     }
 };
 
-//Possible device orientations
-/**
- * Device oriented vertically, home button on the bottom (UIDeviceOrientationPortrait)
- * @constant
- * @type Number
- */
+//可能的设备方向
 /**
  * 设备竖向，home键在底部(UIDeviceOrientationPortrait)
  * @constant
@@ -649,22 +478,12 @@ cc.checkGLErrorDebug = function () {
 cc.DEVICE_ORIENTATION_PORTRAIT = 0;
 
 /**
- * Device oriented horizontally, home button on the right (UIDeviceOrientationLandscapeLeft)
- * @constant
- * @type Number
- */
-/**
  * 设备横向，home键在右侧(UIDeviceOrientationLandscapeLeft)
  * @constant
  * @type Number
  */
 cc.DEVICE_ORIENTATION_LANDSCAPE_LEFT = 1;
 
-/**
- * Device oriented vertically, home button on the top (UIDeviceOrientationPortraitUpsideDown)
- * @constant
- * @type Number
- */
 /**
  * 设备竖向，home键在上(UIDeviceOrientationPortraitUpsideDown)
  * @constant
@@ -673,22 +492,12 @@ cc.DEVICE_ORIENTATION_LANDSCAPE_LEFT = 1;
 cc.DEVICE_ORIENTATION_PORTRAIT_UPSIDE_DOWN = 2;
 
 /**
- * Device oriented horizontally, home button on the left (UIDeviceOrientationLandscapeRight)
- * @constant
- * @type Number
- */
-/**
  * 设备横向，home键在左侧(UIDeviceOrientationLandscapeRight)
  * @constant
  * @type Number
  */
 cc.DEVICE_ORIENTATION_LANDSCAPE_RIGHT = 3;
 
-/**
- * In browsers, we only support 2 orientations by change window size.
- * @constant
- * @type Number
- */
 /**
  * 在浏览器中，我们仅支持由于窗口尺寸的变化产生的两种方向
  * @constant
@@ -908,44 +717,26 @@ cc.ATTRIBUTE_NAME_TEX_COORD = "a_texCoord";
 
 
 /**
- * default size for font size
- * @constant
- * @type Number
- */
-/**
- * 字高的默认值
+ * 字体大小的默认值
  * @constant
  * @type Number
  */
 cc.ITEM_SIZE = 32;
 
 /**
- * default tag for current item
- * @constant
- * @type Number
- */
-/**
  * 当前项的默认标记
  * @constant
  * @type Number
  */
 cc.CURRENT_ITEM = 0xc0c05001;
+
 /**
- * default tag for zoom action tag
- * @constant
- * @type Number
- */
-/**
- * 缩放操作的默认标记
+ * 缩放动作的默认标记
  * @constant
  * @type Number
  */
 cc.ZOOM_ACTION_TAG = 0xc0c05002;
-/**
- * default tag for normal
- * @constant
- * @type Number
- */
+
 /**
  * 正常状态的默认标记
  * @constant
@@ -954,22 +745,12 @@ cc.ZOOM_ACTION_TAG = 0xc0c05002;
 cc.NORMAL_TAG = 8801;
 
 /**
- * default selected tag
- * @constant
- * @type Number
- */
-/**
  * 选中的默认标记
  * @constant
  * @type Number
  */
 cc.SELECTED_TAG = 8802;
 
-/**
- * default disabled tag
- * @constant
- * @type Number
- */
 /**
  * 禁用的默认标记
  * @constant
@@ -980,13 +761,6 @@ cc.DISABLE_TAG = 8803;
 
 // Array utils
 
-/**
- * Verify Array's Type
- * @param {Array} arr
- * @param {function} type
- * @return {Boolean}
- * @function
- */
 /**
  * 检查数组中元素的类型
  * @param {Array} arr
@@ -1007,12 +781,6 @@ cc.arrayVerifyType = function (arr, type) {
 };
 
 /**
- * Searches for the first occurance of object and removes it. If object is not found the function has no effect.
- * @function
- * @param {Array} arr Source Array
- * @param {*} delObj  remove object
- */
-/**
  * 搜索数组中与传入参数相同的第一个元素，并且移除它，如果没有找到，则不做任何处理
  * @function
  * @param {Array} arr 原数组
@@ -1028,12 +796,6 @@ cc.arrayRemoveObject = function (arr, delObj) {
 };
 
 /**
- * Removes from arr all values in minusArr. For each Value in minusArr, the first matching instance in arr will be removed.
- * @function
- * @param {Array} arr Source Array
- * @param {Array} minusArr minus Array
- */
-/**
  * 在原数组中搜索移除元素数组的每一个元素，找到第一个匹配的元素以后，从原数组中移除
  * @function
  * @param {Array} arr 原数组
@@ -1046,15 +808,7 @@ cc.arrayRemoveArray = function (arr, minusArr) {
 };
 
 /**
- * Inserts some objects at index
- * @function
- * @param {Array} arr
- * @param {Array} addObjs
- * @param {Number} index
- * @return {Array}
- */
-/**
- * 在序列号处插入元素
+ * 在指定索引处插入元素
  * @function
  * @param {Array} arr
  * @param {Array} addObjs
@@ -1066,11 +820,6 @@ cc.arrayAppendObjectsToIndex = function(arr, addObjs,index){
     return arr;
 };
 
-/**
- * Copy an array's item to a new array (its performance is better than Array.slice)
- * @param {Array} arr
- * @return {Array}
- */
 /**
  * 拷贝一个数组的所有元素到一个新数组（性能比Array.slice好）
  * @param {Array} arr
