@@ -25,18 +25,18 @@
  ****************************************************************************/
 
 /**
- * The fullscreen API provides an easy way for web content to be presented using the user's entire screen.  全屏API提供了一个简单的方式用来全屏呈现网页内容
- * It's invalid on safari, QQbrowser and android browser  该API在safari、QQ浏览器和android浏览器中无效
+ * 全屏API提供了一个简单的方式用来全屏呈现web内容
+ * 该API在safari、QQ浏览器和android浏览器中无效
  * @class
  * @name cc.screen
  */
 cc.screen = /** @lends cc.screen# */{
     _supportsFullScreen: false,
-	// the pre fullscreenchange function  	执行全屏前预操作的函数
+	// 执行全屏前预操作的函数
     _preOnFullScreenChange: null,
     _touchEvent: "",
 	_fn: null,
-	// Function mapping for cross browser support 	浏览器适配函数表(map) 跨浏览器支持函数表(map)
+	// 跨浏览器支持函数表(map)
 	_fnMap: [
 		[
 			'requestFullscreen',
@@ -76,7 +76,7 @@ cc.screen = /** @lends cc.screen# */{
 	],
 
     /**
-     * initialize 	初始化
+     * 初始化
      * @function
      */
     init: function () {
@@ -97,7 +97,7 @@ cc.screen = /** @lends cc.screen# */{
     },
 
     /**
-     * return true if it's full now. 	如果当前为全屏模式则返回true
+     * 如果当前为全屏模式则返回true
      * @returns {Boolean}
      */
     fullScreen: function() {
@@ -105,7 +105,7 @@ cc.screen = /** @lends cc.screen# */{
     },
 
     /**
-     * change the screen to full mode.  	切换为全屏模式
+     * 切换为全屏模式
      * @param {Element} element
      * @param {Function} onFullScreenChange
      */
@@ -127,7 +127,7 @@ cc.screen = /** @lends cc.screen# */{
     },
 
     /**
-     * exit the full mode.  	退出全屏模式
+     * 退出全屏模式
      * @return {Boolean}
      */
     exitFullScreen: function () {
@@ -135,7 +135,7 @@ cc.screen = /** @lends cc.screen# */{
     },
 
     /**
-     * Automatically request full screen with a touch/click event  	用触摸/点击事件自动请求全屏模式
+     * 用触摸/点击事件自动请求全屏模式
      * @param {Element} element
      * @param {Function} onFullScreenChange
      */
