@@ -29,10 +29,10 @@ cc._globalFontName = "Arial";
 cc._globalFontNameRelease = false;
 
 /**
- * Subclass cc.MenuItem (or any subclass) to create your custom cc.MenuItem objects.
+ * 子类化cc.MenuItem（或者其子类）来创建自定义cc.MenuItem对象
  * @class
  * @extends cc.Node
- * @param {function|String} callback
+ * @param {function|String} 按钮回调
  * @param  {cc.Node} target
  */
 cc.MenuItem = cc.Node.extend(/** @lends cc.MenuItem# */{
@@ -43,8 +43,8 @@ cc.MenuItem = cc.Node.extend(/** @lends cc.MenuItem# */{
     _className: "MenuItem",
 
     /**
-     * Constructor of cc.MenuItem
-     * @param {function|String} callback
+     * cc.MenuItem的构造函数
+     * @param {function|String} 按钮回调
      * @param {cc.Node} target
      */
     ctor: function (callback, target) {
@@ -64,20 +64,22 @@ cc.MenuItem = cc.Node.extend(/** @lends cc.MenuItem# */{
     },
 
     /**
-     * return whether MenuItem is selected
+     * 返回该菜单项是否是选中状态
      * @return {Boolean}
      */
     isSelected: function () {
         return this._isSelected;
     },
+
     /**
-     * only use for jsbinding
+     * 仅用于jsbinding
      * @param value
      */
     setOpacityModifyRGB: function (value) {
     },
+
     /**
-     * only use for jsbinding
+     * 仅用于jsbinding
      * @returns {boolean}
      */
     isOpacityModifyRGB: function () {
@@ -85,10 +87,10 @@ cc.MenuItem = cc.Node.extend(/** @lends cc.MenuItem# */{
     },
 
     /**
-     * set the target/selector of the menu item
-     * @param {function|String} selector
-     * @param {cc.Node} rec
-     * @deprecated since v3.0
+     * 设置菜单项的target和回调
+     * @param {function|String} 按钮回调
+     * @param {cc.Node} target
+     * @v3.0以后已经弃用
      */
     setTarget: function (selector, rec) {
         this._target = rec;
@@ -96,7 +98,7 @@ cc.MenuItem = cc.Node.extend(/** @lends cc.MenuItem# */{
     },
 
     /**
-     * return whether MenuItem is Enabled
+     * 返回该菜单项是否是启用状态
      * @return {Boolean}
      */
     isEnabled: function () {
@@ -104,16 +106,16 @@ cc.MenuItem = cc.Node.extend(/** @lends cc.MenuItem# */{
     },
 
     /**
-     * set enable value of MenuItem
-     * @param {Boolean} enable
+     * 设置菜单项的启用/停用状态
+     * @param {Boolean} enable 是否启用
      */
     setEnabled: function (enable) {
         this._enabled = enable;
     },
 
     /**
-     * initializes a cc.MenuItem with callback
-     * @param {function|String} callback
+     * 使用回调创建一个菜单项
+     * @param {function|String} 按钮回调
      * @param {cc.Node} target
      * @return {Boolean}
      */
@@ -128,7 +130,7 @@ cc.MenuItem = cc.Node.extend(/** @lends cc.MenuItem# */{
     },
 
     /**
-     * return rect value of cc.MenuItem
+     * return 返回菜单项的矩形区域
      * @return {cc.Rect}
      */
     rect: function () {
@@ -139,22 +141,22 @@ cc.MenuItem = cc.Node.extend(/** @lends cc.MenuItem# */{
     },
 
     /**
-     * set the cc.MenuItem selected same as setIsSelected(true)
+     * 设置菜单项为选中状态，功能和setIsSelected(true)一样
      */
     selected: function () {
         this._isSelected = true;
     },
 
     /**
-     * set the cc.MenuItem unselected same as setIsSelected(false)
+     * 设置菜单项为非选中状态，功能和setIsSelected(false)一样
      */
     unselected: function () {
         this._isSelected = false;
     },
 
     /**
-     * set the callback to the menu item
-     * @param {function|String} callback
+     * 设置菜单项的回调函数
+     * @param {function|String} 回调函数
      * @param {cc.Node} target
      */
     setCallback: function (callback, target) {
@@ -163,7 +165,7 @@ cc.MenuItem = cc.Node.extend(/** @lends cc.MenuItem# */{
     },
 
     /**
-     * call the selector with target
+     * 使用target调用按钮回调函数
      */
     activate: function () {
         if (this._enabled) {
@@ -182,16 +184,16 @@ cc.MenuItem = cc.Node.extend(/** @lends cc.MenuItem# */{
 
 var _p = cc.MenuItem.prototype;
 
-// Extended properties
+// 扩展属性
 /** @expose */
 _p.enabled;
 cc.defineGetterSetter(_p, "enabled", _p.isEnabled, _p.setEnabled);
 
 /**
- * creates an empty menu item with target and callback<br/>
- * Not recommended to use the base class, should use more defined menu item classes
- * @deprecated since v3.0, please use new cc.MenuItem(callback,target) instead
- * @param {function|String} callback callback
+ * 根据回调和target创建一个空的菜单项<br/>
+ * 不建议使用此类，而应该用于继承它的子类
+ * @v3.0以后已经废弃, 请使用new cc.MenuItem(callback,target)代替
+ * @param {function|String} 回调函数
  * @param {cc.Node} target
  * @return {cc.MenuItem}
  */
@@ -200,22 +202,22 @@ cc.MenuItem.create = function (callback, target) {
 };
 
 /**
- *  Any cc.Node that supports the cc.LabelProtocol protocol can be added.<br/>
- * Supported nodes:<br/>
+ *  所有支持cc.LabelProtocol协议的节点都可以添加。<br/>
+ * 支持的节点：<br/>
  * - cc.BitmapFontAtlas<br/>
  * - cc.LabelAtlas<br/>
  * - cc.LabelTTF<br/>
  * @class
  * @extends cc.MenuItem
- * @param {cc.Node} label
- * @param {function|String} selector
+ * @param {cc.Node} 标签
+ * @param {function|String} 回调函数
  * @param {cc.Node} target
- * @example
+ * @例子
  * var menuitemLabel = new cc.MenuItemLabel(label,selector,target);
  *
- * @property {String}   string          - Content string of label item
- * @property {cc.Node}  label           - Label of label item
- * @property {cc.Color} disabledColor   - Color of label when it's diabled
+ * @property {String}   string          - 标签项的内容
+ * @property {cc.Node}  label           - 标签项节点
+ * @property {cc.Color} disabledColor   - 当标签不可用时的颜色
  */
 cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     _disabledColor: null,
@@ -224,9 +226,9 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     _colorBackup: null,
 
     /**
-     * Constructor of cc.MenuItemLabel
-     * @param {cc.Node} label
-     * @param {function|String} selector
+     * cc.MenuItemLabel的构造函数
+     * @param {cc.Node} 附属标签
+     * @param {function|String} 回调函数
      * @param {cc.Node} target
      */
     ctor: function (label, selector, target) {
@@ -248,7 +250,7 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     },
 
     /**
-     * return the disable color for this cc.MenuItemLabel
+     * 返回该菜单项不可用时的颜色
      * @return {cc.Color}
      */
     getDisabledColor: function () {
@@ -256,7 +258,7 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     },
 
     /**
-     * set the disable color for this cc.MenuItemLabel
+     * 设置该菜单项不可用时的颜色
      * @param {cc.Color} color
      */
     setDisabledColor: function (color) {
@@ -264,7 +266,7 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     },
 
     /**
-     * return label of cc.MenuItemLabel
+     * 返回该菜单项的标签节点
      * @return {cc.Node}
      */
     getLabel: function () {
@@ -272,7 +274,7 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     },
 
     /**
-     * set a label for cc.MenuItemLabel
+     * 设置该菜单项的标签节点
      * @param {cc.Node} label
      */
     setLabel: function (label) {
@@ -292,8 +294,8 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     },
 
     /**
-     * set enable value to cc.MenuItemLabel
-     * @param {Boolean} enabled
+     * 设置该菜单项的启用/停用状态
+     * @param {Boolean} 是否启用
      */
     setEnabled: function (enabled) {
         if (this._enabled != enabled) {
@@ -309,15 +311,15 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     },
 
     /**
-     * set opacity for cc.MenuItemLabel
-     * @param {Number} opacity from 0-255
+     * 设置该菜单项的透明度
+     * @param {Number} 透明度，数值范围0-255
      */
     setOpacity: function (opacity) {
         this._label.opacity = opacity;
     },
 
     /**
-     * return the opacity of cc.MenuItemLabel
+     * 返回该菜单项的透明度
      * @return {Number}
      */
     getOpacity: function () {
@@ -325,15 +327,15 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     },
 
     /**
-     * set the opacity for cc.MenuItemLabel
-     * @param {cc.Color} color
+     * 设置该菜单项的颜色值
+     * @param {cc.Color} 颜色值
      */
     setColor: function (color) {
         this._label.color = color;
     },
 
     /**
-     * return the color of cc.MenuItemLabel
+     * 返回该菜单项的颜色
      * @return {cc.Color}
      */
     getColor: function () {
@@ -341,9 +343,9 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     },
 
     /**
-     * initializes a cc.MenuItemLabel with a label
-     * @param {cc.Node} label
-     * @param {function|String} selector
+     * 通过标签节点初始化一个菜单项
+     * @param {cc.Node} 标签节点
+     * @param {function|String} 回调函数
      * @param {cc.Node} target
      * @return {Boolean}
      */
@@ -361,16 +363,17 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     },
 
     /**
-     * set the string for  cc.MenuItemLabel
-     * @param {String} label
+     * 设置该菜单项显示的文本字符串
+     * @param {String} 要显示的文本字符串
      */
     setString: function (label) {
         this._label.string = label;
         this.width = this._label.width;
         this.height = this._label.height;
     },
+
     /**
-     * return the string of cc.MenuItemLabel
+     * 返回该菜单项所显示的文本字符串
      * @returns {*|string|_p.string|ret.string|q.string|String}
      */
     getString: function () {
@@ -378,7 +381,7 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     },
 
     /**
-     * activate the menu item
+     * 激活菜单项
      */
     activate: function () {
         if (this._enabled) {
@@ -389,7 +392,7 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     },
 
     /**
-     * menu item is selected (runs callback)
+     * 该菜单项已俾选中 (会触发回调)
      */
     selected: function () {
         if (this._enabled) {
@@ -408,7 +411,7 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
     },
 
     /**
-     * menu item goes back to unselected state
+     * 菜单项回到未选中状态
      */
     unselected: function () {
         if (this._enabled) {
@@ -423,7 +426,7 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
 
 var _p = cc.MenuItemLabel.prototype;
 
-// Extended properties
+// 扩展属性
 /** @expose */
 _p.string;
 cc.defineGetterSetter(_p, "string", _p.getString, _p.setString);
@@ -434,11 +437,10 @@ cc.defineGetterSetter(_p, "disabledColor", _p.getDisabledColor, _p.setDisabledCo
 _p.label;
 cc.defineGetterSetter(_p, "label", _p.getLabel, _p.setLabel);
 
-
 /**
- * @deprecated since v3.0 ,please use new cc.MenuItemLabel(label,selector,target) instead
- * @param {cc.Node} label
- * @param {function|String|Null} [selector=]
+ * @v3.0以后已经弃用 ,请使用 new cc.MenuItemLabel(label,selector,target)来代替
+ * @param {cc.Node} 标签节点
+ * @param {function|String|Null} [selector=] 回调函数
  * @param {cc.Node|Null} [target=]
  * @return {cc.MenuItemLabel}
  */
@@ -447,29 +449,29 @@ cc.MenuItemLabel.create = function (label, selector, target) {
 };
 
 /**
- * Helper class that creates a MenuItemLabel class with a LabelAtlas
+ * 使用LabelAtlas来创建一个MenuItemLabel的助手类
  * @class
- * @extends cc.MenuItemLabel
- * @param {String} value
- * @param {String} charMapFile
- * @param {Number} itemWidth
- * @param {Number} itemHeight
- * @param {String} startCharMap a single character
- * @param {function|String|Null} callback
+ * @继承自 cc.MenuItemLabel
+ * @param {String} 显示的文本
+ * @param {String} 字符映射文件
+ * @param {Number} 文本项的宽度
+ * @param {Number} 文本项的高度
+ * @param {String} 映射文件的起始字符
+ * @param {function|String|Null} 回调函数
  * @param {cc.Node|Null} target
- * @example
+ * @例子
  * var menuItem = new cc.MenuItemAtlasFont(param1,param2...);
  */
 cc.MenuItemAtlasFont = cc.MenuItemLabel.extend(/** @lends cc.MenuItemAtlasFont# */{
 
     /**
-     * the contructor of cc.MenuItemAtlasFont
-     * @param {String} value
-     * @param {String} charMapFile
-     * @param {Number} itemWidth
-     * @param {Number} itemHeight
-     * @param {String} startCharMap a single character
-     * @param {function|String|Null} callback
+     * cc.MenuItemAtlasFont的构造函数
+     * @param {String} 显示的文本
+     * @param {String} 字符映射文件
+     * @param {Number} 文本项的宽度
+     * @param {Number} 文本项的高度
+     * @param {String} 映射文件的起始字符
+     * @param {function|String|Null} 回调函数
      * @param {cc.Node|Null} target
      */
     ctor: function (value, charMapFile, itemWidth, itemHeight, startCharMap, callback, target) {
@@ -482,13 +484,13 @@ cc.MenuItemAtlasFont = cc.MenuItemLabel.extend(/** @lends cc.MenuItemAtlasFont# 
     },
 
     /**
-     * initializes a cc.MenuItemAtlasFont with string
-     * @param {String} value
-     * @param {String} charMapFile
-     * @param {Number} itemWidth
-     * @param {Number} itemHeight
-     * @param {String} startCharMap a single character
-     * @param {function|String|Null} callback
+     * 通过字符串初始化一个cc.MenuItemAtlasFont
+     * @param {String} 显示的文本
+     * @param {String} 字符映射文件
+     * @param {Number} 文本项的宽度
+     * @param {Number} 文本项的高度
+     * @param {String} 映射文件的起始字符
+     * @param {function|String|Null} 回调函数
      * @param {cc.Node|Null} target
      * @return {Boolean}
      */
@@ -506,14 +508,14 @@ cc.MenuItemAtlasFont = cc.MenuItemLabel.extend(/** @lends cc.MenuItemAtlasFont# 
 });
 
 /**
- * create menu item from string with font
- * @deprecated since v3.0 ,please use new cc.MenuItemAtlasFont() instead.
- * @param {String} value the text to display
- * @param {String} charMapFile the character map file
- * @param {Number} itemWidth
- * @param {Number} itemHeight
- * @param {String} startCharMap a single character
- * @param {function|String|Null} [callback=null]
+ * 通过字符串创建一个菜单项
+ * @v3.0以后已经弃用，请使用new cc.MenuItemAtlasFont()替代.
+ * @param {String} 要显示的文本
+ * @param {String} 字符映射文件
+ * @param {Number} 文本项的宽度
+ * @param {Number} 文本项的高度
+ * @param {String} 映射文件的起始字符
+ * @param {function|String|Null} [callback=null] 回调函数
  * @param {cc.Node|Null} [target=]
  * @return {cc.MenuItemAtlasFont}
  */
@@ -522,26 +524,26 @@ cc.MenuItemAtlasFont.create = function (value, charMapFile, itemWidth, itemHeigh
 };
 
 /**
- * Helper class that creates a CCMenuItemLabel class with a Label
+ * 使用标签创建一个CCMenuItemLabel类的助手类
  * @class
- * @extends cc.MenuItemLabel
- * @param {String} value text for the menu item
- * @param {function|String} callback
+ * @继承 cc.MenuItemLabel
+ * @param {String} 菜单项显示的文本
+ * @param {function|String} 回调函数
  * @param {cc.Node} target
- * @example
+ * @例子
  * var menuItem = new cc.MenuItemFont(value, callback, target);
  *
- * @property {Number}   fontSize    - Font size of font item
- * @property {String}   fontName    - Font name of font item
+ * @property {Number}   fontSize    - 字体的大小
+ * @property {String}   fontName    - 字体的名称
  */
 cc.MenuItemFont = cc.MenuItemLabel.extend(/** @lends cc.MenuItemFont# */{
     _fontSize: null,
     _fontName: null,
 
     /**
-     * Constructor of cc.MenuItemFont
-     * @param {String} value text for the menu item
-     * @param {function|String} callback
+     * cc.MenuItemFont的构造函数
+     * @param {String} 菜单项显示的文本
+     * @param {function|String} 回调函数
      * @param {cc.Node} target
      */
     ctor: function (value, callback, target) {
@@ -560,9 +562,9 @@ cc.MenuItemFont = cc.MenuItemLabel.extend(/** @lends cc.MenuItemFont# */{
     },
 
     /**
-     * initializes cc.MenuItemFont with  string
-     * @param {String} value text for the menu item
-     * @param {function|String} callback
+     * 使用文本字符串初始化cc.MenuItemFont
+     * @param {String} 菜单项显示的文本
+     * @param {function|String} 回调函数
      * @param {cc.Node} target
      * @return {Boolean}
      */
@@ -581,8 +583,8 @@ cc.MenuItemFont = cc.MenuItemLabel.extend(/** @lends cc.MenuItemFont# */{
     },
 
     /**
-     * set the font size for cc.MenuItemFont
-     * @param {Number} s
+     * 设置该菜单项的字体尺寸
+     * @param {Number} 尺寸
      */
     setFontSize: function (s) {
         this._fontSize = s;
@@ -590,7 +592,7 @@ cc.MenuItemFont = cc.MenuItemLabel.extend(/** @lends cc.MenuItemFont# */{
     },
 
     /**
-     *return the font size of cc.MenuItemFont
+     * 返回该菜单项的字体尺寸
      * @return {Number}
      */
     getFontSize: function () {
@@ -598,8 +600,8 @@ cc.MenuItemFont = cc.MenuItemLabel.extend(/** @lends cc.MenuItemFont# */{
     },
 
     /**
-     * set the font name for cc.MenuItemFont
-     * @param {String} name
+     * 设置该菜单项的字体
+     * @param {String} name 字体名
      */
     setFontName: function (name) {
         this._fontName = name;
@@ -607,7 +609,7 @@ cc.MenuItemFont = cc.MenuItemLabel.extend(/** @lends cc.MenuItemFont# */{
     },
 
     /**
-     * return the font name for cc.MenuItemFont
+     * 返回该菜单项的字体名称
      * @return {String}
      */
     getFontName: function () {
@@ -621,15 +623,15 @@ cc.MenuItemFont = cc.MenuItemLabel.extend(/** @lends cc.MenuItemFont# */{
 });
 
 /**
- * a shared function to set the fontSize for menuitem font
- * @param {Number} fontSize
+ * 用于设置字体菜单项的字体尺寸的公用函数
+ * @param {Number} 字体尺寸
  */
 cc.MenuItemFont.setFontSize = function (fontSize) {
     cc._globalFontSize = fontSize;
 };
 
 /**
- * a shared function to get the font size for menuitem font
+ * 用于获取字体菜单项的字体尺寸的公用函数
  * @return {Number}
  */
 cc.MenuItemFont.fontSize = function () {
@@ -637,8 +639,8 @@ cc.MenuItemFont.fontSize = function () {
 };
 
 /**
- * a shared function to set the fontsize for menuitem font
- * @param name
+ * 用于设置字体菜单项的字体的公用函数
+ * @param name 字体名
  */
 cc.MenuItemFont.setFontName = function (name) {
     if (cc._globalFontNameRelease) {
@@ -650,7 +652,7 @@ cc.MenuItemFont.setFontName = function (name) {
 
 var _p = cc.MenuItemFont.prototype;
 
-// Extended properties
+// 扩展属性
 /** @expose */
 _p.fontSize;
 cc.defineGetterSetter(_p, "fontSize", _p.getFontSize, _p.setFontSize);
@@ -658,9 +660,8 @@ cc.defineGetterSetter(_p, "fontSize", _p.getFontSize, _p.setFontSize);
 _p.fontName;
 cc.defineGetterSetter(_p, "fontName", _p.getFontName, _p.setFontName);
 
-
 /**
- * a shared function to get the font name for menuitem font
+ * 用于获取字体菜单项的字体名的公用函数
  * @return {String}
  */
 cc.MenuItemFont.fontName = function () {
@@ -668,43 +669,42 @@ cc.MenuItemFont.fontName = function () {
 };
 
 /**
- * create a menu item from string
- * @deprecated since v3.0, please use new construction instead
- * @param {String} value the text to display
- * @param {String|function|Null} callback the callback to run, either in function name or pass in the actual function
- * @param {cc.Node|Null} target the target to run callback
+ * 通过文本字符串创建一个菜单项
+ * @v3.0以后已经弃用, 请使用new construction 替代
+ * @param {String} 要显示的文本字符串
+ * @param {String|function|Null} callback 回调函数，可以是函数名或者函数实体
+ * @param {cc.Node|Null} target 调用该回调函数的上下文
  * @return {cc.MenuItemFont}
  */
 cc.MenuItemFont.create = function (value, callback, target) {
     return new cc.MenuItemFont(value, callback, target);
 };
 
-
 /**
- * CCMenuItemSprite accepts CCNode<CCRGBAProtocol> objects as items.<br/>
- * The images has 3 different states:<br/>
- *   - unselected image<br/>
- *   - selected image<br/>
- *   - disabled image<br/>
+ * CCMenuItemSprite接受所有CCNode<CCRGBAProtocol>对象作为其子项.<br/>
+ * 其显示的图像有三种不同的状态:<br/>
+ *   - 未选中时的图像<br/>
+ *   - 选中时的图像<br/>
+ *   - 不可用时的图像<br/>
  * @class
- * @extends cc.MenuItem
- * @param {Image|Null} normalSprite normal state image
- * @param {Image|Null} selectedSprite selected state image
- * @param {Image|cc.Node|Null} three disabled state image OR target node
- * @param {String|function|cc.Node|Null} four callback function name in string or actual function, OR target Node
- * @param {String|function|Null} five callback function name in string or actual function
+ * @继承 cc.MenuItem
+ * @param {Image|Null} normalSprite 普通状态时的图像
+ * @param {Image|Null} selectedSprite 选中状态时的图像
+ * @param {Image|cc.Node|Null} three 不可用状态时的图像或者节点
+ * @param {String|function|cc.Node|Null} four 回调函数的名字、实体或者目标节点
+ * @param {String|function|Null} five 回调函数名或者实体函数
  *
- * @example
- * var item = new cc.MenuItemSprite(normalImage)//create a menu item from a sprite with no functionality
- * var item = new cc.MenuItemSprite(normalImage, selectedImage)//create a menu Item, nothing will happen when clicked
- * var item = new cc.MenuItemSprite(normalImage, SelectedImage, disabledImage)//same above, but with disabled state image
- * var item = new cc.MenuItemSprite(normalImage, SelectedImage, 'callback', targetNode)//create a menu item, when clicked runs targetNode.callback()
+ * @例子
+ * var item = new cc.MenuItemSprite(normalImage)//通过一个精灵创建一个没有回调的菜单项
+ * var item = new cc.MenuItemSprite(normalImage, selectedImage)//创建一个菜单项，当点击的时候没有任何操作
+ * var item = new cc.MenuItemSprite(normalImage, SelectedImage, disabledImage)//同上, 但同时设置了不可用状态的图像
+ * var item = new cc.MenuItemSprite(normalImage, SelectedImage, 'callback', targetNode)//创建一个菜单项，当点击的时候会调用targetNode.callback()
  * var item = new cc.MenuItemSprite(normalImage, SelectedImage, disabledImage, targetNode.callback, targetNode)
- * //same as above, but with disabled image, and passing in callback function
+ * //同上, 但同时设置了不可用状态的图像, 并且传入了回到函数
  *
- * @property {cc.Sprite}    normalImage     - Sprite in normal state
- * @property {cc.Sprite}    selectedImage     - Sprite in selected state
- * @property {cc.Sprite}    disabledImage     - Sprite in disabled state
+ * @property {cc.Sprite}    normalImage     - 普通状态时的精灵
+ * @property {cc.Sprite}    selectedImage     - 选中状态时的精灵
+ * @property {cc.Sprite}    disabledImage     - 不可用状态时的精灵
  */
 cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     _normalImage: null,
@@ -712,12 +712,12 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     _disabledImage: null,
 
     /**
-     * Constructor of cc.MenuItemSprite
-     * @param {Image|Null} normalSprite normal state image
-     * @param {Image|Null} selectedSprite selected state image
-     * @param {Image|cc.Node|Null} three disabled state image OR target node
-     * @param {String|function|cc.Node|Null} four callback function name in string or actual function, OR target Node
-     * @param {String|function|Null} five callback function name in string or actual function
+     * cc.MenuItemSprite的构造函数
+     * @param {Image|Null} normalSprite 普通状态时的精灵
+     * @param {Image|Null} selectedSprite 选中状态时的精灵
+     * @param {Image|cc.Node|Null} three 不可用状态时的精灵或者回调的目标节点
+     * @param {String|function|cc.Node|Null} four 回调函数的名字、实体或者目标节点
+     * @param {String|function|Null} five 回调函数名或者实体函数
      */
     ctor: function (normalSprite, selectedSprite, three, four, five) {
         cc.MenuItem.prototype.ctor.call(this);
@@ -729,7 +729,7 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
             normalSprite = normalSprite;
             selectedSprite = selectedSprite;
             var disabledImage, target, callback;
-            //when you send 4 arguments, five is undefined
+            // 当你传入4个参数，five的值为undefined
             if (five !== undefined) {
                 disabledImage = three;
                 callback = four;
@@ -749,7 +749,7 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     },
 
     /**
-     * return the normal status image(cc.Sprite)
+     * 返回正常状态时的图像(cc.Sprite)
      * @return {cc.Sprite}
      */
     getNormalImage: function () {
@@ -757,7 +757,7 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     },
 
     /**
-     * set the normal status image(cc.Sprite)
+     * 设置正常状态时的图像(cc.Sprite)
      * @param {cc.Sprite} normalImage
      */
     setNormalImage: function (normalImage) {
@@ -787,7 +787,7 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     },
 
     /**
-     * return the selected status image(cc.Sprite) of cc.MenuItemSprite
+     * return 返回该菜单项选中状态时的图像(cc.Sprite)
      * @return {cc.Sprite}
      */
     getSelectedImage: function () {
@@ -795,8 +795,8 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     },
 
     /**
-     * set the selected status image(cc.Sprite)
-     * @param {cc.Sprite} selectedImage
+     * 设置选中状态时的图像(cc.Sprite)
+     * @param {cc.Sprite} 精灵图像
      */
     setSelectedImage: function (selectedImage) {
         if (this._selectedImage == selectedImage)
@@ -817,7 +817,7 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     },
 
     /**
-     * return the disabled status of cc.MenuItemSprite
+     * 返回菜单项不可用状态时的图像
      * @return {cc.Sprite}
      */
     getDisabledImage: function () {
@@ -825,8 +825,8 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     },
 
     /**
-     * set the disabled status image(cc.Sprite)
-     * @param {cc.Sprite} disabledImage
+     * 设置不可用状态时的图像(cc.Sprite)
+     * @param {cc.Sprite} 精灵图像
      */
     setDisabledImage: function (disabledImage) {
         if (this._disabledImage == disabledImage)
@@ -846,11 +846,11 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     },
 
     /**
-     * initializes cc.MenuItemSprite with a cc.Sprite
-     * @param {cc.Node} normalSprite
-     * @param {cc.Node} selectedSprite
-     * @param {cc.Node} disabledSprite
-     * @param {function|String} callback
+     * 通过cc.Sprite初始化一个cc.MenuItemSprite
+     * @param {cc.Node} 正常状态的图像
+     * @param {cc.Node} 选中状态的图像
+     * @param {cc.Node} 不可用状态的图像
+     * @param {function|String} 回调函数
      * @param {cc.Node} target
      * @return {Boolean}
      */
@@ -879,8 +879,8 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     },
 
     /**
-     * set the color for cc.MenuItemSprite
-     * @param {cc.Color} color
+     * 设置该菜单项的颜色
+     * @param {cc.Color} color 颜色值
      */
     setColor: function (color) {
         this._normalImage.color = color;
@@ -893,16 +893,16 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     },
 
     /**
-     * return the color of cc.MenuItemSprite
-     * @return {cc.Color}
+     * 返回该菜单项的颜色
+     * @return {cc.Color} 颜色值
      */
     getColor: function () {
         return this._normalImage.color;
     },
 
     /**
-     * set the opacity for cc.MenuItemSprite
-     * @param {Number} opacity 0 - 255
+     * 设置该菜单项的透明度
+     * @param {Number} 透明度，范围值 0-255
      */
     setOpacity: function (opacity) {
         this._normalImage.opacity = opacity;
@@ -915,15 +915,15 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     },
 
     /**
-     * return the opacity of cc.MenuItemSprite
-     * @return {Number} opacity from 0 - 255
+     * 返回该菜单项的透明度
+     * @return {Number} 透明度，范围值 0-255
      */
     getOpacity: function () {
         return this._normalImage.opacity;
     },
 
     /**
-     * menu item is selected (runs callback)
+     * 设置该该菜单项为选中状态 (会调用回调函数)
      */
     selected: function () {
         cc.MenuItem.prototype.selected.call(this);
@@ -940,7 +940,7 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     },
 
     /**
-     * menu item goes back to unselected state
+     * 该菜单项返回未选中状态
      */
     unselected: function () {
         cc.MenuItem.prototype.unselected.call(this);
@@ -956,8 +956,8 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
     },
 
     /**
-     * set cc.MenuItemSprite  enable to receive the touch event
-     * @param {Boolean} bEnabled
+     * 设置该菜单项的启用/停用状态，在启用状态下会接收到触摸事件
+     * @param {Boolean} bEnabled 是否启用
      */
     setEnabled: function (bEnabled) {
         if (this._enabled != bEnabled) {
@@ -995,7 +995,7 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
 
 var _p = cc.MenuItemSprite.prototype;
 
-// Extended properties
+// 扩展属性
 /** @expose */
 _p.normalImage;
 cc.defineGetterSetter(_p, "normalImage", _p.getNormalImage, _p.setNormalImage);
@@ -1007,13 +1007,13 @@ _p.disabledImage;
 cc.defineGetterSetter(_p, "disabledImage", _p.getDisabledImage, _p.setDisabledImage);
 
 /**
- * create a menu item from sprite
- * @deprecated since v3.0 please use new cc.MenuItemSprite(normalSprite, selectedSprite, three, four, five) instead
- * @param {Image} normalSprite normal state image
- * @param {Image|Null} selectedSprite selected state image
- * @param {Image|cc.Node|Null} three disabled state image OR target node
- * @param {String|function|cc.Node|Null} four callback function name in string or actual function, OR target Node
- * @param {String|function|Null} five callback function name in string or actual function
+ * 通过精灵创建一个菜单项
+ * @v3.0以后已经弃用，请使用new cc.MenuItemSprite(normalSprite, selectedSprite, three, four, five)替代
+ * @param {Image} normalSprite 普通状态的图像
+ * @param {Image|Null} selectedSprite 选中状态的图像
+ * @param {Image|cc.Node|Null} three 为选中状态的图像或者目标节点
+ * @param {String|function|cc.Node|Null} four 回调函数名、回调函数实体或者目标节点
+ * @param {String|function|Null} five 回调函数名或者回调函数实体
  * @return {cc.MenuItemSprite}
  */
 cc.MenuItemSprite.create = function (normalSprite, selectedSprite, three, four, five) {
@@ -1021,31 +1021,31 @@ cc.MenuItemSprite.create = function (normalSprite, selectedSprite, three, four, 
 };
 
 /**
- * cc.MenuItemImage accepts images as items.<br/>
- * The images has 3 different states:<br/>
- * - unselected image<br/>
- * - selected image<br/>
- * - disabled image<br/>
+ * cc.MenuItemImage接受图像作为其子项<br/>
+ * 这些图像有三种不同的状态:<br/>
+ * - 未选中状态时的图像<br/>
+ * - 选中状态时的图像<br/>
+ * - 不可用状态时的图像<br/>
  * <br/>
- * For best results try that all images are of the same size<br/>
+ * 尽量将所有状态的图像都控制在同一个尺寸大小<br/>
  * @class
- * @extends cc.MenuItemSprite
- * @param {string|null} normalImage
- * @param {string|null} selectedImage
- * @param {string|null} disabledImage
- * @param {function|string|null} callback
+ * @继承 cc.MenuItemSprite
+ * @param {string|null} 普通状态时的图像
+ * @param {string|null} 选中状态时的图像
+ * @param {string|null} 不可用状态时的图像
+ * @param {function|string|null} 回调函数
  * @param {cc.Node|null} target
- * @example
+ * @例子
  * var menuItem = new cc.MenuItemImage(normalImage, selectedImage, three, four, five);
  */
 cc.MenuItemImage = cc.MenuItemSprite.extend(/** @lends cc.MenuItemImage# */{
 
     /**
-     * Constructor of cc.MenuItemImage
-     * @param {string|null} normalImage
-     * @param {string|null} selectedImage
-     * @param {string|null} disabledImage
-     * @param {function|string|null} callback
+     * cc.MenuItemImage的构造函数
+     * @param {string|null} 普通状态时的图像
+     * @param {string|null} 选中状态时的图像
+     * @param {string|null} 不可用状态时的图像
+     * @param {function|string|null} 回调函数
      * @param {cc.Node|null} target
      */
     ctor: function (normalImage, selectedImage, three, four, five) {
@@ -1079,35 +1079,35 @@ cc.MenuItemImage = cc.MenuItemSprite.extend(/** @lends cc.MenuItemImage# */{
     },
 
     /**
-     * sets the sprite frame for the normal image
-     * @param {cc.SpriteFrame} frame
+     * 通过一个精灵帧来设置普通状态时的图像
+     * @param {cc.SpriteFrame} 精灵帧
      */
     setNormalSpriteFrame: function (frame) {
         this.setNormalImage(new cc.Sprite(frame));
     },
 
     /**
-     * sets the sprite frame for the selected image
-     * @param {cc.SpriteFrame} frame
+     * 通过一个精灵帧来设置选中状态时的图像
+     * @param {cc.SpriteFrame} 精灵帧
      */
     setSelectedSpriteFrame: function (frame) {
         this.setSelectedImage(new cc.Sprite(frame));
     },
 
     /**
-     * sets the sprite frame for the disabled image
-     * @param {cc.SpriteFrame} frame
+     * 通过一个精灵帧来设置不可用状态时的图像
+     * @param {cc.SpriteFrame} 精灵帧
      */
     setDisabledSpriteFrame: function (frame) {
         this.setDisabledImage(new cc.Sprite(frame));
     },
 
     /**
-     * initializes a cc.MenuItemImage
-     * @param {string|null} normalImage
-     * @param {string|null} selectedImage
-     * @param {string|null} disabledImage
-     * @param {function|string|null} callback
+     * 初始化一个cc.MenuItemImage
+     * @param {string|null} 普通状态时的图像
+     * @param {string|null} 选中状态时的图像
+     * @param {string|null} 不可用状态时的图像
+     * @param {function|string|null} 回调函数
      * @param {cc.Node|null} target
      * @returns {boolean}
      */
@@ -1130,13 +1130,13 @@ cc.MenuItemImage = cc.MenuItemSprite.extend(/** @lends cc.MenuItemImage# */{
 });
 
 /**
- * creates a new menu item image
- * @deprecated since v3.0, please use new cc.MenuItemImage(normalImage, selectedImage, three, four, five) instead.
- * @param {String} normalImage file name for normal state
- * @param {String} selectedImage image for selected state
- * @param {String|cc.Node} three Disabled image OR callback function
- * @param {String|function|Null} [four] callback function, either name in string or pass the whole function OR the target
- * @param {cc.Node|String|function|Null} [five] cc.Node target to run callback when clicked
+ * 通过图像创建一个菜单项
+ * @v3.0以后已经弃用，请使用 new cc.MenuItemImage(normalImage, selectedImage, three, four, five) 替代.
+ * @param {String} normalImage 普通状态时的图像文件名
+ * @param {String} selectedImage 选中状态时的图像文件名
+ * @param {String|cc.Node} 不可用状态时的图像文件名或者回调函数
+ * @param {String|function|Null} [four] 回调函数名、回调函数实体或者目标节点
+ * @param {cc.Node|String|function|Null} [five] 当点击的时候调用回到的目标节点
  * @return {cc.MenuItemImage}
  */
 cc.MenuItemImage.create = function (normalImage, selectedImage, three, four, five) {
@@ -1145,24 +1145,24 @@ cc.MenuItemImage.create = function (normalImage, selectedImage, three, four, fiv
 
 
 /**
- * A simple container class that "toggles" it's inner items<br/>
- * The inner items can be any MenuItem
+ * 一个用于切换其内部菜单项的简单容器类<br/>
+ * 其内部菜单项可以是任何MenuItem
  * @class
- * @extends cc.MenuItem
+ * @继承 cc.MenuItem
  *
- * @property {Array}    subItems        - Sub items
- * @property {Number}   selectedIndex   - Index of selected sub item
+ * @property {Array}    subItems        - 包含所有子项的数组
+ * @property {Number}   selectedIndex   - 当前选中的子项索引
  *
  *@example
- * // Example
- * //create a toggle item with 2 menu items (which you can then toggle between them later)
+ * // 例子
+ * // 使用两个菜单项创建一个切换菜单项（你可以在这两个菜单项之间来回切换）
  * var toggler = new cc.MenuItemToggle( new cc.MenuItemFont("On"), new cc.MenuItemFont("Off"), this.callback, this)
- * //Note: the first param is the target, the second is the callback function, afterwards, you can pass in any number of menuitems
+ * // 注意： 第一个参数是回调目标节点, 第二个是回调函数, 后面你可以传入随意数量的菜单项
  *
- * //if you pass only 1 variable, then it must be a cc.MenuItem
- * var notYetToggler = new cc.MenuItemToggle(cc.MenuItemFont("On"));//it is useless right now, until you add more stuff to it
+ * // 如果你仅仅传入一个变量，它必须是一个cc.MenuItem
+ * var notYetToggler = new cc.MenuItemToggle(cc.MenuItemFont("On"));//此刻的菜单项是不可用的，直到你添加更多的子菜单项进去
  * notYetToggler.addSubItem(new cc.MenuItemFont("Off"));
- * //this is useful for constructing a toggler without a callback function (you wish to control the behavior from somewhere else)
+ * // 这样做对于创建一个没有回调函数的切换菜单项非常有用（如果你打算在其他地方控制这种行为）
  */
 cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     subItems: null,
@@ -1172,8 +1172,8 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     _color: null,
 
     /**
-     * Constructor of cc.MenuItemToggle
-    */
+     * cc.MenuItemToggle的构造函数
+     */
     ctor: function (/*Multiple arguments follow*/) {
 
         cc.MenuItem.prototype.ctor.call(this);
@@ -1188,16 +1188,16 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     },
 
     /**
-     * return the opacity of cc.MenuItemToggle
-     * @return {Number}
+     * 返回该菜单项的透明度
+     * @return {Number} 透明值，范围值：0~255
      */
     getOpacity: function () {
         return this._opacity;
     },
 
     /**
-     * set the opacity for cc.MenuItemToggle
-     * @param {Number} opacity
+     * 设置该菜单项的透明度
+     * @param {Number} 透明值，范围值：0~255
      */
     setOpacity: function (opacity) {
         this._opacity = opacity;
@@ -1210,8 +1210,8 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     },
 
     /**
-     * return the color of cc.MenuItemToggle
-     * @return {cc.Color}
+     * 获取该菜单项的颜色
+     * @return {cc.Color} 颜色值
      */
     getColor: function () {
         var locColor = this._color;
@@ -1219,8 +1219,8 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     },
 
     /**
-     * set the color for cc.MenuItemToggle
-     * @param {cc.Color} Color
+     * 设置该菜单项的颜色
+     * @param {cc.Color} 颜色值
      */
     setColor: function (color) {
         var locColor = this._color;
@@ -1240,16 +1240,16 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     },
 
     /**
-     * return the index of selected
-     * @return {Number}
+     * 返回当前选中的子菜单项的索引
+     * @return {Number} 索引值
      */
     getSelectedIndex: function () {
         return this._selectedIndex;
     },
 
     /**
-     * set the seleceted index for cc.MenuItemToggle
-     * @param {Number} SelectedIndex
+     * 设置该菜单项当前选中的子菜单项的索引
+     * @param {Number} 索引值
      */
     setSelectedIndex: function (SelectedIndex) {
         if (SelectedIndex != this._selectedIndex) {
@@ -1268,7 +1268,7 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     },
 
     /**
-     * similar to get children,return the sumItem array.
+     * 类似获取孩子节点，返回其所有子菜单项的数组
      * @return {Array}
      */
     getSubItems: function () {
@@ -1276,18 +1276,18 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     },
 
     /**
-     * set the subitem for cc.MenuItemToggle
-     * @param {cc.MenuItem} subItems
+     * 设置其所有子菜单项的数组
+     * @param {cc.MenuItem} subItems 子菜单项数组
      */
     setSubItems: function (subItems) {
         this.subItems = subItems;
     },
 
     /**
-     * initializes a cc.MenuItemToggle with items
-     * @param {cc.MenuItem} args[0...last-2] the rest in the array are cc.MenuItems
-     * @param {function|String} args[last-1] the second item in the args array is the callback
-     * @param {cc.Node} args[last] the first item in the args array is a target
+     * 通过一个菜单项数组初始化一个cc.MenuItemToggle
+     * @param {cc.MenuItem} args[0...last-2] 数组内的子项必须是cc.MenuItems
+     * @param {function|String} args[last-1] 第二个参数为回调函数
+     * @param {cc.Node} args[last] 第三个参数为调用回调函数的目标节点
      * @return {Boolean}
      */
     initWithItems: function (args) {
@@ -1319,15 +1319,15 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     },
 
     /**
-     * add the subitem for cc.MenuItemToggle
-     * @param {cc.MenuItem} item
+     * 为该菜单项添加一个子菜单项
+     * @param {cc.MenuItem} item 子菜单项
      */
     addSubItem: function (item) {
         this.subItems.push(item);
     },
 
     /**
-     * activate the menu item
+     * 激活该菜单项
      */
     activate: function () {
         // update index
@@ -1339,7 +1339,7 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     },
 
     /**
-     * menu item is selected (runs callback)
+     * 该菜单项进入选中状态 (将会调用回调函数)
      */
     selected: function () {
         cc.MenuItem.prototype.selected.call(this);
@@ -1347,7 +1347,7 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     },
 
     /**
-     * menu item goes back to unselected state
+     * 该菜单项回到未选中状态
      */
     unselected: function () {
         cc.MenuItem.prototype.unselected.call(this);
@@ -1355,8 +1355,8 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     },
 
     /**
-     * set the enable status for cc.MenuItemToggle
-     * @param {Boolean} enabled
+     * 设置该菜单项的启用/停用状态
+     * @param {Boolean} enabled 是否启用
      */
     setEnabled: function (enabled) {
         if (this._enabled != enabled) {
@@ -1370,7 +1370,7 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     },
 
     /**
-     * returns the selected item
+     * 返回当前选中的子菜单项
      * @return {cc.MenuItem}
      */
     selectedItem: function () {
@@ -1378,10 +1378,10 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
     },
     /**
      * * <p>
-     *     Event callback that is invoked every time when cc.MenuItemToggle enters the 'stage'.                                   <br/>
-     *     If the cc.MenuItemToggle enters the 'stage' with a transition, this event is called when the transition starts.        <br/>
-     *     During onEnter you can't access a "sister/brother" node.                                                    <br/>
-     *     If you override onEnter, you must call its parent's onEnter function with this._super().
+     *     当cc.MenuItemToggle进入场景，它会调用事件回调                                   <br/>
+     *     如果cc.MenuItemToggle进入场景时附带有场景过渡特效，该时间会在过渡状态时调用        <br/>
+     *     在onEnter期间你不能访问你的兄弟节点                                                <br/>
+     *     如果你重载了onEnter函数, 你必须通过this._super()来调用其父类的onEnter函数
      * </p>
      */
     onEnter: function () {
@@ -1392,16 +1392,16 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
 
 var _p = cc.MenuItemToggle.prototype;
 
-// Extended properties
+// 扩展属性
 /** @expose */
 _p.selectedIndex;
 cc.defineGetterSetter(_p, "selectedIndex", _p.getSelectedIndex, _p.setSelectedIndex);
 
 
 /**
- * create a simple container class that "toggles" it's inner items<br/>
- * The inner items can be any MenuItem
- * @deprecated since v3.0 please use new cc.MenuItemToggle(params) instead
+ * 创建一个可以切换内部菜单项的切换菜单<br/>
+ * 其内部菜单项可以是任何MenuItem对象
+ * @v3.0以后已经弃用，请使用 new cc.MenuItemToggle(params) 替代
  * @return {cc.MenuItemToggle}
  * @example
  */
