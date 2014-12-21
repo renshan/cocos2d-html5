@@ -90,8 +90,8 @@ cc.kmPlaneFromPointNormal = function(pOut, pPoint, pNormal){
 };
 
 /**
- * Creates a plane from 3 points. The result is stored in pOut.    通过3个点创建一个平面，将结果存储在pOut中，并返回pOut
- * pOut is returned.
+ * 以3个点为参数创建一个平面
+ * 将结果存储在pOut中,并返回pOut
  */
 cc.kmPlaneFromPoints = function(pOut, p1, p2, p3){
     /*
@@ -104,11 +104,11 @@ cc.kmPlaneFromPoints = function(pOut, p1, p2, p3){
      */
 
     var n = new cc.kmVec3(), v1 = new cc.kmVec3(), v2 = new cc.kmVec3();
-    cc.kmVec3Subtract(v1, p2, p1); //Create the vectors for the 2 sides of the triangle    给三角形的两边创建向量
+    cc.kmVec3Subtract(v1, p2, p1); //给三角形的两边创建向量
     cc.kmVec3Subtract(v2, p3, p1);
-    cc.kmVec3Cross(n, v1, v2); //Use the cross product to get the normal    通过交叉乘积获取一个标准值
+    cc.kmVec3Cross(n, v1, v2); //通过交叉乘积获取一个标准值
 
-    cc.kmVec3Normalize(n, n); //Normalize it and assign to pOut.m_N    标准化后赋值给pOut.m_N
+    cc.kmVec3Normalize(n, n); //标准化后赋值给pOut.m_N
 
     pOut.a = n.x;
     pOut.b = n.y;
@@ -127,12 +127,12 @@ cc.kmPlaneIntersectLine = function(pOut, pP, pV1, pV2){
      */
     //var d = new cc.kmVec3();
 
-    //cc.kmVec3Subtract(d, pV2, pV1); //Get the direction vector   获取方向向量
+    //cc.kmVec3Subtract(d, pV2, pV1); //获取方向向量
 
-    //TODO: Continue here!   在这里继续
+    //TODO: 这里继续
     /*if (fabs(kmVec3Dot(&pP.m_N, &d)) > kmEpsilon)
      {
-     //If we get here then the plane and line are parallel (i.e. no intersection)    如果我们走到这里了，那么平面和线就平行了（即没有交叉口）
+     //如果执行到这里,那么平面和线平行(即没有交点)
      pOut = nullptr; //Set to nullptr
 
      return pOut;
@@ -149,13 +149,13 @@ cc.kmPlaneNormalize = function(pOut, pP){
     n.z = pP.c;
 
     var l = 1.0 / cc.kmVec3Length(n); //Get 1/length
-    cc.kmVec3Normalize(n, n); //Normalize the vector and assign to pOut    标准化向量并赋值给pOut
+    cc.kmVec3Normalize(n, n); //标准化向量并赋值给pOut
 
     pOut.a = n.x;
     pOut.b = n.y;
     pOut.c = n.z;
 
-    pOut.d = pP.d * l; //Scale the D value and assign to pOut   缩放D值并赋值给pOut
+    pOut.d = pP.d * l; //缩放D值并赋值给pOut
 
     return pOut;
 };
@@ -165,16 +165,16 @@ cc.kmPlaneScale = function(pOut, pP, s){
 };
 
 /**
- * Returns POINT_INFRONT_OF_PLANE if pP is infront of pIn. Returns    如果pP在pIn前面返回POINT_INFRONT_OF_PLANE，如果在后面返回POINT_BEHIND_PLANE，否则返回POINT_ON_PLANE
- * POINT_BEHIND_PLANE if it is behind. Returns POINT_ON_PLANE otherwise
+ * 如果pP在pIn前面返回POINT_INFRONT_OF_PLANE
+ * 如果在后面返回POINT_BEHIND_PLANE,否则返回POINT_ON_PLANE
  */
 cc.kmPlaneClassifyPoint = function(pIn, pP){
-    // This function will determine if a point is on, in front of, or behind   这个方法会判断一个点是在平面的上面，前面，还是后面。
-    // the plane.  First we store the dot product of the plane and the point.    首先我们存储平面的点积和一个点
+    // 这个方法会判断一个点是在平面上，平面前面，还是平面后面。
+    // 首先我们存储这个平面的点积和这个点
     var distance = pIn.a * pP.x + pIn.b * pP.y + pIn.c * pP.z + pIn.d;
 
-    // Simply put if the dot product is greater than 0 then it is infront of it.    简单来说如果点击比0大那么就在前面
-    // If it is less than 0 then it is behind it.  And if it is 0 then it is on it.    如果小于0那么就在后面。如果等于0那么就在上面
+    // 简单来说如果点积比0大那么就在前面
+    // 如果小于0那么就在后面。如果等于0那么就在平面上
     if(distance > 0.001) return cc.POINT_INFRONT_OF_PLANE;
     if(distance < -0.001) return cc.POINT_BEHIND_PLANE;
 
