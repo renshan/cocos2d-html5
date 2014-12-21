@@ -25,22 +25,22 @@
  ****************************************************************************/
 
 /**
- * <p>A class that implements a Texture Atlas. 当前类实现了一个贴图集。<br />
- * Supported features: 支持的功能：<br />
- * The atlas file can be a PNG, JPG. 图集文件可能是一个PNG, JPG。<br />
- * Quads can be updated in runtime 运行时可以更新Quads <br />
- * Quads can be added in runtime 运行时可以添加Quads <br />
- * Quads can be removed in runtime 运行时可以删除Quads <br />
- * Quads can be re-ordered in runtime 运行时可以重新排序Quads <br />
- * The TextureAtlas capacity can be increased or decreased in runtime. 运行时TextureAtlas的占用空间可以增加或者减少。</p>
+ * <p>当前类实现了一个贴图集（Texture Atlas）。<br />
+ * 支持的功能：<br />
+ * 图集文件可能是一个PNG, JPG。<br />
+ * 运行时可以更新Quads <br />
+ * 运行时可以添加Quads <br />
+ * 运行时可以删除Quads <br />
+ * 运行时可以重新排序Quads <br />
+ * 运行时TextureAtlas的占用空间可以增加或者减少。</p>
  * @class
  * @extends cc.Class
  *
- * @property {Boolean}  dirty           - Indicates whether or not the array buffer of the VBO needs to be updated. 指示VBO的数组缓冲是否需要更新
- * @property {Image}    texture         - Image texture for cc.TextureAtlas. cc.TextureAtlas的图片贴图
- * @property {Number}   capacity        - <@readonly> Quantity of quads that can be stored with the current texture atlas size. 当前贴图集的大小可以存储的quads的数量
- * @property {Number}   totalQuads      - <@readonly> Quantity of quads that are going to be drawn. 即将绘制的quads的数量。
- * @property {Array}    quads           - <@readonly> Quads that are going to be rendered 即将渲染的quads
+ * @property {Boolean}  dirty           - 指示VBO的数组缓冲是否需要更新
+ * @property {Image}    texture         - cc.TextureAtlas的图片贴图
+ * @property {Number}   capacity        - <@readonly> 当前贴图集的大小可以存储的quads的数量
+ * @property {Number}   totalQuads      - <@readonly> 即将绘制的quads的数量。
+ * @property {Array}    quads           - <@readonly> 即将渲染的quads
  */
 cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     dirty: false,
@@ -57,17 +57,17 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     _quadsReader: null,
 
     /**
-     * <p>Creates a TextureAtlas with an filename and with an initial capacity for Quads. 通过文件名和初始大小创建TextureAtlas。<br />
-     * The TextureAtlas capacity can be increased in runtime. TextureAtlas的占用空间大小可以在运行时增加。</p>
-     * Constructor of cc.TextureAtlas
+     * <p>通过文件名和初始大小创建TextureAtlas。<br />
+     * TextureAtlas的占用空间大小可以在运行时增加。</p>
+     * cc.TextureAtlas构造函数
      * @param {String|cc.Texture2D} fileName
      * @param {Number} capacity
-     * @example @示例
+     * @example
      * 1.
-     * //creates a TextureAtlas with  filename  用文件名创建TextureAtlas。
+     * //用文件名创建TextureAtlas。
      * var textureAtlas = new cc.TextureAtlas("res/hello.png", 3);
      * 2.
-     * //creates a TextureAtlas with texture 用贴图创建TextureAtlas。
+     * //用贴图创建TextureAtlas。
      * var texture = cc.textureCache.addImage("hello.png");
      * var textureAtlas = new cc.TextureAtlas(texture, 3);
      */
@@ -82,7 +82,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * Quantity of quads that are going to be drawn. 即将绘制的quads数量
+     * 即将绘制的quads数量
      * @return {Number}
      */
     getTotalQuads: function () {
@@ -91,7 +91,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * Quantity of quads that can be stored with the current texture atlas size 当前贴图集的空间大小可以存储的quads的数量
+     * 当前贴图集的空间大小可以存储的quads的数量
      * @return {Number}
      */
     getCapacity: function () {
@@ -99,7 +99,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * Texture of the texture atlas 获取贴图集中的贴图对象
+     * 获取贴图集中的贴图对象
      * @return {Image}
      */
     getTexture: function () {
@@ -114,7 +114,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * specify if the array buffer of the VBO needs to be updated 设置VBO的数组缓冲是否需要更新
+     * 设置VBO的数组缓冲是否需要更新
      * @param {Boolean} dirty
      */
     setDirty: function (dirty) {
@@ -122,7 +122,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * whether or not the array buffer of the VBO needs to be updated VBO的数组缓冲是否需要更新
+     * VBO的数组缓冲是否需要更新
      * @returns {boolean}
      */
     isDirty: function () {
@@ -130,7 +130,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * Quads that are going to be rendered 即将缓冲的Quads
+     * 即将缓冲的Quads
      * @return {Array}
      */
     getQuads: function () {
@@ -166,7 +166,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * Description 描述
+     * 描述
      * @return {String}
      */
     description: function () {
@@ -219,14 +219,14 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * <p>Initializes a TextureAtlas with a filename and with a certain capacity for Quads. 通过文件名和Quads数初始化TextureAtlas。<br />
-     * The TextureAtlas capacity can be increased in runtime. 运行时TextureAtlas的占用空间大小可以增加。<br />
-     * WARNING: Do not reinitialize the TextureAtlas because it will leak memory. 注意：不要重复初始化TextureAtlas，那会造成造成内存泄漏。</p>
+     * <p>通过文件名和Quads数初始化TextureAtlas。<br />
+     * 运行时TextureAtlas的占用空间大小可以增加。<br />
+     * 注意：不要重复初始化TextureAtlas，那会造成造成内存泄漏。</p>
      * @param {String} file
      * @param {Number} capacity
      * @return {Boolean}
      * @example
-     * //example
+     * //示例
      * var textureAtlas = new cc.TextureAtlas();
      * textureAtlas.initWithTexture("hello.png", 3);
      */
@@ -242,15 +242,14 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * <p>Initializes a TextureAtlas with a previously initialized Texture2D object, and<br />
-     * with an initial capacity for Quads. 通过一个之前初始化好的 Texture2D 对象和Quads的大小来初始化 TextureAtlas <br />
-     * The TextureAtlas capacity can be increased in runtime. 运行时可以增加TextureAtlas的占用空间大小。<br />
-     * WARNING: Do not reinitialize the TextureAtlas because it will leak memory 注意：不要重复初始化 TextureAtlas,会造成内存泄漏。</p>
+     * <p>通过一个之前初始化好的 Texture2D 对象和Quads的大小来初始化 TextureAtlas <br />
+     * 运行时可以增加TextureAtlas的占用空间大小。<br />
+     * 注意：不要重复初始化 TextureAtlas,会造成内存泄漏。</p>
      * @param {Image} texture
      * @param {Number} capacity
      * @return {Boolean}
      * @example
-     * //example
+     * //示例
      * var texture = cc.textureCache.addImage("hello.png");
      * var textureAtlas = new cc.TextureAtlas();
      * textureAtlas.initWithTexture(texture, 3);
@@ -286,8 +285,8 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * <p>Updates a Quad (texture, vertex and color) at a certain index 更新特定index的Quad(贴图，顶点，颜色) <br />
-     * index must be between 0 and the atlas capacity - 1 --index 必须是在0～图集的大小 - 1</p>
+     * <p>更新特定index的Quad(贴图，顶点，颜色) <br />
+     * index 必须是在0～图集的大小 - 1</p>
      * @param {cc.V3F_C4B_T2F_Quad} quad
      * @param {Number} index
      */
@@ -301,8 +300,8 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * <p>Inserts a Quad (texture, vertex and color) at a certain index 在特定index插入一个Quad(贴图，顶点和颜色) <br />
-     * index must be between 0 and the atlas capacity - 1 --index 必须是在0～图集的大小 - 1</p>
+     * <p>在特定index插入一个Quad(贴图，顶点和颜色) <br />
+     * index 必须是在0～图集的大小 - 1</p>
      * @param {cc.V3F_C4B_T2F_Quad} quad
      * @param {Number} index
      */
@@ -328,12 +327,9 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
 
     /**
      * <p>
-     *      Inserts a c array of quads at a given index                                           <br />
-	 *		给定index 插入一个quads的c数组
-     *      index must be between 0 and the atlas capacity - 1                                    <br />
-	 *		index 必须是在0～图集的大小 - 1
-     *      this method doesn't enlarge the array when amount + index > totalQuads                <br />
-	 *		当amount + index > totalQuads时，这个方法不会加大数组
+     *      给定index 插入一个quads的c数组                                          <br />
+     *      index 必须是在0～图集的大小 - 1                                   <br />
+     *      当amount + index > totalQuads时，这个方法不会加大数组                <br />
      * </p>
      * @param {Array} quads
      * @param {Number} index
@@ -368,10 +364,8 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * <p>Removes the quad that is located at a certain index and inserts it at a new index <br />
-	 * 删除某个特定index位置的quad, 把它插入到一个新的index位置
-     * This operation is faster than removing and inserting in a quad in 2 different steps</p>
-     * 这种方式比先删除再插入执行2步操作效率要高
+     * <p>删除某个特定index位置的quad, 把它插入到一个新的index位置<br />
+     * 这种方式比先删除再插入执行2步操作效率要高</p>
      * @param {Number} fromIndex
      * @param {Number} newIndex
      */
@@ -402,8 +396,8 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * <p>Removes a quad at a given index number. 删除一个给定index的quad <br />
-     * The capacity remains the same, but the total number of quads to be drawn is reduced in 1 贴图集的大小不变，但是绘制的quads数量减了1 </p>
+     * <p>删除一个给定index的quad <br />
+     * 贴图集的大小不变，但是绘制的quads数量减了1 </p>
      * @param {Number} index
      */
     removeQuadAtIndex: function (index) {
@@ -422,7 +416,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * Removes a given number of quads at a given index 从给定的index开始删除给定数量的quads
+     * 从给定的index开始删除给定数量的quads
      * @param {Number} index
      * @param {Number} amount
      */
@@ -443,9 +437,9 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * <p>Removes all Quads. 删除所有Quads。<br />
-     * The TextureAtlas capacity remains untouched. No memory is freed. TextureAtlas的占用空间不变。内存未被释放。<br />
-     * The total number of quads to be drawn will be 0</p>
+     * <p>删除所有Quads。<br />
+     * TextureAtlas的占用空间不变。内存未被释放。<br />
+     * 绘制的quads数量将变为0</p>
      */
     removeAllQuads: function () {
         this._quads.length = 0;
@@ -457,10 +451,10 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * <p>Resize the capacity of the CCTextureAtlas. 重定义CCTextureAtlas的占用空间。<br />
-     * The new capacity can be lower or higher than the current one 新的空间大小可以比当前的低或者高 <br />
-     * It returns YES if the resize was successful. 成功返回YES <br />
-     * If it fails to resize the capacity it will return NO with a new capacity of 0. 失败返回NO, 并且占用空间被置为0。<br />
+     * <p>重定义CCTextureAtlas的占用空间。<br />
+     * 新的空间大小可以比当前的低或者高 <br />
+     * 成功返回YES <br />
+     * 失败返回NO, 并且占用空间被置为0。<br />
      * no used for js</p>
      * @param {Number} newCapacity
      * @return {Boolean}
@@ -530,8 +524,8 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * Used internally by CCParticleBatchNode      CCParticleBatchNode内部使用                              <br/>
-     * don't use this unless you know what you're doing 不要使用这个方法除非你真正了解
+     * CCParticleBatchNode内部使用                              <br/>
+     * 不要使用这个方法除非你真正了解
      * @param {Number} amount
      */
     increaseTotalQuadsWith: function (amount) {
@@ -539,7 +533,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * Moves an amount of quads from oldIndex at newIndex 把一定数量的quads从旧的index移动到新的index
+     * 把一定数量的quads从旧的index移动到新的index
      * @param {Number} oldIndex
      * @param {Number} amount
      * @param {Number} newIndex
@@ -582,8 +576,8 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     },
 
     /**
-     * Ensures that after a realloc quads are still empty   确保重新初始化后,quads是空的                             <br/>
-     * Used internally by CCParticleBatchNode CCParticleBatchNode 内部使用
+     * 确保重新初始化后,quads是空的                             <br/>
+     * CCParticleBatchNode 内部使用
      * @param {Number} index
      * @param {Number} amount
      */
@@ -597,7 +591,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{
     // TextureAtlas - Drawing
 
     /**
-     * Draws all the Atlas's Quads
+     * 绘制贴图集所有的quad
      */
     drawQuads: function () {
         this.drawNumberOfQuads(this._totalQuads, 0);
@@ -630,12 +624,9 @@ _p.quads;
 cc.defineGetterSetter(_p, "quads", _p.getQuads, _p.setQuads);
 
 /**
- * <p>Creates a TextureAtlas with an filename and with an initial capacity for Quads. <br /
- * 通过文件名和初始化Quads大小创建 TextureAtlas
- * The TextureAtlas capacity can be increased in runtime. </p>
- * TexttureAtlas的占用空间大小可以在运行时增加。
- * @deprecated since v3.0, please use new cc.TextureAtlas(fileName, capacity) instead
- * @此函数从 v3.0已弃用，请使用新接口 cc.TextureAtlas(fileName, capacity)
+ * <p>通过文件名和初始化Quads大小创建 TextureAtlas<br/>
+ * TexttureAtlas的占用空间大小可以在运行时增加。</p>
+ * @deprecated 此函数从 v3.0已弃用，请使用new cc.TextureAtlas(fileName, capacity)代替
  * @param {String|cc.Texture2D} fileName
  * @param {Number} capacity
  * @return {cc.TextureAtlas|Null}
@@ -645,8 +636,7 @@ cc.TextureAtlas.create = function (fileName, capacity) {
 };
 
 /**
- * @deprecated  since v3.0, please use new cc.TextureAtlas(texture) instead
- * @此函数从 v3.0已弃用，请使用新接口 cc.TextureAtlas(texture)
+ * @deprecated  此函数从 v3.0已弃用，请使用new cc.TextureAtlas(texture)
  * @function
  */
 cc.TextureAtlas.createWithTexture = cc.TextureAtlas.create;
