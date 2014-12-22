@@ -24,32 +24,32 @@
  THE SOFTWARE.
  ****************************************************************************/
 /**
- * A tag constant for identifying fade scenes  一个标记用于识别淡出的场景
+ * 一个用于标识淡出场景的标记常量
  * @constant
  * @type Number
  */
 cc.SCENE_FADE = 4208917214;
 
 /**
- * horizontal orientation Type where the Left is nearer  水平方向，接近左边
+ * 水平方向，接近左边
  * @constant
  * @type Number
  */
 cc.TRANSITION_ORIENTATION_LEFT_OVER = 0;
 /**
- * horizontal orientation type where the Right is nearer 水平方向,接近右边
+ * 水平方向,接近右边
  * @constant
  * @type Number
  */
 cc.TRANSITION_ORIENTATION_RIGHT_OVER = 1;
 /**
- * vertical orientation type where the Up is nearer  垂直方向,接近上边
+ * 垂直方向,接近上边
  * @constant
  * @type Number
  */
 cc.TRANSITION_ORIENTATION_UP_OVER = 0;
 /**
- * vertical orientation type where the Bottom is nearer  垂直方向,接近底边
+ * 垂直方向,接近底边
  * @constant
  * @type Number
  */
@@ -58,8 +58,8 @@ cc.TRANSITION_ORIENTATION_DOWN_OVER = 1;
 /**
  * @class
  * @extends cc.Scene
- * @param {Number} t time in seconds 持续时间(秒)
- * @param {cc.Scene} scene the scene to transit with 用于转换的场景
+ * @param {Number} t  持续时间(秒)
+ * @param {cc.Scene} scene  用于转换的场景
  * @example
  * var trans = new TransitionScene(time,scene);
  */
@@ -72,10 +72,10 @@ cc.TransitionScene = cc.Scene.extend(/** @lends cc.TransitionScene# */{
     _className:"TransitionScene",
 
     /**
-     * creates a base transition with duration and incoming scene 创建一个基本的具有持续时间(秒)和进入场景的转换
-     * Constructor of cc.TransitionScene                          TransitionScene的构造函数
-     * @param {Number} t time in seconds                          持续时间(秒)
-     * @param {cc.Scene} scene the scene to transit with          用于转换的场景
+     * 创建一个基本的具有持续时间和进入场景的转换(transition)
+     * TransitionScene的构造函数
+     * @param {Number} t 持续时间(秒)
+     * @param {cc.Scene} scene 用于转换的场景
      */
     ctor:function (t, scene) {
         cc.Scene.prototype.ctor.call(this);
@@ -86,12 +86,12 @@ cc.TransitionScene = cc.Scene.extend(/** @lends cc.TransitionScene# */{
     //private
     _setNewScene:function (dt) {
         this.unschedule(this._setNewScene);
-        // Before replacing, save the "send cleanup to scene"  在替换之前, 保存一个"send cleanup to scene"
+        // 在替换之前, 保存是否"发送清理场景"标识
         var director = cc.director;
         this._isSendCleanupToScene = director.isSendCleanupToScene();
         director.runScene(this._inScene);
 
-        // enable events while transitions   在转场时打开事件
+        // 在转场时启用事件
         cc.eventManager.setEnabled(true);
 
         // issue #267
@@ -104,7 +104,7 @@ cc.TransitionScene = cc.Scene.extend(/** @lends cc.TransitionScene# */{
     },
 
     /**
-     * stuff gets drawn here   进行两个场景的绘制
+     * 进行两个场景的绘制
      */
     visit:function () {
         if (this._isInSceneOnTop) {
@@ -119,20 +119,20 @@ cc.TransitionScene = cc.Scene.extend(/** @lends cc.TransitionScene# */{
 
     /**
      *  <p>
-     *     Event callback that is invoked every time when cc.TransitionScene enters the 'stage'.                                   <br/>    每次调用事件回调会在TransitionScene事件进入'舞台'时 <br/>
-     *     If the TransitionScene enters the 'stage' with a transition, this event is called when the transition starts.        <br/>       转场开始时这个事件会被调用, 当这个TransitionScene使用转场进入'舞台'  <br/>
-     *     During onEnter you can't access a "sister/brother" node.                                                    <br/>                在onEnter时不能访问兄弟节点 <br/>
-     *     If you override onEnter, you must call its parent's onEnter function with this._super().                                         如果需要覆盖onEnter, 必须使用this._super()调用父类的onEnter
+     *     每当cc.TransitionScene进入’舞台‘('stage')，事件回调都会执行。                                 <br/> 
+     *     如果这个转场场景(TransitionScene)使用转场进入'舞台'('stage')，那么当转场开始时这个事件会被调用      <br/>
+     *     在onEnter期间你不能访问"兄弟"("sister/brother")节点                                                 <br/>
+     *     如果需要重写onEnter, 必须使用this._super()调用父类的onEnter。
      * </p>
      */
     onEnter:function () {
         cc.Node.prototype.onEnter.call(this);
 
-        // disable events while transitions    在转场时禁用事件管理
+        // 在转场时禁用事件管理
         cc.eventManager.setEnabled(false);
 
-        // outScene should not receive the onEnter callback   出场的场景不会收到onEnter的回调
-        // only the onExitTransitionDidStart                  只有onExitTransitionDidStart
+        // 此时，出场的场景不会收到onEnter的回调
+        // 只有onExitTransitionDidStart
         this._outScene.onExitTransitionDidStart();
 
         this._inScene.onEnter();
@@ -140,27 +140,27 @@ cc.TransitionScene = cc.Scene.extend(/** @lends cc.TransitionScene# */{
 
     /**
      *  <p>
-     * callback that is called every time the cc.TransitionScene leaves the 'stage'.                                         <br/>      每次调用事件回调会在TransitionScene事件离开'舞台'时 <br/>
-     * If the cc.TransitionScene leaves the 'stage' with a transition, this callback is called when the transition finishes. <br/>      转场结束时这个事件会被调用, 当这个TransitionScene使用转场离开'舞台'  <br/>
-     * During onExit you can't access a sibling node.                                                             <br/>                 在onExit时不能访问兄弟节点 <br/>
-     * If you override onExit, you shall call its parent's onExit with this._super().                                                   如果需要覆盖onExit, 必须使用this._super()调用父类的onExit <br/>
+     * 每当cc.TransitionScene离开'舞台'('stage'),回调都会被调用                                     <br/>
+     * 如果cc.TransitionScene使用转场离开'舞台'('stage'),那么该回调会在转场结束时被调用。<br/>
+     * 在onExit期间你不能访问兄弟节点.                                                             <br/> 
+     * 如果需要重写onExit, 必须使用this._super()调用父类的onExit <br/>
      * </p>
      */
     onExit:function () {
         cc.Node.prototype.onExit.call(this);
 
-        // enable events while transitions  在转场时开启事件管理
+        // 在转场时启用事件管理
         cc.eventManager.setEnabled(true);
 
         this._outScene.onExit();
 
-        // _inScene should not receive the onEnter callback    进场的场景不会收到onEnter的回调
-        // only the onEnterTransitionDidFinish                 只有onEnterTransitionDidFinish
+        // 此时，进场的场景不会收到onEnter的回调
+        // 只有onEnterTransitionDidFinish
         this._inScene.onEnterTransitionDidFinish();
     },
 
     /**
-     * custom cleanup    自定义清理函数
+     * 自定义清理函数
      */
     cleanup:function () {
         cc.Node.prototype.cleanup.call(this);
@@ -170,10 +170,10 @@ cc.TransitionScene = cc.Scene.extend(/** @lends cc.TransitionScene# */{
     },
 
     /**
-     * initializes a transition with duration and incoming scene      初始化一个具有持续时间(秒)和进入的场景
-     * @param {Number} t time in seconds                              持续时间(秒)
-     * @param {cc.Scene} scene a scene to transit to                  需要转场的场景
-     * @return {Boolean} return false if error                        如果是error则返回 false
+     * 初始化一个具有持续时间(秒)和进入的场景的转换
+     * @param {Number} t 持续时间(秒)
+     * @param {cc.Scene} scene 需要转场的场景
+     * @return {Boolean} 如果是error则返回 false
      */
     initWithDuration:function (t, scene) {
         if(!scene)
@@ -206,7 +206,7 @@ cc.TransitionScene = cc.Scene.extend(/** @lends cc.TransitionScene# */{
     },
 
     /**
-     * called after the transition finishes    在转场结束后调用
+     * 在转场结束后调用
      */
     finish:function () {
         // clean up
@@ -235,7 +235,7 @@ cc.TransitionScene = cc.Scene.extend(/** @lends cc.TransitionScene# */{
     },
 
     /**
-     * set hide the out scene and show in scene    隐藏出场的场景显示入场的场景
+     * 隐藏出场的场景并显示入场的场景
      */
     hideOutShowIn:function () {
         this._inScene.visible = true;
@@ -243,10 +243,10 @@ cc.TransitionScene = cc.Scene.extend(/** @lends cc.TransitionScene# */{
     }
 });
 /**
- * creates a base transition with duration and incoming scene                 创建一个基本的具有持续时间(秒)和进入场景的转换
- * @deprecated since v3.0, please use new cc.TransitionScene(t,scene) instead 从v3.0之后使用 new cc.TransitionScene(t,scene) 替代
- * @param {Number} t time in seconds                                          持续时间(秒)
- * @param {cc.Scene} scene the scene to transit with                          需要转场的场景
+ * 创建一个基本的具有持续时间(秒)和进入场景的转换(transition)
+ * @deprecated  从v3.0之后使用 new cc.TransitionScene(t,scene) 替代
+ * @param {Number} t 持续时间(秒)
+ * @param {cc.Scene} scene 需要转场的场景
  * @return {cc.TransitionScene|Null}
  */
 cc.TransitionScene.create = function (t, scene) {
@@ -254,13 +254,13 @@ cc.TransitionScene.create = function (t, scene) {
 };
 
 /**
- * A cc.Transition that supports orientation like.<br/>                         Transition支持不同方向<br/>
- * Possible orientation: LeftOver, RightOver, UpOver, DownOver<br/>             可用的方向为: LeftOver, RightOver, UpOver, DownOver<br/>
- * useful for when you want to make a transition happen between 2 orientations  当需要制造一个使用两个方向之间的转场时可以使用
+ * cc.Transition支持不同方向<br/>
+ * 可用的方向为: LeftOver, RightOver, UpOver, DownOver<br/>
+ * 当需要制作一个使用两个方向之间的转场时可以使用
  *
  * @class
  * @extends cc.TransitionScene
- * @param {Number} t time in seconds
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} orientation
  * @example
@@ -270,8 +270,8 @@ cc.TransitionSceneOriented = cc.TransitionScene.extend(/** @lends cc.TransitionS
     _orientation:0,
 
     /**
-     * Constructor of TransitionSceneOriented TransitionSceneOriented 的构造函数
-     * @param {Number} t time in seconds      持续时间(秒)
+     * TransitionSceneOriented 的构造函数
+     * @param {Number} t     持续时间(秒)
      * @param {cc.Scene} scene
      * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} orientation
      */
@@ -280,8 +280,8 @@ cc.TransitionSceneOriented = cc.TransitionScene.extend(/** @lends cc.TransitionS
         orientation != undefined && this.initWithDuration(t, scene, orientation);
     },
     /**
-     * initialize the transition         初始化转场
-     * @param {Number} t time in seconds 持续时间(秒)
+     * 初始化转场
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} orientation
      * @return {Boolean}
@@ -295,9 +295,9 @@ cc.TransitionSceneOriented = cc.TransitionScene.extend(/** @lends cc.TransitionS
 });
 
 /**
- * creates a base transition with duration and incoming scene                                        初始化一个具有持续时间(秒)和进入的场景
- * @deprecated since v3.0 ,please use new cc.TransitionSceneOriented(t, scene, orientation) instead. 从v3.0之后使用 new cc.TransitionSceneOriented(t, scene, orientation) 替代
- * @param {Number} t time in seconds                                                                 持续时间(秒)
+ *  创建一个基础的具有持续时间(秒)和进入场景的转场(transition)
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionSceneOriented(t, scene, orientation) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} orientation
  * @return {cc.TransitionSceneOriented}
@@ -307,11 +307,11 @@ cc.TransitionSceneOriented.create = function (t, scene, orientation) {
 };
 
 /**
- *  Rotate and zoom out the outgoing scene, and then rotate and zoom in the incoming     旋转和缩放外出的场景，同时旋转缩放进入的场景 
+ *  旋转缩小的切出场景，同时旋转放大传入场景 
 
  * @class
  * @extends cc.TransitionScene
- * @param {Number} t time in seconds                                                     持续时间(秒)
+ * @param {Number} t  持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionRotoZoom(t, scene);
@@ -319,9 +319,9 @@ cc.TransitionSceneOriented.create = function (t, scene, orientation) {
 cc.TransitionRotoZoom = cc.TransitionScene.extend(/** @lends cc.TransitionRotoZoom# */{
 
     /**
-     * Constructor of TransitionRotoZoom TransitionRotoZoom的构造函数
+     * TransitionRotoZoom的构造函数
      * @function
-     * @param {Number} t time in seconds 持续时间(秒)
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -329,7 +329,7 @@ cc.TransitionRotoZoom = cc.TransitionScene.extend(/** @lends cc.TransitionRotoZo
         scene && this.initWithDuration(t, scene);
     },
     /**
-     * Custom On Enter callback  自定义onEnter回调
+     * 自定义onEnter回调
      * @override
      */
     onEnter:function () {
@@ -359,10 +359,10 @@ cc.TransitionRotoZoom = cc.TransitionScene.extend(/** @lends cc.TransitionRotoZo
 });
 
 /**
- * Creates a Transtion rotation and zoom                                          创建旋转和缩放外出的Transtion
- * @deprecated since v3.0,please use new cc.TransitionRotoZoom(t, scene) instead  从v3.0之后使用 new cc.TransitionRotoZoom(t, scene) 替代
- * @param {Number} t time in seconds                                              持续时间(秒)
- * @param {cc.Scene} scene the scene to work with                                 要使用的场景
+ * 创建一个旋转缩放的转场(Transtion)
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionRotoZoom(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
+ * @param {cc.Scene} scene 要使用的场景
  * @return {cc.TransitionRotoZoom}
  */
 cc.TransitionRotoZoom.create = function (t, scene) {
@@ -370,19 +370,18 @@ cc.TransitionRotoZoom.create = function (t, scene) {
 };
 
 /**
- * Zoom out and jump the outgoing scene, and then jump and zoom in the incoming      缩小跳着切出场景, 同时跳着放大传入场景 
+ * 缩小跳着切出场景, 同时跳着放大传入场景 
  * @class
  * @extends cc.TransitionScene
- * @param {Number} t time in seconds                                                持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionJumpZoom(t, scene);
  */
 cc.TransitionJumpZoom = cc.TransitionScene.extend(/** @lends cc.TransitionJumpZoom# */{
     /**
-     * Constructor of TransitionJumpZoom
      * TransitionJumpZoom 构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -390,7 +389,6 @@ cc.TransitionJumpZoom = cc.TransitionScene.extend(/** @lends cc.TransitionJumpZo
         scene && this.initWithDuration(t, scene);
     },
     /**
-     * Custom on enter
      * 自定义onEnter
      */
     onEnter:function () {
@@ -421,9 +419,9 @@ cc.TransitionJumpZoom = cc.TransitionScene.extend(/** @lends cc.TransitionJumpZo
 });
 
 /**
- * creates a scene transition that zooms then jump across the screen, the same for the incoming scene  缩小跳着切出场景, 同时跳着放大传入场景 
- * @deprecated since v3.0,please use new cc.TransitionJumpZoom(t, scene);                              从v3.0之后使用 new cc.TransitionJumpZoom(t, scene) 替代
- * @param {Number} t time in seconds 持续时间(秒)
+ * 缩小跳着切出场景, 同时跳着放大传入场景 
+ * @deprecated 从v3.0之后，请使用new cc.TransitionJumpZoom(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionJumpZoom}
  */
@@ -432,18 +430,18 @@ cc.TransitionJumpZoom.create = function (t, scene) {
 };
 
 /**
- * Move in from to the left the incoming scene.    从左侧传入场景
+ * 从左侧传入场景
  * @class
  * @extends cc.TransitionScene
- * @param {Number} t time in seconds               持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionMoveInL(time,scene);
  */
 cc.TransitionMoveInL = cc.TransitionScene.extend(/** @lends cc.TransitionMoveInL# */{
     /**
-     * Constructor of TransitionMoveInL  TransitionMoveInL构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionMoveInL构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -451,7 +449,7 @@ cc.TransitionMoveInL = cc.TransitionScene.extend(/** @lends cc.TransitionMoveInL
         scene && this.initWithDuration(t, scene);
     },
     /**
-     * Custom on enter  自定义onEnter
+     * 自定义onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
@@ -464,21 +462,21 @@ cc.TransitionMoveInL = cc.TransitionScene.extend(/** @lends cc.TransitionMoveInL
     },
 
     /**
-     * initializes the scenes  初始化场景
+     * 初始化场景
      */
     initScenes:function () {
         this._inScene.setPosition(-cc.director.getWinSize().width, 0);
     },
 
     /**
-     * returns the action that will be performed  当被执行进返回一个action
+     * 返回将要执行的动作(action)
      */
     action:function () {
         return cc.moveTo(this._duration, cc.p(0, 0));
     },
 
     /**
-     * creates an ease action from action 从action中创建一个ease action
+     * 从action中创建一个ease action.
      * @param {cc.ActionInterval} action
      * @return {cc.EaseOut}
      */
@@ -488,9 +486,9 @@ cc.TransitionMoveInL = cc.TransitionScene.extend(/** @lends cc.TransitionMoveInL
 });
 
 /**
- * creates an action that  Move in from to the left the incoming scene.         创建一个从左侧传入场景的动作
- * @deprecated since v3.0,please use new cc.TransitionMoveInL(t, scene) instead 从v3.0之后使用 new cc.TransitionMoveInL(t, scene) 替代
- * @param {Number} t time in seconds 持续时间(秒)
+ * 创建一个从左侧传入场景的动作
+ * @deprecated 从v3.0之后,请使用 new cc.TransitionMoveInL(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionMoveInL}
  */
@@ -499,18 +497,18 @@ cc.TransitionMoveInL.create = function (t, scene) {
 };
 
 /**
- * Move in from to the right the incoming scene. 右侧传入场景
+ * 右侧传入场景
  * @class
  * @extends cc.TransitionMoveInL
- * @param {Number} t time in seconds             持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionMoveInR(time,scene);
  */
 cc.TransitionMoveInR = cc.TransitionMoveInL.extend(/** @lends cc.TransitionMoveInR# */{
     /**
-     * Constructor of TransitionMoveInR  TransitionMoveInR的构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionMoveInR的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -518,7 +516,7 @@ cc.TransitionMoveInR = cc.TransitionMoveInL.extend(/** @lends cc.TransitionMoveI
         scene && this.initWithDuration(t, scene);
     },
     /**
-     * Init function    初始化函数
+     * 初始化函数
      */
     initScenes:function () {
         this._inScene.setPosition(cc.director.getWinSize().width, 0);
@@ -526,9 +524,9 @@ cc.TransitionMoveInR = cc.TransitionMoveInL.extend(/** @lends cc.TransitionMoveI
 });
 
 /**
- * create a scene transition that Move in from to the right the incoming scene.   创建一个右侧传入场景转场
- * @deprecated since v3.0,please use new cc.TransitionMoveInR(t, scene) instead   从v3.0之后使用 new cc.TransitionMoveInR(t, scene) 替代
- * @param {Number} t time in seconds 持续时间(秒)
+ * 创建一个右侧传入场景的转场
+ * @deprecated 从v3.0之后,请使用 new cc.TransitionMoveInR(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionMoveInR}
  */
@@ -537,18 +535,18 @@ cc.TransitionMoveInR.create = function (t, scene) {
 };
 
 /**
- * Move in from to the top the incoming scene.  从顶部传入场景
+ * 从顶部传入场景
  * @class
  * @extends cc.TransitionMoveInL
- * @param {Number} t time in seconds            持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionMoveInT(time,scene);
  */
 cc.TransitionMoveInT = cc.TransitionMoveInL.extend(/** @lends cc.TransitionMoveInT# */{
     /**
-     * Constructor of TransitionMoveInT  TransitionMoveInT的构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionMoveInT的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -556,7 +554,7 @@ cc.TransitionMoveInT = cc.TransitionMoveInL.extend(/** @lends cc.TransitionMoveI
         scene && this.initWithDuration(t, scene);
     },
     /**
-     * init function 初始化函数
+     * 初始化函数
      */
     initScenes:function () {
         this._inScene.setPosition(0, cc.director.getWinSize().height);
@@ -564,9 +562,9 @@ cc.TransitionMoveInT = cc.TransitionMoveInL.extend(/** @lends cc.TransitionMoveI
 });
 
 /**
- * Move in from to the top the incoming scene.                                  从顶部传入场景
- * @deprecated since v3.0,please use new cc.TransitionMoveInT(t, scene) instead 从v3.0之后使用 new cc.TransitionMoveInT(t, scene) 替代
- * @param {Number} t time in seconds                                            持续时间(秒)
+ * 从顶部传入场景
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionMoveInT(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionMoveInT}
  */
@@ -575,18 +573,18 @@ cc.TransitionMoveInT.create = function (t, scene) {
 };
 
 /**
- * Move in from to the bottom the incoming scene. 从底部传入场景
+ * 从底部传入场景
  * @class
  * @extends cc.TransitionMoveInL
- * @param {Number} t time in seconds              持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionMoveInB(time,scene);
  */
 cc.TransitionMoveInB = cc.TransitionMoveInL.extend(/** @lends cc.TransitionMoveInB# */{
     /**
-     * Constructor of TransitionMoveInB  TransitionMoveInB的构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionMoveInB的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -595,7 +593,7 @@ cc.TransitionMoveInB = cc.TransitionMoveInL.extend(/** @lends cc.TransitionMoveI
     },
 
     /**
-     * init function  初始始化函数
+     * 初始始化函数
      */
     initScenes:function () {
         this._inScene.setPosition(0, -cc.director.getWinSize().height);
@@ -603,9 +601,9 @@ cc.TransitionMoveInB = cc.TransitionMoveInL.extend(/** @lends cc.TransitionMoveI
 });
 
 /**
- * create a scene transition that Move in from to the bottom the incoming scene.  创建一个从底部传入场景的转场
- * @deprecated since v3.0,please use new cc.TransitionMoveInB(t, scene) instead   从v3.0之后使用 new cc.TransitionMoveInB(t, scene) 替代
- * @param {Number} t time in seconds                                              持续时间(秒)
+ * 创建一个从底部传入场景的转场
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionMoveInB(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionMoveInB}
  */
@@ -614,28 +612,28 @@ cc.TransitionMoveInB.create = function (t, scene) {
 };
 
 /**
- * The adjust factor is needed to prevent issue #442<br/>                      一个修正系数去防止issue #442 <br/>
- * One solution is to use DONT_RENDER_IN_SUBPIXELS images, but NO<br/>         一个解决方案是使用DONT_RENDER_IN_SUBPIXELS的使用, 不行 <br/>
- * The other issue is that in some transitions (and I don't know why)<br/>     另一个问题在一些转场(我不知道为毛) <br>
- * the order should be reversed (In in top of Out or vice-versa).              这个问题会被反转(?)
+ * 一个修正系数去防止问题 #442 <br/>
+ * 一种解决方案是使用DONT_RENDER_IN_SUBPIXELS图片, 但是不行 <br/>
+ * 另一种问题出现在一些转场中(但我不知道为什么) <br>
+ * 这个命令应该保留(顶部切出或切入场景)
  * @constant
  * @type Number
  */
 cc.ADJUST_FACTOR = 0.5;
 
 /**
- * a transition that a new scene is slided from left 一个从左边滑入传入转场
+ * 一个从左边滑入一个新场景的转场
  * @class
  * @extends cc.TransitionScene
- * @param {Number} t time in seconds                 持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = cc.TransitionSlideInL(time,scene);
  */
 cc.TransitionSlideInL = cc.TransitionScene.extend(/** @lends cc.TransitionSlideInL# */{
     /**
-     * Constructor of TransitionSlideInL TransitionSlideInL的构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionSlideInL的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -647,7 +645,7 @@ cc.TransitionSlideInL = cc.TransitionScene.extend(/** @lends cc.TransitionSlideI
     },
 
     /**
-     * custom on enter 自定义on enter
+     * 自定义on enter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
@@ -663,13 +661,13 @@ cc.TransitionSlideInL = cc.TransitionScene.extend(/** @lends cc.TransitionSlideI
     },
 
     /**
-     * initializes the scenes 初始化场景
+     * 初始化场景
      */
     initScenes:function () {
         this._inScene.setPosition(-cc.director.getWinSize().width + cc.ADJUST_FACTOR, 0);
     },
     /**
-     * returns the action that will be performed by the incomming and outgoing scene 返回传入/传出场景要执行的 action
+     * 返回传入/传出场景要执行的动作(action)
      * @return {cc.MoveBy}
      */
     action:function () {
@@ -686,9 +684,9 @@ cc.TransitionSlideInL = cc.TransitionScene.extend(/** @lends cc.TransitionSlideI
 });
 
 /**
- * create a transition that a new scene is slided from left                       创建一个从左边滑入传入场景的转场.
- * @deprecated since v3.0,please use new cc.TransitionSlideInL(t, scene) instead  从v3.0之后使用 new cc.TransitionSlideInL(t, scene) 替代
- * @param {Number} t time in seconds                                              持续时间(秒)
+ * 创建一个从左边滑入一个新场景的转场.
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionSlideInL(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionSlideInL}
  */
@@ -697,18 +695,18 @@ cc.TransitionSlideInL.create = function (t, scene) {
 };
 
 /**
- *  Slide in the incoming scene from the right border.  从右边滑入传入场景.
+ * 从右侧滑入传入场景.
  * @class
  * @extends cc.TransitionSlideInL
- * @param {Number} t time in seconds                   持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionSlideInR(time,scene);
  */
 cc.TransitionSlideInR = cc.TransitionSlideInL.extend(/** @lends cc.TransitionSlideInR# */{
     /**
-     * Constructor of TransitionSlideInR TransitionSlideInR的构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionSlideInR的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -719,13 +717,13 @@ cc.TransitionSlideInR = cc.TransitionSlideInL.extend(/** @lends cc.TransitionSli
         this._isInSceneOnTop = true;
     },
     /**
-     * initializes the scenes 初始化场景
+     * 初始化场景
      */
     initScenes:function () {
         this._inScene.setPosition(cc.director.getWinSize().width - cc.ADJUST_FACTOR, 0);
     },
     /**
-     *  returns the action that will be performed by the incomming and outgoing scene  返回传入/传出场景 要执行的 action
+     * 返回传入/传出场景将要执行的动作(action)
      * @return {cc.MoveBy}
      */
     action:function () {
@@ -734,9 +732,9 @@ cc.TransitionSlideInR = cc.TransitionSlideInL.extend(/** @lends cc.TransitionSli
 });
 
 /**
- * create Slide in the incoming scene from the right border.                     从右边滑入传入场景.
- * @deprecated since v3.0,please use new cc.TransitionSlideInR(t, scene) instead 从v3.0之后使用 new cc.TransitionSlideInR(t, scene) 替代
- * @param {Number} t time in seconds 持续时间(秒)
+ * 创建从右边滑入传入场景的转场.
+ * @deprecated 从v3.0之后,请使用 new cc.TransitionSlideInR(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionSlideInR}
  */
@@ -745,18 +743,18 @@ cc.TransitionSlideInR.create = function (t, scene) {
 };
 
 /**
- * Slide in the incoming scene from the bottom border.  从底部滑入传入场景. 
+ * 从底部滑入传入场景. 
  * @class
  * @extends cc.TransitionSlideInL
- * @param {Number} t time in seconds                    持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionSlideInB(time,scene);
  */
 cc.TransitionSlideInB = cc.TransitionSlideInL.extend(/** @lends cc.TransitionSlideInB# */{
     /**
-     * Constructor of TransitionSlideInB TransitionSlideInB的构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionSlideInB的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -768,15 +766,14 @@ cc.TransitionSlideInB = cc.TransitionSlideInL.extend(/** @lends cc.TransitionSli
     },
 
     /**
-     * initializes the scenes    初始化场景
+     * 初始化场景
      */
     initScenes:function () {
         this._inScene.setPosition(0, -(cc.director.getWinSize().height - cc.ADJUST_FACTOR));
     },
 
     /**
-     * returns the action that will be performed by the incomming and outgoing scene
-     * 返回传入/传出场景要执行的 action
+     * 返回传入/传出场景将要执行的动作
      * @return {cc.MoveBy}
      */
     action:function () {
@@ -785,9 +782,9 @@ cc.TransitionSlideInB = cc.TransitionSlideInL.extend(/** @lends cc.TransitionSli
 });
 
 /**
- * create a Slide in the incoming scene from the bottom border.                   从底部滑入传入场景
- * @deprecated since v3.0,please use new cc.TransitionSlideInB(t, scene) instead. 从v3.0之后使用 new cc.TransitionSlideInB(t, scene) 替代
- * @param {Number} t time in seconds                                              持续时间(秒)
+ * 创建一个从底部滑入传入场景的转场
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionSlideInB(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionSlideInB}
  */
@@ -796,18 +793,18 @@ cc.TransitionSlideInB.create = function (t, scene) {
 };
 
 /**
- *  Slide in the incoming scene from the top border.   从顶部滑入传入场景. 
+ *  从顶部滑入传入场景. 
  *  @class
  *  @extends cc.TransitionSlideInL
- *  @param {Number} t time in seconds                  持续时间(秒)
+ *  @param {Number} t 持续时间(秒)
  *  @param {cc.Scene} scene
  *  @example
  *  var trans = new cc.TransitionSlideInT(time,scene);
  */
 cc.TransitionSlideInT = cc.TransitionSlideInL.extend(/** @lends cc.TransitionSlideInT# */{
     /**
-     * Constructor of TransitionSlideInT TransitionSlideInT的构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionSlideInT的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -819,14 +816,14 @@ cc.TransitionSlideInT = cc.TransitionSlideInL.extend(/** @lends cc.TransitionSli
     },
 
     /**
-     * initializes the scenes    初始化场景
+     * 初始化场景
      */
     initScenes:function () {
         this._inScene.setPosition(0, cc.director.getWinSize().height - cc.ADJUST_FACTOR);
     },
 
     /**
-     * returns the action that will be performed by the incomming and outgoing scene   返回传入/传出场景要执行的 action
+     * 返回传入/传出场景将要执行的动作
      * @return {cc.MoveBy}
      */
     action:function () {
@@ -835,9 +832,9 @@ cc.TransitionSlideInT = cc.TransitionSlideInL.extend(/** @lends cc.TransitionSli
 });
 
 /**
- * create a Slide in the incoming scene from the top border.                       从顶部滑入传入场景. 
- * @deprecated since v3.0,please use new cc.TransitionSlideInT(t, scene) instead.  从v3.0之后使用 new cc.TransitionSlideInT(t, scene) 替代
- * @param {Number} t time in seconds                                               持续时间(秒)
+ * 创建一个从顶部滑入传入场景的转场. 
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionSlideInT(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionSlideInT}
  */
@@ -846,18 +843,18 @@ cc.TransitionSlideInT.create = function (t, scene) {
 };
 
 /**
- * Shrink the outgoing scene while grow the incoming scene    当增长传入场景的时候，收缩传出的场景
+ * 当增长传入场景的时候，收缩传出的场景
  * @class
  * @extends cc.TransitionScene
- * @param {Number} t time in seconds                          持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionShrinkGrow(time,scene);
  */
 cc.TransitionShrinkGrow = cc.TransitionScene.extend(/** @lends cc.TransitionShrinkGrow# */{
     /**
-     * Constructor of TransitionShrinkGrow  TransitionShrinkGrow构造函数
-     * @param {Number} t time in seconds    持续时间(秒)
+     * TransitionShrinkGrow构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -865,7 +862,7 @@ cc.TransitionShrinkGrow = cc.TransitionScene.extend(/** @lends cc.TransitionShri
         scene && this.initWithDuration(t, scene);
     },
     /**
-     * Custom on enter 自定义onEnter
+     * 自定义onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
@@ -900,9 +897,9 @@ cc.TransitionShrinkGrow = cc.TransitionScene.extend(/** @lends cc.TransitionShri
 });
 
 /**
- * Shrink the outgoing scene while grow the incoming scene                          当增长传入场景的时候，收缩传出的场景
- * @deprecated since v3.0,please use new cc.TransitionShrinkGrow(t, scene) instead. 从v3.0之后使用 new cc.TransitionShrinkGrow(t, scene) 替代
- * @param {Number} t time in seconds                                                持续时间(秒)
+ * 当增长传入场景的时候，收缩传出的场景
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionShrinkGrow(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionShrinkGrow}
  */
@@ -911,11 +908,11 @@ cc.TransitionShrinkGrow.create = function (t, scene) {
 };
 
 /**
- *  Flips the screen horizontally.<br/>                                            水平翻转屏幕<br/>
- * The front face is the outgoing scene and the back face is the incoming scene.   正面是传出的场景，背面是传入的场景
+ * 水平翻转屏幕<br/>
+ * 正面是传出的场景，背面是传入的场景
  * @class
  * @extends cc.TransitionSceneOriented
- * @param {Number} t time in seconds                                               持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
  * @example
@@ -923,9 +920,9 @@ cc.TransitionShrinkGrow.create = function (t, scene) {
  */
 cc.TransitionFlipX = cc.TransitionSceneOriented.extend(/** @lends cc.TransitionFlipX# */{
     /**
-     * Constructor of TransitionFlipX    TransitionFlipX的构造函数
+     * TransitionFlipX的构造函数
      * @function
-     * @param {Number} t time in seconds 持续时间(秒)
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
      */
@@ -937,7 +934,7 @@ cc.TransitionFlipX = cc.TransitionSceneOriented.extend(/** @lends cc.TransitionF
     },
 
     /**
-     * custom on enter  自定义onEnter
+     * 自定义onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
@@ -976,10 +973,10 @@ cc.TransitionFlipX = cc.TransitionSceneOriented.extend(/** @lends cc.TransitionF
 });
 
 /**
- * Flips the screen horizontally.<br/>                                           水平翻转屏幕。<br/>
- * The front face is the outgoing scene and the back face is the incoming scene. 正面是传出的场景，背面是传入的场景
- * @deprecated since v3.0,please use new cc.TransitionFlipX(t, scene,o) instead. 从v3.0之后使用 new cc.TransitionFlipX(t, scene,o) 替代
- * @param {Number} t time in seconds                                             持续时间(秒)
+ * 制作水平翻转屏幕转场。<br/>
+ * 正面是传出的场景，背面是传入的场景
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionFlipX(t, scene,o) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
  * @return {cc.TransitionFlipX}
@@ -989,11 +986,11 @@ cc.TransitionFlipX.create = function (t, scene, o) {
 };
 
 /**
- * Flips the screen vertically.<br/>                                                 垂直翻转屏幕<br/>
- * The front face is the outgoing scene and the back face is the incoming scene.     正面是传出的场景，背面是传入的场景
+ * 垂直翻转屏幕的转场<br/>
+ * 正面是传出的场景，背面是传入的场景
  * @class
  * @extends cc.TransitionSceneOriented
- * @param {Number} t time in seconds                                                 持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
  * @example
@@ -1002,8 +999,8 @@ cc.TransitionFlipX.create = function (t, scene, o) {
 cc.TransitionFlipY = cc.TransitionSceneOriented.extend(/** @lends cc.TransitionFlipY# */{
 
     /**
-     * Constructor of TransitionFlipY    TransitionFlipY的构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionFlipY的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
      */
@@ -1014,7 +1011,7 @@ cc.TransitionFlipY = cc.TransitionSceneOriented.extend(/** @lends cc.TransitionF
         scene && this.initWithDuration(t, scene, o);
     },
     /**
-     * custom on enter  自定义onEnter
+     * 自定义onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
@@ -1052,10 +1049,10 @@ cc.TransitionFlipY = cc.TransitionSceneOriented.extend(/** @lends cc.TransitionF
 });
 
 /**
- * Flips the screen vertically.<br/>                                             垂直翻转屏幕<br/>
- * The front face is the outgoing scene and the back face is the incoming scene. 正面是传出的场景，背面是传入的场景
- * @deprecated since v3.0,please use new cc.TransitionFlipY(t, scene,o) instead. 从v3.0之后使用 new cc.TransitionFlipY(t, scene, o) 替代
- * @param {Number} t time in seconds                                             持续时间(秒)
+ * 制作垂直翻转屏幕转场<br/>
+ * 正面是传出的场景，背面是传入的场景
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionFlipY(t, scene, o) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
  * @return {cc.TransitionFlipY}
@@ -1065,11 +1062,11 @@ cc.TransitionFlipY.create = function (t, scene, o) {
 };
 
 /**
- * Flips the screen half horizontally and half vertically.<br/>                     水平垂直翻转一半屏幕.<br/>
- * The front face is the outgoing scene and the back face is the incoming scene.    正面是传出的场景，背面是传入的场景
+ * 水平垂直翻转一半屏幕的转场.<br/>
+ * 正面是传出的场景，背面是传入的场景
  * @class
  * @extends cc.TransitionSceneOriented
- * @param {Number} t time in seconds                                                持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
  * @example
@@ -1077,8 +1074,8 @@ cc.TransitionFlipY.create = function (t, scene, o) {
  */
 cc.TransitionFlipAngular = cc.TransitionSceneOriented.extend(/** @lends cc.TransitionFlipAngular# */{
     /**
-     * Constructor of TransitionFlipAngular    TransitionFlipAngular的构造函数
-     * @param {Number} t time in seconds       持续时间(秒)
+     * TransitionFlipAngular的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
      */
@@ -1089,7 +1086,7 @@ cc.TransitionFlipAngular = cc.TransitionSceneOriented.extend(/** @lends cc.Trans
         scene && this.initWithDuration(t, scene, o);
     },
     /**
-     * custom on enter   自定义onEnter
+     * 自定义onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
@@ -1127,10 +1124,10 @@ cc.TransitionFlipAngular = cc.TransitionSceneOriented.extend(/** @lends cc.Trans
 });
 
 /**
- * Flips the screen half horizontally and half vertically.<br/>                            水平垂直翻转一半屏幕<br/>
- * The front face is the outgoing scene and the back face is the incoming scene.           正面是传出的场景，背面是传入的场景
- * @deprecated since v3.0,please use new new cc.TransitionFlipAngular(t, scene, o) instead 从v3.0之后使用 new cc.TransitionFlipAngular(t, scene, o) 替代
- * @param {Number} t time in seconds 持续时间(秒)
+ * 制作水平垂直翻转一半屏幕的转场<br/>
+ * 正面是传出的场景，背面是传入的场景
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionFlipAngular(t, scene, o) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
  * @return {cc.TransitionFlipAngular}
@@ -1140,11 +1137,11 @@ cc.TransitionFlipAngular.create = function (t, scene, o) {
 };
 
 /**
- *  Flips the screen horizontally doing a zoom out/in<br/>                           水平翻转屏幕，做一个 传入/穿出 缩放<br/>
- * The front face is the outgoing scene and the back face is the incoming scene.     正面是传出的场景，背面是传入的场景
+ * 水平翻转屏幕，且带一个传出/传入缩放效果的转场<br/>
+ * 正面是传出的场景，背面是传入的场景
  * @class
  * @extends cc.TransitionSceneOriented
- * @param {Number} t time in seconds 持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
  * @example
@@ -1153,9 +1150,8 @@ cc.TransitionFlipAngular.create = function (t, scene, o) {
 cc.TransitionZoomFlipX = cc.TransitionSceneOriented.extend(/** @lends cc.TransitionZoomFlipX# */{
 
     /**
-     * Constructor of TransitionZoomFlipX
      * TransitionZoomFlipX的构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
      */
@@ -1166,7 +1162,6 @@ cc.TransitionZoomFlipX = cc.TransitionSceneOriented.extend(/** @lends cc.Transit
         scene && this.initWithDuration(t, scene, o);
     },
     /**
-     * custom on enter
      * 自定义onEnter
      */
     onEnter:function () {
@@ -1211,10 +1206,10 @@ cc.TransitionZoomFlipX = cc.TransitionSceneOriented.extend(/** @lends cc.Transit
 });
 
 /**
- * Flips the screen horizontally doing a zoom out/in<br/>                                水平翻转屏幕，做一个 传入/穿出 缩放<br/>
- * The front face is the outgoing scene and the back face is the incoming scene.         正面是传出的场景，背面是传入的场景。 
- * @deprecated since v3.0,please use new new cc.TransitionZoomFlipX(t, scene, o) instead 从v3.0之后使用 new cc.TransitionZoomFlipX(t, scene, o) 替代
- * @param {Number} t time in seconds 持续时间(秒)
+ * 制作一个水平翻转屏幕，且带一个传出/传入缩放效果的转场<br/>
+ * 正面是传出的场景，背面是传入的场景。 
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionZoomFlipX(t, scene, o) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
  * @return {cc.TransitionZoomFlipX}
@@ -1224,11 +1219,11 @@ cc.TransitionZoomFlipX.create = function (t, scene, o) {
 };
 
 /**
- * Flips the screen vertically doing a little zooming out/in<br/>                    垂直翻转屏幕，做一个 传入/穿出 缩放 <br/>
- * The front face is the outgoing scene and the back face is the incoming scene.     正面是传出的场景，背面是传入的场景
+ * 垂直翻转屏幕，同时做一点缩放效果的传出/传人转场 <br/>
+ * 正面是传出的场景，背面是传入的场景
  * @class
  * @extends cc.TransitionSceneOriented
- * @param {Number} t time in seconds                                                 持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
  * @example
@@ -1237,8 +1232,8 @@ cc.TransitionZoomFlipX.create = function (t, scene, o) {
 cc.TransitionZoomFlipY = cc.TransitionSceneOriented.extend(/** @lends cc.TransitionZoomFlipY# */{
 
     /**         
-     * Constructor of TransitionZoomFlipY          
-     * @param {Number} t time in seconds           持续时间(秒)
+     * TransitionZoomFlipY 的构造函数       
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
      */
@@ -1249,7 +1244,7 @@ cc.TransitionZoomFlipY = cc.TransitionSceneOriented.extend(/** @lends cc.Transit
         scene && this.initWithDuration(t, scene, o);
     },
     /**
-     * custom on enter  自定义onEnter
+     * 自定义onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
@@ -1291,10 +1286,10 @@ cc.TransitionZoomFlipY = cc.TransitionSceneOriented.extend(/** @lends cc.Transit
 });
 
 /**
- * Flips the screen vertically doing a little zooming out/in<br/>                        垂直翻转屏幕，做一个 传入/穿出 缩放<br/>
- * The front face is the outgoing scene and the back face is the incoming scene.         正面是传出的场景，背面是传入的场景
- * @deprecated since v3.0,please use new new cc.TransitionZoomFlipY(t, scene, o) instead 从v3.0之后使用 new cc.TransitionZoomFlipY(t, scene, o) 替代
- * @param {Number} t time in seconds 持续时间(秒)
+ * 垂直翻转屏幕，同时带一点缩放效果的传出/传人场景的转场<br/>
+ * 正面是传出的场景，背面是传入的场景
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionZoomFlipY(t, scene, o) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
  * @return {cc.TransitionZoomFlipY}
@@ -1304,11 +1299,11 @@ cc.TransitionZoomFlipY.create = function (t, scene, o) {
 };
 
 /**
- *  Flips the screen half horizontally and half vertically doing a little zooming out/in.<br/>    一半水平一半垂直 传入/穿出 翻转并一点点的缩放屏幕<br/>
- * The front face is the outgoing scene and the back face is the incoming scene.                  正面是传出的场景，背面是传入的场景
+ * 一半水平一半垂直翻转，同时带一点传出/传人缩放效果的转场<br/>
+ * 正面是传出的场景，背面是传入的场景
  * @class
  * @extends cc.TransitionSceneOriented
- * @param {Number} t time in seconds                                                              持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
  * @example
@@ -1317,8 +1312,8 @@ cc.TransitionZoomFlipY.create = function (t, scene, o) {
 cc.TransitionZoomFlipAngular = cc.TransitionSceneOriented.extend(/** @lends cc.TransitionZoomFlipAngular# */{
 
     /**
-     * Constructor of TransitionZoomFlipAngular TransitionZoomFlipAngular的构造函数
-     * @param {Number} t time in seconds        持续时间(秒)
+     * TransitionZoomFlipAngular的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
      */
@@ -1329,7 +1324,7 @@ cc.TransitionZoomFlipAngular = cc.TransitionSceneOriented.extend(/** @lends cc.T
         scene && this.initWithDuration(t, scene, o);
     },
     /**
-     * custom on enter  自定义 onEnter
+     * 自定义 onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
@@ -1370,10 +1365,9 @@ cc.TransitionZoomFlipAngular = cc.TransitionSceneOriented.extend(/** @lends cc.T
 });
 
 /**
- * Flips the screen half horizontally and half vertically doing a little zooming out/in.<br/>      一半水平一半垂直 传入/穿出 翻转并一点点的缩放屏幕 <br/>
- * The front face is the outgoing scene and the back face is the incoming scene.                   正面是传出的场景，背面是传入的场景
- * @deprecated since v3.0,please use new new cc.TransitionZoomFlipAngular(t, scene, o) instead     从v3.0之后使用 cc.TransitionZoomFlipAngular(t, scene, o) 替代
- * @param {Number} t time in seconds 持续时间(秒)
+ * 制作一半水平一半垂直翻转，同时带一点传出/传人缩放效果的转场<br/>
+ * @deprecated 从v3.0之后使用 cc.TransitionZoomFlipAngular(t, scene, o) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
  * @return {cc.TransitionZoomFlipAngular}
@@ -1383,10 +1377,10 @@ cc.TransitionZoomFlipAngular.create = function (t, scene, o) {
 };
 
 /**
- * Fade out the outgoing scene and then fade in the incoming scene.  淡出传出场景，淡入传入场景
+ * 淡出传出场景，淡入传入场景
  * @class
  * @extends cc.TransitionScene
- * @param {Number} t time in seconds                                 持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
  * @example
@@ -1396,8 +1390,8 @@ cc.TransitionFade = cc.TransitionScene.extend(/** @lends cc.TransitionFade# */{
     _color:null,
 
     /**
-     * Constructor of TransitionFade     TransitionFade的构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionFade的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      * @param {cc.TRANSITION_ORIENTATION_LEFT_OVER|cc.TRANSITION_ORIENTATION_RIGHT_OVER|cc.TRANSITION_ORIENTATION_UP_OVER|cc.TRANSITION_ORIENTATION_DOWN_OVER} o
      */
@@ -1408,7 +1402,7 @@ cc.TransitionFade = cc.TransitionScene.extend(/** @lends cc.TransitionFade# */{
     },
 
     /**
-     * custom on enter   自定义onEnter
+     * 自定义onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
@@ -1429,7 +1423,7 @@ cc.TransitionFade = cc.TransitionScene.extend(/** @lends cc.TransitionFade# */{
     },
 
     /**
-     * custom on exit  自定义onExit
+     * 自定义onExit
      */
     onExit:function () {
         cc.TransitionScene.prototype.onExit.call(this);
@@ -1437,8 +1431,8 @@ cc.TransitionFade = cc.TransitionScene.extend(/** @lends cc.TransitionFade# */{
     },
 
     /**
-     * initializes the transition with a duration and with an RGB color    通过持续时间、RGB color 初始化一个转场
-     * @param {Number} t time in seconds                                   持续时间(秒)
+     * 使用持续时间、RGB color 初始化一个转场
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      * @param {cc.Color} color
      * @return {Boolean}
@@ -1457,9 +1451,9 @@ cc.TransitionFade = cc.TransitionScene.extend(/** @lends cc.TransitionFade# */{
 
 
 /**
- * Fade out the outgoing scene and then fade in the incoming scene.                   淡出传出场景 ，淡入传入场景
- * @deprecated since v3.0,please use new cc.TransitionFade(time,scene,color) instead. 从v3.0之后使用 new cc.TransitionFade(time,scene,color) 替代
- * @param {Number} t time in seconds                                                  持续时间(秒)
+ * 淡出传出场景，同时淡入传入场景
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionFade(time,scene,color) 替代
+ * @param {Number} t  持续时间(秒)
  * @param {cc.Scene} scene
  * @param {cc.Color} color
  * @return {cc.TransitionFade}
@@ -1469,19 +1463,18 @@ cc.TransitionFade.create = function (t, scene, color) {
 };
 
 /**
- * Cross fades two scenes using the cc.RenderTexture object.
- * 两个 scenes 使用 RenderTexture 对象交叉淡入淡出 
+ * 两个场景使用cc.RenderTexture对象交叉淡入淡出 
  * @class
  * @extends cc.TransitionScene
- * @param {Number} t time in seconds 持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionCrossFade(time,scene);
  */
 cc.TransitionCrossFade = cc.TransitionScene.extend(/** @lends cc.TransitionCrossFade# */{
     /**
-     * Constructor of TransitionCrossFade
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionCrossFade的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -1489,19 +1482,18 @@ cc.TransitionCrossFade = cc.TransitionScene.extend(/** @lends cc.TransitionCross
         scene && this.initWithDuration(t, scene);
     },
     /**
-     * custom on enter
      * 自定义onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
 
-        // create a transparent color layer                 创建一个透明的color layer
-        // in which we are going to add our rendertextures  为了添加到rendertextures
+        // 创建一个透明的颜色层layer
+        // 用于添加到rendertextures
         var color = cc.color(0, 0, 0, 0);
         var winSize = cc.director.getWinSize();
         var layer = new cc.LayerColor(color);
 
-        // create the first render texture for inScene       创建第一个进入场景的rendertexture
+        // 针对传人场景创建第一个rendertexture
         var inTexture = new cc.RenderTexture(winSize.width, winSize.height);
 
         if (null == inTexture)
@@ -1516,48 +1508,47 @@ cc.TransitionCrossFade = cc.TransitionScene.extend(/** @lends cc.TransitionCross
 	        anchorY: 0.5
         });
 
-        // render inScene to its texturebuffer  入场场景绘制进texturebuffer
+        // 渲染入场场景到纹理缓冲区(texturebuffer)
         inTexture.begin();
         this._inScene.visit();
         inTexture.end();
 
-        // create the second render texture for outScene  创造第二个render texture为出场场景
+        // 针对出场场景创造第二个render texture
         var outTexture = new cc.RenderTexture(winSize.width, winSize.height);
         outTexture.setPosition(winSize.width / 2, winSize.height / 2);
 	    outTexture.sprite.anchorX = outTexture.anchorX = 0.5;
 	    outTexture.sprite.anchorY = outTexture.anchorY = 0.5;
 
-        // render outScene to its texturebuffer   绘制出场场景到纹理缓存
+        // 绘制出场场景到纹理缓冲区(texturebuffer)
         outTexture.begin();
         this._outScene.visit();
         outTexture.end();
 
-        inTexture.sprite.setBlendFunc(cc.ONE, cc.ONE);                                             // inScene will lay on background and will not be used with alpha   入场场景是可见的,所以不会用到的alpha
-        outTexture.sprite.setBlendFunc(cc.SRC_ALPHA, cc.ONE_MINUS_SRC_ALPHA);                      // we are going to blend outScene via alpha                         将通过与出场场的alpha进行混合
+        inTexture.sprite.setBlendFunc(cc.ONE, cc.ONE);                                             //入场场景是可见的,所以不会用到的alpha
+        outTexture.sprite.setBlendFunc(cc.SRC_ALPHA, cc.ONE_MINUS_SRC_ALPHA);                      //将通过alpha与出场场景进行混合
 
-        // add render textures to the layer 在这个layer增加render texture
+        // 在这个layer增加渲染纹理(render texture)
         layer.addChild(inTexture);
         layer.addChild(outTexture);
 
-        // initial opacity:  初始透明度
+        // 初始透明度
         inTexture.sprite.opacity = 255;
         outTexture.sprite.opacity = 255;
 
-        // create the blend action  创建混合动作
+        // 创建混合动作
         var layerAction = cc.sequence(
             cc.fadeTo(this._duration, 0), cc.callFunc(this.hideOutShowIn, this),
             cc.callFunc(this.finish, this)
         );
 
-        // run the blend action     执行混合动作
+        // 执行混合动作
         outTexture.sprite.runAction(layerAction);
 
-        // add the layer (which contains our two rendertextures) to the scene     添加一个layer(包含两个rendertexture)到这个场景
+        // 添加一个layer(包含两个渲染纹理(rendertexture))到这个场景
         this.addChild(layer, 2, cc.SCENE_FADE);
     },
 
     /**
-     * custom on exit
      * 自定义onExit
      */
     onExit:function () {
@@ -1566,7 +1557,6 @@ cc.TransitionCrossFade = cc.TransitionScene.extend(/** @lends cc.TransitionCross
     },
 
     /**
-     * stuff gets drawn here
      * 在这绘制
      */
     visit:function () {
@@ -1574,18 +1564,17 @@ cc.TransitionCrossFade = cc.TransitionScene.extend(/** @lends cc.TransitionCross
     },
 
     /**
-     * overide draw
-     * 覆盖draw
+     * 重写draw
      */
     draw:function () {
-        // override draw since both scenes (textures) are rendered in 1 scene    覆盖,由于两个场景的纹理会在一个场景里绘制
+        // 重写,由于两个场景的纹理会在一个场景里绘制
     }
 });
 
 /**
- * Cross fades two scenes using the cc.RenderTexture object.                       使用 RenderTexture 对两个 scenes 交叉淡入淡出
- * @deprecated since v3.0,please use new cc.TransitionCrossFade(t, scene) instead. 从v3.0之后使用 new cc.TransitionCrossFade(t, scene) 替代
- * @param {Number} t time in seconds                                               持续时间(秒)
+ * 使用渲染纹理(RenderTexture)对象实现对两个场景的交叉淡入淡出
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionCrossFade(t, scene) 替代
+ * @param {Number} t 持续时间(秒)                                               持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionCrossFade}
  */
@@ -1594,10 +1583,10 @@ cc.TransitionCrossFade.create = function (t, scene) {
 };
 
 /**
- *  Turn off the tiles of the outgoing scene in random order 随机顺序关闭淡出场景的 tiles.
+ * 随机顺序关闭淡出场景的小方块.
  * @class
  * @extends cc.TransitionScene
- * @param {Number} t time in seconds 持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionTurnOffTiles(time,scene);
@@ -1605,8 +1594,8 @@ cc.TransitionCrossFade.create = function (t, scene) {
 cc.TransitionTurnOffTiles = cc.TransitionScene.extend(/** @lends cc.TransitionTurnOffTiles# */{
     _gridProxy: null,
     /**
-     * Constructor of TransitionCrossFade  TransitionCrossFade的构造函数
-     * @param {Number} t time in seconds   持续时间(秒)
+     * TransitionCrossFade的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -1620,7 +1609,7 @@ cc.TransitionTurnOffTiles = cc.TransitionScene.extend(/** @lends cc.TransitionTu
     },
 
     /**
-     * custom on enter
+     * 自定义onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
@@ -1651,9 +1640,9 @@ cc.TransitionTurnOffTiles = cc.TransitionScene.extend(/** @lends cc.TransitionTu
 });
 
 /**
- *  Turn off the tiles of the outgoing scene in random order                          随机顺序关闭淡出场景的 tiles.
- * @deprecated since v3.0,please use new cc.TransitionTurnOffTiles(t, scene) instead. 从v3.0之后使用 new cc.TransitionTurnOffTiles(t, scene) 替代
- * @param {Number} t time in seconds 持续时间(秒)
+ * 随机顺序关闭切出场景的小方块.
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionTurnOffTiles(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionTurnOffTiles}
  */
@@ -1662,10 +1651,10 @@ cc.TransitionTurnOffTiles.create = function (t, scene) {
 };
 
 /**
- *  The odd columns goes upwards while the even columns goes downwards.  奇数列向上推移而偶数列向下推移.
+ * 奇数列向上推移而偶数列向下推移.
  * @class
  * @extends cc.TransitionScene
- * @param {Number} t time in seconds 持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionSplitCols(time,scene);
@@ -1678,8 +1667,8 @@ cc.TransitionSplitCols = cc.TransitionScene.extend(/** @lends cc.TransitionSplit
     },
 
     /**
-     * Constructor of TransitionSplitCols    TransitionSplitCols的构造函数
-     * @param {Number} t time in seconds     持续时间(秒)
+     * TransitionSplitCols的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -1688,7 +1677,7 @@ cc.TransitionSplitCols = cc.TransitionScene.extend(/** @lends cc.TransitionSplit
         scene && this.initWithDuration(t, scene);
     },
     /**
-     * custom on enter  自定义onEnter
+     * 自定义onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
@@ -1732,9 +1721,9 @@ cc.TransitionSplitCols = cc.TransitionScene.extend(/** @lends cc.TransitionSplit
 });
 
 /**
- * The odd columns goes upwards while the even columns goes downwards.              奇数列向上推移而偶数列向下推移.
- * @deprecated since v3.0,please use new cc.TransitionSplitCols(t, scene) instead. 从v3.0之后使用 new cc.TransitionSplitCols(t, scene) 替代
- * @param {Number} t time in seconds 持续时间(秒)
+ * 奇数列向上推移而偶数列向下推移.
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionSplitCols(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionSplitCols}
  */
@@ -1743,10 +1732,10 @@ cc.TransitionSplitCols.create = function (t, scene) {
 };
 
 /**
- *  The odd rows goes to the left while the even rows goes to the right.      奇数行行从左侧推移，偶数行从右侧推移.
+ * 奇数行行从左侧推移，偶数行从右侧推移.
  * @class
  * @extends cc.TransitionSplitCols
- * @param {Number} t time in seconds 持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionSplitRows(time,scene);
@@ -1754,8 +1743,8 @@ cc.TransitionSplitCols.create = function (t, scene) {
 cc.TransitionSplitRows = cc.TransitionSplitCols.extend(/** @lends cc.TransitionSplitRows# */{
 
     /**
-     * Constructor of TransitionSplitRows    TransitionSplitRows的构造函数
-     * @param {Number} t time in seconds     持续时间(秒)
+     * TransitionSplitRows的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -1771,9 +1760,9 @@ cc.TransitionSplitRows = cc.TransitionSplitCols.extend(/** @lends cc.TransitionS
 });
 
 /**
- * The odd rows goes to the left while the even rows goes to the right.             奇数行行从左侧推移，偶数行从右侧推移.
- * @deprecated since v3.0,please use new cc.TransitionSplitRows(t, scene) instead.  从v3.0之后使用 new cc.TransitionSplitRows(t, scene) 替代
- * @param {Number} t time in seconds 持续时间(秒)
+ * 奇数行行从左侧推移，偶数行从右侧推移.
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionSplitRows(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionSplitRows}
  */
@@ -1782,10 +1771,10 @@ cc.TransitionSplitRows.create = function (t, scene) {
 };
 
 /**
- *  Fade the tiles of the outgoing scene from the left-bottom corner the to top-right corner. 从左下角到右上角淡出 scene 的所有 tiles
+ * 从左下角到右上角淡出场景的所有小方块
  * @class
  * @extends cc.TransitionScene
- * @param {Number} t time in seconds 持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionFadeTR(time,scene);
@@ -1793,8 +1782,8 @@ cc.TransitionSplitRows.create = function (t, scene) {
 cc.TransitionFadeTR = cc.TransitionScene.extend(/** @lends cc.TransitionFadeTR# */{
     _gridProxy: null,
     /**
-     * Constructor of TransitionFadeTR   TransitionFadeTR的构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionFadeTR的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -1807,7 +1796,7 @@ cc.TransitionFadeTR = cc.TransitionScene.extend(/** @lends cc.TransitionFadeTR# 
     },
 
     /**
-     * Custom on enter  自定义onEnter
+     * 自定义onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
@@ -1849,9 +1838,9 @@ cc.TransitionFadeTR = cc.TransitionScene.extend(/** @lends cc.TransitionFadeTR# 
 });
 
 /**
- * Fade the tiles of the outgoing scene from the left-bottom corner the to top-right corner.    从左下角到右上角淡出 scene 的所有 tiles
- * @deprecated since v3.0 please use new cc.TransitionFadeTR(t, scene) instead.                 从v3.0之后使用 new cc.TransitionFadeTR(t, scene) 替代
- * @param {Number} t time in seconds                                                            持续时间(秒)
+ * 从左下角到右上角淡出场景的所有小方块
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionFadeTR(t, scene) 替代
+ * @param {Number} t  持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionFadeTR}
  */
@@ -1860,18 +1849,18 @@ cc.TransitionFadeTR.create = function (t, scene) {
 };
 
 /**
- * Fade the tiles of the outgoing scene from the top-right corner to the bottom-left corner. 从右上角到左下角淡出 scene 的所有 tiles
+ * 从右上角到左下角淡出场景的所有小方块
  * @class
  * @extends cc.TransitionFadeTR
- * @param {Number} t time in seconds                                                         持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionFadeBL(time,scene)
  */
 cc.TransitionFadeBL = cc.TransitionFadeTR.extend(/** @lends cc.TransitionFadeBL# */{
     /**
-     * Constructor of TransitionFadeBL
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionFadeBL的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -1889,9 +1878,9 @@ cc.TransitionFadeBL = cc.TransitionFadeTR.extend(/** @lends cc.TransitionFadeBL#
 });
 
 /**
- * Fade the tiles of the outgoing scene from the top-right corner to the bottom-left corner. 从右上角到左下角淡出 scene 的所有 tiles.
- * @deprecated since v3.0,please use new cc.TransitionFadeBL(t, scene);                      从v3.0之后使用 new cc.TransitionFadeBL(t, scene) 替代
- * @param {Number} t time in seconds 持续时间(秒)
+ * 从右上角到左下角淡出场景的所有小方块.
+ * @deprecated  从v3.0之后，请使用 new cc.TransitionFadeBL(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionFadeBL}
  */
@@ -1900,10 +1889,10 @@ cc.TransitionFadeBL.create = function (t, scene) {
 };
 
 /**
- * Fade the tiles of the outgoing scene from the top-right corner to the bottom-left corner.  从右上向左下淡出 scene 的所有 tiles.
+ * 从下向上淡出场景的所有小方块.
  * @class
  * @extends cc.TransitionFadeTR
- * @param {Number} t time in seconds 持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionFadeUp(time,scene);
@@ -1911,9 +1900,9 @@ cc.TransitionFadeBL.create = function (t, scene) {
 cc.TransitionFadeUp = cc.TransitionFadeTR.extend(/** @lends cc.TransitionFadeUp# */{
 
     /**
-     * Constructor of TransitionFadeUp  TransitionFadeUp的构造函数
+     * TransitionFadeUp的构造函数
      * @function
-     * @param {Number} t time in seconds 持续时间(秒)
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -1931,9 +1920,9 @@ cc.TransitionFadeUp = cc.TransitionFadeTR.extend(/** @lends cc.TransitionFadeUp#
 });
 
 /**
- * Fade the tiles of the outgoing scene from the top-right corner to the bottom-left corner.  从下向上淡出 scene 的所有 tiles.
- * @deprecated since v3.0,please use new cc.TransitionFadeUp(t, scene) instead. 从v3.0之后使用 new cc.TransitionFadeUp(t, scene) 替代
- * @param {Number} t time in seconds 持续时间(秒)
+ * 从下向上淡出场景的所有小方块.
+ * @deprecated  从v3.0之后使，请用 new cc.TransitionFadeUp(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionFadeUp}
  */
@@ -1942,10 +1931,10 @@ cc.TransitionFadeUp.create = function (t, scene) {
 };
 
 /**
- * Fade the tiles of the outgoing scene from the top to the bottom. 从上向下淡出 scene 的所有 tiles
+ * 从上向下淡出场景的所有小方块
  * @class
  * @extends cc.TransitionFadeTR
- * @param {Number} t time in seconds                                持续时间(秒)
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionFadeDown(time,scene);
@@ -1953,8 +1942,8 @@ cc.TransitionFadeUp.create = function (t, scene) {
 cc.TransitionFadeDown = cc.TransitionFadeTR.extend(/** @lends cc.TransitionFadeDown# */{
 
     /**
-     * Constructor of TransitionFadeDown TransitionFadeDown的构造函数
-     * @param {Number} t time in seconds 持续时间(秒)
+     * TransitionFadeDown的构造函数
+     * @param {Number} t 持续时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -1972,9 +1961,9 @@ cc.TransitionFadeDown = cc.TransitionFadeTR.extend(/** @lends cc.TransitionFadeD
 });
 
 /**
- * Fade the tiles of the outgoing scene from the top to the bottom.               从上向下淡出 scene 的所有 tiles
- * @deprecated since v3.0,please use new cc.TransitionFadeDown(t, scene) instead. 从v3.0之后使用 new cc.TransitionFadeDown(t, scene) 替代
- * @param {Number} t time in seconds                                              持续时间(秒)
+ * 从上向下淡出场景的所有 小方块
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionFadeDown(t, scene) 替代
+ * @param {Number} t 持续时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionFadeDown}
  */
