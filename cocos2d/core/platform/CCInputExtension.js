@@ -26,12 +26,6 @@
 var _p = cc.inputManager;
 
 /**
- * whether enable accelerometer event
- * @function
- * @param {Boolean} isEnable
- */
-
-/**
  * 是否开启加速器事件
  * @function
  * @param {Boolean} isEnable
@@ -53,13 +47,7 @@ _p.setAccelerometerEnabled = function(isEnable){
 };
 
 /**
- * set accelerometer interval value
- * @function
- * @param {Number} interval
- */
-
-/**
- * 设置加速剂的时间间隔值
+ * 设置加速计的时间间隔值
  * @function
  * @param {Number} 时间间隔
  */

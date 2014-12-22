@@ -25,10 +25,10 @@
  ****************************************************************************/
 
 /**
- * IME Keyboard Notification Info structure									- 键盘信息结构
- * @param {cc.Rect} begin the soft keyboard rectangle when animatin begin	- 当动作开始时打开软键盘
- * @param {cc.Rect} end the soft keyboard rectangle when animatin end		- 当动作结束时关闭软键盘
- * @param {Number} duration the soft keyboard animation duration			- 软键盘动作间隔
+ * 输入法键盘信息结构
+ * @param {cc.Rect} 当动作开始时打开软键盘
+ * @param {cc.Rect} 当动作结束时关闭软键盘
+ * @param {Number} 软键盘动作间隔
  */
 cc.IMEKeyboardNotificationInfo = function (begin, end, duration) {
     this.begin = begin || cc.rect(0, 0, 0, 0);
@@ -37,27 +37,24 @@ cc.IMEKeyboardNotificationInfo = function (begin, end, duration) {
 };
 
 /**
- * Input method editor delegate.	- 输入法编辑器接口
+ * 输入法编辑器的委托
  * @class
  * @extends cc.Class
  */
 cc.IMEDelegate = cc.Class.extend(/** @lends cc.IMEDelegate# */{
     /**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
 	 * 构造方法,覆盖了父类的构造方法，记得在子类ctor方法调用时要用this._super()
      */
     ctor:function () {
         cc.imeDispatcher.addDelegate(this);
     },
     /**
-     * Remove delegate
 	 * 移除委托
      */
     removeDelegate:function () {
         cc.imeDispatcher.removeDelegate(this);
     },
     /**
-     * Remove delegate
 	 * 打开键盘并允许输入
      * @return {Boolean}
      */
@@ -65,7 +62,7 @@ cc.IMEDelegate = cc.Class.extend(/** @lends cc.IMEDelegate# */{
         return cc.imeDispatcher.attachDelegateWithIME(this);
     },
     /**
-     * Detach with IME 	- 关闭键盘并停止输入
+     * 关闭键盘并停止输入
      * @return {Boolean}
      */
     detachWithIME:function () {
@@ -73,8 +70,8 @@ cc.IMEDelegate = cc.Class.extend(/** @lends cc.IMEDelegate# */{
     },
 
     /**
-     * Decide the delegate instance is ready for receive ime message or not.<br /> - 判断是否可以打开键盘并允许输入
-     * Called by CCIMEDispatcher.												   - 由CCIMEDispatcher调用
+     * 判断是否可以打开键盘并允许输入。<br/>
+     * 由CCIMEDispatcher调用
      * @return {Boolean}
      */
     canAttachWithIME:function () {
@@ -82,13 +79,13 @@ cc.IMEDelegate = cc.Class.extend(/** @lends cc.IMEDelegate# */{
     },
 
     /**
-     * When the delegate detach with IME, this method call by CCIMEDispatcher.     - 当关闭键盘并停止输入，这个方法会被CCIMEDispatcher调用
+     * 当关闭键盘并停止输入，这个方法会被CCIMEDispatcher调用
      */
     didAttachWithIME:function () {
     },
 
     /**
-     * Decide the delegate instance can stop receive ime message or not.           - 判断是否可以阻止接收输入消息
+     * 判断是否可以阻止接收输入消息
      * @return {Boolean}
      */
     canDetachWithIME:function () {
@@ -96,25 +93,25 @@ cc.IMEDelegate = cc.Class.extend(/** @lends cc.IMEDelegate# */{
     },
 
     /**
-     * When the delegate detach with IME, this method call by CCIMEDispatcher.     - 当关闭键盘并停止输入，这个方法会被CCIMEDispatcher调用
+     * 当关闭键盘并停止输入，这个方法会被CCIMEDispatcher调用
      */
     didDetachWithIME:function () {
     },
 
     /**
-     * Called by CCIMEDispatcher when some text input from IME.					   - 有文本从输入时被CCIMEDispatcher调用
+     * 有文本从输入时被CCIMEDispatcher调用
      */
     insertText:function (text, len) {
     },
 
     /**
-     * Called by CCIMEDispatcher when user clicked the backward key.			   - 按退格键(backward)时被CCIMEDispatcher调用
+     * 按退格键(backward)时被CCIMEDispatcher调用
      */
     deleteBackward:function () {
     },
 
     /**
-     * Called by CCIMEDispatcher for get text which delegate already has.          - 获得已经存在的文本
+     * CCIMEDispatcher调用此方法以获得已经存在的文本
      * @return {String}
      */
     getContentText:function () {
@@ -135,7 +132,7 @@ cc.IMEDelegate = cc.Class.extend(/** @lends cc.IMEDelegate# */{
 });
 
 /**
- * cc.imeDispatcher is a singleton object which manage input message dispatching. - cc.imeDispatcher是一个用来管理输入信息分发的单例对象
+ * cc.imeDispatcher是一个用来管理输入消息分发的单例对象
  * @class
  * @name cc.imeDispatcher
  */
@@ -145,7 +142,6 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
     _currentInputString:"",
     _lastClickPosition:null,
     /**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
 	 * 构造方法,覆盖了父类的构造方法，记得在子类ctor方法调用时要用this._super()
      */
     ctor:function () {
@@ -225,7 +221,7 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
     },
 
     /**
-     * Dispatch the input text from ime - 分发键盘输入的信息
+     * 分发键盘输入的文本信息
      * @param {String} text
      * @param {Number} len
      */
@@ -241,7 +237,7 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
     },
 
     /**
-     * Dispatch the delete backward operation - 分发回退操作
+     * 分发回退操作
      */
     dispatchDeleteBackward:function () {
         if (!this.impl) {
@@ -256,7 +252,6 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
     },
 
     /**
-     * Get the content text, which current CCIMEDelegate which attached with IME has.
 	 * 获取当前键盘输入内容
      * @return {String}
      */
@@ -269,8 +264,7 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
     },
 
     /**
-     * Dispatch keyboard notification
-	 * 分发键盘即将展示的消息
+     * 分发键盘即将展示的消息
      * @param {cc.IMEKeyboardNotificationInfo} info
      */
     dispatchKeyboardWillShow:function (info) {
@@ -285,8 +279,7 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
     },
 
     /**
-     * Dispatch keyboard notification
-	 * 分发键盘已经展示的消息
+     * 分发键盘已经展示的消息
      * @param {cc.IMEKeyboardNotificationInfo} info
      */
     dispatchKeyboardDidShow:function (info) {
@@ -300,8 +293,7 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
     },
 
     /**
-     * Dispatch keyboard notification
-	 * 分发键盘即将隐藏的消息
+     * 分发键盘即将隐藏的消息
      * @param {cc.IMEKeyboardNotificationInfo} info
      */
     dispatchKeyboardWillHide:function (info) {
@@ -316,8 +308,7 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
     },
 
     /**
-     * Dispatch keyboard notification
-	 * 分发键盘已经隐藏消息
+     * 分发键盘已经隐藏消息
      * @param {cc.IMEKeyboardNotificationInfo} info
      */
     dispatchKeyboardDidHide:function (info) {
@@ -330,17 +321,9 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
             }
         }
     },
-
-    /**
-     * Add delegate to concern ime msg
-     * @param {cc.IMEDelegate} delegate
-     * @example
-     * //example
-     * cc.imeDispatcher.addDelegate(this);
-     */
 	 
 	/**
-     * 添加协议至关注列表
+     * 添加委托接收IME消息
      * @param {cc.IMEDelegate} delegate
      * @example
      * //例如
@@ -357,18 +340,10 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
         this.impl._delegateList.splice(0, 0, delegate);
     },
 
-    /**
-     * Attach the pDeleate with ime.
-     * @param {cc.IMEDelegate} delegate
-     * @return {Boolean} If the old delegate can detattach with ime and the new delegate can attach with ime, return true, otherwise return false.
-     * @example
-     * //example
-     * var ret = cc.imeDispatcher.attachDelegateWithIME(this);
-     */
 	/**
-     * 打开键盘输入法
+     * 将委托附加到IME
      * @param {cc.IMEDelegate} delegate
-     * @return {Boolean} 如果可以打开新的输入法并关闭旧的输入法，则返回成功否则返回失败
+     * @return {Boolean} 如果旧的委托可以解除，并且新的委托可以附加则返回ture，否则返回false
      * @example
      * //例如
      * var ret = cc.imeDispatcher.attachDelegateWithIME(this);
@@ -435,19 +410,10 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
         }
     },
 
-    /**
-     * Detach the pDeleate with ime.
-     * @param {cc.IMEDelegate} delegate
-     * @return {Boolean} If the old delegate can detattach with ime and the new delegate can attach with ime, return true, otherwise return false.
-     * @example
-     * //example
-     * var ret = cc.imeDispatcher.detachDelegateWithIME(this);
-     */
-	
 	/**
-     * 关闭键盘输入
+     * 从IME移除委托
      * @param {cc.IMEDelegate} delegate
-     * @return {Boolean} 如果旧的键盘输入可以关闭并且可以打开新的键盘输入，则返回成功 否则返回失败
+     * @return {Boolean} 如果旧的委托可以关闭并且可以附加新的委托，则返回true 否则返回false
      * @example
      * //例如
      * var ret = cc.imeDispatcher.detachDelegateWithIME(this);
@@ -468,17 +434,9 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
         cc._canvas.focus();
         return true;
     },
-
-    /**
-     * Remove the delegate from the delegates who concern ime msg
-     * @param {cc.IMEDelegate} delegate
-     * @example
-     * //example
-     * cc.imeDispatcher.removeDelegate(this);
-     */
 	 
 	/**
-     * 从输入信息关注表中删除委托
+     * 在IME消息监听队列中，移除接收消息的委托
      * @param {cc.IMEDelegate} delegate
      * @example
      * //例如
@@ -500,15 +458,6 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
         cc.arrayRemoveObject(this.impl._delegateList, delegate);
     },
 
-    /**
-     * Process keydown's keycode
-     * @param {Number} keyCode
-     * @example
-     * //example
-     * document.addEventListener("keydown", function (e) {
-     *      cc.imeDispatcher.processKeycode(e.keyCode);
-     * });
-     */
 	/**
      * 处理按键事件
      * @param {Number} keyCode
@@ -537,16 +486,8 @@ cc.IMEDispatcher = cc.Class.extend(/**  @lends cc.imeDispatcher# */{
     }
 });
 
-/**
- * Create the cc.IMEDispatcher.Imp Object. <br />
- * This is the inner class...
- * @class
- * @extends cc.Class
- * @name cc.IMEDispatcher.Impl
- */
- 
  /**
- * 创建 cc.IMEDispatcher实现对象<br />
+ * 创建cc.IMEDispatcher.Imp对象<br />
  * 这是个内部类
  * @class
  * @extends cc.Class
@@ -557,14 +498,14 @@ cc.IMEDispatcher.Impl = cc.Class.extend(/** @lends cc.IMEDispatcher.Impl# */{
     _delegateWithIme:null,
     _delegateList:null,
     /**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
 	 * 构造方法,覆盖了父类的构造方法，记得在子类ctor方法调用时要用this._super()
      */
     ctor:function () {
         this._delegateList = [];
     },
+	
     /**
-     * Find delegate 查找接口
+     * 查找委托
      * @param {cc.IMEDelegate} delegate
      * @return {Number|Null}
      */

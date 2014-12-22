@@ -25,7 +25,7 @@
  ****************************************************************************/
 
 /**
- * cc.shaderCache is a singleton object that stores manages GL shaders  - cc.shaderCache 是一个存储、管理GL着色器程序的单例对象
+ * cc.shaderCache 是一个存储、管理GL着色器程序的单例对象
  * @class
  * @name cc.shaderCache
  */
@@ -157,7 +157,7 @@ cc.shaderCache = /** @lends cc.shaderCache# */{
     },
 
     /**
-     * loads the default shaders - 加载默认着色器程序
+     * 加载默认着色器程序
      */
     loadDefaultShaders: function () {
         // Position Texture Color shader
@@ -222,7 +222,7 @@ cc.shaderCache = /** @lends cc.shaderCache# */{
     },
 
     /**
-     * reload the default shaders - 重新加载默认着色器程序
+     * 重新加载默认着色器程序
      */
     reloadDefaultShaders: function () {
         // reset all programs and reload them
@@ -274,7 +274,7 @@ cc.shaderCache = /** @lends cc.shaderCache# */{
     },
 
     /**
-     * returns a GL program for a given key - 根据key值返回对应GL程序
+     * 根据key值返回对应GL程序
      * @param {String} key
      */
     programForKey: function (key) {
@@ -282,7 +282,7 @@ cc.shaderCache = /** @lends cc.shaderCache# */{
     },
 
     /**
-     * returns a GL program for a shader name - 根据着色器名字返回对应GL程序
+     * 根据着色器名字返回对应GL程序
      * @param {String} shaderName
      * @return {cc.GLProgram}
      */
@@ -291,7 +291,7 @@ cc.shaderCache = /** @lends cc.shaderCache# */{
     },
 
     /**
-     * adds a CCGLProgram to the cache for a given name - 在缓存中增加一个名为key的GL程序
+     * 在缓存中增加一个名为key的GL程序
      * @param {cc.GLProgram} program
      * @param {String} key
      */

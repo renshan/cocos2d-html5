@@ -25,19 +25,14 @@
  ****************************************************************************/
 
 /**
- * Text field delegate - 文本块接口
+ * 文本块委托
  * @class
  * @extends cc.Class
  */
 cc.TextFieldDelegate = cc.Class.extend(/** @lends cc.TextFieldDelegate# */{
-    /**
-     * If the sender doesn't want to attach with IME, return true;
-     * @param {cc.TextFieldTTF} sender
-     * @return {Boolean}
-     */
-	 
+
 	/**
-     * 如果发送者连接键盘输入, 返回成功;
+     * 如果不想发送者附加到输入法, 返回true;
      * @param {cc.TextFieldTTF} sender
      * @return {Boolean}
      */
@@ -46,8 +41,7 @@ cc.TextFieldDelegate = cc.Class.extend(/** @lends cc.TextFieldDelegate# */{
     },
 
     /**
-     * If the sender doesn't want to detach with IME, return true; 
-	 * 如果发送者不与断开键盘输入, 返回成功;
+	 * 如果不想发送者从输入法拆离, 返回true;
      * @param {cc.TextFieldTTF} sender
      * @return {Boolean}
      */
@@ -56,8 +50,7 @@ cc.TextFieldDelegate = cc.Class.extend(/** @lends cc.TextFieldDelegate# */{
     },
 
     /**
-     * If the sender doesn't want to insert the text, return true;
-	 * 如果发送者不插入文本, 返回成功;
+	 * 如果不想发送者插入文本, 返回true;
      * @param {cc.TextFieldTTF} sender
      * @param {String} text
      * @param {Number} len
@@ -68,8 +61,7 @@ cc.TextFieldDelegate = cc.Class.extend(/** @lends cc.TextFieldDelegate# */{
     },
 
     /**
-     * If the sender doesn't want to delete the delText, return true;
-	 * 如果发送者不删除文本, 返回成功;
+	 * 如果不想发送者删除文本, 返回成true;
      * @param {cc.TextFieldTTF} sender
      * @param {String} delText
      * @param {Number} len
@@ -80,8 +72,7 @@ cc.TextFieldDelegate = cc.Class.extend(/** @lends cc.TextFieldDelegate# */{
     },
 
     /**
-     * If doesn't want draw sender as default, return true.
-	 * 如果绘制默认消息, 返回成功;
+	 * 如果不想发送者默认绘制, 返回成功;
      * @param {cc.TextFieldTTF} sender
      * @return {Boolean}
      */
@@ -91,36 +82,12 @@ cc.TextFieldDelegate = cc.Class.extend(/** @lends cc.TextFieldDelegate# */{
 });
 
 /**
- * A simple text input field with TTF font.
- * @class
- * @extends cc.LabelTTF
- *
- * @property {cc.Node}      delegate            - Delegate
- * @property {Number}       charCount           - <@readonly> Characators count
- * @property {String}       placeHolder         - Place holder for the field
- * @property {cc.Color}     colorSpaceHolder
- *
- * @param {String} placeholder
- * @param {cc.Size} dimensions
- * @param {Number} alignment
- * @param {String} fontName
- * @param {Number} fontSize
- *
- * @example
- * //example
- * // When five parameters
- * var textField = new cc.TextFieldTTF("<click here for input>", cc.size(100,50), cc.TEXT_ALIGNMENT_LEFT,"Arial", 32);
- * // When three parameters
- * var textField = new cc.TextFieldTTF("<click here for input>", "Arial", 32);
- */
- 
-/**
  * 一个带有ttf字体的简单文本输入框
  * @class
  * @extends cc.LabelTTF
  *
- * @property {cc.Node}      delegate            - Delegate
- * @property {Number}       charCount           - <@readonly> Characators count
+ * @property {cc.Node}      delegate            - 委托
+ * @property {Number}       charCount           - <@readonly> 字符长度
  * @property {String}       placeHolder         - Place holder for the field
  * @property {cc.Color}     colorSpaceHolder
  *
@@ -131,7 +98,7 @@ cc.TextFieldDelegate = cc.Class.extend(/** @lends cc.TextFieldDelegate# */{
  * @param {Number} fontSize
  *
  * @example
- * //示例
+ * // 示例
  * // 当有五个参数
  * var textField = new cc.TextFieldTTF("<click here for input>", cc.size(100,50), cc.TEXT_ALIGNMENT_LEFT,"Arial", 32);
  * // 当有三个参数
@@ -149,9 +116,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     _className:"TextFieldTTF",
 
     /**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * 构造方法,覆盖了父类的构造方法，记得在子类ctor方法调用时要用this._super()
-     * creates a cc.TextFieldTTF from a fontName, alignment, dimension and font size.
+	 * 构造方法,覆盖了父类的构造方法，记得在子类ctor方法调用时要用this._super()<br/>
 	 * 通过字体名称、对齐方式、文本框尺寸、字体大小参数创建一个 cc.TextFieldTTF 对象 
      * @param {String} placeholder
      * @param {cc.Size} dimensions
@@ -177,7 +142,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Gets the delegate. -获得委托
+     * 获得委托
      * @return {cc.Node}
      */
     getDelegate:function () {
@@ -185,7 +150,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Set the delegate. - 设置委托
+     * 设置委托
      * @param {cc.Node} value
      */
     setDelegate:function (value) {
@@ -193,7 +158,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Gets the char count. - 获得字符长度
+     * 获得字符长度
      * @return {Number}
      */
     getCharCount:function () {
@@ -201,8 +166,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Returns the color of space holder.
-	 * 获得动画显示字体颜色
+	 * 获取space holder的颜色。
      * @return {cc.Color}
      */
     getColorSpaceHolder:function () {
@@ -210,7 +174,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Sets the color of space holder. - 设置动画显示字体颜色。
+     * 设置space holder的颜色。
      * @param {cc.Color} value
      */
     setColorSpaceHolder:function (value) {
@@ -221,7 +185,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Sets the color of cc.TextFieldTTF's text. - 设置cc.TextFieldTTF文本颜色
+     * 设置cc.TextFieldTTF文本颜色
      * @param {cc.Color} textColor
      */
     setTextColor:function(textColor){
@@ -234,7 +198,6 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
 
 	 
 	/**
-     * Initializes the cc.TextFieldTTF with a font name, alignment, dimension and font size
 	 * 通过字体名称、对齐方式、文本框尺寸、字体大小参数初始化cc.TextFieldTTF 对象
      * @param {String} placeholder
      * @param {cc.Size} dimensions
@@ -243,11 +206,11 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
      * @param {Number} fontSize
      * @return {Boolean}
      * @example
-     * //example -例如
+     * //例如
      * var  textField = new cc.TextFieldTTF();
-     * // When five parameters -五个参数
+     * // 五个参数
      * textField.initWithPlaceHolder("<click here for input>", cc.size(100,50), cc.TEXT_ALIGNMENT_LEFT,"Arial", 32);
-     * // When three parameters - 三个参数
+     * // 三个参数
      * textField.initWithPlaceHolder("<click here for input>", "Arial", 32);
      */
 
@@ -270,7 +233,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Input text property - 设置文本
+     * 设置文本
      * @param {String} text
      */
     setString:function (text) {
@@ -291,7 +254,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Gets the string - 获得文本
+     * 获得文本
      * @return {String}
      */
     getString:function () {
@@ -299,11 +262,11 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Set the place holder. <br />  - 设置默认字符。
-     * display this string if string equal "". 展示空字符串
+     * 设置默认字符（place holder）。<br />
+     * 展示空字符串
      * @param {String} text
      */
-    setPlaceHolder:function (text) {
+    setPlaceHolder:function 9(text) {
         this._placeHolder = text || "";
         if (!this._inputText.length) {
             cc.LabelTTF.prototype.setString.call(this,this._placeHolder);
@@ -312,8 +275,8 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Gets the place holder. <br /> - 获得默认字符
-     * default display string.       - 默认展示字符
+     * 获得默认字符（place holder）。<br />
+     * 默认展示字符
      * @return {String}
      */
     getPlaceHolder:function () {
@@ -321,9 +284,8 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Render function using the canvas 2d context or WebGL context, internal usage only, please do not call this function.
 	 * 用canvas 2d或者WebGL渲染，仅内部使用，不要调用这个方法
-     * @param {CanvasRenderingContext2D | WebGLRenderingContext} ctx The render context
+     * @param {CanvasRenderingContext2D | WebGLRenderingContext} ctx 渲染环境
      */
     draw:function (ctx) {
         //console.log("size",this._contentSize);
@@ -335,7 +297,6 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Recursive method that visit its children and draw them.
 	 * 递归访问子节点并绘制
      * @param {CanvasRenderingContext2D|WebGLRenderingContext} ctx
      */
@@ -347,7 +308,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     // CCIMEDelegate interface
     //////////////////////////////////////////////////////////////////////////
     /**
-     * Open keyboard and receive input text. 打开键盘并接受输入信息
+     * 打开键盘并接受输入信息
      * @return {Boolean}
      */
     attachWithIME:function () {
@@ -355,7 +316,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * End text input  and close keyboard. 关闭键盘输入信息
+     * 关闭键盘输入信息
      * @return {Boolean}
      */
     detachWithIME:function () {
@@ -363,7 +324,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Return whether to allow attach with IME.
+	 返回是否允许附加到输入法。
      * @return {Boolean}
      */
     canAttachWithIME:function () {
@@ -371,14 +332,13 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * When the delegate detach with IME, this method call by CCIMEDispatcher.
-	 * 关闭键盘输入，方法由CCIMEDispatcher调用
+	 * 当委托附加到输入法时，此方法由CCIMEDispatcher调用。
      */
     didAttachWithIME:function () {
     },
 
     /**
-     * Return whether to allow detach with IME.  - 返回是否允许关闭键盘
+     * 返回是否允许从输入法拆离。
      * @return {Boolean}
      */
     canDetachWithIME:function () {
@@ -386,15 +346,13 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * When the delegate detach with IME, this method call by CCIMEDispatcher.
-	 * 关闭键盘输入
+     * 当委托从输入法拆离时，此方法由CCIMEDispatcher调用。
      */
     didDetachWithIME:function () {
     },
 
     /**
-     * Delete backward
-	 * 处理回退事件
+	 * 后退删除
      */
     deleteBackward:function () {
         var strLen = this._inputText.length;
@@ -423,7 +381,6 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     *  Remove delegate
 	 *  移除委托
      */
     removeDelegate:function () {
@@ -431,8 +388,8 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Append the text. <br />  - 添加文本 
-     * Input the character.     - 输入字符
+     * 添加文本。  <br /> 
+     * 输入字符
      * @param {String} text
      * @param {Number} len
      */
@@ -468,7 +425,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
     },
 
     /**
-     * Gets the input text. - 获得输入内容
+     * 获得输入内容
      * @return {String}
      */
     getContentText:function () {
@@ -490,7 +447,7 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
 
 var _p = cc.TextFieldTTF.prototype;
 
-// Extended properties  - 继承的属性
+// 继承的属性
 /** @expose */
 _p.charCount;
 cc.defineGetterSetter(_p, "charCount", _p.getCharCount);
@@ -500,9 +457,9 @@ cc.defineGetterSetter(_p, "placeHolder", _p.getPlaceHolder, _p.setPlaceHolder);
 
 
 /**
- * Please use new TextFieldTTF instead. <br /> - 请使用new TextFieldTTF()方法代替
- * Creates a cc.TextFieldTTF from a fontName, alignment, dimension and font size. - 通过字体名称、对齐方式、文本框尺寸、字体大小参数创建cc.TextFieldTTF 对象
- * @deprecated since v3.0 Please use new TextFieldTTF instead. - 3.0版本后面请使用new TextFieldTTF()方法代替
+ * 请使用new TextFieldTTF()方法代替<br />
+ * 通过字体名称、对齐方式、文本框尺寸、字体大小参数创建cc.TextFieldTTF 对象
+ * @deprecated 3.0版本后面请使用new TextFieldTTF()方法代替
  * @param {String} placeholder
  * @param {cc.Size} dimensions
  * @param {Number} alignment

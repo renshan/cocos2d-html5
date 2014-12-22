@@ -33,7 +33,7 @@ cc.HashUniformEntry = function (value, location, hh) {
 };
 
 /**
- * Class that implements a WebGL program  -该类实现了一个WebGL程序
+ * 该类实现了一个WebGL程序
  * @class
  * @extends cc.Class
  */
@@ -110,7 +110,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
 	/**
-	 * Create a cc.GLProgram object 	- 创建了一个cc.GLProgram对象
+	 * 创建了一个cc.GLProgram对象
 	 * @param {String} vShaderFileName	
 	 * @param {String} fShaderFileName
 	 * @returns {cc.GLProgram}
@@ -124,7 +124,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * destroy program	- 销毁程序
+     * 销毁程序
      */
     destroyProgram: function () {
         this._vertShader = null;
@@ -136,7 +136,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * Initializes the cc.GLProgram with a vertex and fragment with string	- 用顶点着色器和段着色器程序代码初始化cc.GLProgram对象
+     * 用顶点着色器和段着色器程序代码初始化cc.GLProgram对象
      * @param {String} vertShaderStr
      * @param {String} fragShaderStr
      * @return {Boolean}
@@ -177,7 +177,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * Initializes the cc.GLProgram with a vertex and fragment with string	- 用顶点着色器和段着色器程序代码初始化cc.GLProgram对象
+     * 用顶点着色器和段着色器程序代码初始化cc.GLProgram对象
      * @param {String} vertShaderStr
      * @param {String} fragShaderStr
      * @return {Boolean}
@@ -187,7 +187,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * Initializes the CCGLProgram with a vertex and fragment with contents of filenames	- 用顶点着色器和段着色器程序文件名初始化cc.GLProgram对象
+     * 用顶点着色器和段着色器程序文件名初始化cc.GLProgram对象
      * @param {String} vShaderFilename
      * @param {String} fShaderFileName
      * @return {Boolean}
@@ -201,7 +201,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * Initializes the CCGLProgram with a vertex and fragment with contents of filenames	- 用顶点着色器和段着色器程序文件名初始化cc.GLProgram对象
+     * 用顶点着色器和段着色器程序文件名初始化cc.GLProgram对象
      * @param {String} vShaderFilename
      * @param {String} fShaderFileName
      * @return {Boolean}
@@ -211,7 +211,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * It will add a new attribute to the shader	- 为着色器增加一个新的attribute
+     * 为着色器增加一个新的属性
      * @param {String} attributeName
      * @param {Number} index
      */
@@ -220,7 +220,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * links the glProgram	- 链接glProgram
+     * 链接glProgram
      * @return {Boolean}
      */
     link: function () {
@@ -253,14 +253,14 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * it will call glUseProgram()	- 此处会调用glUseProgram方法
+     * 此处会调用glUseProgram方法
      */
     use: function () {
         cc.glUseProgram(this._programObj);
     },
 
     /**
-     * It will create 4 uniforms:	- 该方法创建了4个uniforms变量
+     * 该方法创建了4个uniform变量
      *  cc.UNIFORM_PMATRIX
      *  cc.UNIFORM_MVMATRIX
      *  cc.UNIFORM_MVPMATRIX
@@ -285,7 +285,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls retrieves the named uniform location for this shader program.	- 根据名称从着色器程序中获得对应uniform位置
+     * 根据名称从着色器程序中获得对应uniform位置
      * @param {String} name
      * @returns {Number}
      */
@@ -299,7 +299,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * get uniform MVP matrix	- 获得MVP matrix变量
+     * 获得MVP matrix变量
      * @returns {WebGLUniformLocation}
      */
     getUniformMVPMatrix: function () {
@@ -307,7 +307,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * get uniform sampler	- 获得sampler变量
+     * 获得sampler变量
      * @returns {WebGLUniformLocation}
      */
     getUniformSampler: function () {
@@ -315,8 +315,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform1i only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform1i方法
+     * 仅仅在着色器程序值变化时会调用glUniform1i方法
      * @param {WebGLUniformLocation} location
      * @param {Number} i1
      */
@@ -327,8 +326,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform2i only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform2i方法
+     * 仅仅在着色器程序值变化时会调用glUniform2i方法
      * @param {WebGLUniformLocation} location
      * @param {Number} i1
      * @param {Number} i2
@@ -342,8 +340,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform3i only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform3i方法
+     * 仅仅在着色器程序值变化时会调用glUniform3i方法
      * @param {WebGLUniformLocation} location
      * @param {Number} i1
      * @param {Number} i2
@@ -358,8 +355,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform4i only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform4i方法
+     * 仅仅在着色器程序值变化时会调用glUniform4i方法
      * @param {WebGLUniformLocation} location
      * @param {Number} i1
      * @param {Number} i2
@@ -375,8 +371,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform2iv only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform2iv方法
+     * 仅仅在着色器程序值变化时会调用glUniform2iv方法
      * @param {WebGLUniformLocation} location
      * @param {Int32Array} intArray
      * @param {Number} numberOfArrays
@@ -389,8 +384,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform3iv only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform3iv方法
+     * 仅仅在着色器程序值变化时会调用glUniform3iv方法
      * @param {WebGLUniformLocation} location
      * @param {Int32Array} intArray
      * @param {Number} numberOfArrays
@@ -403,8 +397,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform4iv only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform4iv方法
+     * 仅仅在着色器程序值变化时会调用glUniform4iv方法
      * @param {WebGLUniformLocation} location
      * @param {Int32Array} intArray
      * @param {Number} numberOfArrays
@@ -417,8 +410,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform1i only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform1i方法
+     * 仅仅在着色器程序值变化时会调用glUniform1i方法
      * @param {WebGLUniformLocation} location
      * @param {Number} i1
      */
@@ -427,8 +419,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform1f only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform1f方法
+     * 仅仅在着色器程序值变化时会调用glUniform1f方法
      * @param {WebGLUniformLocation} location
      * @param {Number} f1
      */
@@ -439,8 +430,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform2f only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform2f方法
+     * 仅仅在着色器程序值变化时会调用glUniform2f方法
      * @param {WebGLUniformLocation} location
      * @param {Number} f1
      * @param {Number} f2
@@ -453,8 +443,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform3f only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform3f方法
+     * 仅仅在着色器程序值变化时会调用glUniform3f方法
      * @param {WebGLUniformLocation} location
      * @param {Number} f1
      * @param {Number} f2
@@ -468,8 +457,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform4f only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform4f方法
+     * 仅仅在着色器程序值变化时会调用glUniform4f方法
      * @param {WebGLUniformLocation} location
      * @param {Number} f1
      * @param {Number} f2
@@ -484,8 +472,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform2fv only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform2fv方法
+     * 仅仅在着色器程序值变化时会调用glUniform2fv方法
      * @param {WebGLUniformLocation} location
      * @param {Float32Array} floatArray
      * @param {Number} numberOfArrays
@@ -497,8 +484,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform3fv only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform3fv方法
+     * 仅仅在着色器程序值变化时会调用glUniform3fv方法
      * @param {WebGLUniformLocation} location
      * @param {Float32Array} floatArray
      * @param {Number} numberOfArrays
@@ -510,8 +496,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniform4fv only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniform4fv方法
+     * 仅仅在着色器程序值变化时会调用glUniform4fv方法
      * @param {WebGLUniformLocation} location
      * @param {Float32Array} floatArray
      * @param {Number} numberOfArrays
@@ -523,8 +508,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * calls glUniformMatrix4fv only if the values are different than the previous call for this same shader program.
-	 * 仅仅在着色器程序值变化时会调用glUniformMatrix4fv方法
+     * 仅仅在着色器程序值变化时会调用glUniformMatrix4fv方法
      * @param {WebGLUniformLocation} location
      * @param {Float32Array} matrixArray
      * @param {Number} numberOfMatrices
@@ -556,8 +540,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * will update the builtin uniforms if they are different than the previous call for this same shader program.
-	 * 在着色器程序值发生变化时会更新内置uniforms变量
+     * 在着色器程序值发生变化时会更新内置uniform变量
      */
     setUniformsForBuiltins: function () {
         var matrixP = new cc.kmMat4();
@@ -620,8 +603,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * will update the MVP matrix on the MVP uniform if it is different than the previous call for this same shader program.
-	 * 在着色器程序值发生变化时会更新MVP matrix uniforms变量值
+     * 在着色器程序值发生变化时会更新MVP matrix uniforms变量值
      */
     setUniformForModelViewProjectionMatrix: function () {
         this._glContext.uniformMatrix4fv(this._uniforms[cc.UNIFORM_MVPMATRIX], false,
@@ -646,8 +628,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * returns the vertexShader error log
-	 * 返回顶点着色器错误日志
+     * 返回顶点着色器错误日志
      * @return {String}
      */
     vertexShaderLog: function () {
@@ -655,8 +636,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * returns the vertexShader error log
-	 * 返回顶点着色器错误日志
+     * 返回顶点着色器错误日志
      * @return {String}
      */
     getVertexShaderLog: function () {
@@ -664,8 +644,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * returns the fragmentShader error log
-	 * 返回片段着色器错误日志
+     * 返回片段着色器错误日志
      * @returns {String}
      */
     getFragmentShaderLog: function () {
@@ -673,8 +652,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * returns the fragmentShader error log
-	 * 返回片段着色器错误日志
+     * 返回片段着色器错误日志
      * @return {String}
      */
     fragmentShaderLog: function () {
@@ -682,8 +660,7 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * returns the program error log
-	 * 返回程序错误日志
+     * 返回程序错误日志
      * @return {String}
      */
     programLog: function () {
@@ -691,18 +668,13 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * returns the program error log
-	 * 返回程序错误日志
+     * 返回程序错误日志
      * @return {String}
      */
     getProgramLog: function () {
         return this._glContext.getProgramInfoLog(this._programObj);
     },
 
-    /**
-     *  reload all shaders, this function is designed for android  <br/>
-     *  when opengl context lost, so don't call it.
-     */
 	 /**
 	  * 重新加载所有着色器，该方法为android设计
 	  * 当opengl上下文丢失时请不要调用该方法
@@ -727,7 +699,6 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
     },
 
     /**
-     * get WebGLProgram object
 	 * 获得WebGLProgram对象
      * @return {WebGLProgram}
      */
@@ -735,11 +706,6 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
         return this._programObj;
     },
 
-    /**
-     * Currently JavaScript Bindings (JSB), in some cases, needs to use retain and release. This is a bug in JSB,
-     * and the ugly workaround is to use retain/release. So, these 2 methods were added to be compatible with JSB.
-     * This is a hack, and should be removed once JSB fixes the retain/release bug
-     */
 	/**
      * 在当前JavaScript Bindings (JSB)中, 有时候需要 retain 和 release.这是个bug,只是为了和jsb保持一致才将这两个方法添加在这里
      * 在JSB修复retain/release 问题后这两个方法会被立刻移出
@@ -751,9 +717,8 @@ cc.GLProgram = cc.Class.extend(/** @lends cc.GLProgram# */{
 });
 
 /**
- * Create a cc.GLProgram object	- 创建一个cc.GLProgram对象
- * @deprecated -since v3.0, please use new cc.GLProgram(vShaderFileName, fShaderFileName) instead
- *			   -在3.0版本之后，请用new cc.GLProgram(vShaderFileName, fShaderFileName)方法代替
+ * 创建一个cc.GLProgram对象
+ * @deprecated -在3.0版本之后，请用new cc.GLProgram(vShaderFileName, fShaderFileName)方法代替
  * @param {String} vShaderFileName
  * @param {String} fShaderFileName
  * @returns {cc.GLProgram}
@@ -764,14 +729,14 @@ cc.GLProgram.create = function (vShaderFileName, fShaderFileName) {
 
 /**
  * <p>
- *     Sets the shader program for this node							- 为这个node设置着色器程序
+ *     为这个node设置着色器程序
  *
- *     Since v2.0, each rendering node must set its shader program.		- 从2.0版本之后，每个rendering node都会被设置一个着色器程序
- *     It should be set in initialize phase.							- 着色器程序在初始化阶段就会被设置
+ *     从2.0版本之后，每个rendering node都会被设置一个着色器程序
+ *     着色器程序在初始化阶段就会被设置
  * </p>
  * @function
  * @param {cc.Node} node
- * @param {cc.GLProgram} program The shader program which fetches from CCShaderCache.		- 从CCShaderCache缓存中获取着色器程序
+ * @param {cc.GLProgram} program 从CCShaderCache缓存中获取着色器程序
  * @example
  * cc.setGLProgram(node, cc.shaderCache.programForKey(cc.SHADER_POSITION_TEXTURECOLOR));
  */

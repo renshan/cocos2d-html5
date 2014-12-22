@@ -44,8 +44,8 @@ if (cc.ENABLE_GL_STATE_CACHE) {
 // GL State Cache functions
 
 /**
- * Invalidates the GL state cache.<br/>								- 使GL状态缓存失效
- * If CC_ENABLE_GL_STATE_CACHE it will reset the GL state cache.	- 当CC_ENABLE_GL_STATE_CACHE为真时重置GL状态缓存
+ * 使GL状态缓存失效。<br/>
+ * 当CC_ENABLE_GL_STATE_CACHE为真时重置GL状态缓存。
  * @function
  */
 cc.glInvalidateStateCache = function () {
@@ -66,8 +66,8 @@ cc.glInvalidateStateCache = function () {
 };
 
 /**
- * Uses the GL program in case program is different than the current one.<br/>		- 当GL程序跟当前不一致时使用新的GL程序
- * If CC_ENABLE_GL_STATE_CACHE is disabled, it will the glUseProgram() directly.	- 当GL状态缓存失效时立刻调用glUseProgram方法
+ * 当GL程序跟当前不一致时使用新的GL程序。 <br/>
+ * 当CC_ENABLE_GL_STATE_CACHE禁用时，直接调用glUseProgram方法。
  * @function
  * @param {WebGLProgram} program
  */
@@ -85,8 +85,8 @@ if(!cc.ENABLE_GL_STATE_CACHE){
 }
 
 /**
- * Deletes the GL program. If it is the one that is being used, it invalidates it.<br/>		- 删除GL程序，如果正被使用，则使之失效
- * If CC_ENABLE_GL_STATE_CACHE is disabled, it will the glDeleteProgram() directly.			- 当GL状态缓存失效时立刻调用glDeleteProgram方法
+ * 删除GL程序，如果正被使用，则使之失效。<br/>
+ * 当CC_ENABLE_GL_STATE_CACHE禁用时，直接调用glUseProgram方法。
  * @function
  * @param {WebGLProgram} program
  */
@@ -99,8 +99,8 @@ cc.glDeleteProgram = function (program) {
 };
 
 /**
- * Uses a blending function in case it not already used.<br/>								- 在没有使用blending方法时使用
- * If CC_ENABLE_GL_STATE_CACHE is disabled, it will the glBlendFunc() directly.     		- 当GL状态缓存失效时立刻调用glBlendFunc方法
+ * 在没有使用blending方法时使用。<br/>
+ * 当CC_ENABLE_GL_STATE_CACHE禁用时，直接调用glBlendFunc方法。
  * @function
  * @param {Number} sfactor
  * @param {Number} dfactor
@@ -155,8 +155,8 @@ if(!cc.ENABLE_GL_STATE_CACHE){
 };
 
 /**
- * Resets the blending mode back to the cached state in case you used glBlendFuncSeparate() or glBlendEquation().<br/>	- 当调用glBlendFuncSeparate或者glBlendEquation时重置图层混合模式为缓存的状态
- * If CC_ENABLE_GL_STATE_CACHE is disabled, it will just set the default blending mode using GL_FUNC_ADD.				- 在CC_ENABLE_GL_STATE_CACHE失效时,则重置图层混合模式为GL_FUNC_ADD
+ * 当调用glBlendFuncSeparate或者glBlendEquation时重置图层混合模式为缓存的状态。<br/>
+ * 在CC_ENABLE_GL_STATE_CACHE失效时，则重置图层混合模式为GL_FUNC_ADD
  * @function
  */
 cc.glBlendResetToCache = function () {
@@ -169,7 +169,7 @@ cc.glBlendResetToCache = function () {
 };
 
 /**
- * sets the projection matrix as dirty	- 设置投影矩阵为dirty
+ * 设置投影矩阵为dirty
  * @function
  */
 cc.setProjectionMatrixDirty = function () {
@@ -192,13 +192,13 @@ cc.setProjectionMatrixDirty = function () {
  
  /**
  * <p>
- *    使顶点属性像变量一样标识.  <br/> 
+ *    启用传递的顶点标识。  <br/> 
  *    可能的标识:                                           <br/>
  *    cc.VERTEX_ATTRIB_FLAG_POSITION                             <br/>
  *    cc.VERTEX_ATTRIB_FLAG_COLOR                                <br/>
  *    cc.VERTEX_ATTRIB_FLAG_TEX_COORDS                            <br/>
  *                                                              <br/>
- *    这些标识可能不存在，或者无效
+ *    这些标识可以是ORed。如果标识没有指定，则会被禁用。
  * </p>
  * @function
  * @param {cc.VERTEX_ATTRIB_FLAG_POSITION | cc.VERTEX_ATTRIB_FLAG_COLOR | cc.VERTEX_ATTRIB_FLAG_TEX_OORDS} flags
@@ -238,8 +238,8 @@ cc.glEnableVertexAttribs = function (flags) {
 };
 
 /**
- * If the texture is not already bound, it binds it.<br/>							- 绑定还没绑定的纹理
- * If CC_ENABLE_GL_STATE_CACHE is disabled, it will call glBindTexture() directly.  - 如果CC_ENABLE_GL_STATE_CACHE无效，则立刻调用glBindTexture
+ * 如果纹理没有被绑定，则绑定到0。<br/>
+ * 如果CC_ENABLE_GL_STATE_CACHE无效，则直接调用glBindTexture
  * @function
  * @param {cc.Texture2D} textureId
  */
@@ -248,8 +248,8 @@ cc.glBindTexture2D = function (textureId) {
 };
 
 /**
- * If the texture is not already bound to a given unit, it binds it.<br/>			- 绑定还没绑定的纹理到给定的单元
- * If CC_ENABLE_GL_STATE_CACHE is disabled, it will call glBindTexture() directly.  - 如果CC_ENABLE_GL_STATE_CACHE无效，则立刻调用glBindTexture
+ * 如果纹理没有被绑定到传入的单位，则绑定它。<br/>
+ * 如果CC_ENABLE_GL_STATE_CACHE无效，则直接调用glBindTexture。
  * @function
  * @param {Number} textureUnit
  * @param {cc.Texture2D} textureId
@@ -278,8 +278,8 @@ if (!cc.ENABLE_GL_STATE_CACHE){
 }
 
 /**
- * It will delete a given texture. If the texture was bound, it will invalidate the cached. <br/> - 删除给定纹理, 如果该纹理已绑定，则会从缓存中失效
- * If CC_ENABLE_GL_STATE_CACHE is disabled, it will call glDeleteTextures() directly.             - 如果CC_ENABLE_GL_STATE_CACHE无效，则立刻调用glDeleteTextures方法
+ * 删除给定纹理, 如果该纹理已绑定，则会从缓存中失效。<br/>
+ * 如果CC_ENABLE_GL_STATE_CACHE无效，则直接调用glDeleteTextures方法
  * @function
  * @param {WebGLTexture} textureId
  */
@@ -288,8 +288,8 @@ cc.glDeleteTexture = function (textureId) {
 };
 
 /**
- * It will delete a given texture. If the texture was bound, it will invalidate the cached for the given texture unit.<br/> - 删除给定纹理, 如果该纹理已绑定，则会从缓存的纹理单元失效
- * If CC_ENABLE_GL_STATE_CACHE is disabled, it will call glDeleteTextures() directly.										- 如果CC_ENABLE_GL_STATE_CACHE无效，则立刻调用glDeleteTextures方法
+ * 删除给定纹理, 如果该纹理已绑定，则会从缓存的纹理单元失效。<br/>
+ * 如果CC_ENABLE_GL_STATE_CACHE无效，则直接调用glDeleteTextures方法。
  * @function
  * @param {Number} textureUnit
  * @param {WebGLTexture} textureId
@@ -303,8 +303,8 @@ cc.glDeleteTextureN = function (textureUnit, textureId) {
 };
 
 /**
- * If the vertex array is not already bound, it binds it.<br/>							- 如果顶点数组还未绑定，则绑定
- * If CC_ENABLE_GL_STATE_CACHE is disabled, it will call glBindVertexArray() directly.	- 如果CC_ENABLE_GL_STATE_CACHE无效，则立刻调用glBindVertexArray方法
+ * 如果顶点数组还未绑定，则绑定它。<br/>
+ * 如果CC_ENABLE_GL_STATE_CACHE无效，则直接调用glBindVertexArray方法。
  * @function
  * @param {Number} vaoId
  */
@@ -324,8 +324,8 @@ cc.glBindVAO = function (vaoId) {
 };
 
 /**
- * It will enable / disable the server side GL states.<br/>                   - 开启/关闭服务端GL状态
- * If CC_ENABLE_GL_STATE_CACHE is disabled, it will call glEnable() directly. - 如果CC_ENABLE_GL_STATE_CACHE无效，则立刻调用glEnable方法
+ * 开启/关闭服务端GL状态。<br/>
+ * 如果CC_ENABLE_GL_STATE_CACHE无效，则直接调用glEnable方法。
  * @function
  * @param {Number} flags
  */

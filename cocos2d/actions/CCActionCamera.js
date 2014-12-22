@@ -25,7 +25,7 @@
  ****************************************************************************/
 
 /**
- * Base class for cc.Camera actions -cc.Camera动作的基类
+ * cc.Camera动作的基类
  * @class
  * @extends cc.ActionInterval
  */
@@ -41,8 +41,7 @@ cc.ActionCamera = cc.ActionInterval.extend(/** @lends cc.ActionCamera# */{
     _upZOrig:0,
 
     /**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-     * 构造函数， 通过重写此函数来继承构造函数行为， 在继承此函数的时候要调用"this._super()"函数
+     * 构造函数,通过重写此函数来继承构造函数行为， 在继承此函数的时候要调用"this._super()"函数
      */
     ctor:function(){
         var _t = this;
@@ -60,9 +59,7 @@ cc.ActionCamera = cc.ActionInterval.extend(/** @lends cc.ActionCamera# */{
     },
 
     /**
-     * called before the action start. It will also set the target.
-     * 在此动作开始执行之前调用会设置执行的对象
-     *
+     * 在动作开始前调用此方法.该方法仍然会设置这个对象.
      * @param {cc.Node} target
      */
     startWithTarget:function (target) {
@@ -87,9 +84,7 @@ cc.ActionCamera = cc.ActionInterval.extend(/** @lends cc.ActionCamera# */{
     },
 
     /**
-     * to copy object with deep copy.
-     * returns a new clone of the action
-     * 深拷贝一个对象，返回一个新的动作副本
+     * 深拷贝一个对象 返回一个动作的克隆
      *
      * @returns {cc.ActionCamera}
      */
@@ -98,17 +93,11 @@ cc.ActionCamera = cc.ActionInterval.extend(/** @lends cc.ActionCamera# */{
     },
 
     /**
-     * returns a reversed action. <br />
-     * For example: <br />
-     * - The action will be x coordinates of 0 move to 100. <br />
-     * - The reversed action will be x of 100 move to 0.
-     * - Will be rewritten
-     *
-     * 返回一个相反的动作<br>
+     * 返回一个逆动作<br>
      * 例如：<br>
      * - 一个X轴坐标从0移动到100的动作<br>
-     * - 它的相反动作是从100移动到0
-     * - 可以重写
+     * - 它的逆动作是从100移动到0
+     * - 这个函数可以被重写
      */
     reverse:function () {
         return new cc.ReverseTime(this);
@@ -116,7 +105,6 @@ cc.ActionCamera = cc.ActionInterval.extend(/** @lends cc.ActionCamera# */{
 });
 
 /**
- * Orbits the camera around the center of the screen using spherical coordinates.
  * 使用圆形坐标系将相机轨道保持在屏幕中心周围
  * @param {Number} t time
  * @param {Number} radius
@@ -141,9 +129,7 @@ cc.OrbitCamera = cc.ActionCamera.extend(/** @lends cc.OrbitCamera# */{
     _radX: 0.0,
     _radDeltaX: 0.0,
 
-	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * creates a cc.OrbitCamera action with radius, delta-radius,  z, deltaZ, x, deltaX.
+   /**
      * 构造函数，重写此函数以表现构造函数行为，在继承ctor函数的时候应调用"this._super()".<br>
      * 使用radius半径， delta-radius相对半径， z深度， deltaZ相对深度, x水平位置, deltaX相对水平位置创建一个 cc.OrbitCamera
 	 * @param {Number} t time
@@ -161,7 +147,6 @@ cc.OrbitCamera = cc.ActionCamera.extend(/** @lends cc.OrbitCamera# */{
     },
 
     /**
-     * initializes a cc.OrbitCamera action with radius, delta-radius,  z, deltaZ, x, deltaX
      * 使用radius, delta-radius, z, deltaZ, x, deltaX 初始化一个 cc.OrbitCamera动作
      *
      * @param {Number} t time
@@ -191,8 +176,7 @@ cc.OrbitCamera = cc.ActionCamera.extend(/** @lends cc.OrbitCamera# */{
     },
 
     /**
-     * positions the camera according to spherical coordinates
-     * 根相机在球面坐标的位置
+     * 相机在球面坐标的位置
      * @return {Object}
      */
     sphericalRadius:function () {
@@ -220,8 +204,7 @@ cc.OrbitCamera = cc.ActionCamera.extend(/** @lends cc.OrbitCamera# */{
     },
 
     /**
-     * called before the action start. It will also set the target.
-     * 在动作开始之前调用设置动作对象
+     * 在动作开始前调用此方法.该方法仍然会设置这个对象.
      * @param {cc.Node} target
      */
     startWithTarget:function (target) {
@@ -242,11 +225,7 @@ cc.OrbitCamera = cc.ActionCamera.extend(/** @lends cc.OrbitCamera# */{
     },
 
     /**
-     * to copy object with deep copy.
-     * returns a new clone of the action
-     * 深拷贝一个对象
-     * 返回一个动作的新副本
-     * 
+     * 深拷贝一个对象 返回一个动作的克隆
      * @returns {cc.ActionCamera}
      */
     clone:function(){
@@ -256,9 +235,7 @@ cc.OrbitCamera = cc.ActionCamera.extend(/** @lends cc.OrbitCamera# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * 每一帧调用一次。时间单位是每一帧持续的时间秒。
-     *
+     * 每一帧调用一次。时间单位是每一帧持续的时间(秒)。
      * @param {Number}  dt
      */
     update:function (dt) {
@@ -277,16 +254,15 @@ cc.OrbitCamera = cc.ActionCamera.extend(/** @lends cc.OrbitCamera# */{
 });
 
 /**
- * creates a cc.OrbitCamera action with radius, delta-radius,  z, deltaZ, x, deltaX
  * 创建一个 cc.OrbitCamera动作 使用radius, delta-radius, z, deltaZ, x, deltaX参数
  * @function
- * @param {Number} t time             Ê±¼ä
- * @param {Number} radius             °ë¾¶
- * @param {Number} deltaRadius        Ïà¶Ô°ë¾¶
- * @param {Number} angleZ             zÖá½Ç¶È
- * @param {Number} deltaAngleZ        zÖáÏà¶Ô½Ç¶È
- * @param {Number} angleX             xÖá½Ç¶È
- * @param {Number} deltaAngleX        xÖáÏà¶Ô½Ç¶È
+ * @param {Number} t time             
+ * @param {Number} radius             
+ * @param {Number} deltaRadius        
+ * @param {Number} angleZ             
+ * @param {Number} deltaAngleZ        
+ * @param {Number} angleX             
+ * @param {Number} deltaAngleX        
  * @return {cc.OrbitCamera}
  */
 cc.orbitCamera = function (t, radius, deltaRadius, angleZ, deltaAngleZ, angleX, deltaAngleX) {
@@ -294,8 +270,6 @@ cc.orbitCamera = function (t, radius, deltaRadius, angleZ, deltaAngleZ, angleX, 
 };
 
 /**
- * Please use cc.orbitCamera instead
- * creates a cc.OrbitCamera action with radius, delta-radius,  z, deltaZ, x, deltaX
  * 请使用cc.orbitCamera代替此方法
  * 创建一个 cc.OrbitCamera动作 使用radius, delta-radius, z, deltaZ, x, deltaX参数
  * @param {Number} t time
@@ -307,6 +281,6 @@ cc.orbitCamera = function (t, radius, deltaRadius, angleZ, deltaAngleZ, angleX, 
  * @param {Number} deltaAngleX
  * @return {cc.OrbitCamera}
  * @static
- * @deprecated since v3.0 please use cc.orbitCamera() instead.
+ * 自v3.0版本以后请使用cc.orbitCamera()代替此方法
  */
 cc.OrbitCamera.create = cc.orbitCamera;

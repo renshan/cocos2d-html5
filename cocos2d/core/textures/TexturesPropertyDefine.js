@@ -30,13 +30,11 @@ cc._tmp.PrototypeTexture2D = function () {
 
     /**
      * <p>
-     *    treats (or not) PVR files as if they have alpha premultiplied.                                                <br/>
-     *    Since it is impossible to know at runtime if the PVR images have the alpha channel premultiplied, it is       <br/>
-     *    possible load them as if they have (or not) the alpha channel premultiplied.                                  <br/>
-     *                                                                                                                  <br/>
-     *    By default it is disabled.                                                                                    <br/>
+     * 设置PVR格式图像是否左乘alpha值。<br/>
+	 * 在运行时无法获取PVR图片是否已左乘alpha通道值，<br/>
+	 * 所以在指定在加载时是否左乘alpha值<br/>
+	 * 默认禁用。
      * </p>
-     * 处理PVR文件时是否预乘alpha通道。如果PVR图片已经预乘了alpha通道，运行时可以知道，这样加载时可以按照是否预乘了alpha通道处理。默认禁用。
      * @param haveAlphaPremultiplied
      */
     _c.PVRImagesHavePremultipliedAlpha = function (haveAlphaPremultiplied) {
@@ -44,7 +42,7 @@ cc._tmp.PrototypeTexture2D = function () {
     };
 
     /**
-     * 32-bit texture: RGBA8888
+     * 32位纹理: RGBA8888
      * @memberOf cc.Texture2D
      * @name PIXEL_FORMAT_RGBA8888
      * @static
@@ -54,7 +52,7 @@ cc._tmp.PrototypeTexture2D = function () {
     _c.PIXEL_FORMAT_RGBA8888 = 2;
 
     /**
-     * 24-bit texture: RGBA888
+     * 24位纹理: RGBA888
      * @memberOf cc.Texture2D
      * @name PIXEL_FORMAT_RGB888
      * @static
@@ -64,7 +62,7 @@ cc._tmp.PrototypeTexture2D = function () {
     _c.PIXEL_FORMAT_RGB888 = 3;
 
     /**
-     * 16-bit texture without Alpha channel
+     * 不包含alpha通道的16位纹理
      * @memberOf cc.Texture2D
      * @name PIXEL_FORMAT_RGB565
      * @static
@@ -74,7 +72,7 @@ cc._tmp.PrototypeTexture2D = function () {
     _c.PIXEL_FORMAT_RGB565 = 4;
 
     /**
-     * 8-bit textures used as masks
+     * 作为遮罩（mask）的8位纹理
      * @memberOf cc.Texture2D
      * @name PIXEL_FORMAT_A8
      * @static
@@ -84,7 +82,7 @@ cc._tmp.PrototypeTexture2D = function () {
     _c.PIXEL_FORMAT_A8 = 5;
 
     /**
-     * 8-bit intensity texture
+     * 8位灰度纹理
      * @memberOf cc.Texture2D
      * @name PIXEL_FORMAT_I8
      * @static
@@ -94,7 +92,7 @@ cc._tmp.PrototypeTexture2D = function () {
     _c.PIXEL_FORMAT_I8 = 6;
 
     /**
-     * 16-bit textures used as masks
+     * 用于遮罩（mask）的16位纹理
      * @memberOf cc.Texture2D
      * @name PIXEL_FORMAT_AI88
      * @static
@@ -104,7 +102,7 @@ cc._tmp.PrototypeTexture2D = function () {
     _c.PIXEL_FORMAT_AI88 = 7;
 
     /**
-     * 16-bit textures: RGBA4444
+     * 16位纹理: RGBA4444
      * @memberOf cc.Texture2D
      * @name PIXEL_FORMAT_RGBA4444
      * @static
@@ -114,7 +112,7 @@ cc._tmp.PrototypeTexture2D = function () {
     _c.PIXEL_FORMAT_RGBA4444 = 8;
 
     /**
-     * 16-bit textures: RGB5A1
+     * 16位纹理: RGB5A1
      * @memberOf cc.Texture2D
      * @name PIXEL_FORMAT_RGB5A1
      * @static
@@ -124,7 +122,7 @@ cc._tmp.PrototypeTexture2D = function () {
     _c.PIXEL_FORMAT_RGB5A1 = 7;
 
     /**
-     * 4-bit PVRTC-compressed texture: PVRTC4
+     * 4位PVRTC压缩纹理: PVRTC4
      * @memberOf cc.Texture2D
      * @name PIXEL_FORMAT_PVRTC4
      * @static
@@ -134,7 +132,7 @@ cc._tmp.PrototypeTexture2D = function () {
     _c.PIXEL_FORMAT_PVRTC4 = 9;
 
     /**
-     * 2-bit PVRTC-compressed texture: PVRTC2
+     * 2位PVRTC压缩纹理: PVRTC2
      * @memberOf cc.Texture2D
      * @name PIXEL_FORMAT_PVRTC2
      * @static
@@ -144,7 +142,7 @@ cc._tmp.PrototypeTexture2D = function () {
     _c.PIXEL_FORMAT_PVRTC2 = 10;
 
     /**
-     * Default texture format: RGBA8888
+     * 默认纹理格式: RGBA8888
      * @memberOf cc.Texture2D
      * @name PIXEL_FORMAT_DEFAULT
      * @static

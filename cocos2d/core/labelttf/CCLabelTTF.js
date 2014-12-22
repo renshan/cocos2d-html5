@@ -25,16 +25,10 @@
  ****************************************************************************/
 
 /**
- * <p>cc.LabelTTF is a subclass of cc.TextureNode that knows how to render text labels with system font or a ttf font file<br/>
- * All features from cc.Sprite are valid in cc.LabelTTF<br/>
- * cc.LabelTTF objects are slow for js-binding on mobile devices.<br/>
- * Consider using cc.LabelAtlas or cc.LabelBMFont instead.<br/>
- * You can create a cc.LabelTTF from a font name, alignment, dimension and font size or a cc.FontDefinition object.</p>
- * cc.LabelTTF是cc.TextureNode的子类，此类可以使用系统字体或者指定的ttf字体文件在游戏中显示文本
- * 所有cc.Sprite的特性都可以在cc.LabelTTF中使用
- * cc.LabelTTF对象在使用js-binding方式编译的移动设备app上运行比较缓慢
- * 可以考虑使用cc.LabelAtlas或者cc.LabelBMFont来代替之
- * 你在创建cc.LabelTTF的时候可以指定字体名称、字体对齐方式、字体尺寸和字体大小，或者使用cc.FontDefinition对象来创建
+ * <p>cc.LabelTTF是cc.TextureNode的子类，此类可以使用系统字体或者指定的ttf字体文件在游戏中显示文本。<br/>
+ * 所有cc.Sprite的特性都可以在cc.LabelTTF中使用。<br/>
+ * cc.LabelTTF对象在使用js-binding方式编译的移动设备app上运行比较缓慢，可以考虑使用cc.LabelAtlas或者cc.LabelBMFont来代替。<br/>
+ * 你在创建cc.LabelTTF的时候可以指定字体名称、字体对齐方式、字体尺寸和字体大小，或者使用cc.FontDefinition对象来创建。</p>
  * @class
  * @extends cc.Sprite
  *
@@ -52,36 +46,21 @@
  * fontDef.fontSize = "32";
  * var myLabel = new cc.LabelTTF('label text',  fontDef);
  *
- * @property {String}       string          - Content string of label
- * 标签的内容
- * @property {Number}       textAlign       - Horizontal Alignment of label: cc.TEXT_ALIGNMENT_LEFT|cc.TEXT_ALIGNMENT_CENTER|cc.TEXT_ALIGNMENT_RIGHT
- * 标签水平对齐可以传入：cc.TEXT_ALIGNMENT_LEFT|cc.TEXT_ALIGNMENT_CENTER|cc.TEXT_ALIGNMENT_RIGHT
- * @property {Number}       verticalAlign   - Vertical Alignment of label: cc.VERTICAL_TEXT_ALIGNMENT_TOP|cc.VERTICAL_TEXT_ALIGNMENT_CENTER|cc.VERTICAL_TEXT_ALIGNMENT_BOTTOM
- * 标签垂直对齐可以传入：cc.VERTICAL_TEXT_ALIGNMENT_TOP|cc.VERTICAL_TEXT_ALIGNMENT_CENTER|cc.VERTICAL_TEXT_ALIGNMENT_BOTTOM
- * @property {Number}       fontSize        - Font size of label
- * 标签的字体大小
- * @property {String}       fontName        - Font name of label
- * 标签名称
- * @property {String}       font            - The label font with a style string: e.g. "18px Verdana"
- * 标签的字体，可以用样式字符串表示，例如"18px Verdan"
- * @property {Number}       boundingWidth   - Width of the bounding box of label, the real content width is limited by boundingWidth
- * 标签的绑定区域宽度，实际的标签内容宽度最大不能超过boundingWidth
- * @property {Number}       boundingHeight  - Height of the bounding box of label, the real content height is limited by boundingHeight
- * 标签的绑定区域高度，实际的标签内容高度最大不能超过boundingHeight
- * @property {cc.Color}     fillStyle       - The fill color
- * 填充的颜色
- * @property {cc.Color}     strokeStyle     - The stroke color
- * 描边颜色
- * @property {Number}       lineWidth       - The line width for stroke
- * 描边的宽度
- * @property {Number}       shadowOffsetX   - The x axis offset of shadow
- * 阴影的x轴偏移
- * @property {Number}       shadowOffsetY   - The y axis offset of shadow
- * 阴影的y轴偏移
- * @property {Number}       shadowOpacity   - The opacity of shadow
- * 阴影的y轴偏移
- * @property {Number}       shadowBlur      - The blur size of shadow
- * 阴影的模糊大小
+ * @property {String}       string          - 标签的内容
+ * @property {Number}       textAlign       - 标签水平对齐可以传入：cc.TEXT_ALIGNMENT_LEFT|cc.TEXT_ALIGNMENT_CENTER|cc.TEXT_ALIGNMENT_RIGHT
+ * @property {Number}       verticalAlign   - 标签垂直对齐可以传入：cc.VERTICAL_TEXT_ALIGNMENT_TOP|cc.VERTICAL_TEXT_ALIGNMENT_CENTER|cc.VERTICAL_TEXT_ALIGNMENT_BOTTOM
+ * @property {Number}       fontSize        - 标签的字体大小
+ * @property {String}       fontName        - 标签名称
+ * @property {String}       font            - 可以用样式字符串表示标签的字体，例如"18px Verdan"
+ * @property {Number}       boundingWidth   - 绑定区域标签的宽度，实际的标签内容宽度最大不能超过boundingWidth
+ * @property {Number}       boundingHeight  - 绑定区域标签的高度，实际的标签内容高度最大不能超过boundingHeight
+ * @property {cc.Color}     fillStyle       -  填充的颜色
+ * @property {cc.Color}     strokeStyle     -  描边颜色
+ * @property {Number}       lineWidth       -  描边的宽度
+ * @property {Number}       shadowOffsetX   - 阴影的x轴偏移
+ * @property {Number}       shadowOffsetY   - 阴影的y轴偏移
+ * @property {Number}       shadowOpacity   - 阴影的y轴偏移
+ * @property {Number}       shadowBlur      - 阴影的模糊大小
  */
 cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     _dimensions: null,
@@ -94,8 +73,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     _isMultiLine: false,
     _fontStyleStr: null,
 
-    // font shadow
-	// 字体阴影属性
+    //字体阴影属性
     _shadowEnabled: false,
     _shadowOffset: null,
     _shadowOpacity: 0,
@@ -103,15 +81,13 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     _shadowColorStr: null,
     _shadowColor: null,
 
-    // font stroke
-	// 字体描边属性
+    // 字体描边属性
     _strokeEnabled: false,
     _strokeColor: null,
     _strokeSize: 0,
     _strokeColorStr: null,
 
-    // font tint
-	// 字体色彩属性
+    //字体色彩属性
     _textFillColor: null,
     _fillColorStr: null,
 
@@ -127,10 +103,8 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     _lineHeight: 0,
 
     /**
-     * Initializes the cc.LabelTTF with a font name, alignment, dimension and font size, do not call it by yourself,
-     * you should pass the correct arguments in constructor to initialize the label.
-	 * 使用字体名称、对齐方式、字体尺寸和字体大小初始化cc.LabelTTF，请不要直接使用此函数初始化，
-	 * 应当在cc.LabelTTF的构造函数中使用正确的参数来初始化cc.LabelTTF
+     * 使用字体名称、对齐方式、字体尺寸和字体大小初始化cc.LabelTTF，请不要直接使用此函数初始化，
+     * 应当在cc.LabelTTF的构造函数中使用正确的参数来初始化cc.LabelTTF
      * @param {String} label string
      * @param {String} fontName
      * @param {Number} fontSize
@@ -251,8 +225,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Returns the text of the label
-	 * 返回标签的文本字符串
+     * 返回标签的文本字符串
      * @return {String}
      */
     getString: function () {
@@ -260,8 +233,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Returns Horizontal Alignment of cc.LabelTTF
-	 * 返回cc.LabelTTF的垂直对齐方式
+     * 返回cc.LabelTTF的垂直对齐方式
      * @return {cc.TEXT_ALIGNMENT_LEFT|cc.TEXT_ALIGNMENT_CENTER|cc.TEXT_ALIGNMENT_RIGHT}
      */
     getHorizontalAlignment: function () {
@@ -269,8 +241,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Returns Vertical Alignment of cc.LabelTTF
-	 * 返回cc.LabelTTF的垂直对齐方式
+     * 返回cc.LabelTTF的垂直对齐方式
      * @return {cc.VERTICAL_TEXT_ALIGNMENT_TOP|cc.VERTICAL_TEXT_ALIGNMENT_CENTER|cc.VERTICAL_TEXT_ALIGNMENT_BOTTOM}
      */
     getVerticalAlignment: function () {
@@ -278,9 +249,8 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Returns the dimensions of cc.LabelTTF, the dimension is the maximum size of the label, set it so that label will automatically change lines when necessary.
      * 返回cc.LabelTTF的尺寸，这个尺寸是标签的最大尺寸，设置这个值将会在必要的时候自动改变线条
-	 * @see cc.LabelTTF#setDimensions, cc.LabelTTF#boundingWidth and cc.LabelTTF#boundingHeight
+     * @see cc.LabelTTF#setDimensions, cc.LabelTTF#boundingWidth and cc.LabelTTF#boundingHeight
      * @return {cc.Size}
      */
     getDimensions: function () {
@@ -288,8 +258,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Returns font size of cc.LabelTTF
-	 * 返回cc.LabelTTF的字体大小
+     * 返回cc.LabelTTF的字体大小
      * @return {Number}
      */
     getFontSize: function () {
@@ -297,8 +266,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Returns font name of cc.LabelTTF
-	 * 返回cc.LabelTTF的字体名称
+     * 返回cc.LabelTTF的字体名称
      * @return {String}
      */
     getFontName: function () {
@@ -306,18 +274,16 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Initializes the CCLabelTTF with a font name, alignment, dimension and font size, do not call it by yourself, you should pass the correct arguments in constructor to initialize the label.
-	 * 使用字体名称、对齐方式、字体尺寸和字体大小初始化cc.LabelTTF，请不要直接使用此函数初始化，
-	 * 应当在cc.LabelTTF的构造函数中使用正确的参数来初始化cc.LabelTTF
-	 * @param {String} text
+     * 使用字体名称、对齐方式、字体尺寸和字体大小初始化cc.LabelTTF，请不要直接使用此函数初始化，
+     * 应当在cc.LabelTTF的构造函数中使用正确的参数来初始化cc.LabelTTF。
+     * @param {String} text
      * @param {cc.FontDefinition} textDefinition
      * @return {Boolean}
      */
     initWithStringAndTextDefinition: null,
 
     /**
-     * Sets the text definition used by this label
-	 * 设置此标签的文本属性
+     * 设置此标签的文本属性
      * @param {cc.FontDefinition} theDefinition
      */
     setTextDefinition: function (theDefinition) {
@@ -326,8 +292,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Extract the text definition used by this label
-	 * 获取此标签的文本属性
+     * 获取此标签的文本属性
      * @return {cc.FontDefinition}
      */
     getTextDefinition: function () {
@@ -335,17 +300,12 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Enable or disable shadow for the label
-	 * 开启或者关闭标签阴影
-     * @param {cc.Color | Number} a Color or The x axis offset of the shadow
-	 * 阴影的颜色或者是x轴偏移
-     * @param {cc.Size | Number} b Size or The y axis offset of the shadow
-	 * 阴影的尺寸或者是y轴偏移
-     * @param {Number} c The blur size of the shadow or The opacity of the shadow (0 to 1)
-	 * 阴影的模糊大小或者是阴影的透明度（值从0到1）
-     * @param {null | Number} d Null or The blur size of the shadow
-	 * 空值或者是阴影的模糊大小
-     * @example
+     * 开启或者关闭标签阴影
+     * @param {cc.Color | Number} a 阴影的颜色或者是x轴偏移
+     * @param {cc.Size | Number} b 阴影的尺寸或者是y轴偏移
+     * @param {Number} c 阴影的模糊大小或者是阴影的透明度（值从0到1）
+     * @param {null | Number} d 空值或者是阴影的模糊大小
+     * @ example
      *   old:
      *     labelttf.enableShadow(shadowOffsetX, shadowOffsetY, shadowOpacity, shadowBlur);
      *   new:
@@ -466,8 +426,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Disable shadow rendering
-	 * 关闭阴影渲染
+     * 关闭阴影渲染
      */
     disableShadow: function () {
         if (this._shadowEnabled) {
@@ -477,12 +436,9 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Enable label stroke with stroke parameters
-	 * 启用标签描边，传入描边参数
-     * @param {cc.Color} strokeColor The color of stroke
-	 * 描边的颜色
-     * @param {Number} strokeSize The size of stroke
-	 * 描边的大小
+     * 启用标签描边，传入描边参数
+     * @param {cc.Color} 描边的颜色
+     * @param {Number} 描边的大小
      */
     enableStroke: function (strokeColor, strokeSize) {
         if (this._strokeEnabled === false)
@@ -531,8 +487,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Disable label stroke
-	 * 关闭标签的描边
+     * 关闭标签的描边
      */
     disableStroke: function () {
         if (this._strokeEnabled) {
@@ -542,11 +497,9 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Sets the text fill color
-	 * 设置文本的填充颜色
+     * 设置文本的填充颜色
      * @function
-     * @param {cc.Color} fillColor The fill color of the label
-	 * 文本的填充颜色
+     * @param {cc.Color} fillColor 文本的填充颜色
      */
     setFontFillColor: null,
 
@@ -554,8 +507,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         return this._textFillColor;
     },
 
-    //set the text definition for this label
-	//设置这个标签的文本属性
+    // 设置这个标签的文本属性
     _updateWithTextDefinition: function (textDefinition, mustUpdateTexture) {
         if (textDefinition.fontDimensions) {
             this._dimensions.width = textDefinition.boundingWidth;
@@ -573,18 +525,18 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         this._fontStyleStr = this._fontSize + "px '" + this._fontName + "'";
         this._fontClientHeight = cc.LabelTTF.__getFontHeightByDiv(this._fontName, this._fontSize);
 
-        // shadow阴影
+        // 阴影
         if (textDefinition.shadowEnabled)
             this.enableShadow(textDefinition.shadowOffsetX,
                 textDefinition.shadowOffsetY,
                 textDefinition.shadowOpacity,
                 textDefinition.shadowBlur);
 
-        // stroke描边
+        // 描边
         if (textDefinition.strokeEnabled)
             this.enableStroke(textDefinition.strokeStyle, textDefinition.lineWidth);
 
-        // fill color填充颜色
+        // 填充颜色
         this.setFontFillColor(textDefinition.fillStyle);
 
         if (mustUpdateTexture)
@@ -609,7 +561,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         texDef.textAlign = this._hAlignment;
         texDef.verticalAlign = this._vAlignment;
 
-        // stroke描边
+        // 描边
         if (this._strokeEnabled) {
             texDef.strokeEnabled = true;
             var locStrokeColor = this._strokeColor;
@@ -618,7 +570,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         } else
             texDef.strokeEnabled = false;
 
-        // shadow阴影
+        // 阴影
         if (this._shadowEnabled) {
             texDef.shadowEnabled = true;
             texDef.shadowBlur = this._shadowBlur;
@@ -629,7 +581,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         } else
             texDef._shadowEnabled = false;
 
-        // text tint文本颜色
+        // 文本颜色
         var locTextFillColor = this._textFillColor;
         texDef.fillStyle = cc.color(locTextFillColor.r, locTextFillColor.g, locTextFillColor.b);
         return texDef;
@@ -638,12 +590,9 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     _fontClientHeight: 18,
 
     /**
-     * Changes the text content of the label
-	 * 改变标签的文本内容
-     * @warning Changing the string is as expensive as creating a new cc.LabelTTF. To obtain better performance use cc.LabelAtlas
-	 * 使用cc.LabelTTF改变标签文本的内容会比较消耗资源，建议使用效率更高的cc.LabelAtlas
-     * @param {String} text Text content for the label
-	 * 标签的文本内容
+     * 改变标签的文本内容
+     * @warning：使用cc.LabelTTF改变标签文本的内容会比较消耗资源，建议使用效率更高的cc.LabelAtlas
+     * @param {String} text 标签的文本内容
      */
     setString: function (text) {
         text = String(text);
@@ -652,7 +601,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
 
             this._updateString();
 
-            // Force update强制刷新
+            // 强制刷新
             this._setUpdateTextureDirty();
         }
     },
@@ -664,22 +613,20 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Sets Horizontal Alignment of cc.LabelTTF
-	 * 设置cc.LabelTTF的水平对齐方式
+     * 设置cc.LabelTTF的水平对齐方式
      * @param {cc.TEXT_ALIGNMENT_LEFT|cc.TEXT_ALIGNMENT_CENTER|cc.TEXT_ALIGNMENT_RIGHT} alignment Horizontal Alignment
      */
     setHorizontalAlignment: function (alignment) {
         if (alignment !== this._hAlignment) {
             this._hAlignment = alignment;
 
-            // Force update强制刷新
+            // 强制刷新
             this._setUpdateTextureDirty();
         }
     },
 
     /**
-     * Sets Vertical Alignment of cc.LabelTTF
-	 * 设置cc.LabelTTF的垂直对齐方式
+     * 设置cc.LabelTTF的垂直对齐方式
      * @param {cc.VERTICAL_TEXT_ALIGNMENT_TOP|cc.VERTICAL_TEXT_ALIGNMENT_CENTER|cc.VERTICAL_TEXT_ALIGNMENT_BOTTOM} verticalAlignment
      */
     setVerticalAlignment: function (verticalAlignment) {
@@ -692,10 +639,9 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     },
 
     /**
-     * Set Dimensions of cc.LabelTTF, the dimension is the maximum size of the label, set it so that label will automatically change lines when necessary.
      * 设置cc.LabelTTF的尺寸，这个尺寸是这个标签大小的最大值，设置这个值将会在必要的时候自动改变线条
-	 * @param {cc.Size|Number} dim dimensions or width of dimensions
-     * @param {Number} [height] height of dimensions
+     * @param {cc.Size|Number} dim 尺寸或者尺寸宽度
+     * @param {Number} [height] 尺寸的高度
      */
     setDimensions: function (dim, height) {
         var width;
@@ -709,7 +655,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             this._dimensions.width = width;
             this._dimensions.height = height;
             this._updateString();
-            // Force udpate强制刷新
+            // 强制刷新
             this._setUpdateTextureDirty();
         }
     },
@@ -721,7 +667,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         if (width != this._dimensions.width) {
             this._dimensions.width = width;
             this._updateString();
-            // Force udpate强制刷新
+            // 强制刷新
             this._setUpdateTextureDirty();
         }
     },
@@ -733,14 +679,13 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         if (height != this._dimensions.height) {
             this._dimensions.height = height;
             this._updateString();
-            // Force udpate强制刷新
+            // 强制刷新
             this._setUpdateTextureDirty();
         }
     },
 
     /**
-     * Sets font size of cc.LabelTTF
-	 * 设置cc.LabelTTF的字体大小
+     * 设置cc.LabelTTF的字体大小
      * @param {Number} fontSize
      */
     setFontSize: function (fontSize) {
@@ -748,14 +693,13 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             this._fontSize = fontSize;
             this._fontStyleStr = fontSize + "px '" + this._fontName + "'";
             this._fontClientHeight = cc.LabelTTF.__getFontHeightByDiv(this._fontName, fontSize);
-            // Force update强制刷新
+            // 强制刷新
             this._setUpdateTextureDirty();
         }
     },
 
     /**
-     * Sets font name of cc.LabelTTF
-	 * 设置cc.LabelTTF的名称
+     * 设置cc.LabelTTF的名称
      * @param {String} fontName
      */
     setFontName: function (fontName) {
@@ -763,7 +707,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             this._fontName = fontName;
             this._fontStyleStr = this._fontSize + "px '" + fontName + "'";
             this._fontClientHeight = cc.LabelTTF.__getFontHeightByDiv(fontName, this._fontSize);
-            // Force update强制刷新
+            // 强制刷新
             this._setUpdateTextureDirty();
         }
     },
@@ -778,7 +722,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             this._fontName = res[2];
             this._fontStyleStr = fontStyle;
             this._fontClientHeight = cc.LabelTTF.__getFontHeightByDiv(this._fontName, this._fontSize);
-            // Force update强制刷新
+            // 强制刷新
             this._setUpdateTextureDirty();
         }
     },
@@ -792,20 +736,20 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
 
         context.setTransform(1, 0, 0, 1, 0 + locStrokeShadowOffsetX * 0.5, locContentSizeHeight + locStrokeShadowOffsetY * 0.5);
 
-        //this is fillText for canvas画布的填充文本
+        //画布的填充文本
         if (context.font != this._fontStyleStr)
             context.font = this._fontStyleStr;
         context.fillStyle = this._fillColorStr;
 
         var xOffset = 0, yOffset = 0;
-        //stroke style setup设置描边的样式
+        //设置描边的样式
         var locStrokeEnabled = this._strokeEnabled;
         if (locStrokeEnabled) {
             context.lineWidth = locStrokeSize * 2;
             context.strokeStyle = this._strokeColorStr;
         }
 
-        //shadow style setup设置阴影的样式
+        //设置阴影的样式
         if (this._shadowEnabled) {
             var locShadowOffset = this._shadowOffset;
             context.shadowColor = this._shadowColorStr;
@@ -819,7 +763,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
 
         var locContentWidth = this._contentSize.width - locStrokeShadowOffsetX;
 
-        //lineHiehgt
+        //行高
         var lineHeight = this.getLineHeight();
         var transformTop = (lineHeight - this._fontClientHeight) / 2;
 
@@ -888,12 +832,10 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             var sLine;
             var pushNum = 0;
 
-            //Increased while cycle maximum ceiling. default 100 time
-			//增加周期的上限，默认100遍
+            //增加周期的上限，默认100遍
             var checkWhile = 0;
 
-            //Exceeded the size
-			//超出大小
+            //超出大小
             while(width > maxWidth && checkWhile++ < 100){
                 fuzzyLen *= maxWidth / width;
                 fuzzyLen = fuzzyLen | 0;
@@ -903,8 +845,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
 
             checkWhile = 0;
 
-            //Find the truncation point
-			//找到截断点
+            //找到截断点
             while(width < maxWidth && checkWhile++ < 100){
 
                 if(tmpText){
@@ -928,8 +869,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
 
             var sText = text.substr(0, fuzzyLen);
 
-            //symbol in the first
-			//首先设置符号
+            // 首先设置符号
             if(cc.LabelTTF.wrapInspection){
                 if(cc.LabelTTF._symbolRex.test(sLine || tmpText)){
                     var result = cc.LabelTTF._lastWordRex.exec(sText);
@@ -940,8 +880,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
                 }
             }
 
-            //To judge whether a English words are truncated
-			//判断英语单词是否被截断
+            // 判断英语单词是否被截断
             if(cc.LabelTTF._firsrEnglish.test(sLine)){
                 var result = cc.LabelTTF._lastEnglish.exec(sText);
                 if(result && sText !== result[0]){
@@ -964,8 +903,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         this._isMultiLine = false;
         this._measureConfig();
         if (locDimensionsWidth !== 0) {
-            // Content processing
-			// 内容处理
+            // 内容处理
             this._strings = this._string.split('\n');
 
             for(i = 0; i < this._strings.length; i++){
@@ -990,8 +928,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             locStrokeShadowOffsetY += Math.abs(locOffsetSize.y) * 2;
         }
 
-        //get offset for stroke and shadow
-		//得到描边和阴影的偏移
+        // 得到描边和阴影的偏移
         if (locDimensionsWidth === 0) {
             if (this._isMultiLine)
                 locSize = cc.size(0 | (Math.max.apply(Math, locLineWidth) + locStrokeShadowOffsetX),
@@ -1005,8 +942,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
                 else
                     locSize = cc.size(0 | (locDimensionsWidth + locStrokeShadowOffsetX), 0 | (this.getLineHeight() + locStrokeShadowOffsetY));
             } else {
-                //dimension is already set, contentSize must be same as dimension
-				//尺寸已经被设置完毕，contentSize必须和dimension相同
+                // 尺寸已经被设置完毕，contentSize必须和dimension相同
                 locSize = cc.size(0 | (locDimensionsWidth + locStrokeShadowOffsetX), 0 | (this._dimensions.height + locStrokeShadowOffsetY));
             }
         }
@@ -1014,18 +950,15 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         this._strokeShadowOffsetX = locStrokeShadowOffsetX;
         this._strokeShadowOffsetY = locStrokeShadowOffsetY;
 
-        // need computing _anchorPointInPoints
-		// 需要计算_anchorPointInPoints
+        // 需要计算_anchorPointInPoints
         var locAP = this._anchorPoint;
         this._anchorPointInPoints.x = (locStrokeShadowOffsetX * 0.5) + ((locSize.width - locStrokeShadowOffsetX) * locAP.x);
         this._anchorPointInPoints.y = (locStrokeShadowOffsetY * 0.5) + ((locSize.height - locStrokeShadowOffsetY) * locAP.y);
     },
 
     /**
-     * Returns the actual content size of the label, the content size is the real size that the label occupied while dimension is the outer bounding box of the label.
      * 返回标签内容的真实大小，当标签所占据的尺寸大于所绑定的区域的时候，返回的还是标签本身真实的大小
-	 * @returns {cc.Size} The content size
-	 * 返回内容的大小
+     * @returns {cc.Size} 返回内容的大小
      */
     getContentSize: function () {
         if (this._needUpdateTexture)
@@ -1056,8 +989,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             return true;
         }
 
-        //set size for labelCanvas
-		//设置标签画布的大小
+        // 设置标签画布的大小
         locContext.font = this._fontStyleStr;
         this._updateTTF();
         var width = locContentSize.width, height = locContentSize.height;
@@ -1066,8 +998,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         locLabelCanvas.height = height;
         if (flag) locContext.clearRect(0, 0, width, height);
 
-        //draw text to labelCanvas
-		//画到标签画布上
+        // 画到标签画布上
         this._drawTTFInCanvas(locContext);
         this._texture && this._texture.handleLoadedTexture();
 
@@ -1217,10 +1148,10 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
     _p.updateDisplayedOpacity = cc.Sprite.prototype.updateDisplayedOpacity;
 
     _p.initWithStringAndTextDefinition = function (text, textDefinition) {
-        // prepare everything needed to render the label
+        // 渲染标签需要的所有准备
         this._updateWithTextDefinition(textDefinition, false);
 
-        // set the string
+        // 设置字符串
         this.string = text;
 
         return true;
@@ -1265,7 +1196,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         this._offsetPosition.x = relativeOffset.x + (this._contentSize.width - this._rect.width) / 2;
         this._offsetPosition.y = relativeOffset.y + (this._contentSize.height - this._rect.height) / 2;
 
-        // rendering using batch node
+        // 使用批节点渲染
         if (this._batchNode) {
             this.dirty = true;
         }
@@ -1286,12 +1217,9 @@ cc.LabelTTF._textAlign = ["left", "center", "right"];
 
 cc.LabelTTF._textBaseline = ["top", "middle", "bottom"];
 
-//check the first character
 //检查第一个字符
 cc.LabelTTF.wrapInspection = true;
 
-//Support: English French German
-//Other as Oriental Language
 //支持： 英语 法语 德语
 //还有一些东方语言
 cc.LabelTTF._wordRex = /([a-zA-Z0-9ÄÖÜäöüßéèçàùêâîôû]+|\S)/;
@@ -1300,14 +1228,12 @@ cc.LabelTTF._lastWordRex = /([a-zA-Z0-9ÄÖÜäöüßéèçàùêâîôû]+|\S)$
 cc.LabelTTF._lastEnglish = /[a-zA-Z0-9ÄÖÜäöüßéèçàùêâîôû]+$/;
 cc.LabelTTF._firsrEnglish = /^[a-zA-Z0-9ÄÖÜäöüßéèçàùêâîôû]/;
 
-// Only support style in this format: "18px Verdana" or "18px 'Helvetica Neue'"
 // 只支持如下格式的字符串："18px Verdana" or "18px 'Helvetica Neue'"
 cc.LabelTTF._fontStyleRE = /^(\d+)px\s+['"]?([\w\s\d]+)['"]?$/;
 
 /**
- * creates a cc.LabelTTF from a font name, alignment, dimension and font size
  * 使用字体名称，对齐方式，尺寸和字体大小来创建一个cc.LabelTTF对象
- * @deprecated since v3.0, please use the new construction instead
+ * @deprecated 3.0后的版本请新的构造器代替
  * @see cc.LabelTTF
  * @static
  * @param {String} text
@@ -1323,8 +1249,7 @@ cc.LabelTTF.create = function (text, fontName, fontSize, dimensions, hAlignment,
 };
 
 /**
- * @deprecated since v3.0, please use the new construction instead
- * 自v3.0版本之后，请使用新的构造函数来代替
+ * @deprecated 自v3.0版本之后，请使用新的构造函数来代替
  * @function
  * @static
  */
