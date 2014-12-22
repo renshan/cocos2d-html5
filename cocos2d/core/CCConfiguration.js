@@ -25,14 +25,14 @@
  ****************************************************************************/
 
 /**
- * cc.configuration is a singleton object which contains some openGL variables     cc.configuration 是一个包含一些openGL变量的单例对象
+ * cc.configuration 是一个包含一些openGL变量的单例对象
  * @class
  * @name cc.configuration
  * @example
  * var textureSize = cc.configuration.getMaxTextureSize();
  */
 cc.configuration = /** @lends cc.configuration# */{
-	// Type constants    常量类型
+	//常量类型
 	/*
 	 * ERROR type
 	 * @public
@@ -42,7 +42,7 @@ cc.configuration = /** @lends cc.configuration# */{
 	ERROR:0,
 
 	/*
-	 * STRING type      字符串类型
+	 * 字符串类型
 	 * @public
 	 * @const
 	 * @type {Number}
@@ -50,7 +50,7 @@ cc.configuration = /** @lends cc.configuration# */{
 	STRING:1,
 
 	/*
-	 * INT type         int类型
+	 * int类型
 	 * @public
 	 * @const
 	 * @type {Number}
@@ -58,7 +58,7 @@ cc.configuration = /** @lends cc.configuration# */{
 	INT:2,
 
 	/*
-	 * DOUBLE type     double类型
+	 * double类型
 	 * @public
 	 * @const
 	 * @type {Number}
@@ -66,7 +66,7 @@ cc.configuration = /** @lends cc.configuration# */{
 	DOUBLE:3,
 
 	/*
-	 * BOOLEAN type   boolean类型
+	 * boolean类型
 	 * @public
 	 * @const
 	 * @type {Number}
@@ -96,7 +96,7 @@ cc.configuration = /** @lends cc.configuration# */{
 	},
 
     /**
-     * OpenGL Max texture size.     OpenGL 最大质地大小
+     * OpenGL 最大纹理大小
      * @return {Number}
      */
     getMaxTextureSize:function () {
@@ -104,7 +104,7 @@ cc.configuration = /** @lends cc.configuration# */{
     },
 
     /**
-     * OpenGL Max Modelview Stack Depth.   OpenGL最大Modelview栈深度
+     * OpenGL最大Modelview栈深度
      * @return {Number}
      */
     getMaxModelviewStackDepth:function () {
@@ -112,7 +112,7 @@ cc.configuration = /** @lends cc.configuration# */{
     },
 
     /**
-     * returns the maximum texture units    返回质地最大单元个数
+     * 返回纹理最大单元个数
      * @return {Number}
      */
     getMaxTextureUnits:function () {
@@ -120,8 +120,8 @@ cc.configuration = /** @lends cc.configuration# */{
     },
 
     /**
-     * Whether or not the GPU supports NPOT (Non Power Of Two) textures.      GPU是否支持非2次方大小的质地
-     * OpenGL ES 2.0 already supports NPOT (iOS).                             OpenGL ES 2.0 已经支持iOS下的NPOT（非2次方大小）的质地
+     * GPU是否支持非2次方大小的纹理
+     * OpenGL ES 2.0 已经支持iOS下的NPOT(非2次方大小)的纹理
      * @return {Boolean}
      */
     supportsNPOT:function () {
@@ -129,7 +129,7 @@ cc.configuration = /** @lends cc.configuration# */{
     },
 
     /**
-     * Whether or not PVR Texture Compressed is supported                     是否支持PVR格式的质地压缩
+     * 是否支持PVR格式的纹理压缩
      * @return {Boolean}
      */
     supportsPVRTC: function () {
@@ -137,7 +137,7 @@ cc.configuration = /** @lends cc.configuration# */{
     },
 
 	/**
-	 * Whether or not ETC Texture Compressed is supported                      是否支持ETC格式的质地压缩
+	 * 是否支持ETC格式的纹理压缩
 	 * @return {Boolean}
 	 */
 	supportsETC: function() {
@@ -145,7 +145,7 @@ cc.configuration = /** @lends cc.configuration# */{
 	},
 
 	/**
-	 * Whether or not S3TC Texture Compressed is supported                    是否支持S3TC格式的质地压缩     
+	 * 是否支持S3TC格式的纹理压缩     
 	 * @return {Boolean}
 	 */
 	supportsS3TC: function() {
@@ -153,7 +153,7 @@ cc.configuration = /** @lends cc.configuration# */{
 	},
 
 	/**
-	 * Whether or not ATITC Texture Compressed is supported                    是否支持ATITC格式的质地压缩 
+	 * 是否支持ATITC格式的纹理压缩 
 	 * @return {Boolean}
 	 */
 	supportsATITC: function() {
@@ -161,7 +161,7 @@ cc.configuration = /** @lends cc.configuration# */{
 	},
 
     /**
-     * Whether or not BGRA8888 textures are supported.                      是否支持BGRA8888格式的质地压缩 
+     * 是否支持BGRA8888格式的纹理压缩 
      * @return {Boolean}
      */
     supportsBGRA8888:function () {
@@ -169,7 +169,7 @@ cc.configuration = /** @lends cc.configuration# */{
     },
 
     /**
-     * Whether or not glDiscardFramebufferEXT is supported                  是否支持glDiscardFramebufferEXT
+     * 是否支持glDiscardFramebufferEXT
      * @return {Boolean}
      */
     supportsDiscardFramebuffer:function () {
@@ -177,7 +177,7 @@ cc.configuration = /** @lends cc.configuration# */{
     },
 
     /**
-     * Whether or not shareable VAOs are supported.                         是否支持共享VAO
+     * 是否支持共享VAO
      * @return {Boolean}
      */
     supportsShareableVAO:function () {
@@ -185,7 +185,7 @@ cc.configuration = /** @lends cc.configuration# */{
     },
 
     /**
-     * returns whether or not an OpenGL is supported                        返回是否支持OpenGL
+     * 返回是否支持OpenGL
      * @param {String} searchName
      */
     checkForGLExtension:function (searchName) {
@@ -193,7 +193,7 @@ cc.configuration = /** @lends cc.configuration# */{
     },
 
     /**
-     * Returns the value of a given key.  If the key is not found, it will return the default value    返回指定键的值，如果没有找到该键，则返回默认值
+     * 返回指定键的值，如果没有找到该键，则返回默认值
      * @param {String} key                                          键
      * @param {String|Bool|Number|Object} [default_value=null]      默认值
      * @returns {String|Bool|Number|Object}                         键对应的值
@@ -208,7 +208,7 @@ cc.configuration = /** @lends cc.configuration# */{
     },
 
     /**
-     * Sets a new key/value pair  in the configuration dictionary      设置一个新的键值对到配置（configuration）字典中
+     * 设置一个新的键值对到配置(configuration)字典中
      * @param {string} key
      * @param {String|Bool|Number|Object} value
      */
@@ -217,7 +217,7 @@ cc.configuration = /** @lends cc.configuration# */{
     },
 
     /**
-     * Dumps the current configuration on the console           将当前配置(configuration)的内容输出到控制台
+     * 将当前配置(configuration)的内容输出到控制台
      */
     dumpInfo: function(){
          if(cc.ENABLE_GL_STATE_CACHE === 0){
@@ -228,7 +228,7 @@ cc.configuration = /** @lends cc.configuration# */{
     },
 
     /**
-     * gathers OpenGL / GPU information                         收集OpenGL/GPU的信息
+     * 收集OpenGL/GPU的信息
      */
     gatherGPUInfo: function(){
         if(cc._renderType === cc._RENDER_TYPE_CANVAS)
@@ -271,8 +271,8 @@ cc.configuration = /** @lends cc.configuration# */{
     },
 
     /**
-     * Loads a config file. If the keys are already present,                    加载一个配置文件，如果配置里已经包含这些键，
-     * then they are going to be replaced. Otherwise the new keys are added.    那么新的键值会替换掉老的键值，如果不包含则添加新的键
+     * 加载一个配置文件,如果配置里已经包含这些键，
+     * 那么新的键值会替换掉老的键值,如果不包含则添加新的键
      * @param {string} url
      */
     loadConfigFile: function( url){
@@ -288,7 +288,7 @@ cc.configuration = /** @lends cc.configuration# */{
             return;
         }
 
-        // Add all keys in the existing dictionary      已存在字典中的所有的键
+        // 向已存在字典中的添加所有的键
         for(var selKey in getDatas)
             this._valueDict[selKey] = getDatas[selKey];
     }

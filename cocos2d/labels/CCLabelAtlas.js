@@ -25,55 +25,39 @@
  ****************************************************************************/
 
 /**
- * using image file to print text label on the screen, might be a bit slower than cc.Label, similar to cc.LabelBMFont		使用图片文件的方式将文本输出到屏幕上，可能会比使用cc.Label的方法慢点，和cc.LabelBMFont的方式类似
- * @class															@class
- * @extends cc.AtlasNode													@extends cc.AtlasNode
+ * 使用图片文件的方式将文本输出到屏幕上，可能会比使用cc.Label的方法慢点，和cc.LabelBMFont的方式类似
+ * @class
+ * @extends cc.AtlasNode
  *
- * @property {String}   string  - Content string of label									@property {string} 字符串 —标签的内容
+ * @property {String}   string  - 标签的内容
  *
- * @param {String} strText													@param {string} str文本
- * @param {String} charMapFile  charMapFile or fntFile										@param {string} 地图文件或者fnt文件
- * @param {Number} [itemWidth=0]												@param {Number} [itemWidth=0]
- * @param {Number} [itemHeight=0]												@param {Number} [itemHeight=0]
- * @param {Number} [startCharMap=""]												@param {Number} [startcharMap=""]
- * @example															@example
- * //creates the cc.LabelAtlas with a string, a char map file(the atlas), the width and height of each element and the starting char of the atlas
+ * @param {String} strText
+ * @param {String} charMapFile  地图文件或者fnt文件
+ * @param {Number} [itemWidth=0]
+ * @param {Number} [itemHeight=0]
+ * @param {Number} [startCharMap=""]
+ * @example
  * //创建一个cc.LabelAtlas同事产生一个字符串，一个字符地图文件，和该地图的么一个开始字符元素的宽度以及高度
  * var myLabel = new cc.LabelAtlas('Text to display', 'CharMapfile.png', 12, 20, ' ')
  * 
  *
- * //creates the cc.LabelAtlas with a string, a fnt file			创建cc.LabelAtlas,同时产生一个字符串和地图文件
- * var myLabel = new cc.LabelAtlas('Text to display', 'CharMapFile.plist鈥�);
+ * //创建cc.LabelAtlas,同时产生一个字符串和地图文件
+ * var myLabel = new cc.LabelAtlas('Text to display', 'CharMapFile.plist');
  */
 cc.LabelAtlas = cc.AtlasNode.extend(/** @lends cc.LabelAtlas# */{
 
-    //property String is Getter and Setter					存取器
+    // 存取器
     //
 
-    // string to render								着色
+    // 着色
     _string: null,
-    // the first char in the charmap						字符地图的第一个字符
+    // 字符地图的第一个字符
     _mapStartChar: null,
 
     _textureLoaded: false,
     _className: "LabelAtlas",
 
     /**
-     * <p>						
-     *  Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-     *  Create a label atlas. <br />
-     *  It accepts two groups of parameters: <br/>
-     * a) string, fntFile <br/>
-     * b) label, textureFilename, width, height, startChar <br/>
-     * </p>
-     * @param {String}  a char map filestrText
-     * @param {String} charMapFile  charMapFile or fntFile
-     * @param {Number} [itemWidth=0]
-     * @param {Number} [itemHeight=0]
-     * @param {Number} [startCharMap=""]
-     */
-
-   /**
      * <p>						
      *  构造器的功能,重写它以便可以扩充构造的功能，但是但我们使用扩展的"ctor"功能是记得调用"this._super()". <br />
      *  产生一个标签栏图谱. <br />
@@ -87,7 +71,6 @@ cc.LabelAtlas = cc.AtlasNode.extend(/** @lends cc.LabelAtlas# */{
      * @param {Number} [itemHeight=0]
      * @param {Number} [startCharMap=""]
      */
- 
     ctor: function (strText, charMapFile, itemWidth, itemHeight, startCharMap) {
         cc.AtlasNode.prototype.ctor.call(this);
 
@@ -98,39 +81,20 @@ cc.LabelAtlas = cc.AtlasNode.extend(/** @lends cc.LabelAtlas# */{
     },
 
     /**
-     * Return  texture is loaded.		返回被加载的纹理
-     * @returns {boolean}			@returns {boolean}
+     * 返回被加载的纹理
+     * @returns {boolean}
      */
     textureLoaded: function () {
         return this._textureLoaded;
     },
 
     /**
-     * Add texture loaded event listener.				增加纹理加载事件监听器
-     * @param {Function} callback					@param {Function} 回调
-     * @param {cc.Node} target						@param{cc.Node} 目标
-     * @deprecated since 3.1, please use addEventListener instead	@deprecated 从3.1版本后，请使用addEventListener代替之前的   /**
-     * <p>						
-     *  Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-     *  Create a label atlas. <br />
-     *  It accepts two groups of parameters: <br/>
-     * a) string, fntFile <br/>
-     * b) label, textureFilename, width, height, startChar <br/>
-     * </p>
-     * @param {String}  a char map filestrText
-     * @param {String} charMapFile  charMapFile or fntFile
-     * @param {Number} [itemWidth=0]
-     * @param {Number} [itemHeight=0]
-     * @param {Number} [startCharMap=""]
-     */
-
-      /**
      * 增加纹理加载事件监听器
      * @param {Function} 回调
      * @param{cc.Node} 目标
      * @deprecated 从3.1版本后，请使用addEventListener代替之前的   /**
      * <p>						
-        *  构造器的功能,重写它以便可以扩充构造的功能，但是但我们使用扩展的"ctor"功能是记得调用"this._super()". <br />
+     *  构造器的功能,重写它以便可以扩充构造的功能，但是但我们使用扩展的"ctor"功能是记得调用"this._super()". <br />
      *  产生一个标签栏图谱. <br />
      *  它接受两组参数: <br/>
      * a) 字符串，fnt文件 <br/>
@@ -148,18 +112,18 @@ cc.LabelAtlas = cc.AtlasNode.extend(/** @lends cc.LabelAtlas# */{
 
     /**
      * <p>
-     *  initializes the cc.LabelAtlas with a string, a char map file(the atlas), <br/>		初始化cc.LabelAtlas并产生一个字符串和一个字符地图文件, <br/>
-     *  the width and height of each element and the starting char of the atlas <br/>		每个元素和开始地图集字符的宽度和高度	<br/>
-     *  It accepts two groups of parameters: <br/>						它可以接收下面组参数	<br/>
-     * a) string, fntFile <br/>									a) 字符串，fnt文件 <br/>
-     * b) label, textureFilename, width, height, startChar <br/>				b) 标签, 纹理文件的名字, 宽度, 高度, 开始字符 <br/>
-     * </p>											</p>
-     * @param {String} strText									@param {String} strText
-     * @param {String|cc.Texture2D} charMapFile  charMapFile or fntFile or texture file		@param {String|cc.Texture2D} charMapFile  charMapFile or fntFile or texture file
-     * @param {Number} [itemWidth=0]								@param {Number} [itemWidth=0]
-     * @param {Number} [itemHeight=0]								@param {Number} [itemHeight=0]
-     * @param {Number} [startCharMap=""]							@param {Number} [startCharMap=""]
-     * @return {Boolean} returns true on success						@return {Boolean} 成功就返回ture
+     *  初始化cc.LabelAtlas并产生一个字符串和一个字符地图文件, <br/>
+     *  每个元素和开始地图集字符的宽度和高度	<br/>
+     *  它可以接收下面组参数	<br/>
+     * a) 字符串，fnt文件 <br/>
+     * b) 标签, 纹理文件的名字, 宽度, 高度, 开始字符 <br/>
+     * </p>
+     * @param {String} strText
+     * @param {String|cc.Texture2D} charMapFile  字符地图文件或者fnt文件或者纹理文件
+     * @param {Number} [itemWidth=0]
+     * @param {Number} [itemHeight=0]
+     * @param {Number} [startCharMap=""]
+     * @return {Boolean} 成功就返回ture
      */
     initWithString: function (strText, charMapFile, itemWidth, itemHeight, startCharMap) {
         var label = strText + "", textureFilename, width, height, startChar;
@@ -205,8 +169,8 @@ cc.LabelAtlas = cc.AtlasNode.extend(/** @lends cc.LabelAtlas# */{
     },
 
     /**
-     * Set the color.			设置颜色
-     * @param {cc.Color} color3		@param {cc.Color} color3
+     * 设置颜色
+     * @param {cc.Color} color3
      */
     setColor: function (color3) {
         cc.AtlasNode.prototype.setColor.call(this, color3);
@@ -214,15 +178,15 @@ cc.LabelAtlas = cc.AtlasNode.extend(/** @lends cc.LabelAtlas# */{
     },
 
     /**
-     * return the text of this label	返回该文本标签
-     * @return {String}			@return {String}
+     * 返回该文本标签
+     * @return {String}
      */
     getString: function () {
         return this._string;
     },
 
     /**
-     * draw the label			绘制标签
+     * 绘制标签
      */
     draw: function (ctx) {
         cc.AtlasNode.prototype.draw.call(this, ctx);
@@ -240,8 +204,8 @@ cc.LabelAtlas = cc.AtlasNode.extend(/** @lends cc.LabelAtlas# */{
     },
 
     /**
-     * Atlas generation			地图集产生器
-     * @function			@function
+     * 地图集产生器
+     * @function
      */
     updateAtlasValues: null,
 
@@ -249,8 +213,7 @@ cc.LabelAtlas = cc.AtlasNode.extend(/** @lends cc.LabelAtlas# */{
         var locString = this._string || "";
         var n = locString.length;
         var texture = this.texture;
-        var locItemWidth = this._itemWidth , locItemHeight = this._itemHeight;     //needn't multiply cc.contentScaleFactor(), because sprite's draw will do this
-                                                                                   //不必增加cc.contentScaleFactor()，因为精灵的绘图函数将会做这些
+        var locItemWidth = this._itemWidth , locItemHeight = this._itemHeight;     //不必增加cc.contentScaleFactor()，因为精灵的绘图函数将会做这些
         for (var i = 0; i < n; i++) {
             var a = locString.charCodeAt(i) - this._mapStartChar.charCodeAt(0);
             var row = parseInt(a % this._itemsPerRow, 10);
@@ -273,9 +236,9 @@ cc.LabelAtlas = cc.AtlasNode.extend(/** @lends cc.LabelAtlas# */{
                     fontChar.init();
                     fontChar.setTextureRect(cc.rect(0, 0, 10, 10), false, cc.size(0, 0));
                 } else {
-                    // reusing fonts		重用字体
+                    // 重用字体
                     fontChar.initWithTexture(texture, rect);
-                    // restore to default in case they were modified	恢复默认值以防止被修改
+                    // 恢复默认值以防止被修改
                     fontChar.visible = true;
                 }
             }
@@ -310,7 +273,7 @@ cc.LabelAtlas = cc.AtlasNode.extend(/** @lends cc.LabelAtlas# */{
 
             var left, right, top, bottom;
             if (cc.FIX_ARTIFACTS_BY_STRECHING_TEXEL) {
-                // Issue #938. Don't use texStepX & texStepY
+                // Issue #938. 不要使用texStepX和texStepY
                 left = (2 * row * itemWidthInPixels + 1) / (2 * textureWide);
                 right = left + (itemWidthInPixels * 2 - 2) / (2 * textureWide);
                 top = (2 * col * itemHeightInPixels + 1) / (2 * textureHigh);
@@ -358,9 +321,9 @@ cc.LabelAtlas = cc.AtlasNode.extend(/** @lends cc.LabelAtlas# */{
     },
 
     /**
-     * set the display string		设置显示字符串
-     * @function			@function
-     * @param {String} label		@param {Stirng} label
+     * 设置显示字符串
+     * @function	
+     * @param {String} label
      */
     setString: null,
 
@@ -399,9 +362,9 @@ cc.LabelAtlas = cc.AtlasNode.extend(/** @lends cc.LabelAtlas# */{
     },
 
     /**
-     * set the opacity			设置不透明度
-     * @function			@function
-     * @param {Number} opacity		@param {Number} 不透明度
+     * 设置透明度
+     * @function
+     * @param {Number} opacity
      */
     setOpacity: null,
 
@@ -424,30 +387,30 @@ if (cc._renderType === cc._RENDER_TYPE_WEBGL) {
     _p.addChild = _p._addChildForCanvas;
 }
 
-// Override properties		可重写属性
+// 可重写属性
 cc.defineGetterSetter(_p, "opacity", _p.getOpacity, _p.setOpacity);
 cc.defineGetterSetter(_p, "color", _p.getColor, _p.setColor);
 
-// Extended properties		附加属性
+// 附加属性
 /** @expose */
 _p.string;
 cc.defineGetterSetter(_p, "string", _p.getString, _p.setString);
 
 /**
  * <p>
- *     Please use new cc.LabelAtlas instead. <br />								请使用新的cc.LabelAtlas来替代。<br />
- *     Create a label atlas. <br />										产生一个地图集标签。<br />
- *     It accepts two groups of parameters:                                                  <br/>		它可以接收下面两种参数：<br/>
- *         a) string, fntFile                                                                <br/>		a)字符串，fntFile    <br/>
- *         b) label, textureFilename, width, height, startChar                               <br/>		b)标签，纹理的名字，宽度，高度，开始字符<br/>		    
+ *     请使用新的cc.LabelAtlas来替代。<br />
+ *     产生一个地图集标签。<br />
+ *     它可以接收下面两种参数：<br/>
+ *         a)字符串，fntFile    <br/>
+ *         b)标签，纹理的名字，宽度，高度，开始字符<br/>		    
  * </p>														<br/>
- * @deprecated since v3.0 please use new cc.LabelAtlas								@deprecated 从3.0版本开始，请使用新的cc.LabelAttlas
- * @param {String} strText											@param {String} strText
- * @param {String} charMapFile  charMapFile or fntFile								@param {String} charMapFile  charMapFile or fntFile
- * @param {Number} [itemWidth=0]										@param {Number} [itemWidth=0]
- * @param {Number} [itemHeight=0]										@param {Number} [itemHeight=0]
- * @param {Number} [startCharMap=""]										@param {Number} [startCharMap=""]
- * @return {cc.LabelAtlas} returns the LabelAtlas object on success						@return {cc.LabelAtlas}  returns the LabelAtlas object on success
+ * @deprecated 从3.0版本开始，请使用新的cc.LabelAttlas
+ * @param {String} strText
+ * @param {String} charMapFile  字符地图文件或者fnt文件
+ * @param {Number} [itemWidth=0]
+ * @param {Number} [itemHeight=0]
+ * @param {Number} [startCharMap=""]
+ * @return {cc.LabelAtlas} 成功则返回LabelAtlas对象
  */
 cc.LabelAtlas.create = function (strText, charMapFile, itemWidth, itemHeight, startCharMap) {
     return new cc.LabelAtlas(strText, charMapFile, itemWidth, itemHeight, startCharMap);
