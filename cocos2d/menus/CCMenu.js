@@ -46,17 +46,6 @@ cc.MENU_HANDLER_PRIORITY = -128;
 cc.DEFAULT_PADDING = 5;
 
 /**
- *<p> Features and Limitation:<br/>
- *  - You can add MenuItem objects in runtime using addChild:<br/>
- *  - But the only accepted children are MenuItem objects</p>
- * @class
- * @extends cc.Layer
- * @param {...cc.MenuItem|null} menuItems}
- * @example
- * var layer = new cc.Menu(menuitem1, menuitem2, menuitem3);
- */
-
-/**
  * <p> 特点和局限：<br/>
  *  -你可以在运行的时候使用addChild来增加MenuItem objects
  *  -但是唯一可以接受的就是MenuItem objects
@@ -76,14 +65,10 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     _className: "Menu",
 
     /**
-     * Constructor of cc.Menu override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-     * @param {...cc.MenuItem|null} menuItems
-     */
-
-    /**
      * 重写cc.Menus的构造器来扩充他的功能，但是在使用"ctor"功能时，记得要调用"this._super()"
      *  @param {...cc.MenuItem|null} 菜单项
      */
+
     ctor: function (menuItems) {
         cc.Layer.prototype.ctor.call(this);
         this._color = cc.color.WHITE;
@@ -122,18 +107,13 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
         }
         this.initWithArray(items);
     },
+
     /**
      * <p>
-     *     Event callback that is invoked every time when CCMenu enters the 'stage'.                                   <br/>
-     *     If the CCMenu enters the 'stage' with a transition, this event is called when the transition starts.        <br/>
-     *     During onEnter you can't access a "sister/brother" node.                                                    <br/>
-     *     If you override onEnter, you must call its parent's onEnter function with this._super().
-     * </p>
-     */
-    /**
-     * <p>
-     *
-     *
+     *     每次当CCMenu进入'舞台'时请求的事件回调函数                                   <br/>
+     *     如果CCMenu用过渡进入到'舞台'，事件会在过渡开始时调用       <br/>
+     *     在onEnter期间不可以接收其他'兄弟姐妹'节点.         <br/>
+     *     如果你重载onEnter, 你必须在this._super()里调用父类的onEnter.
      * </p>
      */
     onEnter: function () {
@@ -144,25 +124,25 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * return whether or not the menu will receive events		返回这个菜单是否会接收事件
-     * @return {Boolean}						@return {Boolean}
+     * 返回这个菜单是否会接收事件
+     * @return {Boolean}
      */
     isEnabled: function () {
         return this.enabled;
     },
 
     /**
-     * set whether or not the menu will receive events			设置这个菜单是否会接收事件
-     * @param {Boolean} enabled						@param {Boolean} 可以
+     * 设置这个菜单是否会接收事件
+     * @param {Boolean} enabled
      */
     setEnabled: function (enabled) {
         this.enabled = enabled;
     },
 
     /**
-     * initializes a cc.Menu with it's items 				初始化cc.Menu
-     * @param {Array} args						@param {Array} args
-     * @return {Boolean}						@return {Boolean}
+     * 初始化cc.Menu
+     * @param {Array} args
+     * @return {Boolean}
      */
     initWithItems: function (args) {
         var pArray = [];
@@ -177,15 +157,15 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * initializes a cc.Menu with a Array of cc.MenuItem objects		初始化cc.Menu并赋一个cc.MenuItem对象的数组
-     * @param {Array} array Of cc.MenuItem Items				@param {Array} cc.MenuItem数组
-     * @return {Boolean}							@return {Boolean}
+     * 初始化cc.Menu并赋一个cc.MenuItem对象的数组
+     * @param {Array} cc.MenuItem数组
+     * @return {Boolean}
      */
     initWithArray: function (arrayOfItems) {
         if (cc.Layer.prototype.init.call(this)) {
             this.enabled = true;
 
-            // menu in the center of the screen					菜单在屏幕中间
+            // 在屏幕中间的菜单
             var winSize = cc.winSize;
             this.setPosition(winSize.width / 2, winSize.height / 2);
             this.setContentSize(winSize);
@@ -200,7 +180,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
             this._selectedItem = null;
             this._state = cc.MENU_STATE_WAITING;
 
-            // enable cascade color and opacity on menus
+            // 允许在菜单使用渐变颜色和透明度
             this.cascadeColor = true;
             this.cascadeOpacity = true;
 
@@ -210,10 +190,10 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * add a child for  cc.Menu		  								
+     * 为cc.Menu添加子节点	  								
      * @param {cc.Node} child
-     * @param {Number|Null} [zOrder=] zOrder for the child
-     * @param {Number|Null} [tag=] tag for the child
+     * @param {Number|Null} [zOrder=] 子节点的zOrder
+     * @param {Number|Null} [tag=] 子节点的tag
      */
     addChild: function (child, zOrder, tag) {
         if (!(child instanceof cc.MenuItem))
@@ -222,14 +202,14 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * align items vertically with default padding
+     * 用默认的间距垂直对齐菜单子项
      */
     alignItemsVertically: function () {
         this.alignItemsVerticallyWithPadding(cc.DEFAULT_PADDING);
     },
 
     /**
-     * align items vertically with specified padding
+     * 用特定的间距垂直对齐菜单子项
      * @param {Number} padding
      */
     alignItemsVerticallyWithPadding: function (padding) {
@@ -251,14 +231,14 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * align items horizontally with default padding
+     * 用默认的间距水平对齐菜单子项
      */
     alignItemsHorizontally: function () {
         this.alignItemsHorizontallyWithPadding(cc.DEFAULT_PADDING);
     },
 
     /**
-     * align items horizontally with specified padding
+     * 用特定的间距水平对齐菜单子项
      * @param {Number} padding
      */
     alignItemsHorizontallyWithPadding: function (padding) {
@@ -280,13 +260,12 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * align items in columns
+     * 菜单子项列对齐
      * @example
-     * // Example
-     * menu.alignItemsInColumns(3,2,3)// this will create 3 columns, with 3 items for first column, 2 items for second and 3 for third
+     * // 示例
+     * menu.alignItemsInColumns(3,2,3)// 添加三列, 第一列和第三列三个子菜单项, 第二列两个子菜单项
      *
-     * menu.alignItemsInColumns(3,3)//this creates 2 columns, each have 3 items
-     */
+     * menu.alignItemsInColumns(3,3)//创建两列，各有三个子菜单项
     alignItemsInColumns: function (/*Multiple Arguments*/) {
         if ((arguments.length > 0) && (arguments[arguments.length - 1] == null))
             cc.log("parameters should not be ending with null in Javascript");
@@ -307,7 +286,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
                     continue;
 
                 rowColumns = rows[row];
-                // can not have zero columns on a row
+                // 一行中不能没有列数
                 if (!rowColumns)
                     continue;
 
@@ -324,8 +303,8 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
                 }
             }
         }
-        // check if too many rows/columns for available menu items
-        //cc.assert(!columnsOccupied, "");    //?
+        // 检查是否有过多的行数/列数
+        //cc.assert(!columnsOccupied, "");  
         var winSize = cc.director.getWinSize();
 
         row = 0;
@@ -362,13 +341,13 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
         }
     },
     /**
-     * align menu items in rows
+     * 菜单项行对齐
      * @param {Number}
      * @example
-     * // Example
-     * menu.alignItemsInRows(5,3)//this will align items to 2 rows, first row with 5 items, second row with 3
+     * // 示例
+     * menu.alignItemsInRows(5,3)//对其两行菜单项, 第一行有五个菜单项, 第二行有三个
      *
-     * menu.alignItemsInRows(4,4,4,4)//this creates 4 rows each have 4 items
+     * menu.alignItemsInRows(4,4,4,4)//创建四行，每行有四个菜单项
      */
     alignItemsInRows: function (/*Multiple arguments*/) {
         if ((arguments.length > 0) && (arguments[arguments.length - 1] == null))
@@ -391,12 +370,12 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
         if (locChildren && locChildren.length > 0) {
             for (i = 0, len = locChildren.length; i < len; i++) {
                 child = locChildren[i];
-                // check if too many menu items for the amount of rows/columns
+                // 检查是否有过量的行数/列数
                 if (column >= columns.length)
                     continue;
 
                 columnRows = columns[column];
-                // can't have zero rows on a column
+                // 每列不可以没有行数
                 if (!columnRows)
                     continue;
 
@@ -419,7 +398,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
                 }
             }
         }
-        // check if too many rows/columns for available menu items.
+        // 检查是否有超过允许值的行数/列数.
         //cc.assert(!rowsOccupied, "");
         var winSize = cc.director.getWinSize();
 
@@ -458,9 +437,9 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * remove a child from cc.Menu
-     * @param {cc.Node} child the child you want to remove
-     * @param {boolean} cleanup whether to cleanup
+     * 从cc.Menu一出一个子节点
+     * @param {cc.Node} child 你想要移除的子节点
+     * @param {boolean} cleanup 是否清理内存
      */
     removeChild: function (child, cleanup) {
         if (child == null)
@@ -536,10 +515,10 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
 
     /**
      * <p>
-     * callback that is called every time the cc.Menu leaves the 'stage'.                                         <br/>
-     * If the cc.Menu leaves the 'stage' with a transition, this callback is called when the transition finishes. <br/>
-     * During onExit you can't access a sibling node.                   @return {Boolean}                                          <br/>
-     * If you override onExit, you shall call its parent's onExit with this._super().
+     * 每次cc.Menu离开'舞台'时调用的回调函数.                                         <br/>
+     * 如果cc.Menu用过渡离开'舞台', 会在过渡开始时进行调用. <br/>
+     * 在onExit期间， 不可以获取兄弟姐妹节点.                   @return {Boolean}                                          <br/>
+     * 如果重载onExit, 你应该在调用this._super()里父类的onExit.
      * </p>
      */
     onExit: function () {
@@ -553,14 +532,14 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
         cc.Node.prototype.onExit.call(this);
     },
     /**
-     * only use for jsbinding			只能用于js
-     * @param value				@param value
+     * 只能在jsbinding使用
+     * @param value
      */
     setOpacityModifyRGB: function (value) {
     },
     /**
-     * only use for jsbinding			只能用于js
-      * @returns {boolean}			@returns {boolean}
+     * 只能在jsbinding使用
+     * @returns {boolean}
      */
     isOpacityModifyRGB: function () {
         return false;
@@ -588,15 +567,15 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
 
 var _p = cc.Menu.prototype;
 
-// Extended properties			@return {cc.Menu}增加的属性
+// @return {cc.Menu}增加的属性
 /** @expose */
 _p.enabled;
 
 /**
- * create a new menu													产生一个新的菜单
- * @deprecated  since v3.0, please use new cc.Menu(menuitem1, menuitem2, menuitem3) to create a new menu		@deprecated 从3.0版本后，请使用新的cc.Menu来产生一个新的菜单
- * @param {...cc.MenuItem|null} menuItems										@param {...cc.MenuItem|null}						      * todo: need to use new													todo: need to use new
- * @return {cc.Menu}													@return {cc.Menu}
+ * 产生一个新的菜单
+ * @deprecated 从3.0版本后，请使用新的cc.Menu来产生一个新的菜单
+ * @param {...cc.MenuItem|null} menuItems	      todo: 需要使用新的
+ * @return {cc.Menu}
  */
 cc.Menu.create = function (menuItems) {
     var argc = arguments.length;
