@@ -223,7 +223,7 @@ switch (cc.sys.browserType) {
         cc.$.pfx = "webkit";
         cc.$.hd = true;
 }
-//缓存中前缀转换
+//针对前缀转换的缓存
 cc.$.trans = cc.$.pfx + "Transform";
 //构造转换字符串的辅助函数
 cc.$.translate = (cc.$.hd) ? function (a) {
@@ -261,4 +261,3 @@ cc.$.findpos = function (obj) {
     } while (obj = obj.offsetParent);
     return {x: curleft, y: curtop};
 };
-
