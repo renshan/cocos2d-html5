@@ -94,16 +94,16 @@ cc.TMX_TILE_FLIPPED_MASK = (~(cc.TMX_TILE_FLIPPED_ALL)) >>> 0;
 // Bits on the far end of the 32-bit global tile ID (GID's) are used for tile flags
 
 /**
- * <p>cc.TMXLayerInfo contains the information about the layers like: <br />                           <p>cc.TMXLayerInfor 包括了关于TMXLayer类的说明包括:
- * - Layer name<br />                                                                                  - Layer 名称<br />
- * - Layer size <br />                                                                                 - Layer 尺寸<br />
- * - Layer opacity at creation time (it can be modified at runtime)  <br />                            - Layer创建时的透明度(可以在运行时修改)
- * - Whether the layer is visible (if it's not visible, then the CocosNode won't be created) <br />    - 不论这个Layer是否可见(如果是不可见的, 那么CocosNode不会创建它) <br />
- * This information is obtained from the TMX file.</p>                                                  这个信息从TMX文件中获取</p>
+ * <p>cc.TMXLayerInfor 包含了关于TMXLayer类的说明包括:<br /> 
+ * - Layer 名称<br />
+ * - Layer 尺寸<br />
+ * - Layer创建时的透明度(可以在运行时修改)
+ * - 不论这个Layer是否可见(如果是不可见的, 那么CocosNode不会创建它) <br />
+ * 这个信息从TMX文件中获取</p>
  * @class
  * @extends cc.Class
  *
- * @property {Array}    properties  - Properties of the layer info. Layer信息的属性
+ * @property {Array}    properties  - Layer信息的属性
  */
 cc.TMXLayerInfo = cc.Class.extend(/** @lends cc.TMXLayerInfo# */{
     properties:null,
@@ -132,7 +132,7 @@ cc.TMXLayerInfo = cc.Class.extend(/** @lends cc.TMXLayerInfo# */{
     },
 
     /**
-     * Gets the Properties.   得到属性
+     * 获取属性
      * @return {Array}
      */
     getProperties:function () {
@@ -140,7 +140,7 @@ cc.TMXLayerInfo = cc.Class.extend(/** @lends cc.TMXLayerInfo# */{
     },
 
     /**
-     * Set the Properties.   设置属性
+     * 设置属性
      * @param {object} value
      */
     setProperties:function (value) {
@@ -149,28 +149,27 @@ cc.TMXLayerInfo = cc.Class.extend(/** @lends cc.TMXLayerInfo# */{
 });
 
 /**
- * <p>cc.TMXTilesetInfo contains the information about the tilesets like: <br />   <p>TMXTilesetInfo 包括了关于tilessets的信息:</br>
- * - Tileset name<br />          - Tilesset名称<br />
- * - Tileset spacing<br />       - Tileset 间距<br />
- * - Tileset margin<br />         - Tileset 边距
- * - size of the tiles<br />     - tiles的尺寸<br/>
- * - Image used for the tiles<br />p    - tiles使用的图片 <br/>
- * - Image size<br />                    - 图片尺寸<br/>
- * This information is obtained from the TMX file. </p>
+ * <p><p>cc.TMXTilesetInfo 包含了关于tile集合(tilesets)的信息:</br>
+ * - Tilesset名称<br />
+ * - Tileset 间距<br />
+ * - Tileset 边距
+ * - tiles的大小<br/>
+ * - tiles使用的图片 <br/>
+ * - 图片尺寸<br/>
  * 这个信息从TMX文件中获取 </p>
  * @class
  * @extends cc.Class
  *
- * @property {string} name - Tileset name Tilesset名称
- * @property {number} firstGid - First grid 第一个gid
- * @property {number} spacing - Spacing 间距
- * @property {number} margin - Margin 边距
- * @property {string} sourceImage - Filename containing the tiles (should be sprite sheet / texture atlas) 包含了Tiles的源图片(精灵表或纹理集)
- * @property {cc.Size|null} imageSize - Size in pixels of the image 图片的像素尺寸
+ * @property {string} name - Tilesset名称
+ * @property {number} firstGid - 第一个gid
+ * @property {number} spacing - 间距
+ * @property {number} margin - 边距
+ * @property {string} sourceImage - 包含了Tiles的源图片(精灵表单或纹理集)
+ * @property {cc.Size|null} imageSize -图片的尺寸(以像素为单位)
  */
 cc.TMXTilesetInfo = cc.Class.extend(/** @lends cc.TMXTilesetInfo# */{
 
-    //Tileset name Tileset名称
+    //ileset名称
     name:"",
 
     //First grid
@@ -196,7 +195,6 @@ cc.TMXTilesetInfo = cc.Class.extend(/** @lends cc.TMXTilesetInfo# */{
     },
 
     /**
-     * Return rect
      * 返回矩形
      * @param {Number} gid
      * @return {cc.Rect}
@@ -215,40 +213,40 @@ cc.TMXTilesetInfo = cc.Class.extend(/** @lends cc.TMXTilesetInfo# */{
 });
 
 /**
- * <p>cc.TMXMapInfo contains the information about the map like: <br/>     - cc.TMXMapInfo包含了该地图的信息: <br/>
- *- Map orientation (hexagonal, isometric or orthogonal)<br/>              - 地图定向:六边形,等距斜视,直角鸟瞰<br/>
- *- Tile size<br/>                                                         - Tile尺寸<br/>
- *- Map size</p>                                                           - 地图尺寸
- * <p>And it also contains: <br/>                                          <p>以及如下: <br/>
- * - Layers (an array of TMXLayerInfo objects)<br/>                        - Layers (一组TMXLayerInfo对象)<br/>
- * - Tilesets (an array of TMXTilesetInfo objects) <br/>                   - Tilesets (一组TMXTilesetInfo对象)
- * - ObjectGroups (an array of TMXObjectGroupInfo objects) </p>            - ObjectGroups (一组TMXObjectGroupInfo对象)
+ *- cc.TMXMapInfo包含了该地图的信息: <br/>
+ *- 地图定向:六边形,等距斜视,直角鸟瞰<br/>
+ *- Tile尺寸<br/>
+ *- 地图尺寸
+ * <p>以及如下: <br/>
+ * - Layers (一组TMXLayerInfo对象)<br/>
+ * - Tilesets (一组TMXTilesetInfo对象)
+ * - ObjectGroups (一组TMXObjectGroupInfo对象)
  *
- * <p>This information is obtained from the TMX file. </p>                 <p>这些信息均可从TMX文件中读取 </p>
+ * <p>这些信息均可从TMX文件中读取 </p>
  * @class
  * @extends cc.saxParser
  *
- * @property {Array}    properties          - Properties of the map info. Map的信息属性
- * @property {Number}   orientation         - Map orientation. Map的定向
- * @property {Object}   parentElement       - Parent element. 父节点元素
- * @property {Number}   parentGID           - Parent GID. 父全局标识
- * @property {Object}   layerAttrs        - Layer attributes. Layer属性
- * @property {Boolean}  storingCharacters   - Is reading storing characters stream. 读取排序好的字符流
- * @property {String}   tmxFileName         - TMX file name. TMX文件名
- * @property {String}   currentString       - Current string stored from characters stream. 从字符流中得到当前排序好的字符串
- * @property {Number}   mapWidth            - Width of the map Map的宽度
- * @property {Number}   mapHeight           - Height of the map Map的高度
- * @property {Number}   tileWidth           - Width of a tile Tile的宽度
- * @property {Number}   tileHeight          - Height of a tile Tile的高度
+ * @property {Array}    properties          - Map的信息属性
+ * @property {Number}   orientation         - Map的方向
+ * @property {Object}   parentElement       - 父元素
+ * @property {Number}   parentGID           - 父全局标识
+ * @property {Object}   layerAttrs          - Layer属性
+ * @property {Boolean}  storingCharacters   - 是否读取排序好的字符流
+ * @property {String}   tmxFileName         - MX文件名
+ * @property {String}   currentString       - 从字符流中得到当前排序好的字符串
+ * @property {Number}   mapWidth            - Map的宽度
+ * @property {Number}   mapHeight           - Map的高度
+ * @property {Number}   tileWidth           - Tile的宽度
+ * @property {Number}   tileHeight          - Tile的高度
  *
- * @param {String} tmxFile fileName or content string 文件名或有内容的字符串
- * @param {String} resourcePath  If tmxFile is a file name ,it is not required.If tmxFile is content string ,it is must required. 如果tmxFile是文件名则不是必要的. 如果tmxFile是字符串则是必要的
+ * @param {String} tmxFile 文件名或内容的字符串
+ * @param {String} resourcePath 如果tmxFile是文件名则不是必要的. 如果tmxFile是字符串则是必须的
  * @example
  * 1.
- * //create a TMXMapInfo with file name                              使用文件名创建TMXMapInfo
+ * //使用文件名创建TMXMapInfo
  * var tmxMapInfo = new cc.TMXMapInfo("res/orthogonal-test1.tmx");
  * 2.
- * //create a TMXMapInfo with content string and resource path       使用资源路径创建TMXMapInfo
+ * //使用资源路径创建TMXMapInfo
  * var resources = "res/TileMaps";
  * var filePath = "res/TileMaps/orthogonal-test1.tmx";
  * var xmlStr = cc.loader.getRes(filePath);
@@ -275,10 +273,10 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     _currentFirstGID:0,
 
     /**
-     * Creates a TMX Format with a tmx file or content string                           <br/>          创建一个指定tmx文件格式的TMX<br/>
-     * Constructor of cc.TMXMapInfo
-     * @param {String} tmxFile fileName or content string
-     * @param {String} resourcePath  If tmxFile is a file name ,it is not required.If tmxFile is content string ,it is must required. 如果tmxFile是文件名则不是必要的. 如果tmxFile是字符串则是必要的
+     * 使用tmx文件或内容字串创建一个TMX格式的cc.TMXMapInfo对象 <br/> 
+     * cc.TMXMapInfo的构造函数
+     * @param {String} tmxFile 文件名或内容字符串
+     * @param {String} resourcePath  如果tmxFile是文件名则不是必要的. 如果tmxFile是内容字符串则是必要的
      */
     ctor:function (tmxFile, resourcePath) {
         cc.SAXParser.prototype.ctor.apply(this);
@@ -299,7 +297,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
         }
     },
     /**
-     * Gets Map orientation.   得到地图朝向
+     * 获取地图方向
      * @return {Number}
      */
     getOrientation:function () {
@@ -307,7 +305,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Set the Map orientation.   设置地图朝向
+     * 设置地图方向
      * @param {Number} value
      */
     setOrientation:function (value) {
@@ -315,7 +313,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Map width & height    获取Map的宽度与高度
+     * 获取Map的宽度与高度
      * @return {cc.Size}
      */
     getMapSize:function () {
@@ -323,7 +321,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Map width & height    设置Map的宽度与高度
+     * 设置Map的宽度与高度
      * @param {cc.Size} value
      */
     setMapSize:function (value) {
@@ -345,7 +343,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
 	},
 
     /**
-     * Tiles width & height    获取Tiles的宽度与高度
+     * 获取Tiles的宽度与高度
      * @return {cc.Size}
      */
     getTileSize:function () {
@@ -353,7 +351,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Tiles width & height    设置Tiles的宽度与高度
+     * 设置Tiles的宽度与高度
      * @param {cc.Size} value
      */
     setTileSize:function (value) {
@@ -375,7 +373,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
 	},
 
     /**
-     * Layers    获取Layers
+     * 获取Layers
      * @return {Array}
      */
     getLayers:function () {
@@ -383,7 +381,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Layers   设置Layers
+     * 设置Layers
      * @param {cc.TMXLayerInfo} value
      */
     setLayers:function (value) {
@@ -391,7 +389,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * tilesets    获取tilesets
+     * 获取tile集合(tilesets)
      * @return {Array}
      */
     getTilesets:function () {
@@ -399,7 +397,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * tilesets   设置tilesets
+     * 设置tile集合(tilesets)
      * @param {cc.TMXTilesetInfo} value
      */
     setTilesets:function (value) {
@@ -407,7 +405,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * ObjectGroups  获取TMX对象组
+     * 获取TMX对象组
      * @return {Array}
      */
     getObjectGroups:function () {
@@ -415,7 +413,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * ObjectGroups    设置TMX对象组
+     * 设置TMX对象组
      * @param {cc.TMXObjectGroup} value
      */
     setObjectGroupswqb:function (value) {
@@ -423,7 +421,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * parent element   获取父元素
+     * 获取父元素
      * @return {Object}
      */
     getParentElement:function () {
@@ -431,7 +429,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * parent element   设置父元素
+     * 设置父元素
      * @param {Object} value
      */
     setParentElement:function (value) {
@@ -439,7 +437,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * parent GID  获取父全局标识
+     * 获取父全局标识
      * @return {Number}
      */
     getParentGID:function () {
@@ -447,7 +445,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * parent GID  设置父全局标识
+     * 设置父全局标识
      * @param {Number} value
      */
     setParentGID:function (value) {
@@ -455,7 +453,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Layer attribute    获取Layer属性
+     * 获取Layer属性
      * @return {Object}
      */
     getLayerAttribs:function () {
@@ -463,7 +461,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Layer attribute    设置Layer属性
+     * 设置Layer属性
      * @param {Object} value
      */
     setLayerAttribs:function (value) {
@@ -471,7 +469,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Is reading storing characters stream    获取读取排序好的字符流
+     * 获取是否获取读取排序好的字符流
      * @return {Boolean}
      */
     getStoringCharacters:function () {
@@ -479,7 +477,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Is reading storing characters stream    设置读取排序好的字符流
+     * 设置是否读取排序好的字符流
      * @param {Boolean} value
      */
     setStoringCharacters:function (value) {
@@ -487,7 +485,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Properties   获取属性
+     * 获取属性
      * @return {Array}
      */
     getProperties:function () {
@@ -495,7 +493,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Properties   设置属性
+     * 设置属性
      * @param {object} value
      */
     setProperties:function (value) {
@@ -503,7 +501,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Initializes a TMX format with a  tmx file   使用指定tmx文件格式初始化一个TMX
+     * 使用指定tmx文件初始化一个地图
      * @param {String} tmxFile
      * @return {Element}
      */
@@ -513,7 +511,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * initializes a TMX format with an XML string and a TMX resource path   使用指定XML字符串和TMX资源路径(TMX resource path)格式初始化一个TMX
+     * 使用指定XML字符串和TMX资源路径初始化一个地图
      * @param {String} tmxString
      * @param {String} resourcePath
      * @return {Boolean}
@@ -523,7 +521,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
         return this.parseXMLString(tmxString);
     },
 
-    /** Initalises parsing of an XML file, either a tmx (Map) file or tsx (Tileset) file    通过解析一个XML文件,tmx(Map)文件或tsx(Tileset)文件初始化一个TMX
+    /** 通过解析一个XML文件,tmx(Map)文件或tsx(Tileset)文件初始化一个地图
      * @param {String} tmxFile
      * @param {boolean} [isXmlString=false]
      * @return {Element}
@@ -565,7 +563,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
             mapSize.height = parseFloat(map.getAttribute('tileheight'));
             this.setTileSize(mapSize);
 
-            // The parent element is the map   这个map的父元素
+            // 这个父元素是map
             var propertyArr = map.querySelectorAll("map > properties >  property");
             if (propertyArr) {
                 var aPropertyDict = {};
@@ -585,7 +583,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
 
         for (i = 0; i < tilesets.length; i++) {
             var selTileset = tilesets[i];
-            // If this is an external tileset then start parsing that   如果这是个外部的titlset, 那么开始的解析
+            // 如果这是个外部的titlset, 那么开始的解析
             var tsxName = selTileset.getAttribute('source');
             if (tsxName) {
                 //this._currentFirstGID = parseInt(selTileset.getAttribute('firstgid'));
@@ -675,7 +673,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
                 }
                 nodeValue = nodeValue.trim();
 
-                // Unpack the tilemap data     更新tilemap的数据
+                // 解压tilemap的数据
                 var compression = data.getAttribute('compression');
                 var encoding = data.getAttribute('encoding');
                 if(compression && compression !== "gzip" && compression !== "zlib"){
@@ -692,7 +690,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
                         break;
                     case null:
                     case '':
-                        // Uncompressed  未压缩
+                        //  未压缩
                         if (encoding == "base64")
                             layer._tiles = cc.Codec.Base64.decodeAsArray(nodeValue, 4);
                         else if (encoding === "csv") {
@@ -701,7 +699,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
                             for (var csvIdx = 0; csvIdx < csvTiles.length; csvIdx++)
                                 layer._tiles.push(parseInt(csvTiles[csvIdx]));
                         } else {
-                            //XML format XML格式
+                            //XML格式
                             var selDataTiles = data.getElementsByTagName("tile");
                             layer._tiles = [];
                             for (var xmlIdx = 0; xmlIdx < selDataTiles.length; xmlIdx++)
@@ -714,7 +712,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
                         break;
                 }
 
-                // The parent element is the last layer   父子元素在样报的porperty
+                // 父元素是最后一个layer
                 var layerProps = selLayer.querySelectorAll("properties > property");
                 if (layerProps) {
                     var layerProp = {};
@@ -742,7 +740,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
                     for (j = 0; j < groupProps.length; j++) {
                         var groupProp = {};
                         groupProp[groupProps[j].getAttribute('name')] = groupProps[j].getAttribute('value');
-                        // Add the property to the layer   把所有的属性加到这个layer上
+                        // 把所有的属性加到这个layer上
                         objectGroup.properties = groupProp;
                     }
                 }
@@ -751,14 +749,14 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
                 if (objects) {
                     for (j = 0; j < objects.length; j++) {
                         var selObj = objects[j];
-                        // The value for "type" was blank or not a valid class name                     type是空, 不是非法的变量名
-                        // Create an instance of TMXObjectInfo to store the object and its properties   创建一个TMXObjectInfo实例, 用于存储属性和对象
+                        // "type"的值是空, 或不是非法的变量名
+                        // 创建一个TMXObjectInfo实例, 用于存储属性和对象
                         var objectProp = {};
 
-                        // Set the name of the object to the value for "name" 设置该对象的name
+                        // 设置该对象的name的值
                         objectProp["name"] = selObj.getAttribute('name') || "";
 
-                        // Assign all the attributes as key/name pairs in the properties dictionary 把所有属性以key/name对放入属性字典中
+                        // 把所有属性以key/name对放入属性字典中
                         objectProp["type"] = selObj.getAttribute('type') || "";
 
                         objectProp["x"] = parseInt(selObj.getAttribute('x') || 0) + objectGroup.getPositionOffset().x;
@@ -767,7 +765,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
                         objectProp["width"] = parseInt(selObj.getAttribute('width')) || 0;
                         objectProp["height"] = parseInt(selObj.getAttribute('height')) || 0;
 
-                        // Correct y position. (Tiled uses Flipped, cocos2d uses Standard) 修正y轴, (Tiled使用翻转的, cocos2d使用标准的)
+                        // 修正y坐标, (Tiled使用翻转的, cocos2d使用标准的)
                         objectProp["y"] = parseInt(this.getMapSize().height * this.getTileSize().height) - y - objectProp["height"];
 						
                         objectProp["rotation"] = parseInt(selObj.getAttribute('rotation')) || 0;
@@ -778,7 +776,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
                                 objectProp[docObjProps[k].getAttribute('name')] = docObjProps[k].getAttribute('value');
                         }
 
-                        //polygon 多边形
+                        //多边形
                         var polygonProps = selObj.querySelectorAll("polygon");
                         if(polygonProps && polygonProps.length > 0) {
                             var selPgPointStr = polygonProps[0].getAttribute('points');
@@ -786,7 +784,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
                                 objectProp["polygonPoints"] = this._parsePointsString(selPgPointStr);
                         }
 
-                        //polyline 折线
+                        //折线
                         var polylineProps = selObj.querySelectorAll("polyline");
                         if(polylineProps && polylineProps.length > 0) {
                             var selPlPointStr = polylineProps[0].getAttribute('points');
@@ -794,7 +792,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
                                 objectProp["polylinePoints"] = this._parsePointsString(selPlPointStr);
                         }
 
-                        // Add the object to the objectGroup 向objectGroup中增加对象
+                        // 向objectGroup中增加对象
                         objectGroup.setObjects(objectProp);
                     }
                 }
@@ -819,7 +817,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * initializes parsing of an XML string, either a tmx (Map) string or tsx (Tileset) string  通过解析一个XML字符串,tmx(Map)字符串或tsx(Tileset)字符串初始化一个TMX
+     * 通过解析一个XML字符串,tmx(Map)字符串或tsx(Tileset)字符串初始化一个地图
      * @param {String} xmlString
      * @return {Boolean}
      */
@@ -828,8 +826,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Gets the tile properties.   获取Tiles的属性
-
+     * 获取Tiles的属性
      * @return {object}
      */
     getTileProperties:function () {
@@ -837,7 +834,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Set the tile properties.   设置Tiles的属性
+     * 设置Tiles的属性
      * @param {object} tileProperties
      */
     setTileProperties:function (tileProperties) {
@@ -845,7 +842,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Gets the currentString   获取当前字符串
+     * 获取当前字符串
      * @return {String}
      */
     getCurrentString:function () {
@@ -853,7 +850,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Set the currentString  设置当前字符串
+     * 设置当前字符串
      * @param {String} currentString
      */
     setCurrentString:function (currentString) {
@@ -861,7 +858,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Gets the tmxFileName   获取tmx文件名
+     * 获取tmx文件名
      * @return {String}
      */
     getTMXFileName:function () {
@@ -869,7 +866,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
     },
 
     /**
-     * Set the tmxFileName    设置tmx文件名
+     * 设置tmx文件名
      * @param {String} fileName
      */
     setTMXFileName:function (fileName) {
@@ -899,7 +896,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
 
 var _p = cc.TMXMapInfo.prototype;
 
-// Extended properties
+// 扩展属性
 /** @expose */
 _p.mapWidth;
 cc.defineGetterSetter(_p, "mapWidth", _p._getMapWidth, _p._setMapWidth);
@@ -915,10 +912,10 @@ cc.defineGetterSetter(_p, "tileHeight", _p._getTileHeight, _p._setTileHeight);
 
 
 /**
- * Creates a TMX Format with a tmx file or content string                              通过tmx文件或字符串创建TMX格式
- * @deprecated since v3.0 please use new cc.TMXMapInfo(tmxFile, resourcePath) instead. 从v3.0后请使用new cc.TMXMapInfo(tmxFile, resourcePath)代替
- * @param {String} tmxFile fileName or content string 文件名或字符串
- * @param {String} resourcePath  If tmxFile is a file name ,it is not required.If tmxFile is content string ,it is must required.如果tmxFile是文件名则不是必要的. 如果tmxFile是字符串则是必要的
+ * 通过tmx文件或字符串创建TMX格式地图信息对象
+ * @deprecated 从v3.0后，请使用new cc.TMXMapInfo(tmxFile, resourcePath)代替
+ * @param {String} tmxFile 文件名或字符串
+ * @param {String} resourcePath 如果tmxFile是文件名则不是必要的. 如果tmxFile是字符串则是必要的
  * @return {cc.TMXMapInfo}
  */
 cc.TMXMapInfo.create = function (tmxFile, resourcePath) {
