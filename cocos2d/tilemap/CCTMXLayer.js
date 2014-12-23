@@ -25,31 +25,31 @@
  ****************************************************************************/
 
 /**
- * <p>cc.TMXLayer represents the TMX layer. </p>                                                                                 <p>cc.TMXLayer用来表示TMX layer </p>
- * <p>It is a subclass of cc.SpriteBatchNode. By default the tiles are rendered using a cc.TextureAtlas. <br />                  <p>它继承自SpriteBatchNode.tiles使用TextureAtlas进行渲染<br/>
- * If you modify a tile on runtime, then, that tile will become a cc.Sprite, otherwise no cc.Sprite objects are created. <br />  如果运行时修改一个tile，那么tile将变成一个Sprite，反之，则不会有Sprite对象被创建。<br/ >
- * The benefits of using cc.Sprite objects as tiles are: <br />                                                                  使用Sprite对象作为tiles有如下好处：<br/>
- * - tiles (cc.Sprite) can be rotated/scaled/moved with a nice API </p>                                                          - tiles(即Sprite)可以通过完善的API进行旋转/缩放/移动</p>
- * <p>If the layer contains a property named "cc.vertexz" with an integer (in can be positive or negative), <br />               <p>如果这个layer包括了一个名为cc.vertexz整型属性, <br />
- * then all the tiles belonging to the layer will use that value as their OpenGL vertex Z for depth. </p>                         那么属于layer的tiles将使用该属性值作为它们OpenGL用来渲染显示层次的Z值。 </p>
- * <p>On the other hand, if the "cc.vertexz" property has the "automatic" value, then the tiles will use an automatic vertex Z value. <br />  <p>在另一方面，如果"cc_vertexz"属性拥有 "automatic"值，那么这些tiles将使用一个自分配的Z值。<br />
- * Also before drawing the tiles, GL_ALPHA_TEST will be enabled, and disabled after drawing them. The used alpha func will be:  </p>           同样，在绘制这些tiles时，在绘制前，必须设置GL_ALPHA_TEST为可用，绘制后设置为禁用。使用的Alpha函数如下： </p>
+ * <p>cc.TMXLayer用来表示TMX格式的layer </p>
+ * <p>它是cc.SpriteBatchNode的一个子类. 默认情况下，通过使用一个cc.TextureAtlas来渲染瓦片. <br />
+ * 如果运行时修改一个tile，那么tile将变成一个cc.Sprite对象，反之，则不会有Sprite对象被创建。<br/ >
+ * 使用cc.Sprite对象作为tiles有如下好处：<br/>
+ * - tiles(即cc.Sprite)可以通过完善的API进行旋转/缩放/移动</p>
+ * <p>如果这个layer包括了一个名为“cc.vertexz”整型属性, <br />
+ * 那么属于layer的所有tiles将使用该属性值作为它们OpenGL用来渲染显示层次的Z值。 </p>
+ * <p>在另一方面，如果"cc_vertexz"属性拥有 "automatic"值，那么这些tiles将使用一个自分配的Z值。<br />
+ * 同样，在绘制这些tiles时，在绘制前，必须设置GL_ALPHA_TEST为可用，绘制后设置为禁用。使用的Alpha函数如下： </p>
  * glAlphaFunc( GL_GREATER, value ) <br />
  * glAlphaFunc( GL_GREATER, value ) <br />
- * <p>"value" by default is 0, but you can change it from Tiled by adding the "cc_alpha_func" property to the layer. <br />         <p>"value"默认值是0，也可通过添加"cc_alpha_func"属性给转换成tile的layer来进行改变。<br />
- * The value 0 should work for most cases, but if you have tiles that are semi-transparent, then you might want to use a different value, like 0.5.</p>    大多数情况是value的值是0，但如果有些tiles是半透明的，那么这值则可能会有不同，比如0.5 </p>
+ * <p>"value"默认值是0，也可通过添加"cc_alpha_func"属性给转换成tile的layer来进行改变。<br />
+ * 大多数情况是value的值是0，但如果有些tiles是半透明的，那么这值则可能会有不同，比如0.5 </p>
  * @class
  * @extends cc.SpriteBatchNode
  *
- * @property {Array}                tiles               - Tiles for layer Tiles的层
- * @property {cc.TMXTilesetInfo}    tileset             - Tileset for layer Tiles
- * @property {Number}               layerOrientation    - Layer orientation Layer的方向
- * @property {Array}                properties          - Properties from the layer. They can be added using tilemap editors 这个Layer的属性, 使用tilemap编辑器添加这些属性
- * @property {String}               layerName           - Name of the layer layer的名称
- * @property {Number}               layerWidth          - Width of the layer layer的宽度
- * @property {Number}               layerHeight         - Height of the layer layer的高度
- * @property {Number}               tileWidth           - Width of a tile tile的宽度
- * @property {Number}               tileHeight          - Height of a tile tile的高度
+ * @property {Array}                tiles               - Tiles的层
+ * @property {cc.TMXTilesetInfo}    tileset             - Layer上的tile集合(Tileset)
+ * @property {Number}               layerOrientation    - Layer的方向
+ * @property {Array}                properties          - 这个Layer的属性, 使用tilemap编辑器添加这些属性
+ * @property {String}               layerName           - layer的名称
+ * @property {Number}               layerWidth          - ayer的宽度
+ * @property {Number}               layerHeight         - layer的高度
+ * @property {Number}               tileWidth           - tile的宽度
+ * @property {Number}               tileHeight          - tile的高度
  */
 cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
 	tiles: null,
@@ -80,8 +80,8 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     _className:"TMXLayer",
 
     /**
-     * Creates a cc.TMXLayer with an tile set info, a layer info and a map info   <br/> 创建一个TMXLayer包括tile信息, layer信息, 和map信息 <br />
-     * Constructor of cc.TMXLayer  TMXLayer的构造函数
+     * 创建一个TMXLayer包括tile信息, layer信息, 和map信息 <br />
+     * cc.TMXLayer的构造函数
      * @param {cc.TMXTilesetInfo} tilesetInfo
      * @param {cc.TMXLayerInfo} layerInfo
      * @param {cc.TMXMapInfo} mapInfo
@@ -106,7 +106,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
             this._cacheTexture = tempTexture;
             this.width = locCanvas.width;
 	        this.height = locCanvas.height;
-	        // This class uses cache, so its default cachedParent should be himself  这个类使用缓存, 所以cachedParent应该属于本身
+	        // 这个类使用缓存, 所以cachedParent应该属于本身
 	        this._cachedParent = this;
         }
         if(mapInfo !== undefined)
@@ -121,10 +121,10 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Sets the untransformed size of the TMXLayer.                                                                            未变换TMLayer的尺寸
+     * 设置未变换TMLayer的尺寸
      * @override
-     * @param {cc.Size|Number} size The untransformed size of the TMXLayer or The untransformed size's width of the TMXLayer.  未变换TMXLayer的尺寸或者TMXLayer尺寸的宽度
-     * @param {Number} [height] The untransformed size's height of the TMXLayer.                                               未变换TMXLayer的高度
+     * @param {cc.Size|Number} size 未变换TMXLayer的尺寸或者TMXLayer尺寸的宽度
+     * @param {Number} [height] 未变换TMXLayer的高度
      */
     setContentSize:function (size, height) {
         var locContentSize = this._contentSize;
@@ -137,14 +137,14 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
             locCanvas.height = 0 | (locContentSize.height * 1.5 * scaleFactor);
 
             if(this.layerOrientation === cc.TMX_ORIENTATION_HEX)
-                this._cacheContext.translate(0, locCanvas.height - (this._mapTileSize.height * 0.5));                         //translate for hexagonal 转换成6边形地图
+                this._cacheContext.translate(0, locCanvas.height - (this._mapTileSize.height * 0.5));                         //转换成6边形地图
             else
                 this._cacheContext.translate(0, locCanvas.height);
             var locTexContentSize = this._cacheTexture._contentSize;
             locTexContentSize.width = locCanvas.width;
             locTexContentSize.height = locCanvas.height;
 
-            // Init sub caches if needed  如果需要的话初始化子缓存
+            // 如果需要的话初始化子缓存
             var totalPixel = locCanvas.width * locCanvas.height;
             if(totalPixel > this._maxCachePixel) {
                 if(!this._subCacheCanvas) this._subCacheCanvas = [];
@@ -161,19 +161,19 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
                     tmpCanvas.width = this._subCacheWidth = Math.round( locCanvas.width / this._subCacheCount );
                     tmpCanvas.height = locCanvas.height;
                 }
-                // Clear wasted cache to release memory  清理浪费的缓存, 释放内存
+                // 清理浪费的缓存, 释放内存
                 for(i = this._subCacheCount; i < locSubCacheCanvas.length; i++) {
                     tmpCanvas.width = 0;
                     tmpCanvas.height = 0;
                 }
             }
-            // Otherwise use count as a flag to disable sub caches  否则使用一个数字标记去关闭子缓存
+            // 否则使用一个数字标记去关闭子缓存
             else this._subCacheCount = 0;
         }
     },
 
     /**
-     * Return texture of cc.SpriteBatchNode 返回SpriteBatchNote
+     * 返回cc.SpriteBatchNote的渲染纹理
      * @function
      * @return {cc.Texture2D}
      */
@@ -184,7 +184,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * don't call visit on it's children ( override visit of cc.Node )  不要调用visit(覆写cc.Node的visit方法)
+     * 在它的孩子上不要调用visit(覆写cc.Node的visit方法)
      * @function
      * @override
      * @param {CanvasRenderingContext2D} ctx
@@ -192,7 +192,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     visit: null,
 
     _visitForCanvas: function (ctx) {
-        //TODO it will implement dynamic compute child cutting automation.  以后会实现child的动态计算与自动剪切
+        //TODO 以后会实现child的动态计算与自动剪切
         var i, len, locChildren = this._children;
         // quick return if not visible
         if (!this._visible || !locChildren || locChildren.length === 0)
@@ -206,7 +206,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
         if (this._cacheDirty) {
             var locCacheContext = this._cacheContext, locCanvas = this._cacheCanvas, locView = cc.view,
                 instanceID = this.__instanceId, renderer = cc.renderer;
-            //begin cache 开始缓存
+            //开始缓存
             renderer._turnToCacheMode(instanceID);
 
             this.sortAllChildren();
@@ -217,7 +217,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
                 }
             }
 
-            //copy cached render cmd array to TMXLayer renderer复制缓存渲染命令组到TMXLayer的渲染器中
+            //复制缓存渲染命令组到TMXLayer的渲染器中
             this._rendererCmd._copyRendererCmds(renderer._cacheToCanvasCmds[instanceID]);
 
             locCacheContext.save();
@@ -225,7 +225,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
             var t = cc.affineTransformInvert(this._transformWorld);
             locCacheContext.transform(t.a, t.c, t.b, t.d, t.tx * locView.getScaleX(), -t.ty * locView.getScaleY());
 
-            //draw to cache canvas 绘制canvas缓存
+            //绘制canvas缓存
             renderer._renderingToCacheCanvas(locCacheContext, instanceID);
             locCacheContext.restore();
             this._cacheDirty = false;
@@ -233,7 +233,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
         cc.renderer.pushRenderCommand(this._rendererCmd);
     },
 
-    //set the cache dirty flag for canvas 设置canvas的脏标记
+    //设置canvas的脏标记(dirty flag)
     _setNodeDirtyForCache: function () {
         this._cacheDirty  = true;
         if(cc.renderer._transformNodePool.indexOf(this) === -1)
@@ -242,7 +242,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * draw cc.SpriteBatchNode (override draw of cc.Node)  绘制SpriteBatchNode(覆盖Node的draw函数)
+     * 绘制SpriteBatchNode(覆盖Node的draw函数)
      * @function
      * @param {CanvasRenderingContext2D} ctx
      */
@@ -254,7 +254,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
         var posX = 0 | ( -this._anchorPointInPoints.x), posY = 0 | ( -this._anchorPointInPoints.y);
         var eglViewer = cc.view;
         var locCacheCanvas = this._cacheCanvas;
-        //direct draw image by canvas drawImage 使用canvas drawImags直接绘制图片
+        //使用canvas drawImags直接绘制图片
         if (locCacheCanvas) {
             var locSubCacheCount = this._subCacheCount, locCanvasHeight = locCacheCanvas.height * eglViewer._scaleY;
             var halfTileSize = this._mapTileSize.height * 0.5 * eglViewer._scaleY;
@@ -281,7 +281,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Gets layer size.   获取layer的尺寸
+     * 获取layer的尺寸
      * @return {cc.Size}
      */
     getLayerSize:function () {
@@ -289,7 +289,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Set layer size 设置layer的尺寸
+     * 设置layer的尺寸
      * @param {cc.Size} Var
      */
     setLayerSize:function (Var) {
@@ -311,7 +311,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
 	},
 
     /**
-     * Size of the map's tile (could be different from the tile's size)  map的尺寸(与title的尺寸不同)
+     * 地图的尺寸以tile为单位(与title的尺寸不同)
      * @return {cc.Size}
      */
     getMapTileSize:function () {
@@ -319,7 +319,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Set the map tile size. 设置map tile的尺寸
+     * 设置map tile的尺寸
      * @param {cc.Size} Var
      */
     setMapTileSize:function (Var) {
@@ -341,7 +341,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
 	},
 
     /**
-     * Pointer to the map of tiles   指向tiles的映射
+     * 指向tiles的映射
      * @return {Array}
      */
     getTiles:function () {
@@ -349,7 +349,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Pointer to the map of tiles  指向tiles的映射
+     * 设置指向tiles的映射
      * @param {Array} Var
      */
     setTiles:function (Var) {
@@ -357,7 +357,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Tile set information for the layer     获取layer的Tileset信息
+     * 获取layer的tile集合(Tileset)信息
      * @return {cc.TMXTilesetInfo}
      */
     getTileset:function () {
@@ -365,7 +365,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Tile set information for the layer   设置layer的Tileset信息
+     * 设置layer的tile集合(Tileset)信息
      * @param {cc.TMXTilesetInfo} Var
      */
     setTileset:function (Var) {
@@ -373,7 +373,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Layer orientation, which is the same as the map orientation  Layer的朝向, 与地图朝向相同
+     * 获取Layer的方向, 与地图方向相同
      * @return {Number}
      */
     getLayerOrientation:function () {
@@ -381,7 +381,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Layer orientation, which is the same as the map orientation  Layer的朝向, 与地图朝向相同
+     * 设置Layer的方向, 与地图方向相同
      * @param {Number} Var
      */
     setLayerOrientation:function (Var) {
@@ -389,7 +389,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * properties from the layer. They can be added using Tiled  layer的属性，可以被当作Tile添加
+     * 获取layer的属性，它们可以被当作Tile添加
      * @return {Array}
      */
     getProperties:function () {
@@ -397,7 +397,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * properties from the layer. They can be added using Tiled layer的属性，可以被当作Tile添加
+     * 设置layer的属性，它们可以被当作Tile添加
      * @param {Array} Var
      */
     setProperties:function (Var) {
@@ -405,7 +405,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Initializes a cc.TMXLayer with a tileset info, a layer info and a map info 使用指定TMXTilesetInfo,TMXLayerInfo和TMXMapInfo初始化一个TMXLayer
+     * 使用指定TMXTileset信息,TMXLayer信息和TMXMap信息初始化一个TMXLayer
      * @param {cc.TMXTilesetInfo} tilesetInfo
      * @param {cc.TMXLayerInfo} layerInfo
      * @param {cc.TMXMapInfo} mapInfo
@@ -453,9 +453,9 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * <p>Dealloc the map that contains the tile position from memory. <br />                          <p>从内存中释放包含tile位置信息的地图.<br/>
-     * Unless you want to know at runtime the tiles positions, you can safely call this method. <br /> 除非知道在运行时知道tiles的位置信息外，你都可安全的调用此方法。<br />
-     * If you are going to call layer.getTileGIDAt() then, don't release the map</p>                   如果调用layer.tileGIDAt()，那么不能释放地图。 </p>
+     * <p>从内存中释放包含tile位置信息的地图.<br/>
+     * 除非知道在运行时知道tiles的位置信息外，你都可以安全的调用此方法。<br />
+     * 如果调用layer.tileGIDAt()，那么不能释放地图。 </p>
      */
     releaseMap:function () {
         if (this.tiles)
@@ -466,12 +466,12 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * <p>Returns the tile (cc.Sprite) at a given a tile coordinate. <br/>                                                  <p>通过给定的坐标返回tile(cc.Sprite) <br/>
-     * The returned cc.Sprite will be already added to the cc.TMXLayer. Don't add it again.<br/>                            返回的cc.Sprite已经是cc.TMXLayer的Child,不要再添加 <br/>
-     * The cc.Sprite can be treated like any other cc.Sprite: rotated, scaled, translated, opacity, color, etc. <br/>       这个cc.Sprite可以和别的cc.Sprite一样, 旋转,缩放,透明, 变色, 等等<br/>
-     * You can remove either by calling: <br/>                                                                              也可以删除通过调用 <br/>
-     * - layer.removeChild(sprite, cleanup); <br/>                                                                          - layer.removeChild(sprite, cleanup); <br/>
-     * - or layer.removeTileAt(ccp(x,y)); </p>                                                                              - or layer.removeTileAt(ccp(x,y)); </p>
+     * <p>返回指定坐标处的瓦片精灵tile(cc.Sprite) <br/>
+     * 返回的cc.Sprite已经是cc.TMXLayer的Child,不要再添加 <br/>
+     * 这个cc.Sprite可以像别的cc.Sprite一样, 旋转,缩放,透明, 变色, 等等<br/>
+     * 也可以删除通过调用 <br/>
+     * - layer.removeChild(sprite, cleanup); <br/>
+     * - or layer.removeTileAt(ccp(x,y)); </p>
      * @param {cc.Point|Number} pos or x
      * @param {Number} [y]
      * @return {cc.Sprite}
@@ -517,9 +517,9 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Returns the tile gid at a given tile coordinate. <br />                                                          通过指定的tile坐标获取对应的tile gid. <br />
-     * if it returns 0, it means that the tile is empty. <br />                                                         如果返回0, 意味着这个tile是空的<br/>
-     * This method requires the the tile map has not been previously released (eg. don't call layer.releaseMap())<br /> 这个方法要求tile map不会被释放 <br>
+     * 通过指定的tile坐标获取对应的tile gid. <br />
+     * 如果返回0, 意味着这个tile是空的<br/>
+     * 这个方法要求，在此之前tile map不会被释放 (比如. 不要调用 layer.releaseMap())<br />
      * @param {cc.Point|Number} pos or x
      * @param {Number} [y]
      * @return {Number}
@@ -537,7 +537,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
         }
 
         var idx = 0 | (pos.x + pos.y * this._layerSize.width);
-        // Bits on the far end of the 32-bit global tile ID are used for tile flags   32位全局的tile id的高位被用于tile的标记
+        // 32位全局的tile id的高位被用于tile的标记
         var tile = this.tiles[idx];
 
         return (tile & cc.TMX_TILE_FLIPPED_MASK) >>> 0;
@@ -546,7 +546,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     // tileGIDAt:getTileGIDAt,
 
     /**
-     *  lipped tiles can be changed dynamically
+     *  获取指定坐标处的tile的标记
      * @param {cc.Point|Number} pos or x
      * @param {Number} [y]
      * @return {Number}
@@ -564,7 +564,6 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
         }
 
         var idx = 0 | (pos.x + pos.y * this._layerSize.width);
-        // Bits on the far end of the 32-bit global tile ID are used for tile flags
 		// 32位全局的tile id的高位被用于tile的标记
         var tile = this.tiles[idx];
 
@@ -574,9 +573,9 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     // tileFlagAt:getTileFlagsAt,
 
     /**
-     * <p>Sets the tile gid (gid = tile global id) at a given tile coordinate.<br />                                            <p>设置一个指定坐标的tile的gid(gid = tile global id)。 <br />
-     * The Tile GID can be obtained by using the method "tileGIDAt" or by using the TMX editor . Tileset Mgr +1.<br />          Tile GID可以通过调用tileGIDAt方法或使用TMX editor . Tileset Mgr +1得到.<br />
-     * If a tile is already placed at that position, then it will be removed.</p>                                               如果该位置上已有一个tile，那么该位置上已有的tile将会被移除。
+     * <p>设置指定坐标处tile的gid(gid = tile global id)。 <br />
+     * Tile GID可以通过调用"tileGIDAt"方法或使用TMX编辑器 . Tileset管理器 +1得到.<br />
+     * 如果该位置上已有一个tile，那么该位置上已有的tile将会被移除。
      * @param {Number} gid
      * @param {cc.Point|Number} posOrX position or x
      * @param {Number} flagsOrY flags or y
@@ -610,12 +609,12 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
 
         if (currentGID != gid || currentFlags != flags) {
             var gidAndFlags = (gid | flags) >>> 0;
-            // setting gid=0 is equal to remove the tile 设置gid=0代表tile被删除
+            // 设置gid=0代表tile被删除
             if (gid === 0)
                 this.removeTileAt(pos);
-            else if (currentGID === 0)            // empty tile. create a new one      空tile 生成一个新的
+            else if (currentGID === 0)            // 空tile 生成一个新的
                 this._insertTileForGID(gidAndFlags, pos);
-            else {                // modifying an existing tile with a non-empty tile  修改一个非空的tile
+            else {                // 修改一个非空的tile
                 var z = pos.x + pos.y * this._layerSize.width;
                 var sprite = this.getChildByTag(z);
                 if (sprite) {
@@ -634,7 +633,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Removes a tile at given tile coordinate  通过一个给定的坐标删除一个tile
+     * 通过给定的坐标删除一个tile
      * @param {cc.Point|Number} pos position or x
      * @param {Number} [y]
      */
@@ -656,13 +655,13 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
                 this._setNodeDirtyForCache();
             var z = 0 | (pos.x + pos.y * this._layerSize.width);
             var atlasIndex = this._atlasIndexForExistantZ(z);
-            // remove tile from GID map   从GID地图中删除Tile
+            // 从GID地图中删除Tile
             this.tiles[z] = 0;
 
-            // remove tile from atlas position array  从位置数组中删除tile
+            // 从位置数组中删除tile
             this._atlasIndexArray.splice(atlasIndex, 1);
 
-            // remove it from sprites and/or texture atlas   从sprites或texture atlas中删除
+            // 从sprites或texture atlas中删除
             var sprite = this.getChildByTag(z);
 
             if (sprite)
@@ -671,7 +670,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
                 if(cc._renderType === cc._RENDER_TYPE_WEBGL)
                     this.textureAtlas.removeQuadAtIndex(atlasIndex);
 
-                // update possible children   更新需要的children
+                // 更新需要的children
                 if (this._children) {
                     var locChildren = this._children;
                     for (var i = 0, len = locChildren.length; i < len; i++) {
@@ -688,7 +687,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Returns the position in pixels of a given tile coordinate  获取指定坐标的位置(以点为单位)
+     * 获取指定tile坐标的位置(以像素为单位)
      * @param {cc.Point|Number} pos position or x
      * @param {Number} [y]
      * @return {cc.Point}
@@ -710,11 +709,11 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
         }
         return cc.pointPixelsToPoints(ret);
     },
-    // XXX: Deprecated. For backward compatibility only   XXX:废弃, 为了向后兼容
+    // XXX:废弃, 为了向后兼容
     // positionAt:getPositionAt,
 
     /**
-     * Return the value for the specific property name  获取指定属性名的值
+     * 获取指定属性名的值
      * @param {String} propertyName
      * @return {*}
      */
@@ -723,10 +722,10 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Creates the tiles    创建tiles
+     * 创建tiles
      */
     setupTiles:function () {
-        // Optimization: quick hack that sets the image size on the tileset     优化:快速在titleset上设置图片的尺寸
+        // 优化:快速在titleset上设置图片的尺寸
         if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
             this.tileset.imageSize = this._originalTexture.getContentSizeInPixels();
         } else {
@@ -740,7 +739,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
             this.textureAtlas.texture.setAliasTexParameters();
         }
 
-        // Parse cocos2d properties  解析cocos2d的属性
+        // 解析cocos2d的属性
         this._parseInternalProperties();
         if (cc._renderType === cc._RENDER_TYPE_CANVAS)
             this._setNodeDirtyForCache();
@@ -754,7 +753,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
                 // XXX: gid == 0 -. empty tile
                 if (gid !== 0) {
                     this._appendTileForGID(gid, cc.p(x, y));
-                    // Optimization: update min and max GID rendered by the layer   优化:通过这个layer更新最大和最小的GID
+                    // 优化:通过这个layer更新最大和最小的GID
                     this._minGID = Math.min(gid, this._minGID);
                     this._maxGID = Math.max(gid, this._maxGID);
                 }
@@ -767,8 +766,8 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * cc.TMXLayer doesn't support adding a cc.Sprite manually.                           TMXLayer不支持addinng Sprite
-     * @warning addChild(child); is not supported on cc.TMXLayer. Instead of setTileGID. addChild支持TMXLayer, 使用setTileGID代替
+     * cc.TMXLayer不支持手动添加一个cc.Sprite对象
+     * @warning addChild(child)在cc.TMXLayer上不支持, 请使用setTileGID代替
      * @param {cc.Node} child
      * @param {number} zOrder
      * @param {number} tag
@@ -778,12 +777,12 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Remove child  删除Child
+     * 删除Child
      * @param  {cc.Sprite} sprite
      * @param  {Boolean} cleanup
      */
     removeChild:function (sprite, cleanup) {
-        // allows removing nil objects  允许删除nil对象
+        // 允许删除nil对象
         if (!sprite)
             return;
 
@@ -803,7 +802,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Gets the layer name  获取名称
+     * 获取名称
      * @return {String}
      */
     getLayerName:function () {
@@ -811,7 +810,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
     },
 
     /**
-     * Set the layer name  设置名称
+     * 设置名称
      * @param {String} layerName
      */
     setLayerName:function (layerName) {
@@ -860,15 +859,15 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
         var tile = this._reusedTileWithRect(rect);
         this._setupTileSprite(tile, pos, gid);
 
-        // optimization:  优化:
-        // The difference between appendTileForGID and insertTileforGID is that append is faster, since   appendTileForGID 与 insertTileforGID的不同是appendTileForGID更快, 因为
-		// it appends the tile at the end of the texture atlas                                            是在texutre atlas的尾部增加
+        // 优化:
+        // appendTileForGID 与 insertTileforGID的不同是appendTileForGID更快, 因为
+		// 它是在texutre atlas的尾部添加tile
         var indexForZ = this._atlasIndexArray.length;
 
-        // don't add it using the "standard" way.    不要用"标准"的方法添加
+        // 不要用"标准"的方法添加
         this.insertQuadFromSprite(tile, indexForZ);
 
-        // append should be after addQuadFromSprite since it modifies the quantity values       由于修改值了, 所以应该在addQuadFromSprite之后append,
+        // 由于修改质量值了, 所以应该在addQuadFromSprite之后添加,
         this._atlasIndexArray.splice(indexForZ, 0, z);
         return tile;
     },
@@ -881,15 +880,15 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
         var tile = this._reusedTileWithRect(rect);
         this._setupTileSprite(tile, pos, gid);
 
-        // get atlas index   得到atlas的索引
+        // 得到atlas的索引
         var indexForZ = this._atlasIndexForNewZ(z);
 
-        // Optimization: add the quad without adding a child    优化: 添加四元数, 不添加child
+        // 优化: 添加quad, 不添加child
         this.insertQuadFromSprite(tile, indexForZ);
 
-        // insert it into the local atlasindex array    插入到本地的atlasindex数组
+        // 插入到本地的atlasindex数组
         this._atlasIndexArray.splice(indexForZ, 0, z);
-        // update possible children             更新可能的children
+        // 更新可能的children
         if (this._children) {
             var locChildren = this._children;
             for (var i = 0, len = locChildren.length; i < len; i++) {
@@ -924,9 +923,9 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
         return tile;
     },
 
-    //The layer recognizes some special properties, like cc_vertez  这个Layer的一些特别的属性, 就像cc_vertez
+    //这个Layer识别一些特别的属性, 比如cc_vertez
     _parseInternalProperties:function () {
-        // if cc_vertex=automatic, then tiles will be rendered using vertexz  如果cc_vertex=automatic, 那么titles会使用vertexz渲染
+        // 如果cc_vertex=automatic, 那么titles会使用vertexz渲染
         var vertexz = this.getProperty("cc_vertexz");
         if (vertexz) {
             if (vertexz == "automatic") {
@@ -939,7 +938,7 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
                 if (cc._renderType === cc._RENDER_TYPE_WEBGL) {
                     this.shaderProgram = cc.shaderCache.programForKey(cc.SHADER_POSITION_TEXTURECOLORALPHATEST);
                     var alphaValueLocation = cc._renderContext.getUniformLocation(this.shaderProgram.getProgram(), cc.UNIFORM_ALPHA_TEST_VALUE_S);
-                    // NOTE: alpha test shader is hard-coded to use the equivalent of a glAlphaFunc(GL_GREATER) comparison  注意:透明度测试shader是被硬编码之中, 相当于使用glAphaFunc(GL_GREATER)
+                    // 注意:透明度测试shader是被硬编码之中, 相当于使用glAphaFunc(GL_GREATER)
                     this.shaderProgram.use();
                     this.shaderProgram.setUniformLocationWith1f(alphaValueLocation, alphaFuncValue);
                 }
@@ -966,16 +965,16 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
         sprite.setFlippedX(false);
         sprite.setFlippedY(false);
 
-        // Rotation in tiled is achieved using 3 flipped states, flipping across the horizontal, vertical, and diagonal axes of the tiles.  旋转tiles使用三个翻转属性, 水平, 垂直, 和对角线
+        // 旋转tiles使用三个翻转状态完成, 水平, 垂直, 和对角线翻转tile
         if ((gid & cc.TMX_TILE_DIAGONAL_FLAG) >>> 0) {
-            // put the anchor in the middle for ease of rotation.   放置矛点在中间, 以方便旋转
+            // 放置锚点在中间, 以方便旋转
             sprite.anchorX = 0.5;
 	        sprite.anchorY = 0.5;
             sprite.x = this.getPositionAt(pos).x + sprite.width / 2;
 	        sprite.y = this.getPositionAt(pos).y + sprite.height / 2;
 
             var flag = (gid & (cc.TMX_TILE_HORIZONTAL_FLAG | cc.TMX_TILE_VERTICAL_FLAG) >>> 0) >>> 0;
-            // handle the 4 diagonally flipped states.   处理对角线翻转状态
+            // 处理对角线翻转状态
             if (flag == cc.TMX_TILE_HORIZONTAL_FLAG)
                 sprite.rotation = 90;
             else if (flag == cc.TMX_TILE_VERTICAL_FLAG)
@@ -1005,14 +1004,14 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
                 this._reusedTile.initWithTexture(this.texture, rect, false);
                 this._reusedTile.batchNode = this;
             } else { 
-                // XXX HACK: Needed because if "batch node" is nil,   XXX HACK: 如果 batch node 是nil
-                // then the Sprite'squad will be reset                那么Sprite的四元线会被重置
+                // XXX HACK: 如果 "batch node" 是nil
+                // 那么Sprite的quad会被重置
                 this._reusedTile.batchNode = null;
 
-                // Re-init the sprite    重新初始化sprite
+                // 重新初始化sprite
                 this._reusedTile.setTextureRect(rect, false);
 
-                // restore the batch node    恢复batch node
+                // 恢复batch node
                 this._reusedTile.batchNode = this;
             }
         } else {
@@ -1090,7 +1089,7 @@ if(cc._renderType == cc._RENDER_TYPE_WEBGL){
 /** @expose */
 cc.defineGetterSetter(_p, "texture", _p.getTexture, _p.setTexture);
 
-// Extended properties   扩展属性
+// 扩展属性
 /** @expose */
 _p.layerWidth;
 cc.defineGetterSetter(_p, "layerWidth", _p._getLayerWidth, _p._setLayerWidth);
@@ -1106,8 +1105,8 @@ cc.defineGetterSetter(_p, "tileHeight", _p._getTileHeight, _p._setTileHeight);
 
 
 /**
- * Creates a cc.TMXLayer with an tile set info, a layer info and a map info                    创建一个TMXLayer包括tile信息, layer信息, 和map信息
- * @deprecated since v3.0 please use new cc.TMXLayer(tilesetInfo, layerInfo, mapInfo) instead. 从v3.0之后请使用 new cc.TMXLayer(tilesetInfo, layerInfo, mapInfo) 替代
+ * 创建一个cc.TMXLayer包括tile集合信息, layer信息, 和map信息
+ * @deprecated 从v3.0之后,请使用 new cc.TMXLayer(tilesetInfo, layerInfo, mapInfo) 替代
  * @param {cc.TMXTilesetInfo} tilesetInfo
  * @param {cc.TMXLayerInfo} layerInfo
  * @param {cc.TMXMapInfo} mapInfo
