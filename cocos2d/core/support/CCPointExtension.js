@@ -25,20 +25,16 @@
  ****************************************************************************/
 
 /**
- * <p>cc.Point extensions based on Chipmunk's cpVect file.<br />
  * <p>cc.Point 是Chipmunk引擎中cpVect文件的扩展.<br />
- * These extensions work both with cc.Point</p>
- * cc.Point中也可以使用原本Chipmunk中cpVect的功能
- * <p>The "ccp" prefix means: "CoCos2d Point"</p>
+ * cc.Point中也可以使用原本Chipmunk中cpVect的功能</p>
  * <p>"ccp" 前缀的意思是"CoCos2d Point"</p>
- * <p> //Examples:<br />  //举个例子
- * - cc.pAdd( cc.p(1,1), cc.p(2,2) ); // preferred cocos2d way <br />  //首选cocos2d的写法
- * - cc.pAdd( cc.p(1,1), cc.p(2,2) ); // also ok but more verbose<br /> //估计这里错了，修正 - cc.pAdd( cc.cpv(1,1), cc.cpv(2,2) );  //这种复杂的写法也行
- * - cc.pAdd( cc.cpv(1,1), cc.cpv(2,2) ); // mixing chipmunk and cocos2d (avoid)</p>//估计这里错了，修正 - cc.pAdd( cc.p(1,1), cc.cpv(2,2) );   //chipmunk和cocos2d的混合写法(尽量避免)
+ * <p> //例子:<br />  
+ * - cc.pAdd( cc.p(1,1), cc.p(2,2) ); // 首选cocos2d的写法 <br /> 
+ * - cc.pAdd( cc.cpv(1,1), cc.cpv(2,2) );  //这种复杂的写法也行<br />
+ * - cc.pAdd( cc.p(1,1), cc.cpv(2,2) );   //chipmunk和cocos2d的混合写法(尽量避免)</p>
  */
 
 /**
- * smallest such that 1.0+FLT_EPSILON != 1.0
  * 设定最小值为1.0+FLT_EPSILON
  * @constant
  * @type Number
@@ -46,7 +42,6 @@
 cc.POINT_EPSILON = parseFloat('1.192092896e-07F');
 
 /**
- * Returns opposite of point.
  * 返回以原点为中心对称的点
  * @param {cc.Point} point
  * @return {cc.Point}
@@ -56,7 +51,6 @@ cc.pNeg = function (point) {
 };
 
 /**
- * Calculates sum of two points.
  * 计算两点坐标的和
  * @param {cc.Point} v1
  * @param {cc.Point} v2
@@ -67,7 +61,6 @@ cc.pAdd = function (v1, v2) {
 };
 
 /**
- * Calculates difference of two points.
  * 计算两向量的差
  * @param {cc.Point} v1
  * @param {cc.Point} v2
@@ -78,7 +71,6 @@ cc.pSub = function (v1, v2) {
 };
 
 /**
- * Returns point multiplied by given factor.
  * 返回放大n倍之后的点
  * @param {cc.Point} point
  * @param {Number} floatVar
@@ -89,7 +81,6 @@ cc.pMult = function (point, floatVar) {
 };
 
 /**
- * Calculates midpoint between two points.
  * 计算两点的中点
  * @param {cc.Point} v1
  * @param {cc.Point} v2
@@ -100,7 +91,6 @@ cc.pMidpoint = function (v1, v2) {
 };
 
 /**
- * Calculates dot product of two points.
  * 计算两向量的点积
  * @param {cc.Point} v1
  * @param {cc.Point} v2
@@ -111,7 +101,6 @@ cc.pDot = function (v1, v2) {
 };
 
 /**
- * Calculates cross product of two points.
  * 计算两向量的叉积
  * @param {cc.Point} v1
  * @param {cc.Point} v2
@@ -122,8 +111,7 @@ cc.pCross = function (v1, v2) {
 };
 
 /**
- * Calculates perpendicular of v, rotated 90 degrees counter-clockwise -- cross(v, perp(v)) >= 0
- * 将向量v沿逆时针旋转90度
+ * 将向量v沿逆时针旋转90度 -- cross(v, perp(v)) >= 0
  * @param {cc.Point} point
  * @return {cc.Point}
  */
@@ -132,8 +120,7 @@ cc.pPerp = function (point) {
 };
 
 /**
- * Calculates perpendicular of v, rotated 90 degrees clockwise -- cross(v, rperp(v)) <= 0
- * 将向量v沿顺时针旋转90度
+ * 将向量v沿顺时针旋转90度 -- cross(v, rperp(v)) <= 0
  * @param {cc.Point} point
  * @return {cc.Point}
  */
@@ -142,7 +129,6 @@ cc.pRPerp = function (point) {
 };
 
 /**
- * Calculates the projection of v1 over v2.
  * 计算向量V1在向量V2上的投影点
  * @param {cc.Point} v1
  * @param {cc.Point} v2
@@ -153,7 +139,7 @@ cc.pProject = function (v1, v2) {
 };
 
 /**
- * Rotates two points.
+ * 旋转两个点.
  *
  * @param  {cc.Point} v1
  * @param  {cc.Point} v2
@@ -164,7 +150,7 @@ cc.pRotate = function (v1, v2) {
 };
 
 /**
- * Unrotates two points.
+ * 不旋转两个点.
  *
  * @param  {cc.Point} v1
  * @param  {cc.Point} v2
@@ -175,7 +161,6 @@ cc.pUnrotate = function (v1, v2) {
 };
 
 /**
- * Calculates the square length of a cc.Point (not calling sqrt() )
  * 计算一个向量的长度平方
  * @param  {cc.Point} v
  *@return {Number}
@@ -185,7 +170,6 @@ cc.pLengthSQ = function (v) {
 };
 
 /**
- * Calculates the square distance between two points (not calling sqrt() )
  * 计算两个点之间的长度平方
  * @param {cc.Point} point1
  * @param {cc.Point} point2
@@ -196,7 +180,6 @@ cc.pDistanceSQ = function(point1, point2){
 };
 
 /**
- * Calculates distance between point an origin
  * 计算点和原点的距离
  * @param  {cc.Point} v
  * @return {Number}
@@ -206,7 +189,6 @@ cc.pLength = function (v) {
 };
 
 /**
- * Calculates the distance between two points
  * 计算两点间距离
  * @param {cc.Point} v1
  * @param {cc.Point} v2
@@ -217,7 +199,6 @@ cc.pDistance = function (v1, v2) {
 };
 
 /**
- * Returns point multiplied to a length of 1.
  * 将点的长度单位化为1
  * @param {cc.Point} v
  * @return {cc.Point}
@@ -227,7 +208,6 @@ cc.pNormalize = function (v) {
 };
 
 /**
- * Converts radians to a normalized vector.
  * 将弧度转换为标准化的向量
  * @param {Number} a
  * @return {cc.Point}
@@ -237,7 +217,6 @@ cc.pForAngle = function (a) {
 };
 
 /**
- * Converts a vector to radians.
  * 将向量转换为弧度
  * @param {cc.Point} v
  * @return {Number}
@@ -247,7 +226,6 @@ cc.pToAngle = function (v) {
 };
 
 /**
- * Clamp a value between from and to.
  * 在上下界之间截取一个值
  * @param {Number} value
  * @param {Number} min_inclusive
@@ -264,7 +242,6 @@ cc.clampf = function (value, min_inclusive, max_inclusive) {
 };
 
 /**
- * Clamp a point between from and to.
  * 在上下界之间截取一个点
  * @param {Point} p
  * @param {Number} min_inclusive
@@ -276,7 +253,6 @@ cc.pClamp = function (p, min_inclusive, max_inclusive) {
 };
 
 /**
- * Quickly convert cc.Size to a cc.Point
  * 快速将一个cc.Size类型转换为cc.Point类型
  * @param {cc.Size} s
  * @return {cc.Point}
@@ -286,8 +262,7 @@ cc.pFromSize = function (s) {
 };
 
 /**
- * Run a math operation function on each point component <br />
- * 使用一个点进行数学运算
+ * 使用一个点进行数学运算 <br />
  * Math.abs, Math.fllor, Math.ceil, Math.round.
  * @param {cc.Point} p
  * @param {Function} opFunc
@@ -301,8 +276,7 @@ cc.pCompOp = function (p, opFunc) {
 };
 
 /**
- * Linear Interpolation between two points a and b
- * 在两点ab间进行线性插值
+ * 在a、b两点间进行线性插值
  * alpha == 0 ? a
  * alpha == 1 ? b
  * otherwise a value between a..b
@@ -319,8 +293,7 @@ cc.pLerp = function (a, b, alpha) {
  * @param {cc.Point} a
  * @param {cc.Point} b
  * @param {Number} variance  方差
- * @return {Boolean} if points have fuzzy equality which means equal with some degree of variance.
- * @return {Boolean} 该点是否有模糊相等(方差的差别程度)
+ * @return {Boolean} 如果点有fuzzy equality意味着与某种方差是相等的
  */
 cc.pFuzzyEqual = function (a, b, variance) {
     if (a.x - variance <= b.x && b.x <= a.x + variance) {
@@ -331,7 +304,6 @@ cc.pFuzzyEqual = function (a, b, variance) {
 };
 
 /**
- * Multiplies a nd b components, a.x*b.x, a.y*b.y
  * 计算a和b的对应值相乘
  * @param {cc.Point} a
  * @param {cc.Point} b
@@ -344,7 +316,6 @@ cc.pCompMult = function (a, b) {
 /**
  * @param {cc.Point} a
  * @param {cc.Point} b
- * @return {Number} the signed angle in radians between two vector directions
  * @return {Number} 两向量之间的弧度(有符号)
  */
 cc.pAngleSigned = function (a, b) {
@@ -359,7 +330,6 @@ cc.pAngleSigned = function (a, b) {
 /**
  * @param {cc.Point} a
  * @param {cc.Point} b
- * @return {Number} the angle in radians between two vector directions
  * @return {Number} 两向量之间的弧度(无符号)
  */
 cc.pAngle = function (a, b) {
@@ -369,12 +339,11 @@ cc.pAngle = function (a, b) {
 };
 
 /**
- * Rotates a point counter clockwise by the angle around a pivot
- * 将逆时针旋转
- * @param {cc.Point} v v is the point to rotate
- * @param {cc.Point} pivot pivot is the pivot, naturally
- * @param {Number} angle angle is the angle of rotation cw in radians
- * @return {cc.Point} the rotated point
+ * 以pivot为轴逆时针旋转angle度（单位为弧度）
+ * @param {cc.Point} v v是旋转的点
+ * @param {cc.Point} pivot pivot是中心轴
+ * @param {Number} angle angle是顺时针旋转的弧度
+ * @return {cc.Point} 旋转的点
  */
 cc.pRotateByAngle = function (v, pivot, angle) {
     var r = cc.pSub(v, pivot);
@@ -386,19 +355,16 @@ cc.pRotateByAngle = function (v, pivot, angle) {
 };
 
 /**
- * A general line-line intersection test
- * 一个相交测试
- * indicating successful intersection of a line<br />
- * 表明有一条线成功相交
- * note that to truly test intersection for segments we have to make<br />
- * 注意:真正的测试相交我们必须确定两条线的夹角必须大于0(估计翻译的不对,不记得ray是不是表示极坐标了)
- * sure that s & t lie within [0..1] and for rays, make sure s & t > 0<br />
- * the hit point is        p3 + t * (p4 - p3);<br />
- * the hit point also is    p1 + s * (p2 - p1);
- * @param {cc.Point} A A is the startpoint for the first line P1 = (p1 - p2).
- * @param {cc.Point} B B is the endpoint for the first line P1 = (p1 - p2).
- * @param {cc.Point} C C is the startpoint for the second line P2 = (p3 - p4).
- * @param {cc.Point} D D is the endpoint for the second line P2 = (p3 - p4).
+ * 一个普通的线线相交测试
+ * 表明有一条线成功相交<br />
+ * 注意:真正的相交测试，对于线段segments来说，我们必须确保s & t在[0..1]之间，<br />
+ * 对于射线rays来说，必须确保s & t > 0<br />
+ * 这个相交点是       p3 + t * (p4 - p3);<br />
+ * 也可以是    p1 + s * (p2 - p1);
+ * @param {cc.Point} A A是第一条线的开始点 P1 = (p1 - p2).
+ * @param {cc.Point} B B是第一条线的结束点 P1 = (p1 - p2).
+ * @param {cc.Point} C C是第二条线的开始点 P2 = (p3 - p4).
+ * @param {cc.Point} D D是第二条线的结束点 P2 = (p3 - p4).
  * @param {cc.Point} retP retP.x is the range for a hitpoint in P1 (pa = p1 + s*(p2 - p1)), <br />
  * retP.y is the range for a hitpoint in P3 (pa = p2 + t*(p4 - p3)).
  * @return {Boolean}
@@ -422,11 +388,9 @@ cc.pLineIntersect = function (A, B, C, D, retP) {
     if (denom == 0) {
         if (retP.x == 0 || retP.y == 0) {
             // Lines incident
-            // 线之间没有冲突(可能不对)
             return true;
         }
         // Lines parallel and not incident
-        // // 线之间平行而且没有冲突(可能不对)
         return false;
     }
 
@@ -437,7 +401,6 @@ cc.pLineIntersect = function (A, B, C, D, retP) {
 };
 
 /**
- * ccpSegmentIntersect return YES if Segment A-B intersects with segment C-D.
  * 如果线段AB与CD相交ccpSegmentIntersect返回true
  * @param {cc.Point} A
  * @param {cc.Point} B
@@ -454,7 +417,6 @@ cc.pSegmentIntersect = function (A, B, C, D) {
 };
 
 /**
- * ccpIntersectPoint return the intersection point of line A-B, C-D
  * ccpIntersectPoint返回AB与CD相交的点
  * @param {cc.Point} A
  * @param {cc.Point} B
@@ -478,7 +440,6 @@ cc.pIntersectPoint = function (A, B, C, D) {
 };
 
 /**
- * check to see if both points are equal
  * 判断两点是否相等
  * @param {cc.Point} A A ccp a
  * @param {cc.Point} B B ccp b to be compared
@@ -494,10 +455,8 @@ cc.pSameAs = function (A, B) {
 
 
 // High Perfomance In Place Operationrs ---------------------------------------
-// 高性能操作
 /**
- * sets the position of the point to 0
- * 将点的位置置0
+ * 将点的位置为0
  * @param {cc.Point} v
  */
 cc.pZeroIn = function(v) {
@@ -506,7 +465,6 @@ cc.pZeroIn = function(v) {
 };
 
 /**
- * copies the position of one point to another
  * 将v2的坐标复制给v1
  * @param {cc.Point} v1
  * @param {cc.Point} v2
@@ -517,7 +475,6 @@ cc.pIn = function(v1, v2) {
 };
 
 /**
- * multiplies the point with the given factor (inplace)
  * 使用一个因子来缩放点的坐标
  * @param {cc.Point} point
  * @param {Number} floatVar
@@ -528,7 +485,6 @@ cc.pMultIn = function(point, floatVar) {
 };
 
 /**
- * subtracts one point from another (inplace)
  * v1坐标减去v2点坐标
  * @param {cc.Point} v1
  * @param {cc.Point{ v2
@@ -539,8 +495,7 @@ cc.pSubIn = function(v1, v2) {
 };
 
 /**
- * adds one point to another (inplace)
- * 两向量相加
+ * 两向量相加(inplace)
  * @param {cc.Point} v1
  * @param {cc.point} v2
  */
@@ -550,8 +505,7 @@ cc.pAddIn = function(v1, v2) {
 };
 
 /**
- * normalizes the point (inplace)
- * 将点坐标规范化(可能不对)
+ * 将点坐标规范化(inplace)
  * @param {cc.Point{ v
  */
 cc.pNormalizeIn = function(v) {

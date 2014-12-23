@@ -25,32 +25,13 @@
  ****************************************************************************/
 
 /**
- * <p> An interval action is an action that takes place within a certain period of time. <br/>
- * It has an start time, and a finish time. The finish time is the parameter<br/>
- * duration plus the start time.</p>
- *
- * <p>These CCActionInterval actions have some interesting properties, like:<br/>
- * - They can run normally (default)  <br/>
- * - They can run reversed with the reverse method   <br/>
- * - They can run with the time altered with the Accelerate, AccelDeccel and Speed actions. </p>
- *
- * <p>For example, you can simulate a Ping Pong effect running the action normally and<br/>
- * then running it again in Reverse mode. </p>
- *
- * @class
- * @extends cc.FiniteTimeAction
- * @param {Number} d duration in seconds
- * @example
- * var actionInterval = new cc.ActionInterval(3);
- */
-/**
  * <p> 持续动作是需要持续运行一段时间的动作。 <br/>
  *  它有一个启动时间和结束时间。结束时间由启动时间加上周期得出。 </p>
  *
  * <p>持续动作有很多有趣的特性，例如：<br/>
- * - 他们可以正常运行 (default)  <br/>
- * - 他们也可以反向运行           <br/>
- * - 他们可以随加速器的改变运行        <br/>
+ * - 它们可以正常运行 (default)  <br/>
+ * - 它们也可以反向运行           <br/>
+ * - 它们可以随加速器的改变运行        <br/>
  *
  * <p>例如：你可以使用正常运行加反向运行模拟一个乒乓球的运动</p>
  *
@@ -71,11 +52,7 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     _speedMethod: false,//Compatible with speed class, Discard after can be deleted
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {Number} d duration in seconds
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+     	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
 	 * @param {Number} d 以秒为单位
 	 */
     ctor:function (d) {
@@ -90,10 +67,6 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     },
 
     /**
-     * How many seconds had elapsed since the actions started to run.
-     * @return {Number}
-     */
-    /**
      * 动作开始执行以后花费了多少秒。
      * @return {Number}
      */
@@ -102,13 +75,8 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     },
 
     /**
-     * Initializes the action.
-     * @param {Number} d duration in seconds
-     * @return {Boolean}
-     */
-    /**
      * 初始化这个动作。
-     * @param {Number} d duration in seconds
+     * @param {Number} d 时间以秒为单位
      * @return {Boolean}
      */
     initWithDuration:function (d) {
@@ -122,18 +90,13 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     },
 
     /**
-     * Returns true if the action has finished.
+     * 如果动作完成了将会返回true
      * @return {Boolean}
      */
     isDone:function () {
         return (this._elapsed >= this._duration);
     },
 
-    /**
-     * Some additional parameters of cloning.
-     * @param {cc.Action} action
-     * @private
-     */
     /**
      * 带参数的克隆方法。
      * @param {cc.Action} action
@@ -158,10 +121,6 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     },
 
     /**
-     * Returns a new clone of the action.
-     * @returns {cc.ActionInterval}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.ActionInterval}
      */
@@ -172,19 +131,10 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     },
 
     /**
-     * Implementation of ease motion.
-     *
-     * @example
-     * //example
-     * action.easeing(cc.easeIn(3.0));
-     * @param {Object} easeObj
-     * @returns {cc.ActionInterval}
-     */
-    /**
      * ease motion的实现。
      *
      * @example
-     * //example
+     * //举例
      * action.easeing(cc.easeIn(3.0));
      * @param {Object} easeObj
      * @returns {cc.ActionInterval}
@@ -209,13 +159,7 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     },
 
     /**
-     * called every frame with it's delta time. <br />
-     * DON'T override unless you know what you are doing.
-     *
-     * @param {Number} dt
-     */
-    /**
-     * 每帧调用一次。时间是两帧之间间隔的秒数。<br />
+     * 每帧调用一次，时间是两帧之间间隔的秒数。<br />
      * 除非你知道在做什么，否则不要重载这个方法。
      *
      * @param {Number} dt
@@ -249,10 +193,6 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     },
 
     /**
-     * Start this action with target.
-     * @param {cc.Node} target
-     */
-    /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
      */
@@ -263,14 +203,8 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     },
 
     /**
-     * returns a reversed action. <br />
-     * Will be overwrite.
-     *
-     * @return {null}
-     */
-    /**
      * 返回一个反转的动作。<br />
-     * 即将重写。
+     * 将被重写。
      *
      * @return {null}
      */
@@ -280,13 +214,8 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     },
 
     /**
-     * Set amplitude rate.
-     * @warning It should be overridden in subclass.
-     * @param {Number} amp
-     */
-    /**
-     * 设置振幅比率？
-     * @warning It should be overridden in subclass.
+     * 设置振幅比率
+     * @warning 子类中需要重载该方法
      * @param {Number} amp
      */
     setAmplitudeRate:function (amp) {
@@ -295,13 +224,8 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     },
 
     /**
-     * Get amplitude rate.
-     * @warning It should be overridden in subclass.
-     * @return {Number} 0
-     */
-    /**
-     * 获取振幅比率？
-     * @warning 在子类中需要重载。
+     * 获取振幅比率
+     * @warning 在子类中需要重载该方法
      * @return {Number} 0
      */
     getAmplitudeRate:function () {
@@ -310,14 +234,6 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
         return 0;
     },
 
-    /**
-     * Changes the speed of an action, making it take longer (speed>1)
-     * or less (speed<1) time. <br/>
-     * Useful to simulate 'slow motion' or 'fast forward' effect.
-     *
-     * @param speed
-     * @returns {cc.Action}
-     */
     /**
      * 修改动作的速度，使之花费更长(speed>1)
      * 或者更少(speed<1)的时间。 <br/>
@@ -338,10 +254,6 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     },
 
     /**
-     * Get this action speed.
-     * @return {Number}
-     */
-    /**
      * 获取动作的速度
      * @return {Number}
      */
@@ -349,11 +261,6 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
         return this._speed;
     },
 
-    /**
-     * Set this action speed.
-     * @param {Number} speed
-     * @returns {cc.ActionInterval}
-     */
     /**
      * 设置动作的速度
      * @param {Number} speed
@@ -365,13 +272,7 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     },
 
     /**
-     * Repeats an action a number of times.
-     * To repeat an action forever use the CCRepeatForever action.
-     * @param times
-     * @returns {cc.ActionInterval}
-     */
-    /**
-     * 循环执行一个动作指定的次数。
+     * 循环执行一个动作很多次。
      * 如果需要无限循环，使用CCRepeatForever动作。
      * @param times
      * @returns {cc.ActionInterval}
@@ -388,11 +289,6 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
     },
 
     /**
-     * Repeats an action for ever.  <br/>
-     * To repeat the an action for a limited number of times use the Repeat action. <br/>
-     * @returns {cc.ActionInterval}
-     */
-    /**
      * 无限循环执行一个动作。  <br/>
      * 如果执行次数有限制，使用Repeat动作。 <br/>
      * @returns {cc.ActionInterval}
@@ -408,19 +304,10 @@ cc.ActionInterval = cc.FiniteTimeAction.extend(/** @lends cc.ActionInterval# */{
 /**
  * 持续的动作是指需要花费一段时间执行的动作。 
  * @function
- * @param {Number} d duration in seconds
+ * @param {Number} d 时间以秒为单位
  * @return {cc.ActionInterval}
  * @example
- * // example
- * var actionInterval = cc.actionInterval(3);
- */
-/**
- * An interval action is an action that takes place within a certain period of time.
- * @function
- * @param {Number} d duration in seconds
- * @return {cc.ActionInterval}
- * @example
- * // example
+ * // 举例
  * var actionInterval = cc.actionInterval(3);
  */
 cc.actionInterval = function (d) {
@@ -428,37 +315,17 @@ cc.actionInterval = function (d) {
 };
 
 /**
- * Please use cc.actionInterval instead.
- * An interval action is an action that takes place within a certain period of time.
- * @static
- * @deprecated since v3.0 <br /> Please use cc.actionInterval instead.
- * @param {Number} d duration in seconds
- * @return {cc.ActionInterval}
- */
-/**
  * 使用cc.actionInterval代替。
  * 持续的动作是指需要花费一段时间执行的动作。 
  * @static
- * @deprecated since v3.0 <br /> Please use cc.actionInterval instead.
- * @param {Number} d duration in seconds
+ * @deprecated 在3.0版本之后请使用cc.actionInterval来替代
+ * @param {Number} d 时间以秒为单位
  * @return {cc.ActionInterval}
  */
 cc.ActionInterval.create = cc.actionInterval;
 
 /**
- * Runs actions sequentially, one after another.
- * @class
- * @extends cc.ActionInterval
- * @param {Array|cc.FiniteTimeAction} tempArray
- * @example
- * // create sequence with actions
- * var seq = new cc.Sequence(act1, act2);
- *
- * // create sequence with array
- * var seq = new cc.Sequence(actArray);
- */
-/**
- * 串行执行动作。
+ * 顺序地执行动作。
  * @class
  * @extends cc.ActionInterval
  * @param {Array|cc.FiniteTimeAction} tempArray
@@ -475,13 +342,8 @@ cc.Sequence = cc.ActionInterval.extend(/** @lends cc.Sequence# */{
     _last:0,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-     * Create an array of sequenceable actions.
-	 * @param {Array|cc.FiniteTimeAction} tempArray
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。<br />
-     * 创建一组串行执行的动作序列。
+     	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。<br />
+     	 * 创建一组顺序执行的动作序列。
 	 * @param {Array|cc.FiniteTimeAction} tempArray
 	 */
     ctor:function (tempArray) {
@@ -506,12 +368,6 @@ cc.Sequence = cc.ActionInterval.extend(/** @lends cc.Sequence# */{
     },
 
     /**
-     * Initializes the action <br/>
-     * @param {cc.FiniteTimeAction} actionOne
-     * @param {cc.FiniteTimeAction} actionTwo
-     * @return {Boolean}
-     */
-    /**
      * 初始化这个动作。 <br/>
      * @param {cc.FiniteTimeAction} actionOne
      * @param {cc.FiniteTimeAction} actionTwo
@@ -530,10 +386,6 @@ cc.Sequence = cc.ActionInterval.extend(/** @lends cc.Sequence# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.Sequence}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.Sequence}
      */
@@ -545,10 +397,6 @@ cc.Sequence = cc.ActionInterval.extend(/** @lends cc.Sequence# */{
     },
 
     /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
-    /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
      */
@@ -559,9 +407,6 @@ cc.Sequence = cc.ActionInterval.extend(/** @lends cc.Sequence# */{
     },
 
     /**
-     * stop the action.
-     */
-    /**
      * 停止动作。
      */
     stop:function () {
@@ -571,10 +416,6 @@ cc.Sequence = cc.ActionInterval.extend(/** @lends cc.Sequence# */{
         cc.Action.prototype.stop.call(this);
     },
 
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number}  dt
-     */
     /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number}  dt
@@ -626,10 +467,6 @@ cc.Sequence = cc.ActionInterval.extend(/** @lends cc.Sequence# */{
     },
 
     /**
-     * Returns a reversed action.
-     * @return {cc.Sequence}
-     */
-    /**
      * 返回一个反转的动作。
      * @return {cc.Sequence}
      */
@@ -641,20 +478,7 @@ cc.Sequence = cc.ActionInterval.extend(/** @lends cc.Sequence# */{
     }
 });
 
-/** helper constructor to create an array of sequenceable actions
- * @function
- * @param {Array|cc.FiniteTimeAction} tempArray
- * @return {cc.Sequence}
- * @example
- * // example
- * // create sequence with actions
- * var seq = cc.sequence(act1, act2);
- *
- * // create sequence with array
- * var seq = cc.sequence(actArray);
- * todo: It should be use new
- */
-/** 构造一组串行执行的动作序列。
+/** 构造一组顺序执行的动作序列。
  * @function
  * @param {Array|cc.FiniteTimeAction} tempArray
  * @return {cc.Sequence}
@@ -681,29 +505,15 @@ cc.sequence = function (/*Multiple Arguments*/tempArray) {
 };
 
 /**
- * Please use cc.sequence instead.
- * helper constructor to create an array of sequenceable actions
- * @static
- * @deprecated since v3.0 <br /> Please use cc.sequence instead.
- * @param {Array|cc.FiniteTimeAction} tempArray
- * @return {cc.Sequence}
- */
-/**
  * 使用cc.sequence代替。
- * 构造一组串行执行的动作序列。
+ * 构造一组顺序执行的动作序列。
  * @static
- * @deprecated since v3.0 <br /> Please use cc.sequence instead.
+ * @deprecated 在3.0版本之后请使用cc.sequence来替代 
  * @param {Array|cc.FiniteTimeAction} tempArray
  * @return {cc.Sequence}
  */
 cc.Sequence.create = cc.sequence;
 
-/** creates the action
- * @param {cc.FiniteTimeAction} actionOne
- * @param {cc.FiniteTimeAction} actionTwo
- * @return {cc.Sequence}
- * @private
- */
 /** 创建这个动作。
  * @param {cc.FiniteTimeAction} actionOne
  * @param {cc.FiniteTimeAction} actionTwo
@@ -717,17 +527,7 @@ cc.Sequence._actionOneTwo = function (actionOne, actionTwo) {
 };
 
 /**
- * Repeats an action a number of times.
- * To repeat an action forever use the CCRepeatForever action.
- * @class
- * @extends cc.ActionInterval
- * @param {cc.FiniteTimeAction} action
- * @param {Number} times
- * @example
- * var rep = new cc.Repeat(cc.sequence(jump2, jump1), 5);
- */
-/**
- * 循环执行一个动作指定的次数。
+ * 循环执行一个动作很多次。
  * 如果需要无限循环，使用CCRepeatForever动作。
  * @class
  * @extends cc.ActionInterval
@@ -744,13 +544,7 @@ cc.Repeat = cc.ActionInterval.extend(/** @lends cc.Repeat# */{
     _innerAction:null, //CCFiniteTimeAction
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * Creates a Repeat action. Times is an unsigned integer between 1 and pow(2,30).
-	 * @param {cc.FiniteTimeAction} action
-	 * @param {Number} times
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。<br />
+         * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。<br />
 	 * 创建一个Repeat动作。次数是无符号整数，从1到2的30次方。
 	 * @param {cc.FiniteTimeAction} action
 	 * @param {Number} times
@@ -783,10 +577,6 @@ cc.Repeat = cc.ActionInterval.extend(/** @lends cc.Repeat# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.Repeat}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.Repeat}
      */
@@ -797,10 +587,6 @@ cc.Repeat = cc.ActionInterval.extend(/** @lends cc.Repeat# */{
         return action;
     },
 
-    /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
     /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
@@ -813,9 +599,6 @@ cc.Repeat = cc.ActionInterval.extend(/** @lends cc.Repeat# */{
     },
 
     /**
-     * stop the action
-     */
-    /**
      * 停止动作。
      */
     stop:function () {
@@ -823,10 +606,6 @@ cc.Repeat = cc.ActionInterval.extend(/** @lends cc.Repeat# */{
         cc.Action.prototype.stop.call(this);
     },
 
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number}  dt
-     */
     /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number}  dt
@@ -868,10 +647,6 @@ cc.Repeat = cc.ActionInterval.extend(/** @lends cc.Repeat# */{
     },
 
     /**
-     * Return true if the action has finished.
-     * @return {Boolean}
-     */
-    /**
      * 如果动作完成，返回true
      * @return {Boolean}
      */
@@ -879,10 +654,6 @@ cc.Repeat = cc.ActionInterval.extend(/** @lends cc.Repeat# */{
         return this._total == this._times;
     },
 
-    /**
-     * returns a reversed action.
-     * @return {cc.Repeat}
-     */
     /**
      * 返回一个反转的动作。
      * @return {cc.Repeat}
@@ -895,10 +666,6 @@ cc.Repeat = cc.ActionInterval.extend(/** @lends cc.Repeat# */{
     },
 
     /**
-     * Set inner Action.
-     * @param {cc.FiniteTimeAction} action
-     */
-    /**
      * 设置内部动作。
      * @param {cc.FiniteTimeAction} action
      */
@@ -909,10 +676,6 @@ cc.Repeat = cc.ActionInterval.extend(/** @lends cc.Repeat# */{
     },
 
     /**
-     * Get inner Action.
-     * @return {cc.FiniteTimeAction}
-     */
-    /**
      * 获取内部动作。
      * @return {cc.FiniteTimeAction}
      */
@@ -922,38 +685,19 @@ cc.Repeat = cc.ActionInterval.extend(/** @lends cc.Repeat# */{
 });
 
 /**
- * Creates a Repeat action. Times is an unsigned integer between 1 and pow(2,30)
- * @function
- * @param {cc.FiniteTimeAction} action
- * @param {Number} times
- * @return {cc.Repeat}
- * @example
- * // example
- * var rep = cc.repeat(cc.sequence(jump2, jump1), 5);
- */
-/**
  * 创建一个Repeat动作。次数是无符号整数，从1到2的30次方。
  * @function
  * @param {cc.FiniteTimeAction} action
  * @param {Number} times
  * @return {cc.Repeat}
  * @example
- * // example
+ * // 举例
  * var rep = cc.repeat(cc.sequence(jump2, jump1), 5);
  */
 cc.repeat = function (action, times) {
     return new cc.Repeat(action, times);
 };
 
-/**
- * Please use cc.repeat instead
- * Creates a Repeat action. Times is an unsigned integer between 1 and pow(2,30)
- * @static
- * @deprecated since v3.0 <br /> Please use cc.repeat instead.
- * @param {cc.FiniteTimeAction} action
- * @param {Number} times
- * @return {cc.Repeat}
- */
 /**
  * 使用cc.repeat代替。
  * 创建一个Repeat动作。次数是无符号整数，从1到2的30次方。
@@ -965,19 +709,9 @@ cc.repeat = function (action, times) {
  */
 cc.Repeat.create = cc.repeat;
 
-
-/**  Repeats an action for ever.  <br/>
- * To repeat the an action for a limited number of times use the Repeat action. <br/>
- * @warning This action can't be Sequenceable because it is not an IntervalAction
- * @class
- * @extends cc.ActionInterval
- * @param {cc.FiniteTimeAction} action
- * @example
- * var rep = new cc.RepeatForever(cc.sequence(jump2, jump1), 5);
- */
-/**  无限循环一个动作。  <br/>
+/** 无限循环一个动作。  <br/>
  * 如果执行次数有限制，使用Repeat动作<br/>
- * @warning 这个动作不能被用于串行执行序列，因为它不是一个IntervalAction
+ * @warning 这个动作不能被用于顺序执行序列，因为它不是一个IntervalAction
  * @class
  * @extends cc.ActionInterval
  * @param {cc.FiniteTimeAction} action
@@ -988,12 +722,7 @@ cc.RepeatForever = cc.ActionInterval.extend(/** @lends cc.RepeatForever# */{
     _innerAction:null, //CCActionInterval
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * Create a acton which repeat forever.
-	 * @param {cc.FiniteTimeAction} action
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。<br />
+     	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。<br />
 	 * 创建一个永远重复执行的动作。
 	 * @param {cc.FiniteTimeAction} action
 	 */
@@ -1017,10 +746,6 @@ cc.RepeatForever = cc.ActionInterval.extend(/** @lends cc.RepeatForever# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.RepeatForever}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.RepeatForever}
      */
@@ -1032,10 +757,6 @@ cc.RepeatForever = cc.ActionInterval.extend(/** @lends cc.RepeatForever# */{
     },
 
     /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
-    /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
      */
@@ -1045,14 +766,9 @@ cc.RepeatForever = cc.ActionInterval.extend(/** @lends cc.RepeatForever# */{
     },
 
     /**
-     * called every frame with it's delta time. <br />
-     * DON'T override unless you know what you are doing.
-     * @param dt delta time in seconds
-     */
-    /**
      * 每一帧调用一次这个方法。时间是两帧之间的时间间隔。 <br />
      * 除非你知道在做什么，否则不要重载这个方法。
-     * @param dt delta time in seconds
+     * @param dt 时间以秒为单位
      */
     step:function (dt) {
         var locInnerAction = this._innerAction;
@@ -1068,10 +784,6 @@ cc.RepeatForever = cc.ActionInterval.extend(/** @lends cc.RepeatForever# */{
     },
 
     /**
-     * Return true if the action has finished.
-     * @return {Boolean}
-     */
-    /**
      * 如果动作完成，返回true
      * @return {Boolean}
      */
@@ -1079,10 +791,6 @@ cc.RepeatForever = cc.ActionInterval.extend(/** @lends cc.RepeatForever# */{
         return false;
     },
 
-    /**
-     * Returns a reversed action.
-     * @return {cc.RepeatForever}
-     */
     /**
      * 返回一个反转的动作。
      * @return {cc.RepeatForever}
@@ -1095,10 +803,6 @@ cc.RepeatForever = cc.ActionInterval.extend(/** @lends cc.RepeatForever# */{
     },
 
     /**
-     * Set inner action.
-     * @param {cc.ActionInterval} action
-     */
-    /**
      * 设置内部动作。
      * @param {cc.ActionInterval} action
      */
@@ -1109,10 +813,6 @@ cc.RepeatForever = cc.ActionInterval.extend(/** @lends cc.RepeatForever# */{
     },
 
     /**
-     * Get inner action.
-     * @return {cc.ActionInterval}
-     */
-    /**
      * 获取内部动作。
      * @return {cc.ActionInterval}
      */
@@ -1121,15 +821,6 @@ cc.RepeatForever = cc.ActionInterval.extend(/** @lends cc.RepeatForever# */{
     }
 });
 
-/**
- * Create a acton which repeat forever
- * @function
- * @param {cc.FiniteTimeAction} action
- * @return {cc.RepeatForever}
- * @example
- * // example
- * var repeat = cc.repeatForever(cc.rotateBy(1.0, 360));
- */
 /**
  * 创建一个永远重复执行的动作。
  * @function
@@ -1144,21 +835,10 @@ cc.repeatForever = function (action) {
 };
 
 /**
- * Please use cc.repeatForever instead
- * Create a acton which repeat forever
- * @static
- * @deprecated since v3.0 <br /> Please use cc.repeatForever instead.
- * @param {cc.FiniteTimeAction} action
- * @return {cc.RepeatForever}
- * @param {Array|cc.FiniteTimeAction} tempArray
- * @example
- * var action = new cc.Spawn(cc.jumpBy(2, cc.p(300, 0), 50, 4), cc.rotateBy(2, 720));
- */
-/**
  * 使用cc.repeatForever代替
  * 创建一个永远重复执行的动作。
  * @static
- * @deprecated since v3.0 <br /> 使用cc.repeatForever代替
+ * @deprecated 在3.0版本之后使用cc.repeatForever代替
  * @param {cc.FiniteTimeAction} action
  * @return {cc.RepeatForever}
  * @param {Array|cc.FiniteTimeAction} tempArray
@@ -1167,11 +847,6 @@ cc.repeatForever = function (action) {
  */
 cc.RepeatForever.create = cc.repeatForever;
 
-
-/** Spawn a new action immediately
- * @class
- * @extends cc.ActionInterval
- */
 /** 立即并行执行一个新的动作。
  * @class
  * @extends cc.ActionInterval
@@ -1181,11 +856,7 @@ cc.Spawn = cc.ActionInterval.extend(/** @lends cc.Spawn# */{
     _two:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {Array|cc.FiniteTimeAction} tempArray
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+     	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
 	 * @param {Array|cc.FiniteTimeAction} tempArray
 	 */
     ctor:function (tempArray) {
@@ -1210,11 +881,6 @@ cc.Spawn = cc.ActionInterval.extend(/** @lends cc.Spawn# */{
         }
     },
 
-    /** initializes the Spawn action with the 2 actions to spawn
-     * @param {cc.FiniteTimeAction} action1
-     * @param {cc.FiniteTimeAction} action2
-     * @return {Boolean}
-     */
     /** 使用两个需要并行执行的动作，初始化Spawn动作
      * @param {cc.FiniteTimeAction} action1
      * @param {cc.FiniteTimeAction} action2
@@ -1245,10 +911,6 @@ cc.Spawn = cc.ActionInterval.extend(/** @lends cc.Spawn# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.Spawn}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.Spawn}
      */
@@ -1260,10 +922,6 @@ cc.Spawn = cc.ActionInterval.extend(/** @lends cc.Spawn# */{
     },
 
     /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
-    /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
      */
@@ -1274,9 +932,6 @@ cc.Spawn = cc.ActionInterval.extend(/** @lends cc.Spawn# */{
     },
 
     /**
-     * Stop the action
-     */
-    /**
      * 停止动作。
      */
     stop:function () {
@@ -1285,10 +940,6 @@ cc.Spawn = cc.ActionInterval.extend(/** @lends cc.Spawn# */{
         cc.Action.prototype.stop.call(this);
     },
 
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number}  dt
-     */
     /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number}  dt
@@ -1302,10 +953,6 @@ cc.Spawn = cc.ActionInterval.extend(/** @lends cc.Spawn# */{
     },
 
     /**
-     * Returns a reversed action.
-     * @return {cc.Spawn}
-     */
-    /**
      * 返回一个反转的动作。
      * @return {cc.Spawn}
      */
@@ -1317,16 +964,6 @@ cc.Spawn = cc.ActionInterval.extend(/** @lends cc.Spawn# */{
     }
 });
 
-/**
- * Create a spawn action which runs several actions in parallel.
- * @function
- * @param {Array|cc.FiniteTimeAction}tempArray
- * @return {cc.FiniteTimeAction}
- * @example
- * // example
- * var action = cc.spawn(cc.jumpBy(2, cc.p(300, 0), 50, 4), cc.rotateBy(2, 720));
- * todo:It should be the direct use new
- */
 /**
  * 创建一个可以并行执行几个动作的spawn动作。
  * @function
@@ -1351,18 +988,10 @@ cc.spawn = function (/*Multiple Arguments*/tempArray) {
 };
 
 /**
- * Please use cc.spawn instead.
- * Create a spawn action which runs several actions in parallel.
- * @static
- * @deprecated since v3.0 <br /> Please use cc.spawn instead.
- * @param {Array|cc.FiniteTimeAction}tempArray
- * @return {cc.FiniteTimeAction}
- */
-/**
  * 使用cc.spawn代替。
  * 创建一个可以并行执行几个动作的spawn动作。
  * @static
- * @deprecated since v3.0 <br /> 使用cc.spawn代替。
+ * @deprecated 在3.0版本之后使用cc.spawn代替。
  * @param {Array|cc.FiniteTimeAction}tempArray
  * @return {cc.FiniteTimeAction}
  */
@@ -1381,18 +1010,6 @@ cc.Spawn._actionOneTwo = function (action1, action2) {
 };
 
 
-/**
- * Rotates a cc.Node object to a certain angle by modifying it's.
- * rotation attribute. <br/>
- * The direction will be decided by the shortest angle.
- * @class
- * @extends cc.ActionInterval
- * @param {Number} duration duration in seconds
- * @param {Number} deltaAngleX deltaAngleX in degrees.
- * @param {Number} [deltaAngleY] deltaAngleY in degrees.
- * @example
- * var rotateTo = new cc.RotateTo(2, 61.0);
- */
 /**
  * 通过修改cc.Node对象的旋转属性，将它旋转到指定角度的动作。 <br/>
  * 方向由最短的角决定。
@@ -1414,18 +1031,11 @@ cc.RotateTo = cc.ActionInterval.extend(/** @lends cc.RotateTo# */{
     _diffAngleY:0,
 
 	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。<br />
+     	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。<br />
 	 * 使用x和y旋转角度，创建一个RotateTo动作。
-	 * @param {Number} duration duration in seconds
-	 * @param {Number} deltaAngleX deltaAngleX in degrees.
-	 * @param {Number} [deltaAngleY] deltaAngleY in degrees.
-	 */
-	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * Creates a RotateTo action with x and y rotation angles.
-	 * @param {Number} duration duration in seconds
-	 * @param {Number} deltaAngleX deltaAngleX in degrees.
-	 * @param {Number} [deltaAngleY] deltaAngleY in degrees.
+	 * @param {Number} duration duration以秒为单位
+	 * @param {Number} deltaAngleX deltaAngleX以度为单位
+	 * @param {Number} [deltaAngleY] deltaAngleY以度为单位
 	 */
     ctor:function (duration, deltaAngleX, deltaAngleY) {
         cc.ActionInterval.prototype.ctor.call(this);
@@ -1433,13 +1043,6 @@ cc.RotateTo = cc.ActionInterval.extend(/** @lends cc.RotateTo# */{
 		deltaAngleX !== undefined && this.initWithDuration(duration, deltaAngleX, deltaAngleY);
     },
 
-    /**
-     * Initializes the action.
-     * @param {Number} duration
-     * @param {Number} deltaAngleX
-     * @param {Number} deltaAngleY
-     * @return {Boolean}
-     */
     /**
      * 初始化这个动作。
      * @param {Number} duration
@@ -1457,10 +1060,6 @@ cc.RotateTo = cc.ActionInterval.extend(/** @lends cc.RotateTo# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.RotateTo}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.RotateTo}
      */
@@ -1471,10 +1070,6 @@ cc.RotateTo = cc.ActionInterval.extend(/** @lends cc.RotateTo# */{
         return action;
     },
 
-    /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
     /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
@@ -1503,21 +1098,13 @@ cc.RotateTo = cc.ActionInterval.extend(/** @lends cc.RotateTo# */{
     },
 
     /**
-     * RotateTo reverse not implemented.
-     * Will be overridden.
-     */
-    /**
-     * RotateTo reverse 未实现。
+     * RotateTo 的reverse未实现。
      * 需要重载。
      */
     reverse:function () {
         cc.log("cc.RotateTo.reverse(): it should be overridden in subclass.");
     },
 
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number}  dt
-     */
     /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number}  dt
@@ -1531,18 +1118,6 @@ cc.RotateTo = cc.ActionInterval.extend(/** @lends cc.RotateTo# */{
     }
 });
 
-/**
- * Creates a RotateTo action with separate rotation angles.
- * To specify the angle of rotation.
- * @function
- * @param {Number} duration duration in seconds
- * @param {Number} deltaAngleX deltaAngleX in degrees.
- * @param {Number} [deltaAngleY] deltaAngleY in degrees.
- * @return {cc.RotateTo}
- * @example
- * // example
- * var rotateTo = cc.rotateTo(2, 61.0);
- */
 /**
  * 使用一个单独的旋转角度创建一个RotateTo动作。
  * 指定旋转的角度。
@@ -1560,17 +1135,6 @@ cc.rotateTo = function (duration, deltaAngleX, deltaAngleY) {
 };
 
 /**
- * Please use cc.rotateTo instead
- * Creates a RotateTo action with separate rotation angles.
- * To specify the angle of rotation.
- * @static
- * @deprecated since v3.0 <br /> Please use cc.rotateTo instead.
- * @param {Number} duration duration in seconds
- * @param {Number} deltaAngleX deltaAngleX in degrees.
- * @param {Number} [deltaAngleY] deltaAngleY in degrees.
- * @return {cc.RotateTo}
- */
-/**
  * 使用cc.rotateTo代替。
  * 使用一个单独的旋转角度创建一个RotateTo动作。
  * 指定旋转的角度。
@@ -1585,24 +1149,13 @@ cc.RotateTo.create = cc.rotateTo;
 
 
 /**
- * Rotates a cc.Node object clockwise a number of degrees by modifying it's rotation attribute.
- * Relative to its properties to modify.
- * @class
- * @extends  cc.ActionInterval
- * @param {Number} duration duration in seconds
- * @param {Number} deltaAngleX deltaAngleX in degrees
- * @param {Number} [deltaAngleY] deltaAngleY in degrees
- * @example
- * var actionBy = new cc.RotateBy(2, 360);
- */
-/**
  * 通过cc.Node对象的旋转属性，顺时针旋转一个角度的动作。
  * 根据它的属性进行旋转。
  * @class
  * @extends  cc.ActionInterval
- * @param {Number} duration duration in seconds
- * @param {Number} deltaAngleX deltaAngleX in degrees
- * @param {Number} [deltaAngleY] deltaAngleY in degrees
+ * @param {Number} duration duration以秒为单位
+ * @param {Number} deltaAngleX deltaAngleX以度为单位
+ * @param {Number} [deltaAngleY] deltaAngleY以度为单位
  * @example
  * var actionBy = new cc.RotateBy(2, 360);
  */
@@ -1613,13 +1166,7 @@ cc.RotateBy = cc.ActionInterval.extend(/** @lends cc.RotateBy# */{
     _startAngleY:0,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {Number} duration duration in seconds
-	 * @param {Number} deltaAngleX deltaAngleX in degrees
-	 * @param {Number} [deltaAngleY] deltaAngleY in degrees
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+     	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
 	 * @param {Number} duration 以秒为单位
 	 * @param {Number} deltaAngleX 以度为单位
 	 * @param {Number} [deltaAngleY] deltaAngleY 以度为单位
@@ -1630,13 +1177,6 @@ cc.RotateBy = cc.ActionInterval.extend(/** @lends cc.RotateBy# */{
 		deltaAngleX !== undefined && this.initWithDuration(duration, deltaAngleX, deltaAngleY);
     },
 
-    /**
-     * Initializes the action.
-     * @param {Number} duration duration in seconds
-     * @param {Number} deltaAngleX deltaAngleX in degrees
-     * @param {Number} [deltaAngleY=] deltaAngleY in degrees
-     * @return {Boolean}
-     */
     /**
      * 初始化这个动作。
      * @param {Number} duration 以秒为单位
@@ -1654,10 +1194,6 @@ cc.RotateBy = cc.ActionInterval.extend(/** @lends cc.RotateBy# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.RotateBy}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.RotateBy}
      */
@@ -1669,10 +1205,6 @@ cc.RotateBy = cc.ActionInterval.extend(/** @lends cc.RotateBy# */{
     },
 
     /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
-    /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
      */
@@ -1682,10 +1214,6 @@ cc.RotateBy = cc.ActionInterval.extend(/** @lends cc.RotateBy# */{
         this._startAngleY = target.rotationY;
     },
 
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number}  dt
-     */
     /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number}  dt
@@ -1699,10 +1227,6 @@ cc.RotateBy = cc.ActionInterval.extend(/** @lends cc.RotateBy# */{
     },
 
     /**
-     * Returns a reversed action.
-     * @return {cc.RotateBy}
-     */
-    /**
      * 返回一个反转的动作。
      * @return {cc.RotateBy}
      */
@@ -1714,18 +1238,6 @@ cc.RotateBy = cc.ActionInterval.extend(/** @lends cc.RotateBy# */{
     }
 });
 
-/**
- * Rotates a cc.Node object clockwise a number of degrees by modifying it's rotation attribute.
- * Relative to its properties to modify.
- * @function
- * @param {Number} duration duration in seconds
- * @param {Number} deltaAngleX deltaAngleX in degrees
- * @param {Number} [deltaAngleY] deltaAngleY in degrees
- * @return {cc.RotateBy}
- * @example
- * // example
- * var actionBy = cc.rotateBy(2, 360);
- */
 /**
  * 通过cc.Node对象的旋转属性，顺时针旋转一个角度的动作。
  * 根据它的属性进行旋转。
@@ -1741,17 +1253,7 @@ cc.RotateBy = cc.ActionInterval.extend(/** @lends cc.RotateBy# */{
 cc.rotateBy = function (duration, deltaAngleX, deltaAngleY) {
     return new cc.RotateBy(duration, deltaAngleX, deltaAngleY);
 };
-/**
- * Please use cc.rotateBy instead.
- * Rotates a cc.Node object clockwise a number of degrees by modifying it's rotation attribute.
- * Relative to its properties to modify.
- * @static
- * @deprecated since v3.0 <br /> Please use cc.rotateBy instead.
- * @param {Number} duration duration in seconds
- * @param {Number} deltaAngleX deltaAngleX in degrees
- * @param {Number} [deltaAngleY] deltaAngleY in degrees
- * @return {cc.RotateBy}
- */
+
 /**
  * 使用cc.rotateBy代替。
  * 通过cc.Node对象的旋转属性，顺时针旋转一个角度的动作。
@@ -1768,23 +1270,8 @@ cc.RotateBy.create = cc.rotateBy;
 
 /**
  * <p>
- *     Moves a CCNode object x,y pixels by modifying it's position attribute.                                  <br/>
- *     x and y are relative to the position of the object.                                                     <br/>
- *     Several CCMoveBy actions can be concurrently called, and the resulting                                  <br/>
- *     movement will be the sum of individual movements.
- * </p>
- * @class
- * @extends cc.ActionInterval
- * @param {Number} duration duration in seconds
- * @param {cc.Point|Number} deltaPos
- * @param {Number} [deltaY]
- * @example
- * var actionTo = cc.moveBy(2, cc.p(windowSize.width - 40, windowSize.height - 40));
- */
-/**
- * <p>
- *     移动一个CCNode对象x、y个像素，通过修改它的位置属性。 <br/>
- *     x和y与这个对象的位置相关。                                              <br/>
+ *     通过修改一个CCNode对象的位置属性来移动x、y个像素 <br/>
+ *     x和y是这个对象的相对位置。        <br/>
  *     几个CCMoveBy动作可以同时调用， <br/>
  *     结果是每个单个动作之和。
  * </p>
@@ -1802,14 +1289,8 @@ cc.MoveBy = cc.ActionInterval.extend(/** @lends cc.MoveBy# */{
     _previousPosition:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {Number} duration duration in seconds
-	 * @param {cc.Point|Number} deltaPos
-	 * @param {Number} [deltaY]
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
-	 * @param {Number} duration duration in seconds
+    	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+	 * @param {Number} duration duration以秒为单位
 	 * @param {cc.Point|Number} deltaPos
 	 * @param {Number} [deltaY]
 	 */
@@ -1823,13 +1304,6 @@ cc.MoveBy = cc.ActionInterval.extend(/** @lends cc.MoveBy# */{
 		deltaPos !== undefined && this.initWithDuration(duration, deltaPos, deltaY);
     },
 
-    /**
-     * Initializes the action.
-     * @param {Number} duration duration in seconds
-     * @param {cc.Point} position
-     * @param {Number} [y]
-     * @return {Boolean}
-     */
     /**
      * 初始化这个动作。
      * @param {Number} duration 以秒为单位
@@ -1852,10 +1326,6 @@ cc.MoveBy = cc.ActionInterval.extend(/** @lends cc.MoveBy# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.MoveBy}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.MoveBy}
      */
@@ -1866,10 +1336,6 @@ cc.MoveBy = cc.ActionInterval.extend(/** @lends cc.MoveBy# */{
         return action;
     },
 
-    /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
     /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
@@ -1884,10 +1350,6 @@ cc.MoveBy = cc.ActionInterval.extend(/** @lends cc.MoveBy# */{
         this._startPosition.y = locPosY;
     },
 
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number} dt
-     */
     /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number} dt
@@ -1917,11 +1379,7 @@ cc.MoveBy = cc.ActionInterval.extend(/** @lends cc.MoveBy# */{
     },
 
     /**
-     * MoveTo reverse is not implemented
-     * @return {cc.MoveBy}
-     */
-    /**
-     * MoveTo reverse 未实现
+     * MoveTo 的reverse方法未实现
      * @return {cc.MoveBy}
      */
     reverse:function () {
@@ -1933,22 +1391,10 @@ cc.MoveBy = cc.ActionInterval.extend(/** @lends cc.MoveBy# */{
 });
 
 /**
- * Create the action.
- * Relative to its coordinate moves a certain distance.
- * @function
- * @param {Number} duration duration in seconds
- * @param {cc.Point|Number} deltaPos
- * @param {Number} deltaY
- * @return {cc.MoveBy}
- * @example
- * // example
- * var actionTo = cc.moveBy(2, cc.p(windowSize.width - 40, windowSize.height - 40));
- */
-/**
  * 创建一个动作。
  * 和目标原有的坐标相关，移动一个指定的距离。
  * @function
- * @param {Number} duration duration in seconds
+ * @param {Number} duration duration以秒为单位
  * @param {cc.Point|Number} deltaPos
  * @param {Number} deltaY
  * @return {cc.MoveBy}
@@ -1959,19 +1405,10 @@ cc.MoveBy = cc.ActionInterval.extend(/** @lends cc.MoveBy# */{
 cc.moveBy = function (duration, deltaPos, deltaY) {
     return new cc.MoveBy(duration, deltaPos, deltaY);
 };
-/**
- * Please use cc.moveBy instead.
- * Relative to its coordinate moves a certain distance.
- * @static
- * @deprecated since v3.0 please use cc.moveBy instead.
- * @param {Number} duration duration in seconds
- * @param {cc.Point|Number} deltaPos
- * @param {Number} deltaY
- * @return {cc.MoveBy}
- */
+
 /**
  * 使用cc.moveBy代替。
- * 和目标原有的坐标相关，移动一个指定的距离。
+ * 相对于它的位置坐标移动一个指定的距离。
  * @static
  * @deprecated since v3.0 please use cc.moveBy instead.
  * @param {Number} duration duration in seconds
@@ -1983,24 +1420,12 @@ cc.MoveBy.create = cc.moveBy;
 
 
 /**
- * Moves a CCNode object to the position x,y. x and y are absolute coordinates by modifying it's position attribute. <br/>
- * Several CCMoveTo actions can be concurrently called, and the resulting                                            <br/>
- * movement will be the sum of individual movements.
- * @class
- * @extends cc.MoveBy
- * @param {Number} duration duration in seconds
- * @param {cc.Point|Number} position
- * @param {Number} y
- * @example
- * var actionBy = new cc.MoveTo(2, cc.p(80, 80));
- */
-/**
- * 通过修改CCNode对象的位置属性，将它移动到指定的x、y坐标的动作，x和y是绝对坐标<br/>
+ * 通过修改CCNode对象的位置属性将它移动到（x, y）坐标，这里x和y是绝对坐标<br/>
  * 多个CCMoveTo动作可以同时调用，                     <br/>
  * 结果是每个单个动作之和。
  * @class
  * @extends cc.MoveBy
- * @param {Number} duration duration in seconds
+ * @param {Number} duration duration以秒为单位
  * @param {cc.Point|Number} position
  * @param {Number} y
  * @example
@@ -2010,13 +1435,7 @@ cc.MoveTo = cc.MoveBy.extend(/** @lends cc.MoveTo# */{
     _endPosition:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {Number} duration duration in seconds
-	 * @param {cc.Point|Number} position
-	 * @param {Number} y
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+     	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
 	 * @param {Number} duration 以秒为单位
 	 * @param {cc.Point|Number} position
 	 * @param {Number} y
@@ -2029,15 +1448,8 @@ cc.MoveTo = cc.MoveBy.extend(/** @lends cc.MoveTo# */{
     },
 
     /**
-     * Initializes the action.
-     * @param {Number} duration  duration in seconds
-     * @param {cc.Point} position
-     * @param {Number} y
-     * @return {Boolean}
-     */
-    /**
      * 初始化这个动作。
-     * @param {Number} duration  以秒为单位
+     * @param {Number} duration 以秒为单位
      * @param {cc.Point} position
      * @param {Number} y
      * @return {Boolean}
@@ -2057,10 +1469,6 @@ cc.MoveTo = cc.MoveBy.extend(/** @lends cc.MoveTo# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.MoveTo}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.MoveTo}
      */
@@ -2071,10 +1479,6 @@ cc.MoveTo = cc.MoveBy.extend(/** @lends cc.MoveTo# */{
         return action;
     },
 
-    /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
     /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
@@ -2087,22 +1491,10 @@ cc.MoveTo = cc.MoveBy.extend(/** @lends cc.MoveTo# */{
 });
 
 /**
- * Create new action.
- * Moving to the specified coordinates.
- * @function
- * @param {Number} duration duration in seconds
- * @param {cc.Point} position
- * @param {Number} y
- * @return {cc.MoveBy}
- * @example
- * // example
- * var actionBy = cc.moveTo(2, cc.p(80, 80));
- */
-/**
  * 创建一个动作。
  * 移动到一个指定的坐标。
  * @function
- * @param {Number} duration duration in seconds
+ * @param {Number} duration duration以秒为单位
  * @param {cc.Point} position
  * @param {Number} y
  * @return {cc.MoveBy}
@@ -2113,21 +1505,12 @@ cc.MoveTo = cc.MoveBy.extend(/** @lends cc.MoveTo# */{
 cc.moveTo = function (duration, position, y) {
     return new cc.MoveTo(duration, position, y);
 };
-/**
- * Please use cc.moveTo instead.
- * Moving to the specified coordinates.
- * @static
- * @deprecated since v3.0 <br /> Please use cc.moveTo instead.
- * @param {Number} duration duration in seconds
- * @param {cc.Point} position
- * @param {Number} y
- * @return {cc.MoveBy}
- */
+
 /**
  * 使用cc.moveTo代替。
  * 移动到一个指定的坐标。
  * @static
- * @deprecated 自v3.0 <br /> 使用cc.moveTo代替。
+ * @deprecated 自v3.0 以后使用cc.moveTo代替。
  * @param {Number} duration 以秒为单位
  * @param {cc.Point} position
  * @param {Number} y
@@ -2146,10 +1529,10 @@ cc.MoveTo.create = cc.moveTo;
  * var actionTo = new cc.SkewTo(2, 37.2, -37.2);
  */
 /**
- * 通过修改cc.Node的skewX度数和shewY度数，倾斜这个对象的动作。
+ * 通过修改节点对象的skewX和skewY属性来使节点对象倾斜到一个给定的角度。
  * @class
  * @extends cc.ActionInterval
- * @param {Number} t time in seconds
+ * @param {Number} t 时间以秒为单位
  * @param {Number} sx
  * @param {Number} sy
  * @example
@@ -2166,14 +1549,8 @@ cc.SkewTo = cc.ActionInterval.extend(/** @lends cc.SkewTo# */{
     _deltaY:0,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {Number} t time in seconds
-	 * @param {Number} sx
-	 * @param {Number} sy
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
-	 * @param {Number} t time in seconds
+    	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+	 * @param {Number} t 时间以秒为单位
 	 * @param {Number} sx
 	 * @param {Number} sy
 	 */
@@ -2183,13 +1560,6 @@ cc.SkewTo = cc.ActionInterval.extend(/** @lends cc.SkewTo# */{
 		sy !== undefined && this.initWithDuration(t, sx, sy);
     },
 
-    /**
-     * Initializes the action.
-     * @param {Number} t time in seconds
-     * @param {Number} sx
-     * @param {Number} sy
-     * @return {Boolean}
-     */
     /**
      * 初始化这个动作。
      * @param {Number} t 以秒为单位
@@ -2208,10 +1578,6 @@ cc.SkewTo = cc.ActionInterval.extend(/** @lends cc.SkewTo# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.SkewTo}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.SkewTo}
      */
@@ -2222,10 +1588,6 @@ cc.SkewTo = cc.ActionInterval.extend(/** @lends cc.SkewTo# */{
         return action;
     },
 
-    /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
     /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
@@ -2249,10 +1611,6 @@ cc.SkewTo = cc.ActionInterval.extend(/** @lends cc.SkewTo# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number} dt
-     */
-    /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number} dt
      */
@@ -2262,25 +1620,12 @@ cc.SkewTo = cc.ActionInterval.extend(/** @lends cc.SkewTo# */{
         this.target.skewY = this._startSkewY + this._deltaY * dt;
     }
 });
-/**
- * Create new action.
- * Skews a cc.Node object to given angles by modifying it's skewX and skewY attributes.
- * Changes to the specified value.
- * @function
- * @param {Number} t time in seconds
- * @param {Number} sx
- * @param {Number} sy
- * @return {cc.SkewTo}
- * @example
- * // example
- * var actionTo = cc.skewTo(2, 37.2, -37.2);
- */
+
 /**
  * 创建一个动作。
- * 通过修改cc.Node的skewX度数和shewY度数，倾斜这个对象的动作。<br />
- * 变换到一个指定值。
+ * 通过修改节点对象的skewX和skewY属性来使节点对象倾斜到一个给定的角度。<br />
  * @function
- * @param {Number} t time in seconds
+ * @param {Number} t 时间以秒为单位
  * @param {Number} sx
  * @param {Number} sy
  * @return {cc.SkewTo}
@@ -2291,24 +1636,13 @@ cc.SkewTo = cc.ActionInterval.extend(/** @lends cc.SkewTo# */{
 cc.skewTo = function (t, sx, sy) {
     return new cc.SkewTo(t, sx, sy);
 };
-/**
- * Please use cc.skewTo instead.
- * Skews a cc.Node object to given angles by modifying it's skewX and skewY attributes。
- * Changes to the specified value.
- * @static
- * @deprecated since v3.0 <br /> Please use cc.skewTo instead.
- * @param {Number} t time in seconds
- * @param {Number} sx
- * @param {Number} sy
- * @return {cc.SkewTo}
- */
+
 /**
  * 使用cc.skewTo代替。
- * 通过修改cc.Node的skewX度数和shewY度数，倾斜这个对象的动作。
- * 变换到一个指定值。
+ * 通过修改节点对象的skewX和skewY属性来使节点对象倾斜到一个给定的角度。<br />
  * @static
- * @deprecated 自v3.0 <br /> 使用cc.skewTo代替。
- * @param {Number} t 以秒为单位
+ * @deprecated 自v3.0以后使用cc.skewTo代替。
+ * @param {Number} t 时间以秒为单位
  * @param {Number} sx
  * @param {Number} sy
  * @return {cc.SkewTo}
@@ -2316,17 +1650,8 @@ cc.skewTo = function (t, sx, sy) {
 cc.SkewTo.create = cc.skewTo;
 
 /**
- * Skews a cc.Node object by skewX and skewY degrees.
- * Relative to its attribute modification.
- * @class
- * @extends cc.SkewTo
- * @param {Number} t time in seconds
- * @param {Number} sx  skew in degrees for X axis
- * @param {Number} sy  skew in degrees for Y axis
- */
-/**
- * 通过修改cc.Node的skewX度数和shewY度数，倾斜这个对象的动作。<br />
- * 和它的属性修改相关。
+ * 通过修改节点对象的skewX和skewY度数节点对象倾斜<br />
+ * 相对于节点对象的属性修改
  * @class
  * @extends cc.SkewTo
  * @param {Number} t 以秒为单位
@@ -2336,13 +1661,7 @@ cc.SkewTo.create = cc.skewTo;
 cc.SkewBy = cc.SkewTo.extend(/** @lends cc.SkewBy# */{
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {Number} t time in seconds
-	 * @param {Number} sx  skew in degrees for X axis
-	 * @param {Number} sy  skew in degrees for Y axis
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+     	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
 	 * @param {Number} t 以秒为单位
 	 * @param {Number} sx  X轴倾斜度数
 	 * @param {Number} sy  Y轴倾斜度数
@@ -2352,13 +1671,6 @@ cc.SkewBy = cc.SkewTo.extend(/** @lends cc.SkewBy# */{
 		sy !== undefined && this.initWithDuration(t, sx, sy);
 	},
 
-    /**
-     * Initializes the action.
-     * @param {Number} t time in seconds
-     * @param {Number} deltaSkewX  skew in degrees for X axis
-     * @param {Number} deltaSkewY  skew in degrees for Y axis
-     * @return {Boolean}
-     */
     /**
      * 初始化这个动作。
      * @param {Number} t 以秒为单位
@@ -2377,10 +1689,6 @@ cc.SkewBy = cc.SkewTo.extend(/** @lends cc.SkewBy# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.SkewBy}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.SkewBy}
      */
@@ -2391,10 +1699,6 @@ cc.SkewBy = cc.SkewTo.extend(/** @lends cc.SkewBy# */{
         return action;
     },
 
-    /**
-     * Start the action width target.
-     * @param {cc.Node} target
-     */
     /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
@@ -2408,10 +1712,6 @@ cc.SkewBy = cc.SkewTo.extend(/** @lends cc.SkewBy# */{
     },
 
     /**
-     * Returns a reversed action.
-     * @return {cc.SkewBy}
-     */
-    /**
      * 返回一个反转的动作。
      * @return {cc.SkewBy}
      */
@@ -2424,20 +1724,8 @@ cc.SkewBy = cc.SkewTo.extend(/** @lends cc.SkewBy# */{
 });
 
 /**
- * Skews a cc.Node object by skewX and skewY degrees. <br />
- * Relative to its attribute modification.
- * @function
- * @param {Number} t time in seconds
- * @param {Number} sx sx skew in degrees for X axis
- * @param {Number} sy sy skew in degrees for Y axis
- * @return {cc.SkewBy}
- * @example
- * // example
- * var actionBy = cc.skewBy(2, 0, -90);
- */
-/**
- * 通过修改cc.Node的skewX度数和shewY度数，倾斜这个对象的动作。<br />
- * 和它的属性修改相关。
+ * 通过修改节点对象的skewX和skewY度数节点对象倾斜<br />
+ * 相对于节点对象的属性修改
  * @function
  * @param {Number} t 以秒为单位
  * @param {Number} sx sx X轴倾斜度数
@@ -2450,23 +1738,13 @@ cc.SkewBy = cc.SkewTo.extend(/** @lends cc.SkewBy# */{
 cc.skewBy = function (t, sx, sy) {
     return new cc.SkewBy(t, sx, sy);
 };
-/**
- * Please use cc.skewBy instead. <br />
- * Skews a cc.Node object by skewX and skewY degrees. <br />
- * Relative to its attribute modification.
- * @static
- * @deprecated since v3.0 please use cc.skewBy instead.
- * @param {Number} t time in seconds
- * @param {Number} sx sx skew in degrees for X axis
- * @param {Number} sy sy skew in degrees for Y axis
- * @return {cc.SkewBy}
- */
+
 /**
  * 使用cc.skewBy代替。 <br />
- * 通过修改cc.Node的skewX度数和shewY度数，倾斜这个对象的动作。<br />
- * 和它的属性修改相关。
+ * 通过修改节点对象的skewX和skewY度数节点对象倾斜<br />
+ * 相对于节点对象的属性修改
  * @static
- * @deprecated 自v3.0 使用cc.skewBy代替。
+ * @deprecated 自v3.0以后 使用cc.skewBy代替。
  * @param {Number} t 以秒为单位
  * @param {Number} sx sx X轴倾斜度数
  * @param {Number} sy sy Y轴倾斜度数
@@ -2474,24 +1752,9 @@ cc.skewBy = function (t, sx, sy) {
  */
 cc.SkewBy.create = cc.skewBy;
 
-
 /**
- * Moves a cc.Node object simulating a parabolic jump movement by modifying it's position attribute.
- * Relative to its movement.
- * @class
- * @extends cc.ActionInterval
- * @param {Number} duration
- * @param {cc.Point|Number} position
- * @param {Number} [y]
- * @param {Number} height
- * @param {Number} jumps
- * @example
- * var actionBy = new cc.JumpBy(2, cc.p(300, 0), 50, 4);
- * var actionBy = new cc.JumpBy(2, 300, 0, 50, 4);
- */
-/**
- * 通过修改cc.Node对象的位置属性，将它按照抛物线移动到一个指定点，来模拟跳的动作。
- * 与它的移动相关。
+ * 通过修改cc.Node对象的位置属性，将它按照抛物线移动到一个指定点，来模仿跳跃的轨迹动作
+ * 相对于它的运动。
  * @class
  * @extends cc.ActionInterval
  * @param {Number} duration
@@ -2511,15 +1774,7 @@ cc.JumpBy = cc.ActionInterval.extend(/** @lends cc.JumpBy# */{
     _previousPosition:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {Number} duration
-	 * @param {cc.Point|Number} position
-	 * @param {Number} [y]
-	 * @param {Number} height
-	 * @param {Number} jumps
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+    	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
 	 * @param {Number} duration
 	 * @param {cc.Point|Number} position
 	 * @param {Number} [y]
@@ -2534,18 +1789,7 @@ cc.JumpBy = cc.ActionInterval.extend(/** @lends cc.JumpBy# */{
 
 		height !== undefined && this.initWithDuration(duration, position, y, height, jumps);
     },
-    /**
-     * Initializes the action.
-     * @param {Number} duration
-     * @param {cc.Point|Number} position
-     * @param {Number} [y]
-     * @param {Number} height
-     * @param {Number} jumps
-     * @return {Boolean}
-     * @example
-     * actionBy.initWithDuration(2, cc.p(300, 0), 50, 4);
-     * actionBy.initWithDuration(2, 300, 0, 50, 4);
-     */
+
     /**
      * 初始化这个动作。
      * @param {Number} duration
@@ -2576,10 +1820,6 @@ cc.JumpBy = cc.ActionInterval.extend(/** @lends cc.JumpBy# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.JumpBy}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.JumpBy}
      */
@@ -2590,10 +1830,6 @@ cc.JumpBy = cc.ActionInterval.extend(/** @lends cc.JumpBy# */{
         return action;
     },
 
-    /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
     /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
@@ -2608,10 +1844,6 @@ cc.JumpBy = cc.ActionInterval.extend(/** @lends cc.JumpBy# */{
         this._startPosition.y = locPosY;
     },
 
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number} dt
-     */
     /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number} dt
@@ -2644,10 +1876,6 @@ cc.JumpBy = cc.ActionInterval.extend(/** @lends cc.JumpBy# */{
     },
 
     /**
-     * Returns a reversed action.
-     * @return {cc.JumpBy}
-     */
-    /**
      * 返回一个反转的动作。
      * @return {cc.JumpBy}
      */
@@ -2660,23 +1888,8 @@ cc.JumpBy = cc.ActionInterval.extend(/** @lends cc.JumpBy# */{
 });
 
 /**
- * Moves a cc.Node object simulating a parabolic jump movement by modifying it's position attribute.
- * Relative to its movement.
- * @function
- * @param {Number} duration
- * @param {cc.Point|Number} position
- * @param {Number} [y]
- * @param {Number} height
- * @param {Number} jumps
- * @return {cc.JumpBy}
- * @example
- * // example
- * var actionBy = cc.jumpBy(2, cc.p(300, 0), 50, 4);
- * var actionBy = cc.jumpBy(2, 300, 0, 50, 4);
- */
-/**
- * 通过修改cc.Node对象的位置属性，将它按照抛物线移动到一个指定点，来模拟跳的动作。 <br />
- * 与它的移动相关。
+ * 通过修改cc.Node对象的位置属性，将它按照抛物线移动到一个指定点，来模仿跳跃的轨迹动作
+ * 相对于它的运动。
  * @function
  * @param {Number} duration
  * @param {cc.Point|Number} position
@@ -2692,23 +1905,11 @@ cc.JumpBy = cc.ActionInterval.extend(/** @lends cc.JumpBy# */{
 cc.jumpBy = function (duration, position, y, height, jumps) {
     return new cc.JumpBy(duration, position, y, height, jumps);
 };
-/**
- * Please use cc.jumpBy instead. <br />
- * Moves a cc.Node object simulating a parabolic jump movement by modifying it's position attribute. <br />
- * Relative to its movement.
- * @static
- * @deprecated since v3.0 please use cc.jumpBy instead.
- * @param {Number} duration
- * @param {cc.Point|Number} position
- * @param {Number} [y]
- * @param {Number} height
- * @param {Number} jumps
- * @return {cc.JumpBy}
- */
+
 /**
  * 使用cc.jumpBy代替。<br />
- * 通过修改cc.Node对象的位置属性，将它按照抛物线移动到一个指定点，来模拟跳的动作。 <br />
- * 与它的移动相关。
+ * 通过修改cc.Node对象的位置属性，将它按照抛物线移动到一个指定点，来模仿跳跃的轨迹动作
+ * 相对于它的运动。
  * @static
  * @deprecated 使用cc.jumpBy代替。
  * @param {Number} duration
@@ -2721,21 +1922,7 @@ cc.jumpBy = function (duration, position, y, height, jumps) {
 cc.JumpBy.create = cc.jumpBy;
 
 /**
- * Moves a cc.Node object to a parabolic position simulating a jump movement by modifying it's position attribute. <br />
- * Jump to the specified location.
- * @class
- * @extends cc.JumpBy
- * @param {Number} duration
- * @param {cc.Point|Number} position
- * @param {Number} [y]
- * @param {Number} height
- * @param {Number} jumps
- * @example
- * var actionTo = new cc.JumpTo(2, cc.p(300, 0), 50, 4);
- * var actionTo = new cc.JumpTo(2, 300, 0, 50, 4);
- */
-/**
- * 通过修改cc.Node对象的位置属性，将它按照抛物线移动到一个指定点，来模拟跳的动作。 <br />
+ * 通过修改cc.Node对象的位置属性，将它按照抛物线移动到一个指定点，来模仿跳跃的轨迹动作
  * 跳到一个指定的位置。
  * @class
  * @extends cc.JumpBy
@@ -2752,14 +1939,6 @@ cc.JumpTo = cc.JumpBy.extend(/** @lends cc.JumpTo# */{
     _endPosition:null,
 
     /**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-     * @param {Number} duration
-     * @param {cc.Point|Number} position
-     * @param {Number} [y]
-     * @param {Number} height
-     * @param {Number} jumps
-     */
-    /**
      * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
      * @param {Number} duration
      * @param {cc.Point|Number} position
@@ -2773,18 +1952,6 @@ cc.JumpTo = cc.JumpBy.extend(/** @lends cc.JumpTo# */{
 
         height !== undefined && this.initWithDuration(duration, position, y, height, jumps);
     },
-    /**
-     * Initializes the action.
-     * @param {Number} duration
-     * @param {cc.Point|Number} position
-     * @param {Number} [y]
-     * @param {Number} height
-     * @param {Number} jumps
-     * @return {Boolean}
-     * @example
-     * actionTo.initWithDuration(2, cc.p(300, 0), 50, 4);
-     * actionTo.initWithDuration(2, 300, 0, 50, 4);
-     */
     /**
      * 初始化这个动作。
      * @param {Number} duration
@@ -2810,10 +1977,6 @@ cc.JumpTo = cc.JumpBy.extend(/** @lends cc.JumpTo# */{
         return false;
     },
     /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
-    /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
      */
@@ -2823,10 +1986,6 @@ cc.JumpTo = cc.JumpBy.extend(/** @lends cc.JumpTo# */{
         this._delta.y = this._endPosition.y - this._startPosition.y;
     },
 
-    /**
-     * returns a new clone of the action
-     * @returns {cc.JumpTo}
-     */
     /**
      * 返回动作的克隆对象。
      * @returns {cc.JumpTo}
@@ -2840,22 +1999,7 @@ cc.JumpTo = cc.JumpBy.extend(/** @lends cc.JumpTo# */{
 });
 
 /**
- * Moves a cc.Node object to a parabolic position simulating a jump movement by modifying it's position attribute. <br />
- * Jump to the specified location.
- * @function
- * @param {Number} duration
- * @param {cc.Point|Number} position
- * @param {Number} [y]
- * @param {Number} height
- * @param {Number} jumps
- * @return {cc.JumpTo}
- * @example
- * // example
- * var actionTo = cc.jumpTo(2, cc.p(300, 300), 50, 4);
- * var actionTo = cc.jumpTo(2, 300, 300, 50, 4);
- */
-/**
- * 通过修改cc.Node对象的位置属性，将它按照抛物线移动到一个指定点，来模拟跳的动作。<br />
+ * 通过修改cc.Node对象的位置属性，将它按照抛物线移动到一个指定点，来模仿跳跃的轨迹动作
  * 跳到一个指定的位置。
  * @function
  * @param {Number} duration
@@ -2872,22 +2016,10 @@ cc.JumpTo = cc.JumpBy.extend(/** @lends cc.JumpTo# */{
 cc.jumpTo = function (duration, position, y, height, jumps) {
     return new cc.JumpTo(duration, position, y, height, jumps);
 };
-/**
- * Please use cc.jumpTo instead.
- * Moves a cc.Node object to a parabolic position simulating a jump movement by modifying it's position attribute. <br />
- * Jump to the specified location.
- * @static
- * @deprecated since v3.0 please use cc.jumpTo instead.
- * @param {Number} duration
- * @param {cc.Point|Number} position
- * @param {Number} [y]
- * @param {Number} height
- * @param {Number} jumps
- * @return {cc.JumpTo}
- */
+
 /**
  * 使用cc.jumpTo代替。
- * 通过修改cc.Node对象的位置属性，将它按照抛物线移动到一个指定点，来模拟跳的动作。<br />
+ * 通过修改cc.Node对象的位置属性，将它按照抛物线移动到一个指定点，来模仿跳跃的轨迹动作。
  * 跳到一个指定的位置。
  * @static
  * @deprecated 自v3.0 使用cc.jumpTo代替。
@@ -2916,19 +2048,9 @@ cc.bezierAt = function (a, b, c, d, t) {
         Math.pow(t, 3) * d );
 };
 
-/** An action that moves the target with a cubic Bezier curve by a certain distance.
- * Relative to its movement.
- * @class
- * @extends cc.ActionInterval
- * @param {Number} t time in seconds
- * @param {Array} c Array of points
- * @example
- * var bezier = [cc.p(0, windowSize.height / 2), cc.p(300, -windowSize.height / 2), cc.p(300, 100)];
- * var bezierForward = new cc.BezierBy(3, bezier);
- */
 /** 
- * 按照三次贝塞尔曲线将目标移动到指定点的动作。
- * 与它的移动相关。
+ * 该动作按照贝塞尔曲线路径将目标移动到指定的位置。
+ * 相对于它的运动。
  * @class
  * @extends cc.ActionInterval
  * @param {Number} t 以秒为单位
@@ -2943,12 +2065,7 @@ cc.BezierBy = cc.ActionInterval.extend(/** @lends cc.BezierBy# */{
     _previousPosition:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {Number} t time in seconds
-	 * @param {Array} c Array of points
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+     	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
 	 * @param {Number} t 以秒为单位
 	 * @param {Array} c 点数组
 	 */
@@ -2961,12 +2078,6 @@ cc.BezierBy = cc.ActionInterval.extend(/** @lends cc.BezierBy# */{
 		c && this.initWithDuration(t, c);
     },
 
-    /**
-     * Initializes the action.
-     * @param {Number} t time in seconds
-     * @param {Array} c Array of points
-     * @return {Boolean}
-     */
     /**
      * 初始化这个动作。
      * @param {Number} t 以秒为单位
@@ -2981,10 +2092,6 @@ cc.BezierBy = cc.ActionInterval.extend(/** @lends cc.BezierBy# */{
         return false;
     },
 
-    /**
-     * returns a new clone of the action
-     * @returns {cc.BezierBy}
-     */
     /**
      * 返回动作的克隆对象。
      * @returns {cc.BezierBy}
@@ -3002,10 +2109,6 @@ cc.BezierBy = cc.ActionInterval.extend(/** @lends cc.BezierBy# */{
     },
 
     /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
-    /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
      */
@@ -3019,10 +2122,6 @@ cc.BezierBy = cc.ActionInterval.extend(/** @lends cc.BezierBy# */{
         this._startPosition.y = locPosY;
     },
 
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number} dt
-     */
     /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number} dt
@@ -3064,10 +2163,6 @@ cc.BezierBy = cc.ActionInterval.extend(/** @lends cc.BezierBy# */{
     },
 
     /**
-     * Returns a reversed action.
-     * @return {cc.BezierBy}
-     */
-    /**
      * 返回一个反转的动作。
      * @return {cc.BezierBy}
      */
@@ -3085,20 +2180,8 @@ cc.BezierBy = cc.ActionInterval.extend(/** @lends cc.BezierBy# */{
 });
 
 /**
- * An action that moves the target with a cubic Bezier curve by a certain distance.
- * Relative to its movement.
- * @function
- * @param {Number} t time in seconds
- * @param {Array} c Array of points
- * @return {cc.BezierBy}
- * @example
- * // example
- * var bezier = [cc.p(0, windowSize.height / 2), cc.p(300, -windowSize.height / 2), cc.p(300, 100)];
- * var bezierForward = cc.bezierBy(3, bezier);
- */
-/**
- * 按照三次贝塞尔曲线将目标移动到指定点的动作。
- * 与它的移动相关。
+ * 该动作按照贝塞尔曲线路径将目标移动到指定的位置。
+ * 相对于它的运动。
  * @function
  * @param {Number} t 以秒为单位
  * @param {Array} c 点数组
@@ -3111,39 +2194,21 @@ cc.BezierBy = cc.ActionInterval.extend(/** @lends cc.BezierBy# */{
 cc.bezierBy = function (t, c) {
     return new cc.BezierBy(t, c);
 };
-/**
- * Please use cc.bezierBy instead.
- * An action that moves the target with a cubic Bezier curve by a certain distance.
- * Relative to its movement.
- * @static
- * @deprecated since v3.0 please use cc.bezierBy instead.
- * @param {Number} t time in seconds
- * @param {Array} c Array of points
- * @return {cc.BezierBy}
- */
+
 /**
  * 使用cc.bezierBy代替。
- * 按照三次贝塞尔曲线将目标移动到指定点的动作。
- * 与它的移动相关。
+ * 该动作按照贝塞尔曲线路径将目标移动到指定的位置。
+ * 相对于它的运动。
  * @static
- * @deprecated 自v3.0 使用cc.bezierBy代替。
+ * @deprecated 自v3.0以后使用cc.bezierBy代替。
  * @param {Number} t 以秒为单位
  * @param {Array} c 点数组
  * @return {cc.BezierBy}
  */
 cc.BezierBy.create = cc.bezierBy;
 
-
-/** An action that moves the target with a cubic Bezier curve to a destination point.
- * @class
- * @extends cc.BezierBy
- * @param {Number} t
- * @param {Array} c array of points
- * @example
- * var bezier = [cc.p(0, windowSize.height / 2), cc.p(300, -windowSize.height / 2), cc.p(300, 100)];
- * var bezierTo = new cc.BezierTo(2, bezier);
- */
-/** 按照三次贝塞尔曲线将目标移动到指定点的动作。
+/** 
+ * 该动作按照贝塞尔曲线路径将目标移动到指定的位置。
  * @class
  * @extends cc.BezierBy
  * @param {Number} t
@@ -3156,13 +2221,7 @@ cc.BezierTo = cc.BezierBy.extend(/** @lends cc.BezierTo# */{
     _toConfig:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {Number} t
-	 * @param {Array} c array of points
-	 * var bezierTo = new cc.BezierTo(2, bezier);
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+     	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
 	 * @param {Number} t
 	 * @param {Array} c 点数组
 	 * var bezierTo = new cc.BezierTo(2, bezier);
@@ -3174,15 +2233,9 @@ cc.BezierTo = cc.BezierBy.extend(/** @lends cc.BezierTo# */{
     },
 
     /**
-     * Initializes the action.
-     * @param {Number} t time in seconds
-     * @param {Array} c Array of points
-     * @return {Boolean}
-     */
-    /**
      * 初始化这个动作。
-     * @param {Number} t time in seconds
-     * @param {Array} c Array of points
+     * @param {Number} t 时间以秒为单位
+     * @param {Array} c 点的数组
      * @return {Boolean}
      */
     initWithDuration:function (t, c) {
@@ -3194,10 +2247,6 @@ cc.BezierTo = cc.BezierBy.extend(/** @lends cc.BezierTo# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.BezierTo}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.BezierTo}
      */
@@ -3208,10 +2257,6 @@ cc.BezierTo = cc.BezierBy.extend(/** @lends cc.BezierTo# */{
         return action;
     },
 
-    /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
     /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
@@ -3227,19 +2272,9 @@ cc.BezierTo = cc.BezierBy.extend(/** @lends cc.BezierTo# */{
         locConfig[2] = cc.pSub(locToConfig[2], locStartPos);
     }
 });
+
 /**
- * An action that moves the target with a cubic Bezier curve to a destination point.
- * @function
- * @param {Number} t
- * @param {Array} c array of points
- * @return {cc.BezierTo}
- * @example
- * // example
- * var bezier = [cc.p(0, windowSize.height / 2), cc.p(300, -windowSize.height / 2), cc.p(300, 100)];
- * var bezierTo = cc.bezierTo(2, bezier);
- */
-/**
- * 按照三次贝塞尔曲线将目标移动到指定点的动作
+ * 该动作按照贝塞尔曲线路径将目标移动到指定的位置。
  * @function
  * @param {Number} t
  * @param {Array} c 点数组
@@ -3252,39 +2287,17 @@ cc.BezierTo = cc.BezierBy.extend(/** @lends cc.BezierTo# */{
 cc.bezierTo = function (t, c) {
     return new cc.BezierTo(t, c);
 };
-/**
- * Please use cc.bezierTo instead
- * @static
- * @deprecated since v3.0 please use cc.bezierTo instead.
- * @param {Number} t
- * @param {Array} c array of points
- * @return {cc.BezierTo}
- */
+
 /**
  * 使用cc.bezierTo代替
  * @static
- * @deprecated 自v3.0 使用cc.bezierTo代替
+ * @deprecated 自v3.0以后使用cc.bezierTo代替
  * @param {Number} t
  * @param {Array} c 点数组
  * @return {cc.BezierTo}
  */
 cc.BezierTo.create = cc.bezierTo;
 
-
-/** Scales a cc.Node object to a zoom factor by modifying it's scale attribute.
- * @warning This action doesn't support "reverse"
- * @class
- * @extends cc.ActionInterval
- * @param {Number} duration
- * @param {Number} sx  scale parameter in X
- * @param {Number} [sy] scale parameter in Y, if Null equal to sx
- * @example
- * // It scales to 0.5 in both X and Y.
- * var actionTo = new cc.ScaleTo(2, 0.5);
- *
- * // It scales to 0.5 in x and 2 in Y
- * var actionTo = new cc.ScaleTo(2, 0.5, 2);
- */
 /** 通过修改cc.Node的scale属性，变换它的缩放比例。
  * @warning 这个动作不支持"reverse"
  * @class
@@ -3310,29 +2323,16 @@ cc.ScaleTo = cc.ActionInterval.extend(/** @lends cc.ScaleTo# */{
     _deltaY:0,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
+    	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
 	 * @param {Number} duration
-	 * @param {Number} sx  scale parameter in X
-	 * @param {Number} [sy] scale parameter in Y, if Null equal to sx
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
-	 * @param {Number} duration
-	 * @param {Number} sx  scale parameter in X
-	 * @param {Number} [sy] scale parameter in Y, if Null equal to sx
+	 * @param {Number} sx  X轴缩放比例
+	 * @param {Number} [sy] Y轴缩放比例，如果为Null则和sx相等
 	 */
     ctor:function (duration, sx, sy) {
         cc.ActionInterval.prototype.ctor.call(this);
 		sx !== undefined && this.initWithDuration(duration, sx, sy);
     },
 
-    /**
-     * Initializes the action.
-     * @param {Number} duration
-     * @param {Number} sx
-     * @param {Number} [sy=]
-     * @return {Boolean}
-     */
     /**
      * 初始化这个动作。
      * @param {Number} duration
@@ -3350,10 +2350,6 @@ cc.ScaleTo = cc.ActionInterval.extend(/** @lends cc.ScaleTo# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.ScaleTo}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.ScaleTo}
      */
@@ -3364,10 +2360,6 @@ cc.ScaleTo = cc.ActionInterval.extend(/** @lends cc.ScaleTo# */{
         return action;
     },
 
-    /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
     /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
@@ -3381,10 +2373,6 @@ cc.ScaleTo = cc.ActionInterval.extend(/** @lends cc.ScaleTo# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number} dt
-     */
-    /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number} dt
      */
@@ -3396,21 +2384,7 @@ cc.ScaleTo = cc.ActionInterval.extend(/** @lends cc.ScaleTo# */{
         }
     }
 });
-/**
- * Scales a cc.Node object to a zoom factor by modifying it's scale attribute.
- * @function
- * @param {Number} duration
- * @param {Number} sx  scale parameter in X
- * @param {Number} [sy] scale parameter in Y, if Null equal to sx
- * @return {cc.ScaleTo}
- * @example
- * // example
- * // It scales to 0.5 in both X and Y.
- * var actionTo = cc.scaleTo(2, 0.5);
- *
- * // It scales to 0.5 in x and 2 in Y
- * var actionTo = cc.scaleTo(2, 0.5, 2);
- */
+
 /**
  * 通过修改cc.Node的scale属性，变换它的缩放比例。
  * @function
@@ -3429,21 +2403,12 @@ cc.ScaleTo = cc.ActionInterval.extend(/** @lends cc.ScaleTo# */{
 cc.scaleTo = function (duration, sx, sy) { //function overload
     return new cc.ScaleTo(duration, sx, sy);
 };
-/**
- * Please use cc.scaleTo instead.
- * Scales a cc.Node object to a zoom factor by modifying it's scale attribute.
- * @static
- * @deprecated since v3.0 please use cc.scaleTo instead.
- * @param {Number} duration
- * @param {Number} sx  scale parameter in X
- * @param {Number} [sy] scale parameter in Y, if Null equal to sx
- * @return {cc.ScaleTo}
- */
+
 /**
  * 使用cc.scaleTo代替。
  * 通过修改cc.Node的scale属性，变换它的缩放比例。
  * @static
- * @deprecated 自v3.0 使用cc.scaleTo代替。
+ * @deprecated 自v3.0以后使用cc.scaleTo代替。
  * @param {Number} duration
  * @param {Number} sx  X轴缩放比例
  * @param {Number} [sy] Y轴缩放比例，如果为Null则和sx相等
@@ -3451,22 +2416,13 @@ cc.scaleTo = function (duration, sx, sy) { //function overload
  */
 cc.ScaleTo.create = cc.scaleTo;
 
-
-/** Scales a cc.Node object a zoom factor by modifying it's scale attribute.
- * Relative to its changes.
- * @class
- * @extends cc.ScaleTo
- */
 /** 通过修改cc.Node的scale属性，变换它的缩放比例。
  * 与它原来的变换相关。
  * @class
  * @extends cc.ScaleTo
  */
 cc.ScaleBy = cc.ScaleTo.extend(/** @lends cc.ScaleBy# */{
-    /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
+
     /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
@@ -3477,10 +2433,6 @@ cc.ScaleBy = cc.ScaleTo.extend(/** @lends cc.ScaleBy# */{
         this._deltaY = this._startScaleY * this._endScaleY - this._startScaleY;
     },
 
-    /**
-     * Returns a reversed action.
-     * @return {cc.ScaleBy}
-     */
     /**
      * 返回一个反转的动作。
      * @return {cc.ScaleBy}
@@ -3493,10 +2445,6 @@ cc.ScaleBy = cc.ScaleTo.extend(/** @lends cc.ScaleBy# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.ScaleBy}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.ScaleBy}
      */
@@ -3507,21 +2455,7 @@ cc.ScaleBy = cc.ScaleTo.extend(/** @lends cc.ScaleBy# */{
         return action;
     }
 });
-/**
- * Scales a cc.Node object a zoom factor by modifying it's scale attribute.
- * Relative to its changes.
- * @function
- * @param {Number} duration duration in seconds
- * @param {Number} sx sx  scale parameter in X
- * @param {Number|Null} [sy=] sy scale parameter in Y, if Null equal to sx
- * @return {cc.ScaleBy}
- * @example
- * // example without sy, it scales by 2 both in X and Y
- * var actionBy = cc.scaleBy(2, 2);
- *
- * //example with sy, it scales by 0.25 in X and 4.5 in Y
- * var actionBy2 = cc.scaleBy(2, 0.25, 4.5);
- */
+
 /**
  * 通过修改cc.Node的scale属性，变换它的缩放比例。
  * 与它原来的变换相关。
@@ -3540,17 +2474,7 @@ cc.ScaleBy = cc.ScaleTo.extend(/** @lends cc.ScaleBy# */{
 cc.scaleBy = function (duration, sx, sy) {
     return new cc.ScaleBy(duration, sx, sy);
 };
-/**
- * Please use cc.scaleBy instead.
- * Scales a cc.Node object a zoom factor by modifying it's scale attribute.
- * Relative to its changes.
- * @static
- * @deprecated since v3.0 please use cc.scaleBy() instead.
- * @param {Number} duration duration in seconds
- * @param {Number} sx sx  scale parameter in X
- * @param {Number|Null} [sy=] sy scale parameter in Y, if Null equal to sx
- * @return {cc.ScaleBy}
- */
+
 /**
  * 使用cc.scaleBy代替。
  * 通过修改cc.Node的scale属性，变换它的缩放比例。
@@ -3564,19 +2488,11 @@ cc.scaleBy = function (duration, sx, sy) {
  */
 cc.ScaleBy.create = cc.scaleBy;
 
-/** Blinks a cc.Node object by modifying it's visible attribute
- * @class
- * @extends cc.ActionInterval
- * @param {Number} duration  duration in seconds
- * @param {Number} blinks  blinks in times
- * @example
- * var action = new cc.Blink(2, 10);
- */
 /** 通过修改一个cc.Node对象的可见性属性，闪烁这个对象。
  * @class
  * @extends cc.ActionInterval
- * @param {Number} duration  duration in seconds
- * @param {Number} blinks  blinks in times
+ * @param {Number} duration 以秒为单位
+ * @param {Number} blinks  闪烁次数
  * @example
  * var action = new cc.Blink(2, 10);
  */
@@ -3585,13 +2501,8 @@ cc.Blink = cc.ActionInterval.extend(/** @lends cc.Blink# */{
     _originalState:false,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-     * @param {Number} duration  duration in seconds
-	 * @param {Number} blinks  blinks in times
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
-     * @param {Number} duration  以秒为单位
+    	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+     	 * @param {Number} duration  以秒为单位
 	 * @param {Number} blinks 闪烁次数
 	 */
     ctor:function (duration, blinks) {
@@ -3599,12 +2510,6 @@ cc.Blink = cc.ActionInterval.extend(/** @lends cc.Blink# */{
 		blinks !== undefined && this.initWithDuration(duration, blinks);
     },
 
-    /**
-     * Initializes the action.
-     * @param {Number} duration duration in seconds
-     * @param {Number} blinks blinks in times
-     * @return {Boolean}
-     */
     /**
      * 初始化这个动作。
      * @param {Number} duration 以秒为单位
@@ -3620,10 +2525,6 @@ cc.Blink = cc.ActionInterval.extend(/** @lends cc.Blink# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.Blink}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.Blink}
      */
@@ -3634,10 +2535,6 @@ cc.Blink = cc.ActionInterval.extend(/** @lends cc.Blink# */{
         return action;
     },
 
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number} dt time in seconds
-     */
     /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number} dt 以秒为单位
@@ -3652,10 +2549,6 @@ cc.Blink = cc.ActionInterval.extend(/** @lends cc.Blink# */{
     },
 
     /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
-    /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
      */
@@ -3665,9 +2558,6 @@ cc.Blink = cc.ActionInterval.extend(/** @lends cc.Blink# */{
     },
 
     /**
-     * stop the action
-     */
-    /**
      * 停止动作。
      */
     stop:function () {
@@ -3675,10 +2565,6 @@ cc.Blink = cc.ActionInterval.extend(/** @lends cc.Blink# */{
         cc.ActionInterval.prototype.stop.call(this);
     },
 
-    /**
-     * Returns a reversed action.
-     * @return {cc.Blink}
-     */
     /**
      * 返回一个反转的动作。
      * @return {cc.Blink}
@@ -3700,48 +2586,21 @@ cc.Blink = cc.ActionInterval.extend(/** @lends cc.Blink# */{
  * // example
  * var action = cc.blink(2, 10);
  */
-/**
- * Blinks a cc.Node object by modifying it's visible attribute.
- * @function
- * @param {Number} duration  duration in seconds
- * @param blinks blinks in times
- * @return {cc.Blink}
- * @example
- * // example
- * var action = cc.blink(2, 10);
- */
+
 cc.blink = function (duration, blinks) {
     return new cc.Blink(duration, blinks);
 };
 /**
- * Please use cc.blink instead.
- * Blinks a cc.Node object by modifying it's visible attribute.
- * @static
- * @deprecated since v3.0 please use cc.blink instead.
- * @param {Number} duration  duration in seconds
- * @param blinks blinks in times
- * @return {cc.Blink}
- */
-/**
  * 使用cc.blink代替。
  * 通过修改一个cc.Node对象的可见性属性，闪烁这个对象。
  * @static
- * @deprecated 自v3.0 使用cc.blink代替。
+ * @deprecated 自v3.0以后使用cc.blink代替。
  * @param {Number} duration  以秒为单位
  * @param blinks 闪烁次数
  * @return {cc.Blink}
  */
 cc.Blink.create = cc.blink;
 
-/** Fades an object that implements the cc.RGBAProtocol protocol. It modifies the opacity from the current value to a custom one.
- * @warning This action doesn't support "reverse"
- * @class
- * @extends cc.ActionInterval
- * @param {Number} duration
- * @param {Number} opacity 0-255, 0 is transparent
- * @example
- * var action = new cc.FadeTo(1.0, 0);
- */
 /** 渐变一个对象的透明度（遵循cc.RGBAProtocol协议）。从当前透明度到一个自定义值。
  * @warning 这个动作不支持"reverse"。
  * @class
@@ -3756,12 +2615,7 @@ cc.FadeTo = cc.ActionInterval.extend(/** @lends cc.FadeTo# */{
     _fromOpacity:0,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {Number} duration
-	 * @param {Number} opacity 0-255, 0 is transparent
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+    	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
 	 * @param {Number} duration
 	 * @param {Number} opacity 0-255，0是透明。
 	 */
@@ -3770,12 +2624,6 @@ cc.FadeTo = cc.ActionInterval.extend(/** @lends cc.FadeTo# */{
 		opacity !== undefined && this.initWithDuration(duration, opacity);
     },
 
-    /**
-     * Initializes the action.
-     * @param {Number} duration  duration in seconds
-     * @param {Number} opacity
-     * @return {Boolean}
-     */
     /**
      * 初始化这个动作。
      * @param {Number} duration  以秒为单位
@@ -3791,10 +2639,6 @@ cc.FadeTo = cc.ActionInterval.extend(/** @lends cc.FadeTo# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.FadeTo}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.FadeTo}
      */
@@ -3805,10 +2649,6 @@ cc.FadeTo = cc.ActionInterval.extend(/** @lends cc.FadeTo# */{
         return action;
     },
 
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number} time time in seconds
-     */
     /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number} time 以秒为单位
@@ -3821,10 +2661,6 @@ cc.FadeTo = cc.ActionInterval.extend(/** @lends cc.FadeTo# */{
     },
 
     /**
-     * Start this action with target.
-     * @param {cc.Node} target
-     */
-    /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
      */
@@ -3834,16 +2670,6 @@ cc.FadeTo = cc.ActionInterval.extend(/** @lends cc.FadeTo# */{
     }
 });
 
-/**
- * Fades an object that implements the cc.RGBAProtocol protocol. It modifies the opacity from the current value to a custom one.
- * @function
- * @param {Number} duration
- * @param {Number} opacity 0-255, 0 is transparent
- * @return {cc.FadeTo}
- * @example
- * // example
- * var action = cc.fadeTo(1.0, 0);
- */
 /**
  * 渐变一个对象的透明度（遵循cc.RGBAProtocol协议）。从当前透明度到一个自定义值。
  * @function
@@ -3857,32 +2683,18 @@ cc.FadeTo = cc.ActionInterval.extend(/** @lends cc.FadeTo# */{
 cc.fadeTo = function (duration, opacity) {
     return new cc.FadeTo(duration, opacity);
 };
-/**
- * Please use cc.fadeTo instead.
- * Fades an object that implements the cc.RGBAProtocol protocol. It modifies the opacity from the current value to a custom one.
- * @static
- * @deprecated since v3.0 please use cc.fadeTo instead.
- * @param {Number} duration
- * @param {Number} opacity 0-255, 0 is transparent
- * @return {cc.FadeTo}
- */
+
 /**
  * 使用cc.fadeTo代替。
  * 渐变一个对象的透明度（遵循cc.RGBAProtocol协议）。从当前透明度到一个自定义值。
  * @static
- * @deprecated 自v3.0 使用cc.fadeTo代替。
+ * @deprecated 自v3.0以后使用cc.fadeTo代替。
  * @param {Number} duration
  * @param {Number} opacity 0-255，0是透明。
  * @return {cc.FadeTo}
  */
 cc.FadeTo.create = cc.fadeTo;
 
-/** Fades In an object that implements the cc.RGBAProtocol protocol. It modifies the opacity from 0 to 255.<br/>
- * The "reverse" of this action is FadeOut
- * @class
- * @extends cc.FadeTo
- * @param {Number} duration duration in seconds
- */
 /** 淡入一个对象（遵循cc.RGBAProtocol协议）。透明度从0变化到255。<br/>
  * "reverse"动作是FadeOut。
  * @class
@@ -3893,10 +2705,6 @@ cc.FadeIn = cc.FadeTo.extend(/** @lends cc.FadeIn# */{
     _reverseAction: null,
 
     /**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-     * @param {Number} duration duration in seconds
-     */
-    /**
      * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
      * @param {Number} duration 以秒为单位
      */
@@ -3905,10 +2713,6 @@ cc.FadeIn = cc.FadeTo.extend(/** @lends cc.FadeIn# */{
         duration && this.initWithDuration(duration, 255);
     },
 
-    /**
-     * Returns a reversed action.
-     * @return {cc.FadeOut}
-     */
     /**
      * 返回一个反转的动作。
      * @return {cc.FadeOut}
@@ -3922,10 +2726,6 @@ cc.FadeIn = cc.FadeTo.extend(/** @lends cc.FadeIn# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.FadeIn}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.FadeIn}
      */
@@ -3936,10 +2736,6 @@ cc.FadeIn = cc.FadeTo.extend(/** @lends cc.FadeIn# */{
         return action;
     },
 
-    /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
     /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
@@ -3952,76 +2748,45 @@ cc.FadeIn = cc.FadeTo.extend(/** @lends cc.FadeIn# */{
 });
 
 /**
- * Fades In an object that implements the cc.RGBAProtocol protocol. It modifies the opacity from 0 to 255.
- * @function
- * @param {Number} duration duration in seconds
- * @return {cc.FadeIn}
- * @example
- * //example
- * var action = cc.fadeIn(1.0);
- */
-/**
  * 淡入一个对象（遵循cc.RGBAProtocol协议）。透明度从0变化到255。
  * @function
  * @param {Number} duration duration in seconds
  * @return {cc.FadeIn}
  * @example
- * //example
+ * //举例
  * var action = cc.fadeIn(1.0);
  */
 cc.fadeIn = function (duration) {
     return new cc.FadeIn(duration);
 };
-/**
- * Please use cc.fadeIn instead.
- * Fades In an object that implements the cc.RGBAProtocol protocol. It modifies the opacity from 0 to 255.
- * @static
- * @deprecated since v3.0 please use cc.fadeIn() instead.
- * @param {Number} duration duration in seconds
- * @return {cc.FadeIn}
- */
+
 /**
  * 使用cc.fadeIn代替。
  * 淡入一个对象（遵循cc.RGBAProtocol协议）。透明度从0变化到255。
  * @static
- * @deprecated since v3.0 please use cc.fadeIn() instead.
- * @param {Number} duration duration in seconds
+ * @deprecated 自v3.0以后使用cc.fadeIn代替.
+ * @param {Number} duration 以秒为单位
  * @return {cc.FadeIn}
  */
 cc.FadeIn.create = cc.fadeIn;
 
-
-/** Fades Out an object that implements the cc.RGBAProtocol protocol. It modifies the opacity from 255 to 0.
- * The "reverse" of this action is FadeIn
- * @class
- * @extends cc.FadeTo
- * @param {Number} duration duration in seconds
- */
 /** 淡出一个对象（遵循cc.RGBAProtocol协议）。透明度从255变化到0。
  * "reverse"动作是FadeIn。
  * @class
  * @extends cc.FadeTo
- * @param {Number} duration duration in seconds
+ * @param {Number} duration 以秒为单位
  */
 cc.FadeOut = cc.FadeTo.extend(/** @lends cc.FadeOut# */{
 
     /**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-     * @param {Number} duration duration in seconds
-     */
-    /**
      * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
-     * @param {Number} duration duration in seconds
+     * @param {Number} duration 以秒为单位
      */
     ctor:function (duration) {
         cc.FadeTo.prototype.ctor.call(this);
         duration && this.initWithDuration(duration, 0);
     },
 
-    /**
-     * Returns a reversed action.
-     * @return {cc.FadeIn}
-     */
     /**
      * 返回一个反转的动作。
      * @return {cc.FadeIn}
@@ -4036,10 +2801,6 @@ cc.FadeOut = cc.FadeTo.extend(/** @lends cc.FadeOut# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.FadeOut}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.FadeOut}
      */
@@ -4052,15 +2813,6 @@ cc.FadeOut = cc.FadeTo.extend(/** @lends cc.FadeOut# */{
 });
 
 /**
- * Fades Out an object that implements the cc.RGBAProtocol protocol. It modifies the opacity from 255 to 0.
- * @function
- * @param {Number} d  duration in seconds
- * @return {cc.FadeOut}
- * @example
- * // example
- * var action = cc.fadeOut(1.0);
- */
-/**
  * 淡出一个对象（遵循cc.RGBAProtocol协议）。透明度从255变化到0。
  * @function
  * @param {Number} d  以秒为单位
@@ -4072,37 +2824,19 @@ cc.FadeOut = cc.FadeTo.extend(/** @lends cc.FadeOut# */{
 cc.fadeOut = function (d) {
     return new cc.FadeOut(d);
 };
-/**
- * Please use cc.fadeOut instead.
- * Fades Out an object that implements the cc.RGBAProtocol protocol. It modifies the opacity from 255 to 0.
- * @static
- * @deprecated since v3.0 please use cc.fadeOut instead.
- * @param {Number} d  duration in seconds
- * @return {cc.FadeOut}
- */
+
 /**
  * 使用cc.fadeOut代替。
  * 淡出一个对象（遵循cc.RGBAProtocol协议）。透明度从255变化到0。
  * @static
- * @deprecated since v3.0 please use cc.fadeOut instead.
- * @param {Number} d  duration in seconds
+ * @deprecated 自v3.0以后使用cc.fadeOut代替.
+ * @param {Number} d  以秒为单位
  * @return {cc.FadeOut}
  */
 cc.FadeOut.create = cc.fadeOut;
 
-/** Tints a cc.Node that implements the cc.NodeRGB protocol from current tint to a custom one.
- * @warning This action doesn't support "reverse"
- * @class
- * @extends cc.ActionInterval
- * @param {Number} duration
- * @param {Number} red 0-255
- * @param {Number} green  0-255
- * @param {Number} blue 0-255
- * @example
- * var action = new cc.TintTo(2, 255, 0, 255);
- */
 /** 改变一个cc.Node的颜色（遵循cc.NodeRGB约定）。
- * @warning This action doesn't support "reverse"
+ * @warning 这个动作不支持"reverse"
  * @class
  * @extends cc.ActionInterval
  * @param {Number} duration
@@ -4117,14 +2851,7 @@ cc.TintTo = cc.ActionInterval.extend(/** @lends cc.TintTo# */{
     _from:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {Number} duration
-	 * @param {Number} red 0-255
-	 * @param {Number} green  0-255
-	 * @param {Number} blue 0-255
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+    	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
 	 * @param {Number} duration
 	 * @param {Number} red 0-255
 	 * @param {Number} green  0-255
@@ -4138,14 +2865,6 @@ cc.TintTo = cc.ActionInterval.extend(/** @lends cc.TintTo# */{
 		blue !== undefined && this.initWithDuration(duration, red, green, blue);
     },
 
-    /**
-     * Initializes the action.
-     * @param {Number} duration
-     * @param {Number} red 0-255
-     * @param {Number} green 0-255
-     * @param {Number} blue 0-255
-     * @return {Boolean}
-     */
     /**
      * 初始化这个动作。
      * @param {Number} duration
@@ -4163,10 +2882,6 @@ cc.TintTo = cc.ActionInterval.extend(/** @lends cc.TintTo# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.TintTo}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.TintTo}
      */
@@ -4179,10 +2894,6 @@ cc.TintTo = cc.ActionInterval.extend(/** @lends cc.TintTo# */{
     },
 
     /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
-    /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
      */
@@ -4191,11 +2902,6 @@ cc.TintTo = cc.ActionInterval.extend(/** @lends cc.TintTo# */{
 
         this._from = this.target.color;
     },
-
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number} dt time in seconds
-     */
 
     /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
@@ -4213,18 +2919,6 @@ cc.TintTo = cc.ActionInterval.extend(/** @lends cc.TintTo# */{
 });
 
 /**
- * Tints a cc.Node that implements the cc.NodeRGB protocol from current tint to a custom one.
- * @function
- * @param {Number} duration
- * @param {Number} red 0-255
- * @param {Number} green  0-255
- * @param {Number} blue 0-255
- * @return {cc.TintTo}
- * @example
- * // example
- * var action = cc.tintTo(2, 255, 0, 255);
- */
-/**
  * 改变一个cc.Node的颜色（遵循cc.NodeRGB约定）。
  * @function
  * @param {Number} duration
@@ -4239,22 +2933,12 @@ cc.TintTo = cc.ActionInterval.extend(/** @lends cc.TintTo# */{
 cc.tintTo = function (duration, red, green, blue) {
     return new cc.TintTo(duration, red, green, blue);
 };
-/**
- * Please use cc.tintTo instead.
- * Tints a cc.Node that implements the cc.NodeRGB protocol from current tint to a custom one.
- * @static
- * @deprecated since v3.0 please use cc.tintTo instead.
- * @param {Number} duration
- * @param {Number} red 0-255
- * @param {Number} green  0-255
- * @param {Number} blue 0-255
- * @return {cc.TintTo}
- */
+
 /**
  * 使用cc.tintTo代替。
  * 改变一个cc.Node的颜色（遵循cc.NodeRGB约定）。
  * @static
- * @deprecated since v3.0 please use cc.tintTo instead.
+ * @deprecated 自v3.0以后使用cc.tintTo代替.
  * @param {Number} duration
  * @param {Number} red 0-255
  * @param {Number} green  0-255
@@ -4263,20 +2947,8 @@ cc.tintTo = function (duration, red, green, blue) {
  */
 cc.TintTo.create = cc.tintTo;
 
-
-/**  Tints a cc.Node that implements the cc.NodeRGB protocol from current tint to a custom one.
- * Relative to their own color change.
- * @class
- * @extends cc.ActionInterval
- * @param {Number} duration  duration in seconds
- * @param {Number} deltaRed
- * @param {Number} deltaGreen
- * @param {Number} deltaBlue
- * @example
- * var action = new cc.TintBy(2, -127, -255, -127);
- */
 /**  改变一个cc.Node的颜色（遵循cc.NodeRGB约定）。
- * 与他们自己的颜色变化相关。
+ * 与它们自己的颜色变化相关。
  * @class
  * @extends cc.ActionInterval
  * @param {Number} duration  以秒为单位
@@ -4296,14 +2968,7 @@ cc.TintBy = cc.ActionInterval.extend(/** @lends cc.TintBy# */{
     _fromB:0,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {Number} duration  duration in seconds
-	 * @param {Number} deltaRed
-	 * @param {Number} deltaGreen
-	 * @param {Number} deltaBlue
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
+    	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。
 	 * @param {Number} duration  以秒为单位
 	 * @param {Number} deltaRed
 	 * @param {Number} deltaGreen
@@ -4314,14 +2979,6 @@ cc.TintBy = cc.ActionInterval.extend(/** @lends cc.TintBy# */{
 		deltaBlue !== undefined && this.initWithDuration(duration, deltaRed, deltaGreen, deltaBlue);
     },
 
-    /**
-     * Initializes the action.
-     * @param {Number} duration
-     * @param {Number} deltaRed 0-255
-     * @param {Number} deltaGreen 0-255
-     * @param {Number} deltaBlue 0-255
-     * @return {Boolean}
-     */
     /**
      * 初始化这个动作。
      * @param {Number} duration
@@ -4341,10 +2998,6 @@ cc.TintBy = cc.ActionInterval.extend(/** @lends cc.TintBy# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.TintBy}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.TintBy}
      */
@@ -4355,10 +3008,6 @@ cc.TintBy = cc.ActionInterval.extend(/** @lends cc.TintBy# */{
         return action;
     },
 
-    /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
     /**
      * 指定目标，并且开始动作。
      * @param {cc.Node} target
@@ -4374,10 +3023,6 @@ cc.TintBy = cc.ActionInterval.extend(/** @lends cc.TintBy# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number} dt time in seconds
-     */
-    /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number} dt 以秒为单位
      */
@@ -4391,10 +3036,6 @@ cc.TintBy = cc.ActionInterval.extend(/** @lends cc.TintBy# */{
     },
 
     /**
-     * Returns a reversed action.
-     * @return {cc.TintBy}
-     */
-    /**
      * 返回一个反转的动作。
      * @return {cc.TintBy}
      */
@@ -4407,21 +3048,8 @@ cc.TintBy = cc.ActionInterval.extend(/** @lends cc.TintBy# */{
 });
 
 /**
- * Tints a cc.Node that implements the cc.NodeRGB protocol from current tint to a custom one.
- * Relative to their own color change.
- * @function
- * @param {Number} duration  duration in seconds
- * @param {Number} deltaRed
- * @param {Number} deltaGreen
- * @param {Number} deltaBlue
- * @return {cc.TintBy}
- * @example
- * // example
- * var action = cc.tintBy(2, -127, -255, -127);
- */
-/**
  * 改变一个cc.Node的颜色（遵循cc.NodeRGB约定）。
- * 与他们自己的颜色变化相关。
+ * 与它们自己的颜色变化相关。
  * @function
  * @param {Number} duration  以秒为单位
  * @param {Number} deltaRed
@@ -4435,22 +3063,11 @@ cc.TintBy = cc.ActionInterval.extend(/** @lends cc.TintBy# */{
 cc.tintBy = function (duration, deltaRed, deltaGreen, deltaBlue) {
     return new cc.TintBy(duration, deltaRed, deltaGreen, deltaBlue);
 };
-/**
- * Please use cc.tintBy instead.
- * Tints a cc.Node that implements the cc.NodeRGB protocol from current tint to a custom one.
- * Relative to their own color change.
- * @static
- * @deprecated since v3.0 please use cc.tintBy instead.
- * @param {Number} duration  duration in seconds
- * @param {Number} deltaRed
- * @param {Number} deltaGreen
- * @param {Number} deltaBlue
- * @return {cc.TintBy}
- */
+
 /**
  * 使用cc.tintBy代替
  * 改变一个cc.Node的颜色（遵循cc.NodeRGB约定）。
- * 与他们自己的颜色变化相关。
+ * 与它们自己的颜色变化相关。
  * @static
  * @deprecated since v3.0 please use cc.tintBy instead.
  * @param {Number} duration  以秒为单位
@@ -4467,19 +3084,14 @@ cc.TintBy.create = cc.tintBy;
  */
 cc.DelayTime = cc.ActionInterval.extend(/** @lends cc.DelayTime# */{
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * Will be overwrite.
-     * @param {Number} dt time in seconds
-     */    
-	 /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
-     * 即将重写
+     * 将被重写
      * @param {Number} dt 时间以秒为单位
      */
     update:function (dt) {},
 
     /**
-     * Returns a reversed action.
+     * 返回一个逆向动作。
      * @return {cc.DelayTime}
      */
     reverse:function () {
@@ -4489,10 +3101,6 @@ cc.DelayTime = cc.ActionInterval.extend(/** @lends cc.DelayTime# */{
         return action;
     },
 
-    /**
-     * returns a new clone of the action
-     * @returns {cc.DelayTime}
-     */
     /**
      * 返回动作的克隆对象。
      * @returns {cc.DelayTime}
@@ -4506,15 +3114,6 @@ cc.DelayTime = cc.ActionInterval.extend(/** @lends cc.DelayTime# */{
 });
 
 /**
- * Delays the action a certain amount of seconds
- * @function
- * @param {Number} d duration in seconds
- * @return {cc.DelayTime}
- * @example
- * // example
- * var delay = cc.delayTime(1);
- */
-/**
  * 延时动作，延迟一个特定的时间后执行动作
  * @function
  * @param {Number} d 持续时间，以秒为单位
@@ -4526,37 +3125,17 @@ cc.DelayTime = cc.ActionInterval.extend(/** @lends cc.DelayTime# */{
 cc.delayTime = function (d) {
     return new cc.DelayTime(d);
 };
-/**
- * Please use cc.delayTime instead.
- * Delays the action a certain amount of seconds
- * @static
- * @deprecated since v3.0 please use cc.delaTime instead.
- * @param {Number} d duration in seconds
- * @return {cc.DelayTime}
- */
+
 /**
  * 使用cc.delayTime代替。
  * 延时动作，延迟一个特定的时间后执行动作
  * @static
- * @deprecated 自v3.0 使用cc.delayTime代替。
+ * @deprecated 自v3.0以后使用cc.delayTime代替。
  * @param {Number} d 持续时间，以秒为单位
  * @return {cc.DelayTime}
  */
 cc.DelayTime.create = cc.delayTime;
 
-/**
- * <p>
- * Executes an action in reverse order, from time=duration to time=0                                     <br/>
- * @warning Use this action carefully. This action is not sequenceable.                                 <br/>
- * Use it as the default "reversed" method of your own actions, but using it outside the "reversed"      <br/>
- * scope is not recommended.
- * </p>
- * @class
- * @extends cc.ActionInterval
- * @param {cc.FiniteTimeAction} action
- * @example
- *  var reverse = new cc.ReverseTime(this);
- */
 /**
  * <p>
  * 使用相反的顺序执行动作，从time=duration到time=0。                             <br/>
@@ -4573,11 +3152,7 @@ cc.ReverseTime = cc.ActionInterval.extend(/** @lends cc.ReverseTime# */{
     _other:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-	 * @param {cc.FiniteTimeAction} action
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this
+    	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this
 	 * @param {cc.FiniteTimeAction} action
 	 */
     ctor:function (action) {
@@ -4606,10 +3181,6 @@ cc.ReverseTime = cc.ActionInterval.extend(/** @lends cc.ReverseTime# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.ReverseTime}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.ReverseTime}
      */
@@ -4621,10 +3192,6 @@ cc.ReverseTime = cc.ActionInterval.extend(/** @lends cc.ReverseTime# */{
     },
 
     /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
-    /**
      * 指定目标，并且开始一个动作。
      * @param {cc.Node} target
      */
@@ -4633,10 +3200,6 @@ cc.ReverseTime = cc.ActionInterval.extend(/** @lends cc.ReverseTime# */{
         this._other.startWithTarget(target);
     },
 
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number} dt time in seconds
-     */
     /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number} dt 以秒为单位
@@ -4648,10 +3211,6 @@ cc.ReverseTime = cc.ActionInterval.extend(/** @lends cc.ReverseTime# */{
     },
 
     /**
-     * Returns a reversed action.
-     * @return {cc.ActionInterval}
-     */
-    /**
      * 返回一个反转的动作。
      * @return {cc.ActionInterval}
      */
@@ -4659,9 +3218,6 @@ cc.ReverseTime = cc.ActionInterval.extend(/** @lends cc.ReverseTime# */{
         return this._other.clone();
     },
 
-    /**
-     * Stop the action
-     */
     /**
      * 停止动作。
      */
@@ -4671,15 +3227,6 @@ cc.ReverseTime = cc.ActionInterval.extend(/** @lends cc.ReverseTime# */{
     }
 });
 
-/**
- * Executes an action in reverse order, from time=duration to time=0.
- * @function
- * @param {cc.FiniteTimeAction} action
- * @return {cc.ReverseTime}
- * @example
- * // example
- *  var reverse = cc.reverseTime(this);
- */
 /**
  * 使用相反的顺序执行动作，从time=duration到time=0。
  * @function
@@ -4692,34 +3239,18 @@ cc.ReverseTime = cc.ActionInterval.extend(/** @lends cc.ReverseTime# */{
 cc.reverseTime = function (action) {
     return new cc.ReverseTime(action);
 };
-/**
- * Please use cc.reverseTime instead.
- * Executes an action in reverse order, from time=duration to time=0.
- * @static
- * @deprecated since v3.0 please use cc.reverseTime instead.
- * @param {cc.FiniteTimeAction} action
- * @return {cc.ReverseTime}
- */
+
 /**
  * 使用cc.reverseTime代替。
  * 使用相反的顺序执行动作，从time=duration到time=0。
  * @static
- * @deprecated 自v3.0 使用cc.reverseTime代替。
+ * @deprecated 自v3.0以后使用cc.reverseTime代替。
  * @param {cc.FiniteTimeAction} action
  * @return {cc.ReverseTime}
  */
 cc.ReverseTime.create = cc.reverseTime;
 
-
-/**  Animates a sprite given the name of an Animation
- * @class
- * @extends cc.ActionInterval
- * @param {cc.Animation} animation
- * @example
- * // create the animation with animation
- * var anim = new cc.Animate(dance_grey);
- */
-/**  通过一个给出的动画驱动一个精灵
+/** 通过一个给出的动画驱动一个精灵
  * @class
  * @extends cc.ActionInterval
  * @param {cc.Animation} animation
@@ -4735,12 +3266,7 @@ cc.Animate = cc.ActionInterval.extend(/** @lends cc.Animate# */{
     _splitTimes:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * create the animate with animation.
-	 * @param {cc.Animation} animation
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。<br />
+    	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。<br />
 	 * 使用动画创建animate。
 	 * @param {cc.Animation} animation
 	 */
@@ -4800,10 +3326,6 @@ cc.Animate = cc.ActionInterval.extend(/** @lends cc.Animate# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.Animate}
-     */
-    /**
      * 返回动作的克隆对象。
      * @returns {cc.Animate}
      */
@@ -4814,10 +3336,6 @@ cc.Animate = cc.ActionInterval.extend(/** @lends cc.Animate# */{
         return action;
     },
 
-    /**
-     * Start the action with target.
-     * @param {cc.Sprite} target
-     */
     /**
      * 指定目标，并且开始一个动作。
      * @param {cc.Sprite} target
@@ -4830,10 +3348,6 @@ cc.Animate = cc.ActionInterval.extend(/** @lends cc.Animate# */{
         this._executedLoops = 0;
     },
 
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number} dt
-     */
     /**
      * 每帧调用一次。时间是两帧之间间隔的秒数。
      * @param {Number} dt
@@ -4869,10 +3383,6 @@ cc.Animate = cc.ActionInterval.extend(/** @lends cc.Animate# */{
     },
 
     /**
-     * Returns a reversed action.
-     * @return {cc.Animate}
-     */
-    /**
      * 返回一个反转的动作
      * @return {cc.Animate}
      */
@@ -4899,9 +3409,6 @@ cc.Animate = cc.ActionInterval.extend(/** @lends cc.Animate# */{
     },
 
     /**
-     * stop the action
-     */
-    /**
      * 停止动作
      */
     stop:function () {
@@ -4911,16 +3418,6 @@ cc.Animate = cc.ActionInterval.extend(/** @lends cc.Animate# */{
     }
 });
 
-/**
- * create the animate with animation
- * @function
- * @param {cc.Animation} animation
- * @return {cc.Animate}
- * @example
- * // example
- * // create the animation with animation
- * var anim = cc.animate(dance_grey);
- */
 /**
  * 使用动画创建animate
  * @function
@@ -4934,19 +3431,12 @@ cc.Animate = cc.ActionInterval.extend(/** @lends cc.Animate# */{
 cc.animate = function (animation) {
     return new cc.Animate(animation);
 };
+
 /**
  * 使用cc.animate代替
  * 使用动画创建animate
  * @static
- * @deprecated 自v3.0 使用cc.animate代替
- * @param {cc.Animation} animation
- * @return {cc.Animate}
- */
-/**
- * 使用cc.animate代替
- * 使用动画创建animate
- * @static
- * @deprecated 自v3.0 使用cc.animate代替
+ * @deprecated 自v3.0以后使用cc.animate代替
  * @param {cc.Animation} animation
  * @return {cc.Animate}
  */
@@ -4954,18 +3444,8 @@ cc.Animate.create = cc.animate;
 
 /**
  * <p>
- *     Overrides the target of an action so that it always runs on the target<br/>
- *     specified at action creation rather than the one specified by runAction.
- * </p>
- * @class
- * @extends cc.ActionInterval
- * @param {cc.Node} target
- * @param {cc.FiniteTimeAction} action
- */
-/**
- * <p>
- *     改写一个动作的目标，让这个动作可以在创建的时候运行在一个特定的目标上，<br/>
- *    而不是运行在在通过runAction指定的目标。 
+ *	改写一个动作的目标，让这个动作可以在创建的时候运行在一个特定的目标上，<br/>
+ *	而不是运行在在通过runAction指定的目标。 
  * </p>
  * @class
  * @extends cc.ActionInterval
@@ -4977,13 +3457,7 @@ cc.TargetedAction = cc.ActionInterval.extend(/** @lends cc.TargetedAction# */{
     _forcedTarget:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-	 * Create an action with the specified action and forced target.
-	 * @param {cc.Node} target
-	 * @param {cc.FiniteTimeAction} action
-	 */
-	/**
-     * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。<br />
+    	 * 构造函数，重载它以扩展构造函数的行为，记得在扩展的“ctor”方法中调用“this._super()”。<br />
 	 * 使用一个具体的动作和强制对象创建一个动作。
 	 * @param {cc.Node} target
 	 * @param {cc.FiniteTimeAction} action
@@ -4993,12 +3467,6 @@ cc.TargetedAction = cc.ActionInterval.extend(/** @lends cc.TargetedAction# */{
 		action && this.initWithTarget(target, action);
     },
 
-    /**
-     * Init an action with the specified action and forced target
-     * @param {cc.Node} target
-     * @param {cc.FiniteTimeAction} action
-     * @return {Boolean}
-     */
     /**
      * 使用具体的动作和强制目标初始化动作
      * @param {cc.Node} target
@@ -5015,10 +3483,6 @@ cc.TargetedAction = cc.ActionInterval.extend(/** @lends cc.TargetedAction# */{
     },
 
     /**
-     * returns a new clone of the action
-     * @returns {cc.TargetedAction}
-     */
-    /**
      * 返回动作的克隆对象
      * @returns {cc.TargetedAction}
      */
@@ -5030,10 +3494,6 @@ cc.TargetedAction = cc.ActionInterval.extend(/** @lends cc.TargetedAction# */{
     },
 
     /**
-     * Start the action with target.
-     * @param {cc.Node} target
-     */
-    /**
      * 设置目标，并且开始动作
      * @param {cc.Node} target
      */
@@ -5043,19 +3503,12 @@ cc.TargetedAction = cc.ActionInterval.extend(/** @lends cc.TargetedAction# */{
     },
 
     /**
-     * stop the action
-     */
-    /**
      * 停止动作
      */
     stop:function () {
         this._action.stop();
     },
 
-    /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
-     * @param {Number} dt
-     */
     /**
      * 每一帧调用一次这个方法。时间是两帧之间的时间间隔。
      * @param {Number} dt
@@ -5066,10 +3519,6 @@ cc.TargetedAction = cc.ActionInterval.extend(/** @lends cc.TargetedAction# */{
     },
 
     /**
-     * return the target that the action will be forced to run with
-     * @return {cc.Node}
-     */
-    /**
      * 返回强制运行这个动作的目标
      * @return {cc.Node}
      */
@@ -5077,10 +3526,6 @@ cc.TargetedAction = cc.ActionInterval.extend(/** @lends cc.TargetedAction# */{
         return this._forcedTarget;
     },
 
-    /**
-     * set the target that the action will be forced to run with
-     * @param {cc.Node} forcedTarget
-     */
     /**
      * 设置强制运行这个动作的目标
      * @param {cc.Node} forcedTarget
@@ -5101,20 +3546,12 @@ cc.TargetedAction = cc.ActionInterval.extend(/** @lends cc.TargetedAction# */{
 cc.targetedAction = function (target, action) {
     return new cc.TargetedAction(target, action);
 };
+
 /**
  * 请使用cc.targetedAction代替
  * 用具体的动作和强制的目标创建一个动作
  * @static
- * @deprecated 自v3.0 请使用cc.targetedAction代替
- * @param {cc.Node} target
- * @param {cc.FiniteTimeAction} action
- * @return {cc.TargetedAction}
- */
- /**
- * 请使用cc.targetedAction代替
- * 用具体的动作和强制的目标创建一个动作
- * @static
- * @deprecated 自v3.0 请使用cc.targetedAction代替
+ * @deprecated 自v3.0以后请使用cc.targetedAction代替
  * @param {cc.Node} target
  * @param {cc.FiniteTimeAction} action
  * @return {cc.TargetedAction}

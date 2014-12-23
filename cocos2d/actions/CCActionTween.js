@@ -32,7 +32,6 @@
 cc.ActionTweenDelegate = cc.Class.extend(/** @lends cc.ActionTweenDelegate */{
 
     /**
-     * Update Tween Action.
      * 更新Tween动作
      * @param value
      * @param key
@@ -42,18 +41,14 @@ cc.ActionTweenDelegate = cc.Class.extend(/** @lends cc.ActionTweenDelegate */{
 
 /**
  * cc.ActionTween
- * cc.ActionTween is an action that lets you update any property of an object.
- * cc.ActionTween是一个可以让你更新的某个对象属性的动作
+ * cc.ActionTween是一个可以让你更新的某个对象(Object)属性的动作
  * @class
  * @extends cc.ActionInterval
  * @example
- * //For example, if you want to modify the "width" property of a target from 200 to 300 in 2 seconds, then:
- * //例如:如果你想要让某个目标对象的宽度属性在2秒内从200变成300, 代码可以这样写
+ * //例如, 如果你想要让某个目标对象(target)的宽度属性(width)在2秒内从200变成300, 代码可以这样写:
  *  var modifyWidth = cc.actionTween(2,"width",200,300)
  *  target.runAction(modifyWidth);
- * //Another example: cc.ScaleTo action could be rewriten using cc.PropertyAction:
  * //再一个例子: cc.ScaleTo 动作(一个改变对象大小的动作)可以通过 ActionTween 重写
- * // scaleA and scaleB are equivalents
  * //scaleA 和 scaleB 是等价的动作
  * var scaleA = cc.scaleTo(2,3);
  * var scaleB = cc.actionTween(2,"scale",1,3);
@@ -69,10 +64,8 @@ cc.ActionTween = cc.ActionInterval.extend(/** @lends cc.ActionTween */{
     delta:0,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-    *构造函数，覆盖它之后请继承它的形式，别忘记在继承的"ctor"函数里调用 "this._super()"
-	 * Creates an initializes the action with the property name (key), and the from and to parameters.
-             * 由参数name(key),from和其他参数初始化一个动作
+    	 *构造函数，覆盖它之后请继承它的形式，别忘记在继承的"ctor"函数里调用 "this._super()"
+         * 由参数name(key),from和其他参数初始化一个动作
 	 * @param {Number} duration
 	 * @param {String} key
 	 * @param {Number} from
@@ -86,7 +79,6 @@ cc.ActionTween = cc.ActionInterval.extend(/** @lends cc.ActionTween */{
     },
 
     /**
-     * initializes the action with the property name (key), and the from and to parameters.
      * 由参数name(key),from和其他参数初始化一个动作
      * @param {Number} duration
      * @param {String} key
@@ -105,7 +97,6 @@ cc.ActionTween = cc.ActionInterval.extend(/** @lends cc.ActionTween */{
     },
 
     /**
-     * Start this tween with target.
      * 对目标进行tween动作
      * @param {cc.ActionTweenDelegate} target
      */
@@ -117,7 +108,6 @@ cc.ActionTween = cc.ActionInterval.extend(/** @lends cc.ActionTween */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
      * 每帧之前调用一次.参数dt是每帧之间间隙的秒数
      * @param {Number}  dt
      */
@@ -126,7 +116,6 @@ cc.ActionTween = cc.ActionInterval.extend(/** @lends cc.ActionTween */{
     },
 
     /**
-     * returns a reversed action.
      * 返回一个反向动作
      * @return {cc.ActionTween}
      */
@@ -135,9 +124,7 @@ cc.ActionTween = cc.ActionInterval.extend(/** @lends cc.ActionTween */{
     },
 
     /**
-     * to copy object with deep copy.
      * 对对象进行深拷贝
-     * returns a clone of action.
      * 返回一个拷贝的动作
      * @return {cc.ActionTween}
      */
@@ -149,7 +136,6 @@ cc.ActionTween = cc.ActionInterval.extend(/** @lends cc.ActionTween */{
 });
 
 /**
- * Creates an initializes the action with the property name (key), and the from and to parameters.
  * 由参数name(key),from和其他参数初始化一个动作
  * @function
  * @param {Number} duration
@@ -163,14 +149,10 @@ cc.actionTween = function (duration, key, from, to) {
 };
 
 /**
- * Please use cc.actionTween instead.
  * 请使用cc.actionTween来替代
- * Creates an initializes the action with the property name (key), and the from and to parameters.
  * 由参数name(key),from和其他参数初始化一个动作
  * @static
- * @静态方法
- * @deprecated since v3.0 <br /> Please use cc.actionTween instead.
- * @在3.0版本之后请使用cc.actionTween来替代
+ * @deprecated 在3.0版本之后请使用cc.actionTween来替代
  * @param {Number} duration
  * @param {String} key
  * @param {Number} from

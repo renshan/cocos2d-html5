@@ -25,16 +25,14 @@
  ****************************************************************************/
 
 /**
- * Instant actions are immediate actions. They don't have a duration like.
- * 瞬间动作是立刻执行动作.他们没有持续时间
- * the CCIntervalAction actions.
+ * 瞬间（即时）动作是立刻执行的动作, 它们没有持续时间
+ * CCIntervalAction 动作
  * @class
  * @extends cc.FiniteTimeAction
  */
 cc.ActionInstant = cc.FiniteTimeAction.extend(/** @lends cc.ActionInstant# */{
     /**
-     * return true if the action has finished.
-     * 返回动作是否已经完成
+     * 如果动作已经完成则返回true
      * @return {Boolean}
      */
     isDone:function () {
@@ -42,10 +40,8 @@ cc.ActionInstant = cc.FiniteTimeAction.extend(/** @lends cc.ActionInstant# */{
     },
 
     /**
-     * called every frame with it's delta time. <br />
-     * 按时间调用每一帧. <br />
-     * DON'T override unless you know what you are doing.
-     * 千万不要覆盖这个函数，除非你知道它是干嘛的.
+     * 这个方法每一帧都会被调用, 参数dt为两帧之间的时间间隔(单位秒) <br />
+     * 除非你知道正在做什么否则不要重载这个方法.
      * @param {Number} dt
      */
     step:function (dt) {
@@ -53,25 +49,19 @@ cc.ActionInstant = cc.FiniteTimeAction.extend(/** @lends cc.ActionInstant# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
      * 每帧之前调用一次.参数dt是每帧之间间隙的秒数
      * @param {Number} dt
      */
     update:function (dt) {
-        //nothing
         //什么都不做
     },
 
     /**
-     * returns a reversed action. <br />
      * 返回一个反向动作. <br />
-     * For example: <br />
      * 举个例子: <br />
-     * - The action will be x coordinates of 0 move to 100. <br />
-     * -一个动作是从x轴坐标0移到100. <br />
-     * - The reversed action will be x of 100 move to 0.
-     * -那么它的反向动作就是从x轴坐标100移到0
-     * - Will be rewritten
+     * - 一个动作如果从x轴坐标的0移到100. <br />
+     * - 那么它的反向动作就将是从x轴坐标的100移到0.
+     * - 将被重写
      * @returns {cc.Action}
      */
     reverse:function(){
@@ -79,9 +69,7 @@ cc.ActionInstant = cc.FiniteTimeAction.extend(/** @lends cc.ActionInstant# */{
     },
 
     /**
-     * to copy object with deep copy.
      * 对对象进行深拷贝
-     * returns a clone of action.
      * 返回一个拷贝的动作
      * @return {cc.FiniteTimeAction}
      */
@@ -91,7 +79,6 @@ cc.ActionInstant = cc.FiniteTimeAction.extend(/** @lends cc.ActionInstant# */{
 });
 
 /**
- * Show the node.
  * 显示节点
  * @class
  * @extends cc.ActionInstant
@@ -99,7 +86,6 @@ cc.ActionInstant = cc.FiniteTimeAction.extend(/** @lends cc.ActionInstant# */{
 cc.Show = cc.ActionInstant.extend(/** @lends cc.Show# */{
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
      * 每帧之前调用一次.参数dt是每帧之间间隙的秒数
      * @param {Number} dt
      */
@@ -108,15 +94,11 @@ cc.Show = cc.ActionInstant.extend(/** @lends cc.Show# */{
     },
 
     /**
-     * returns a reversed action. <br />
      * 返回一个反向动作. <br />
-      * For example: <br />
      * 举个例子: <br />
-     * - The action will be x coordinates of 0 move to 100. <br />
-     * -一个动作是从x轴坐标0移到100. <br />
-     * - The reversed action will be x of 100 move to 0.
-     * -那么它的反向动作就是从x轴坐标100移到0
-     * - Will be rewritten
+     * - 一个动作如果从x轴坐标的0移到100. <br />
+     * - 那么它的反向动作就将是从x轴坐标的100移到0.
+     * - 将被重写
      * @returns {cc.Hide}
      */
     reverse:function () {
@@ -124,9 +106,7 @@ cc.Show = cc.ActionInstant.extend(/** @lends cc.Show# */{
     },
 
     /**
-     * to copy object with deep copy.
      * 对对象进行深拷贝
-     * returns a clone of action.
      * 返回一个拷贝的动作
      * @return {cc.FiniteTimeAction}
      */
@@ -136,12 +116,10 @@ cc.Show = cc.ActionInstant.extend(/** @lends cc.Show# */{
 });
 
 /**
- * Show the Node.
  * 显示节点
  * @function
  * @return {cc.Show}
  * @example
- * // example
  * //举个例子
  * var showAction = cc.show();
  */
@@ -150,17 +128,14 @@ cc.show = function () {
 };
 
 /**
- * Show the Node. Please use cc.show instead.
  * 显示节点，请使用cc.show代替
  * @static
- * @deprecated since v3.0 <br /> Please use cc.show instead.
- * @在3.0版本之后请使用cc.show来替代
+ * @deprecated 在3.0版本之后请使用cc.show来替代
  * @return {cc.Show}
  */
 cc.Show.create = cc.show;
 
 /**
- * Hide the node.
  * 隐藏节点.
  * @class
  * @extends cc.ActionInstant
@@ -168,7 +143,6 @@ cc.Show.create = cc.show;
 cc.Hide = cc.ActionInstant.extend(/** @lends cc.Hide# */{
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
      * 每帧之前调用一次.参数dt是每帧之间间隙的秒数
      * @param {Number} dt
      */
@@ -177,16 +151,11 @@ cc.Hide = cc.ActionInstant.extend(/** @lends cc.Hide# */{
     },
 
     /**
-     * returns a reversed action. <br />
      * 返回一个反向动作. <br />
-     * For example: <br />
      * 举个例子: <br />
-     * - The action will be x coordinates of 0 move to 100. <br />
-     * -一个动作是从x轴坐标0移到100. <br />
-     * - The reversed action will be x of 100 move to 0.
-     * -那么它的反向动作就是从x轴坐标100移到0
-     * - Will be rewritten
-     * -将会被重写
+     * - 一个动作如果从x轴坐标的0移到100. <br />
+     * - 那么它的反向动作就将是从x轴坐标的100移到0.
+     * - 将会被重写
      * @returns {cc.Show}
      */
     reverse:function () {
@@ -194,9 +163,7 @@ cc.Hide = cc.ActionInstant.extend(/** @lends cc.Hide# */{
     },
 
     /**
-     * to copy object with deep copy.
      * 对对象进行深拷贝
-     * returns a clone of action.
      * 返回一个拷贝的动作
      * @return {cc.Hide}
      */
@@ -206,12 +173,10 @@ cc.Hide = cc.ActionInstant.extend(/** @lends cc.Hide# */{
 });
 
 /**
- * Hide the node.
  * 隐藏节点
  * @function
  * @return {cc.Hide}
  * @example
- * // example
  * //举个例子
  * var hideAction = cc.hide();
  */
@@ -220,30 +185,24 @@ cc.hide = function () {
 };
 
 /**
- * Hide the node. Please use cc.hide instead.
  * 隐藏节点，请使用cc.hide代替
  * @static
- * @静态方法
- * @deprecated since v3.0 <br /> Please use cc.hide instead.
- * @在3.0版本之后请使用cc.hide来替代
+ * @deprecated 在3.0版本之后请使用cc.hide来替代
  * @return {cc.Hide}
  * @example
- * // example
  * //举个例子
  * var hideAction = cc.hide();
  */
 cc.Hide.create = cc.hide;
 
 /**
- * Toggles the visibility of a node.
- * 切换节点的可见性
+ * 切换节点的可视属性
  * @class
  * @extends cc.ActionInstant
  */
 cc.ToggleVisibility = cc.ActionInstant.extend(/** @lends cc.ToggleVisibility# */{
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
      * 每帧之前调用一次.参数dt是每帧之间间隙的秒数
      * @param {Number} dt
      */
@@ -252,7 +211,6 @@ cc.ToggleVisibility = cc.ActionInstant.extend(/** @lends cc.ToggleVisibility# */
     },
 
     /**
-     * returns a reversed action.
      * 返回一个反向动作.
      * @returns {cc.ToggleVisibility}
      */
@@ -261,9 +219,7 @@ cc.ToggleVisibility = cc.ActionInstant.extend(/** @lends cc.ToggleVisibility# */
     },
 
     /**
-     * to copy object with deep copy.
      * 对对象进行深拷贝
-     * returns a clone of action.
      * 返回一个拷贝的动作
      * @return {cc.ToggleVisibility}
      */
@@ -273,12 +229,10 @@ cc.ToggleVisibility = cc.ActionInstant.extend(/** @lends cc.ToggleVisibility# */
 });
 
 /**
- * Toggles the visibility of a node.
- * 切换节点的可见性.
+ * 切换节点的可视属性
  * @function
  * @return {cc.ToggleVisibility}
  * @example
- * // example
  * //举个例子
  * var toggleVisibilityAction = cc.toggleVisibility();
  */
@@ -287,25 +241,20 @@ cc.toggleVisibility = function () {
 };
 
 /**
- * Toggles the visibility of a node. Please use cc.toggleVisibility instead.
- * 切换节点的可见性.请使用cc.toggleVisibility代替
+ * 切换节点的可视属性.请使用cc.toggleVisibility代替
  * @static
- * @静态方法
- * @deprecated since v3.0 <br /> Please use cc.toggleVisibility instead.
- * @在3.0版本之后请使用 cc.toggleVisibility来替代
+ * @deprecated 在3.0版本之后请使用 cc.toggleVisibility来替代
  * @return {cc.ToggleVisibility}
  */
 cc.ToggleVisibility.create = cc.toggleVisibility;
 
 /**
- * Delete self in the next frame.
  * 下一帧销毁自己
  * @class
  * @extends cc.ActionInstant
  * @param {Boolean} [isNeedCleanUp=true]
  *
  * @example
- * // example
  * //举个例子
  * var removeSelfAction = new cc.RemoveSelf(false);
  */
@@ -313,10 +262,8 @@ cc.RemoveSelf = cc.ActionInstant.extend({
      _isNeedCleanUp: true,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-     * 构造函数，覆盖它之后请继承它的形式，别忘记在继承的"ctor"函数里调用 "this._super()"
-	 * Create a RemoveSelf object with a flag indicate whether the target should be cleaned up while removing.
-             * 创建一个可以销毁自己的对象，使用一个标记来记录是否在移除的时候需要被销毁
+     	 * 构造函数, 覆盖它之后请继承它的形式, 别忘记在继承的"ctor"函数里调用 "this._super()"<br />
+         * 创建一个可以销毁自己的对象，使用一个标记来记录是否在移除的时候需要被销毁
 	 * @param {Boolean} [isNeedCleanUp=true]
 	 */
     ctor:function(isNeedCleanUp){
@@ -326,7 +273,6 @@ cc.RemoveSelf = cc.ActionInstant.extend({
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
      * 每帧之前调用一次.参数dt是每帧之间间隙的秒数
      * @param {Number} dt
      */
@@ -335,8 +281,7 @@ cc.RemoveSelf = cc.ActionInstant.extend({
     },
 
     /**
-     * Initialization of the node, please do not call this function by yourself, you should pass the parameters to constructor to initialize it .
-     * 初始化节点，不要自己调用这个方法，你应该使用给构造函数传值来初始化
+     * 初始化节点，不要自己调用这个方法，你应该通过传参给构造函数来初始化它
      * @param isNeedCleanUp
      * @returns {boolean}
      */
@@ -346,7 +291,6 @@ cc.RemoveSelf = cc.ActionInstant.extend({
     },
 
     /**
-     * returns a reversed action.
      * 返回一个反向动作.
      */
     reverse:function(){
@@ -354,9 +298,7 @@ cc.RemoveSelf = cc.ActionInstant.extend({
     },
 
     /**
-   * to copy object with deep copy.
      * 对对象进行深拷贝
-     * returns a clone of action.
      * 返回一个拷贝的动作
      * @return {cc.RemoveSelf}
      */
@@ -366,14 +308,12 @@ cc.RemoveSelf = cc.ActionInstant.extend({
 });
 
 /**
- * Create a RemoveSelf object with a flag indicate whether the target should be cleaned up while removing.
  * 创建一个可以销毁自己的对象，使用一个标记来记录是否在移除的时候需要被销毁
  * @function
  * @param {Boolean} [isNeedCleanUp=true]
  * @return {cc.RemoveSelf}
  *
  * @example
- * // example
  * //举个例子
  * var removeSelfAction = cc.removeSelf();
  */
@@ -382,39 +322,31 @@ cc.removeSelf = function(isNeedCleanUp){
 };
 
 /**
- * Please use cc.removeSelf instead.
  * 请使用cc.removeSelf来代替
- * Create a RemoveSelf object with a flag indicate whether the target should be cleaned up while removing.
  * 创建一个可以销毁自己的对象，使用一个标记来记录是否在移除的时候需要被销毁
  * @static
- * @deprecated since v3.0 <br /> Please use cc.removeSelf instead.
+ * @deprecated 在3.0版本之后请使用 cc.removeSelf来替代
  * @param {Boolean} [isNeedCleanUp=true]
  * @return {cc.RemoveSelf}
  */
 cc.RemoveSelf.create = cc.removeSelf;
 
 /**
- * Flips the sprite horizontally.
  * 水平方向翻转精灵
  * @class
  * @extends cc.ActionInstant
- * @param {Boolean} flip Indicate whether the target should be flipped or not
- * @param {Boolean} 参数用来表示目标是否要被翻转
+ * @param {Boolean} 参数用来表示目标是否将被翻转
  *
  * @example
- * @举个例子
  * var flipXAction = new cc.FlipX(true);
  */
 cc.FlipX = cc.ActionInstant.extend(/** @lends cc.FlipX# */{
     _flippedX:false,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-     * 构造函数，覆盖它之后请继承它的形式，别忘记在继承的"ctor"函数里调用 "this._super()"
-	 * Create a FlipX action to flip or unflip the target.
-             *创建一个可以销毁自己的对象，使用一个标记来记录是否在移除的时候需要被销毁
-	 * @param {Boolean} flip Indicate whether the target should be flipped or not
-             * @param {Boolean} 参数用来表示目标是否要被翻转
+       	 * 构造函数，覆盖它之后请继承它的形式，别忘记在继承的"ctor"函数里调用 "this._super()"
+         * 创建一个可以销毁自己的对象，使用一个标记来记录是否在移除的时候需要被销毁
+         * @param {Boolean} 参数用来表示目标是否要被翻转
 	 */
     ctor:function(flip){
         cc.FiniteTimeAction.prototype.ctor.call(this);
@@ -423,7 +355,6 @@ cc.FlipX = cc.ActionInstant.extend(/** @lends cc.FlipX# */{
     },
 
     /**
-     * initializes the action with a set flipX.
      * 默认使用水平翻转来初始化一个动作
      * @param {Boolean} flip
      * @return {Boolean}
@@ -434,7 +365,6 @@ cc.FlipX = cc.ActionInstant.extend(/** @lends cc.FlipX# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
      * 每帧之前调用一次.参数dt是每帧之间间隙的秒数
      * @param {Number}  dt
      */
@@ -443,7 +373,6 @@ cc.FlipX = cc.ActionInstant.extend(/** @lends cc.FlipX# */{
     },
 
     /**
-     * returns a reversed action.
      * 返回一个反向动作.
      * @return {cc.FlipX}
      */
@@ -452,9 +381,7 @@ cc.FlipX = cc.ActionInstant.extend(/** @lends cc.FlipX# */{
     },
 
     /**
-   * to copy object with deep copy.
      * 对对象进行深拷贝
-     * returns a clone of action.
      * 返回一个拷贝的动作
      * @return {cc.FiniteTimeAction}
      */
@@ -466,14 +393,11 @@ cc.FlipX = cc.ActionInstant.extend(/** @lends cc.FlipX# */{
 });
 
 /**
- * Create a FlipX action to flip or unflip the target.
  * 为目标创建一个水平翻转动作
  * @function
- * @param {Boolean} flip Indicate whether the target should be flipped or not
  * @param {Boolean} 参数用来表示目标是否要被翻转
  * @return {cc.FlipX}
  * @example
- * @举个例子
  * var flipXAction = cc.flipX(true);
  */
 cc.flipX = function (flip) {
@@ -481,38 +405,28 @@ cc.flipX = function (flip) {
 };
 
 /**
- * Plese use cc.flipX instead.
  * 请使用cc.flipX来代替
- * Create a FlipX action to flip or unflip the target
  * 为目标创建一个水平翻转动作
  * @static
- * @静态方法
- * @deprecated since v3.0 <br /> Plese use cc.flipX instead.
- * @在3.0版本之后请使用se cc.flipX来替代
- * @param {Boolean} flip Indicate whether the target should be flipped or not
+ * @deprecated 在3.0版本之后请使用se cc.flipX来替代
  * @param {Boolean} 参数用来表示目标是否要被翻转
-
  * @return {cc.FlipX}
  */
 cc.FlipX.create = cc.flipX;
 
 /**
- * Flips the sprite vertically
  * 竖直方向翻转精灵
  * @class
  * @extends cc.ActionInstant
  * @param {Boolean} flip
  * @example
- * @举个例子
  * var flipYAction = new cc.FlipY(true);
  */
 cc.FlipY = cc.ActionInstant.extend(/** @lends cc.FlipY# */{
     _flippedY:false,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-    *构造函数，覆盖它之后请继承它的形式，别忘记在继承的"ctor"函数里调用 "this._super()"
-	 * Create a FlipY action to flip or unflip the target.
+    	 *构造函数，覆盖它之后请继承它的形式，别忘记在继承的"ctor"函数里调用 "this._super()"
 	 * 为目标创建一个竖直翻转动作
 	 * @param {Boolean} flip
 	 */
@@ -524,7 +438,6 @@ cc.FlipY = cc.ActionInstant.extend(/** @lends cc.FlipY# */{
     },
 
     /**
-     * initializes the action with a set flipY.
      * 默认使用竖直翻转来初始化一个动作
      * @param {Boolean} flip
      * @return {Boolean}
@@ -535,7 +448,6 @@ cc.FlipY = cc.ActionInstant.extend(/** @lends cc.FlipY# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
      * 每帧之前调用一次.参数dt是每帧之间间隙的秒数
      * @param {Number}  dt
      */
@@ -544,7 +456,6 @@ cc.FlipY = cc.ActionInstant.extend(/** @lends cc.FlipY# */{
     },
 
     /**
-     * returns a reversed action.
      * 返回一个反向动作.
      * @return {cc.FlipY}
      */
@@ -553,9 +464,7 @@ cc.FlipY = cc.ActionInstant.extend(/** @lends cc.FlipY# */{
     },
 
     /**
-   * to copy object with deep copy.
      * 对对象进行深拷贝
-     * returns a clone of action.
      * 返回一个拷贝的动作
      * @return {cc.FlipY}
      */
@@ -567,13 +476,11 @@ cc.FlipY = cc.ActionInstant.extend(/** @lends cc.FlipY# */{
 });
 
 /**
- * Create a FlipY action to flip or unflip the target.
  * 为目标创建一个竖直翻转动作
  * @function
  * @param {Boolean} flip
  * @return {cc.FlipY}
  * @example
- * @举个例子
  * var flipYAction = cc.flipY(true);
  */
 cc.flipY = function (flip) {
@@ -581,27 +488,22 @@ cc.flipY = function (flip) {
 };
 
 /**
- * Please use cc.flipY instead
- * Create a FlipY action to flip or unflip the target
+ * 请使用cc.flipY替代
  * 为目标创建一个竖直翻转动作
  * @static
- * @静态方法
- * @deprecated since v3.0 <br /> Please use cc.flipY instead.
- * 在3.0版本之后请使用cc.flipY来替代
+ * @deprecated 在3.0版本之后请使用cc.flipY来替代
  * @param {Boolean} flip
  * @return {cc.FlipY}
  */
 cc.FlipY.create = cc.flipY;
 
 /**
- * Places the node in a certain position
  * 将节点放置在绝对坐标位置
  * @class
  * @extends cc.ActionInstant
  * @param {cc.Point|Number} pos
  * @param {Number} [y]
  * @example
- * @举个例子
  * var placeAction = new cc.Place(cc.p(200, 200));
  * var placeAction = new cc.Place(200, 200);
  */
@@ -610,10 +512,8 @@ cc.Place = cc.ActionInstant.extend(/** @lends cc.Place# */{
 	_y: 0,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-     *构造函数，覆盖它之后请继承它的形式，别忘记在继承的"ctor"函数里调用 "this._super()"
-	 * Creates a Place action with a position.
-             * 使用坐标创建一个位置动作
+     	 *构造函数，覆盖它之后请继承它的形式，别忘记在继承的"ctor"函数里调用 "this._super()"
+         * 使用坐标创建一个位置动作
 	 * @param {cc.Point|Number} pos
 	 * @param {Number} [y]
 	 */
@@ -632,7 +532,6 @@ cc.Place = cc.ActionInstant.extend(/** @lends cc.Place# */{
     },
 
     /**
-     * Initializes a Place action with a position
      * 使用坐标初始化一个位置动作
      * @param {number} x
      * @param {number} y
@@ -645,7 +544,6 @@ cc.Place = cc.ActionInstant.extend(/** @lends cc.Place# */{
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
      * 每帧之前调用一次.参数dt是每帧之间间隙的秒数
      * @param {Number}  dt
      */
@@ -654,9 +552,7 @@ cc.Place = cc.ActionInstant.extend(/** @lends cc.Place# */{
     },
 
     /**
-     * to copy object with deep copy.
      * 对对象进行深拷贝
-     * returns a clone of action.
      * 返回一个拷贝的动作
      * @return {cc.Place}
      */
@@ -668,14 +564,12 @@ cc.Place = cc.ActionInstant.extend(/** @lends cc.Place# */{
 });
 
 /**
- * Creates a Place action with a position.
  * 使用坐标创建一个位置动作
  * @function
  * @param {cc.Point|Number} pos
  * @param {Number} [y]
  * @return {cc.Place}
  * @example
- * // example
  * //举个例子
  * var placeAction = cc.place(cc.p(200, 200));
  * var placeAction = cc.place(200, 200);
@@ -685,14 +579,10 @@ cc.place = function (pos, y) {
 };
 
 /**
- * Please use cc.place instead.
  * 请使用cc.place来替代
- * Creates a Place action with a position.
- * 用坐标创建一个位置动作
+ * 用坐标创建一个Place动作
  * @static
- * @静态方法
- * @deprecated since v3.0 <br /> Please use cc.place instead.
- * 在3.0版本之后请使用cc.place来替代
+ * @deprecated 在3.0版本之后请使用cc.place来替代
  * @param {cc.Point|Number} pos
  * @param {Number} [y]
  * @return {cc.Place}
@@ -701,23 +591,18 @@ cc.Place.create = cc.place;
 
 
 /**
- * Calls a 'callback'.
- * 回调函数
+ * 调用回调函数
  * @class
  * @extends cc.ActionInstant
  * @param {function} selector
  * @param {object|null} [selectorTarget]
- * @param {*|null} [data] data for function, it accepts all data types.
- * @param {*|null} 该参数接收所有类型
+ * @param {*|null} [data] 该参数接收所有类型
  * @example
- * // example
- * //举个例子
- * // CallFunc without data
- * //不带参数的回调
+ * // 举个例子
+ * // 不带参数的回调
  * var finish = new cc.CallFunc(this.removeSprite, this);
  *
- * // CallFunc with data
- * //带参数的回调
+ * // 带参数的回调
  * var finish = new cc.CallFunc(this.removeFromParentAndCleanup, this,  true);
  */
 cc.CallFunc = cc.ActionInstant.extend(/** @lends cc.CallFunc# */{
@@ -727,14 +612,11 @@ cc.CallFunc = cc.ActionInstant.extend(/** @lends cc.CallFunc# */{
     _data:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />
-    *构造函数，覆盖它之后请继承它的形式，别忘记在继承的"ctor"函数里调用 "this._super()"
-	 * Creates a CallFunc action with the callback.
-             * 用回调函数创建一个回调动作
+    	 * 构造函数，覆盖它之后请继承它的形式，别忘记在继承的"ctor"函数里调用 "this._super()"
+         * 用回调函数创建一个回调动作
 	 * @param {function} selector
 	 * @param {object|null} [selectorTarget]
-	 * @param {*|null} [data] data for function, it accepts all data types.
-             * @param {*|null} 该参数接收所有类型
+	 * @param {*|null} [data] 该参数接收所有类型
 	 */
     ctor:function(selector, selectorTarget, data){
         cc.FiniteTimeAction.prototype.ctor.call(this);
@@ -747,12 +629,10 @@ cc.CallFunc = cc.ActionInstant.extend(/** @lends cc.CallFunc# */{
     },
 
     /**
-     * Initializes the action with a function or function and its target
      * 用一个回调函数或者一个回调函数和它的目标来初始化回调动作
      * @param {function} selector
      * @param {object|Null} selectorTarget
-     * @param {*|Null} [data] data for function, it accepts all data types.
-     * @param {*|null} 该参数接收所有类型
+     * @param {*|Null} [data] 该参数接收所有类型
      * @return {Boolean}
      */
     initWithFunction:function (selector, selectorTarget, data) {
@@ -767,18 +647,16 @@ cc.CallFunc = cc.ActionInstant.extend(/** @lends cc.CallFunc# */{
     },
 
     /**
-     * execute the function.
-     * 执行
+     * 执行这个函数
      */
     execute:function () {
-        if (this._callFunc != null)         //CallFunc, N, ND  //回调函数，带参和不带参
+        if (this._callFunc != null)         //CallFunc, N, ND （回调函数，带参和不带参）
             this._callFunc.call(this._selectorTarget, this.target, this._data);
         else if(this._function)
             this._function.call(null, this.target);
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.
      * 每帧之前调用一次.参数dt是每帧之间间隙的秒数
      * @param {Number}  dt
      */
@@ -787,7 +665,6 @@ cc.CallFunc = cc.ActionInstant.extend(/** @lends cc.CallFunc# */{
     },
 
     /**
-     * Get selectorTarget.
      * 获得selectorTarget
      * @return {object}
      */
@@ -796,7 +673,6 @@ cc.CallFunc = cc.ActionInstant.extend(/** @lends cc.CallFunc# */{
     },
 
     /**
-     * Set selectorTarget.
      * 设置selectorTarget
      * @param {object} sel
      */
@@ -809,9 +685,7 @@ cc.CallFunc = cc.ActionInstant.extend(/** @lends cc.CallFunc# */{
     },
 
     /**
-     * to copy object with deep copy.
      * 对对象进行深拷贝
-     * returns a clone of action.
      * 返回一个拷贝的动作
      * @return {cc.CallFunc}
      */
@@ -827,21 +701,18 @@ cc.CallFunc = cc.ActionInstant.extend(/** @lends cc.CallFunc# */{
 });
 
 /**
- * Creates the action with the callback
  * 用回调函数创建一个回调动作
  * @function
  * @param {function} selector
  * @param {object|null} [selectorTarget]
- * @param {*|null} [data] data for function, it accepts all data types.
- * @param {*|null} 该参数接收所有类型
+ * @param {*|null} [data] 该参数接收所有类型
  * @return {cc.CallFunc}
  * @example
- * // example
- * //举个例子
- * // CallFunc without data
+ * // 举个例子
+ * // 不带参数的回调
  * var finish = cc.callFunc(this.removeSprite, this);
  *
- * // CallFunc with data
+ * // 带参数的回调
  * var finish = cc.callFunc(this.removeFromParentAndCleanup, this._grossini,  true);
  */
 cc.callFunc = function (selector, selectorTarget, data) {
@@ -849,18 +720,13 @@ cc.callFunc = function (selector, selectorTarget, data) {
 };
 
 /**
- * Please use cc.callFunc instead.
  * 请使用cc.callFunc来替代
- * Creates the action with the callback.
- * 用回调函数创建一个回调动作
+ * 用回调函数创建这个动作
  * @static
- * @静态方法
- * @deprecated since v3.0 <br /> Please use cc.callFunc instead.
- * @在3.0版本之后请使用cc.hide来替代
+ * @deprecated 在3.0版本之后请使用cc.hide来替代
  * @param {function} selector
  * @param {object|null} [selectorTarget]
- * @param {*|null} [data] data for function, it accepts all data types.
- * @param {*|null} 该参数接收所有类型
+ * @param {*|null} [data] 该参数接收所有类型
  * @return {cc.CallFunc}
  */
 cc.CallFunc.create = cc.callFunc;
