@@ -26,28 +26,25 @@
 
 /**
  * <p>
- *    A cc.SpriteFrame has:<br/> 一个cc.SpriteFrame包括
- *      - texture: A cc.Texture2D that will be used by the cc.Sprite<br/>纹理：一个cc.Sprite使用的cc.Texture2D对象
- *      - rectangle: A rectangle of the texture<br/> 一个纹理的矩形区域
+ *    一个cc.SpriteFrame包括<br/>
+ *      - 纹理：一个cc.Sprite使用的cc.Texture2D对象<br/>
+ *      - 矩形: 一个纹理的矩形区域<br/> 
  *    <br/>
- *    You can modify the frame of a cc.Sprite by doing:<br/>可以修改一个cc.Sprite
  * </p>
  * @class
  * @extends cc.Class
  *
- * @param {String|cc.Texture2D} filename 文件名称
- * @param {cc.Rect} rect If parameters' length equal 2, rect in points, else rect in pixels 如果有两个参数，那么是一个用点集表示的矩形区域，非两个参数的话就是用像素画出的矩形区域
- * @param {Boolean} [rotated] Whether the frame is rotated in the texture 是否要在纹理中旋转帧
- * @param {cc.Point} [offset] The offset of the frame in the texture 帧在纹理中的偏移
- * @param {cc.Size} [originalSize] The size of the frame in the texture 帧在纹理中的尺寸
+ * @param {String|cc.Texture2D} 文件名称
+ * @param {cc.Rect} rect 如果有两个参数，那么是一个用点集表示的矩形区域，非两个参数的话就是用像素画出的矩形区域
+ * @param {Boolean} [rotated] 是否要在纹理中旋转帧
+ * @param {cc.Point} [offset] 帧在纹理中的偏移
+ * @param {cc.Size} [originalSize] 帧在纹理中的尺寸
  *
  * @example
- * // 1. Create a cc.SpriteFrame with image path 
  * // 1、使用图像路径新建一个cc.SpriteFrame
  * var frame1 = new cc.SpriteFrame("res/grossini_dance.png",cc.rect(0,0,90,128));
  * var frame2 = new cc.SpriteFrame("res/grossini_dance.png",cc.rect(0,0,90,128),false,0,cc.size(90,128));
  *
- * // 2. Create a cc.SpriteFrame with a texture, rect, rotated, offset and originalSize in pixels. 
  * // 2、用纹理新建一个纹理、矩形区域、旋转值、偏移量和用像素表示的原始大小来新建一个cc.SpriteFrame
  * var texture = cc.textureCache.addImage("res/grossini_dance.png");
  * var frame1 = new cc.SpriteFrame(texture, cc.rect(0,0,90,128));
@@ -84,7 +81,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Returns whether the texture have been loaded 返回纹理是否已经被加载
+     * 返回纹理是否已经被加载
      * @returns {boolean}
      */
     textureLoaded:function(){
@@ -92,17 +89,17 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Add a event listener for texture loaded event. 为纹理加载事件增加一个监听
+     * 为纹理加载事件增加一个监听
      * @param {Function} callback
      * @param {Object} target
-     * @deprecated since 3.1, please use addEventListener instead 从v3.1之后，请使用addEventListener代替
+     * @deprecated 从v3.1之后，请使用addEventListener代替
      */
     addLoadedEventListener:function(callback, target){
         this.addEventListener("load", callback, target);
     },
 
     /**
-     * Gets the rect of the frame in the texture 得到纹理中帧的矩形区域
+     * 得到纹理中帧的矩形区域
      * @return {cc.Rect}
      */
     getRectInPixels:function () {
@@ -111,7 +108,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Sets the rect of the frame in the texture 设置纹理中帧的矩形区域
+     * 设置纹理中帧的矩形区域
      * @param {cc.Rect} rectInPixels
      */
     setRectInPixels:function (rectInPixels) {
@@ -126,7 +123,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Returns whether the sprite frame is rotated in the texture. 返回精灵帧是否在纹理中有旋转
+     * 返回精灵帧是否在纹理中有旋转
      * @return {Boolean}
      */
     isRotated:function () {
@@ -134,7 +131,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Set whether the sprite frame is rotated in the texture. 设定精灵帧是否在纹理中有旋转
+     * 设定精灵帧是否在纹理中有旋转
      * @param {Boolean} bRotated
      */
     setRotated:function (bRotated) {
@@ -142,7 +139,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Returns the rect of the sprite frame in the texture 返回在纹理中帧的矩形区域
+     * 返回在纹理中帧的矩形区域
      * @return {cc.Rect}
      */
     getRect:function () {
@@ -151,7 +148,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Sets the rect of the sprite frame in the texture 设置在纹理中帧的矩形区域
+     * 设置在纹理中帧的矩形区域
      * @param {cc.Rect} rect
      */
     setRect:function (rect) {
@@ -166,7 +163,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Returns the offset of the sprite frame in the texture in pixel 返回精灵帧在纹理中的偏移，返回值用像素表示
+     * 返回精灵帧在纹理中的偏移，返回值用像素表示
      * @return {cc.Point}
      */
     getOffsetInPixels:function () {
@@ -174,7 +171,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Sets the offset of the sprite frame in the texture in pixel 用像素设置精灵帧在纹理中的偏移
+     * 用像素设置精灵帧在纹理中的偏移
      * @param {cc.Point} offsetInPixels
      */
     setOffsetInPixels:function (offsetInPixels) {
@@ -184,7 +181,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Returns the original size of the trimmed image 返回裁剪图像的原始大小
+     * 返回裁剪图像的原始大小
      * @return {cc.Size}
      */
     getOriginalSizeInPixels:function () {
@@ -192,7 +189,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Sets the original size of the trimmed image 设置裁剪图像的原始大小
+     * 设置裁剪图像的原始大小
      * @param {cc.Size} sizeInPixels
      */
     setOriginalSizeInPixels:function (sizeInPixels) {
@@ -201,7 +198,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Returns the original size of the trimmed image 返回裁剪图像的原始大小
+     * 返回裁剪图像的原始大小
      * @return {cc.Size}
      */
     getOriginalSize:function () {
@@ -209,7 +206,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Sets the original size of the trimmed image 设置裁剪图像的原始大小
+     * 设置裁剪图像的原始大小
      * @param {cc.Size} sizeInPixels
      */
     setOriginalSize:function (sizeInPixels) {
@@ -218,7 +215,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Returns the texture of the frame 返回帧的纹理
+     * 返回帧的纹理
      * @return {cc.Texture2D}
      */
     getTexture:function () {
@@ -234,7 +231,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Sets the texture of the frame, the texture is retained automatically 设置帧的纹理，纹理将会默认被保持在帧中
+     * 设置帧的纹理，纹理对象自动retain一次
      * @param {cc.Texture2D} texture
      */
     setTexture:function (texture) {
@@ -267,7 +264,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
                         this._originalSize.width =  w;
                         this._originalSize.height =  h;
                     }
-                    //dispatch 'load' event of cc.SpriteFrame 触发cc.SpriteFrame的load事件
+                    //触发cc.SpriteFrame的load事件
                     this.dispatchEvent("load");
                 }, this);
             }
@@ -275,7 +272,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Returns the offset of the frame in the texture 返回纹理中帧的偏移
+     * 返回纹理中帧的偏移
      * @return {cc.Point}
      */
     getOffset:function () {
@@ -283,7 +280,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Sets the offset of the frame in the texture 设置纹理中帧的偏移
+     * 设置纹理中帧的偏移
      * @param {cc.Point} offsets
      */
     setOffset:function (offsets) {
@@ -292,7 +289,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Clone the sprite frame 复制精灵帧
+     * 克隆精灵帧
      * @returns {SpriteFrame}
      */
     clone: function(){
@@ -303,7 +300,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Copy the sprite frame 拷贝精灵帧
+     * 拷贝精灵帧
      * @return {cc.SpriteFrame}
      */
     copyWithZone:function () {
@@ -314,24 +311,13 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
     },
 
     /**
-     * Copy the sprite frame 拷贝精灵帧
+     * 拷贝精灵帧
      * @returns {cc.SpriteFrame}
      */
     copy:function () {
         return this.copyWithZone();
     },
 
-    /**
-     * Initializes SpriteFrame with Texture, rect, rotated, offset and originalSize in pixels.<br/>
-     * Please pass parameters to the constructor to initialize the sprite, do not call this function yourself.
-     * @param {String|cc.Texture2D} texture
-     * @param {cc.Rect} rect if parameters' length equal 2, rect in points, else rect in pixels
-     * @param {Boolean} [rotated=false]
-     * @param {cc.Point} [offset=cc.p(0,0)]
-     * @param {cc.Size} [originalSize=rect.size]
-     * @return {Boolean}
-     */
-	 
 	/**
      * 使用纹理、矩形区域、旋转角度、偏移和用像素表示的原始尺寸来初始化一个精灵帧<br/>
      * 请使用构造函数来初始化精灵，不要直接调用这个函数
@@ -394,16 +380,13 @@ cc.EventHelper.prototype.apply(cc.SpriteFrame.prototype);
 
 /**
  * <p>
- *    Create a cc.SpriteFrame with a texture filename, rect, rotated, offset and originalSize in pixels.<br/>
  *    使用纹理文件名、矩形区域、旋转角度、偏移和像素表示的原始大小来新建一个精灵帧<br/>
- *    The originalSize is the size in pixels of the frame before being trimmed.
  *    原始大小是指在帧被裁剪之前用像素表示的尺寸
  * </p>
- * @deprecated since v3.0, please use new construction instead 从v3.0版本之后，请使用新的构造函数来代替
+ * @deprecated 从v3.0版本之后，请使用新的构造函数来代替
  * @see cc.SpriteFrame
  * @param {String|cc.Texture2D} filename
- * @param {cc.Rect} rect if parameters' length equal 2, rect in points, else rect in pixels 
- * 如果参数的个数为2，那么返回用点集表示的矩形区域，如果不为2，那么返回用像素表示的区域
+ * @param {cc.Rect} rect 如果参数的个数为2，那么返回用点集表示的矩形区域，如果不为2，那么返回用像素表示的区域
  * @param {Boolean} rotated
  * @param {cc.Point} offset
  * @param {cc.Size} originalSize
@@ -414,7 +397,7 @@ cc.SpriteFrame.create = function (filename, rect, rotated, offset, originalSize)
 };
 
 /**
- * @deprecated since v3.0, please use new construction instead 从v3.0版本之后，请使用新的构造函数来代替
+ * @deprecated 从v3.0版本之后，请使用新的构造函数来代替
  * @see cc.SpriteFrame
  * @function
  */
