@@ -27,13 +27,11 @@
 cc._tmp.PrototypeSprite = function () {
     var _p = cc.Sprite.prototype;
 
-    // Override properties
 	// 重写属性
     cc.defineGetterSetter(_p, "opacityModifyRGB", _p.isOpacityModifyRGB, _p.setOpacityModifyRGB);
     cc.defineGetterSetter(_p, "opacity", _p.getOpacity, _p.setOpacity);
     cc.defineGetterSetter(_p, "color", _p.getColor, _p.setColor);
 
-    // Extended properties
 	// 扩展属性
     /** @expose */
     _p.dirty;
