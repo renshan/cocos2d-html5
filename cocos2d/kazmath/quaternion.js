@@ -41,7 +41,7 @@ cc.kmQuaternion = function (x, y, z, w) {
     this.w = w || 0;
 };
 
-///< Returns pOut, sets pOut to the conjugate of pIn    将共轭的pIn赋值给pOut，返回pOut
+///< 将pIn的共轭(conjugate)赋值给pOut，返回pOut
 cc.kmQuaternionConjugate = function (pOut, pIn) {
     pOut.x = -pIn.x;
     pOut.y = -pIn.y;
@@ -51,7 +51,7 @@ cc.kmQuaternionConjugate = function (pOut, pIn) {
     return pOut;
 };
 
-///< Returns the dot product of the 2 quaternions    返回两个四元数的乘积
+///< 返回两个四元数的点积
 cc.kmQuaternionDot = function (q1, q2) {
     // A dot B = B dot A = AtBt + AxBx + AyBy + AzBz
     return (q1.w * q2.w +
@@ -60,14 +60,14 @@ cc.kmQuaternionDot = function (q1, q2) {
         q1.z * q2.z);
 };
 
-///< Returns the exponential of the quaternion   返回四元数的指数
+///< 返回四元数的自然幂
 cc.kmQuaternionExp = function (pOut, pIn) {
-    //TODO not implement
+    //TODO 未实现
     //cc.assert(0);
     return pOut;
 };
 
-///< Makes the passed quaternion an identity quaternion    获取一个恒等四元数
+///< 将传入的四元数变为identity四元数
 cc.kmQuaternionIdentity = function (pOut) {
     pOut.x = 0.0;
     pOut.y = 0.0;
@@ -77,7 +77,7 @@ cc.kmQuaternionIdentity = function (pOut) {
     return pOut;
 };
 
-///< Returns the inverse of the passed Quaternion   返回传递过来的四元数的倒数
+///< 返回传入的四元数的倒数
 cc.kmQuaternionInverse = function (pOut, pIn) {
     var l = cc.kmQuaternionLength(pIn);
     var tmp = new cc.kmQuaternion();
@@ -90,43 +90,43 @@ cc.kmQuaternionInverse = function (pOut, pIn) {
         return pOut;
     }
 
-    ///Get the conjugute and divide by the length   获取共轭并以长度来除
+    ///获取共轭并除以长度
     cc.kmQuaternionScale(pOut,
         cc.kmQuaternionConjugate(tmp, pIn), 1.0 / l);
 
     return pOut;
 };
 
-///< Returns true if the quaternion is an identity quaternion   如果四元数是一个恒等四元数则返回true
+///< 如果四元数是一个identity四元数则返回true
 cc.kmQuaternionIsIdentity = function (pIn) {
     return (pIn.x == 0.0 && pIn.y == 0.0 && pIn.z == 0.0 &&
         pIn.w == 1.0);
 };
 
-///< Returns the length of the quaternion    返回四元数的长度
+///< 返回四元数的长度
 cc.kmQuaternionLength = function (pIn) {
     return Math.sqrt(cc.kmQuaternionLengthSq(pIn));
 };
 
-///< Returns the length of the quaternion squared (prevents a sqrt)   返回四元数的平方（阻止开方）
+///< 返回平方后四元数的长度(预防开方)
 cc.kmQuaternionLengthSq = function (pIn) {
     return pIn.x * pIn.x + pIn.y * pIn.y +
         pIn.z * pIn.z + pIn.w * pIn.w;
 };
 
-///< Returns the natural logarithm    返回自然对数
+///< 返回自然对数
 cc.kmQuaternionLn = function (pOut, pIn) {
     /*
-     A unit quaternion, is defined by:   单位四元数，采用以下定义：
+     单位四元数, 定义为:
      Q == (cos(theta), sin(theta) * v) where |v| = 1
-     The natural logarithm of Q is, ln(Q) = (0, theta * v)
+     Q的自然对数为, ln(Q) = (0, theta * v)
      */
     //assert(0);
-    //TODO not implement
+    //TODO 未实现
     return pOut;
 };
 
-///< Multiplies 2 quaternions together    两个四元数相乘在一起
+///< 两个四元数相乘
 cc.kmQuaternionMultiply = function (pOut, q1, q2) {
     pOut.w = q1.w * q2.w - q1.x * q2.x - q1.y * q2.y - q1.z * q2.z;
     pOut.x = q1.w * q2.x + q1.x * q2.w + q1.y * q2.z - q1.z * q2.y;
@@ -136,7 +136,7 @@ cc.kmQuaternionMultiply = function (pOut, q1, q2) {
     return pOut;
 };
 
-///< Normalizes a quaternion    正规化一个四元数
+///< 标准化一个四元数
 cc.kmQuaternionNormalize = function (pOut, pIn) {
     var length = cc.kmQuaternionLength(pIn);
     if(Math.abs(length) <= cc.kmEpsilon)
@@ -146,7 +146,7 @@ cc.kmQuaternionNormalize = function (pOut, pIn) {
     return pOut;
 };
 
-///< Rotates a quaternion around an axis    通过一个坐标轴来旋转一个四元数
+///< 绕一个轴旋转一个四元数
 cc.kmQuaternionRotationAxis = function (pOut, pV, angle) {
     var rad = angle * 0.5;
     var scale = Math.sin(rad);
@@ -159,11 +159,11 @@ cc.kmQuaternionRotationAxis = function (pOut, pV, angle) {
     return pOut;
 };
 
-///< Creates a quaternion from a rotation matrix    通过旋转矩阵创建一个四元数
+///< 以旋转矩阵为参数创建一个四元数
 cc.kmQuaternionRotationMatrix = function (pOut, pIn) {
     /*
-     Note: The OpenGL matrices are transposed from the description below     注释：OPENGL矩阵是通过以下矩阵和四元数变换来的
-     taken from the Matrix and Quaternion FAQ
+     注释: OPENGL矩阵是通过下述方式变换来的
+     (摘自Matrix and Quaternion FAQ)
 
      if ( mat[0] > mat[5] && mat[0] > mat[10] )  {    // Column 0:
      S  = sqrt( 1.0 + mat[0] - mat[5] - mat[10] ) * 2;
@@ -218,43 +218,43 @@ cc.kmQuaternionRotationMatrix = function (pOut, pIn) {
     diagonal = pMatrix[0] + pMatrix[5] + pMatrix[10] + 1;
 
     if (diagonal > cc.kmEpsilon) {
-        // Calculate the scale of the diagonal   计算缩放的对角线
+        // 计算对角线的缩放比例
         scale = Math.sqrt(diagonal) * 2;
 
-        // Calculate the x, y, x and w of the quaternion through the respective equation   通过各自的方程式来计算x，y，x和w
+        // 通过各自的方程式来计算x, y, x和w
         x = ( pMatrix[9] - pMatrix[6] ) / scale;
         y = ( pMatrix[2] - pMatrix[8] ) / scale;
         z = ( pMatrix[4] - pMatrix[1] ) / scale;
         w = 0.25 * scale;
     } else {
-        // If the first element of the diagonal is the greatest value    如果对角线的第一个元素更大
+        // if 对角线的第一个元素是最大值
         if (pMatrix[0] > pMatrix[5] && pMatrix[0] > pMatrix[10]) {
-            // Find the scale according to the first element, and double that value   根据第一个元素找到比例，并将该值乘以二
+            // 根据第一个元素找到比例, 并将该值乘以二
             scale = Math.sqrt(1.0 + pMatrix[0] - pMatrix[5] - pMatrix[10]) * 2.0;
 
-            // Calculate the x, y, x and w of the quaternion through the respective equation    通过各自的方程式来计算x，y，x和w
+            // 通过各自的方程式来计算四元数的x, y, z和w
             x = 0.25 * scale;
             y = (pMatrix[4] + pMatrix[1] ) / scale;
             z = (pMatrix[2] + pMatrix[8] ) / scale;
             w = (pMatrix[9] - pMatrix[6] ) / scale;
         }
-        // Else if the second element of the diagonal is the greatest value   else if第二个元素更大
+        // else if 第二个元素是最大值
         else if (pMatrix[5] > pMatrix[10]) {
-            // Find the scale according to the second element, and double that value    根据第二个元素找到比例，并将该值乘以二
+            // 根据第二个元素找到比例, 并将该值乘以二
             scale = Math.sqrt(1.0 + pMatrix[5] - pMatrix[0] - pMatrix[10]) * 2.0;
 
-            // Calculate the x, y, x and w of the quaternion through the respective equation    通过各自的方程式来计算x，y，x和w
+            // 通过各自的方程式来计算四元数的x, y, z和w
             x = (pMatrix[4] + pMatrix[1] ) / scale;
             y = 0.25 * scale;
             z = (pMatrix[9] + pMatrix[6] ) / scale;
             w = (pMatrix[2] - pMatrix[8] ) / scale;
         } else {
-            // Else the third element of the diagonal is the greatest value    else if第三个元素更大
+            // else 第三个元素是最大值
 
-            // Find the scale according to the third element, and double that value    根据第三个元素找到比例，并将该值乘以二
+            // 根据第三个元素找到比例, 并将该值乘以二
             scale = Math.sqrt(1.0 + pMatrix[10] - pMatrix[0] - pMatrix[5]) * 2.0;
 
-            // Calculate the x, y, x and w of the quaternion through the respective equation    通过各自的方程式来计算x，y，x和w
+            // 通过各自的方程式来计算四元数的x, y, z和w
             x = (pMatrix[2] + pMatrix[8] ) / scale;
             y = (pMatrix[9] + pMatrix[6] ) / scale;
             z = 0.25 * scale;
@@ -270,12 +270,12 @@ cc.kmQuaternionRotationMatrix = function (pOut, pIn) {
     return pOut;
 };
 
-///< Create a quaternion from yaw, pitch and roll    通过yaw，pitch和roll创建一个四元数
+///< 以yaw, pitch和roll为参数创建一个四元数
 cc.kmQuaternionRotationYawPitchRoll = function (pOut, yaw, pitch, roll) {
-    var ex, ey, ez;        // temp half euler angles    
-    var cr, cp, cy, sr, sp, sy, cpcy, spsy;        // temp vars in roll,pitch yaw   
+    var ex, ey, ez;        // 二分之一欧拉角的临时变量   
+    var cr, cp, cy, sr, sp, sy, cpcy, spsy;        // roll pitch yaw的临时变量   
 
-    ex = cc.kmDegreesToRadians(pitch) / 2.0;    // convert to rads and half them   转换成半径并处以2
+    ex = cc.kmDegreesToRadians(pitch) / 2.0;    // 转换成弧度并除以2
     ey = cc.kmDegreesToRadians(yaw) / 2.0;
     ez = cc.kmDegreesToRadians(roll) / 2.0;
 
@@ -301,7 +301,7 @@ cc.kmQuaternionRotationYawPitchRoll = function (pOut, yaw, pitch, roll) {
     return pOut;
 };
 
-///< Interpolate between 2 quaternions    在两个四元数中插入一个数
+///< 在两个四元数中间插值
 cc.kmQuaternionSlerp = function (pOut, q1, q2, t) {
     /*float CosTheta = Q0.DotProd(Q1);
      float Theta = acosf(CosTheta);
@@ -343,7 +343,7 @@ cc.kmQuaternionSlerp = function (pOut, q1, q2, t) {
     return pOut;
 };
 
-///< Get the axis and angle of rotation from a quaternion    从一个四元数中获取坐标轴和旋转的角度
+///< 从一个四元数中获取旋转的轴和角度
 cc.kmQuaternionToAxisAngle = function (pIn, pAxis, pAngle) {
     var tempAngle;        // temp angle
     var scale;            // temp vars
@@ -352,14 +352,14 @@ cc.kmQuaternionToAxisAngle = function (pIn, pAxis, pAngle) {
     scale = Math.sqrt(cc.kmSQR(pIn.x) + cc.kmSQR(pIn.y) + cc.kmSQR(pIn.z));
 
     if (((scale > -cc.kmEpsilon) && scale < cc.kmEpsilon)
-        || (scale < 2 * cc.kmPI + cc.kmEpsilon && scale > 2 * cc.kmPI - cc.kmEpsilon)) {       // angle is 0 or 360 so just simply set axis to 0,0,1 with angle 0    角度是0或者360时设置轴为0,0,1和角度0
+        || (scale < 2 * cc.kmPI + cc.kmEpsilon && scale > 2 * cc.kmPI - cc.kmEpsilon)) {       // 角度是0或者360 所以只需设轴为0,0,1 角度为0
         pAngle = 0.0;
 
         pAxis.x = 0.0;
         pAxis.y = 0.0;
         pAxis.z = 1.0;
     } else {
-        pAngle = tempAngle * 2.0;        // angle in radians    以弧度制为单位的角度
+        pAngle = tempAngle * 2.0;        // 以弧度制为单位的角度
 
         pAxis.x = pIn.x / scale;
         pAxis.y = pIn.y / scale;
@@ -368,7 +368,7 @@ cc.kmQuaternionToAxisAngle = function (pIn, pAxis, pAngle) {
     }
 };
 
-///< Scale a quaternion   缩放一个四元数
+///< 缩放一个四元数
 cc.kmQuaternionScale = function (pOut, pIn, s) {
     pOut.x = pIn.x * s;
     pOut.y = pIn.y * s;
@@ -396,15 +396,15 @@ cc.kmQuaternionAdd = function (pOut, pQ1, pQ2) {
     return pOut;
 };
 
-/** Adapted from the OGRE engine!    改编自OGRE引擎！
+/** 改编自OGRE引擎！
 
- Gets the shortest arc quaternion to rotate this vector to the destination    获取最短弧度四元数以便旋转这个向量
- vector.
+ 获取最短弧四元数以旋转这个向量至目标向量
+
  @remarks
- If you call this with a dest vector that is close to the inverse    如果你调用这个方法传递的向量以约等于此向量倒数的时候，我们会通过180度旋转'fallbackAxis'（如果不行的话生成一个新的坐标轴）让其这种情况下任何坐标轴都是有效的
- of this vector, we will rotate 180 degrees around the 'fallbackAxis'
- (if specified, or a generated axis if not) since in this case
- ANY axis of rotation is valid.
+ 如果你调用这个方法传递的目标向量接近这个向量的逆向量,
+ 我们会绕指定的'fallbackAxis'
+ (如果未指定则生成一个)旋转180度,
+ 这样的话，旋转的任何轴都是有效的.
  */
 cc.kmQuaternionRotationBetweenVec3 = function (pOut, vec1, vec2, fallback) {
     var v1 = new cc.kmVec3(), v2 = new cc.kmVec3();
@@ -435,7 +435,7 @@ cc.kmQuaternionRotationBetweenVec3 = function (pOut, vec1, vec2, fallback) {
 
             cc.kmVec3Cross(axis, X, vec1);
 
-            //If axis is zero   如果坐标轴是0
+            //如果轴是0
             if (Math.abs(cc.kmVec3LengthSq(axis)) < cc.kmEpsilon) {
                 var Y = new cc.kmVec3();
                 Y.x = 0.0;

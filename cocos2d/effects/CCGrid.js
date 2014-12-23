@@ -26,8 +26,8 @@
  ****************************************************************************/
 
 /**
- * Base class for cc.Grid
- * @class
+ * cc.Grid的基本类
+ * @class			
  * @extends cc.Class
  */
 cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
@@ -44,8 +44,8 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     _dirty:false,
 
     /**
-     * create one cc.GridBase Object
-     * Constructor of cc.GridBase
+     * 创建一个cc.Grid的基本类
+     * cc.GridBase类的函数构造函数
      * @param {cc.Size} gridSize
      * @param {cc.Texture2D} [texture=]
      * @param {Boolean} [flipped=]
@@ -68,7 +68,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * whether or not the grid is active
+     * 网格控件是否可用
      * @return {Boolean}
      */
     isActive:function () {
@@ -76,7 +76,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * whether or not the grid is active
+     * 网格控件是否可用
      * @param {Number} active
      */
     setActive:function (active) {
@@ -89,14 +89,14 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * get number of times that the grid will be reused
+     * 获取网格控件被重用的次数
      * @return {Number}
      */
     getReuseGrid:function () {
         return this._reuseGrid;
     },
     /**
-     * set number of times that the grid will be reused
+     * 设置网格控件被重用的次数
      * @param reuseGrid
      */
     setReuseGrid:function (reuseGrid) {
@@ -104,7 +104,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * get size of the grid
+     * 获取网格的大小
      * @return {cc.Size}
      */
     getGridSize:function () {
@@ -112,7 +112,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * set size of the grid
+     * 设置网格的大小
      * @param {cc.Size} gridSize
      */
     setGridSize:function (gridSize) {
@@ -121,7 +121,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * get pixels between the grids
+     * 获取网格的像素
      * @return {cc.Point}
      */
     getStep:function () {
@@ -129,7 +129,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * set pixels between the grids
+     * 设置网格的像素
      * @param {cc.Point} step
      */
     setStep:function (step) {
@@ -138,7 +138,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * get whether or not the texture is flipped
+     * 判断该纹理是否可以翻转
      * @return {Boolean}
      */
     isTextureFlipped:function () {
@@ -146,7 +146,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * set whether or not the texture is flipped
+     * 设置该纹理是否可以翻转
      * @param {Boolean} flipped
      */
     setTextureFlipped:function (flipped) {
@@ -158,10 +158,10 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
 
     /**
      *
-     * @param {cc.Size} gridSize
-     * @param {cc.Texture2D} [texture=]
-     * @param {Boolean} [flipped=false]
-     * @returns {boolean}
+     * @param {cc.Size} gridSize				@param {cc.Size} 网格大小
+     * @param {cc.Texture2D} [texture=]				@param {cc.Texture2D} [texture=]
+     * @param {Boolean} [flipped=false]				@param {Boolean} [flipped=false]
+     * @returns {boolean}					@returns {boolean}
      */
     initWithSize:function (gridSize, texture, flipped) {
         if (!texture) {
@@ -178,7 +178,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
             }
 
             texture = new cc.Texture2D();
-            // we only use rgba8888
+            // 只使用RGBa8888颜色
             texture.initWithData(data, cc.Texture2D.PIXEL_FORMAT_RGBA8888, POTWide, POTHigh, winSize);
             if (!texture) {
                 cc.log("cocos2d: CCGrid: error creating texture");
@@ -207,24 +207,24 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     beforeDraw:function () {
-        // save projection
+        // 保存投影
         this._directorProjection = cc.director.getProjection();
 
-        //this.set2DProjection();    //TODO why?
+        //this.set2DProjection();    //TODO why?		调用设置2d投影方法
         this._grabber.beforeRender(this._texture);
     },
 
     afterDraw:function (target) {
         this._grabber.afterRender(this._texture);
 
-        // restore projection
+        // 储存该投影
         //cc.director.setProjection(this._directorProjection);
 
         if (target && target.getCamera().isDirty()) {
             var offset = target.getAnchorPointInPoints();
 
             //
-            // XXX: Camera should be applied in the AnchorPoint
+            // XXX:摄影机应该被放置在锚点位置
             //
             cc.kmGLTranslatef(offset.x, offset.y, 0);
             target.getCamera().locate();
@@ -266,7 +266,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
 });
 
 /**
- * create one cc.GridBase Object
+ * 创建一个cc.GridBase类
  * @deprecated
  * @param {cc.Size} gridSize
  * @param {cc.Texture2D} [texture=]
@@ -278,7 +278,7 @@ cc.GridBase.create = function (gridSize, texture, flipped) {
 };
 
 /**
- * cc.Grid3D is a 3D grid implementation. Each vertex has 3 dimensions: x,y,z
+ * cc.Grid3D是一个3D网格的实现器。每一个顶点都有3个参数：x,y,z
  * @class
  * @extends cc.GridBase
  */
@@ -293,8 +293,8 @@ cc.Grid3D = cc.GridBase.extend(/** @lends cc.Grid3D# */{
     _indicesBuffer:null,
 
     /**
-     * create one Grid3D object
-     * Constructor of cc.Grid3D
+     * 创建一个Grid3D类
+     * cc.Grid3D的构造器
      * @param {cc.Size} gridSize
      * @param {cc.Texture2D} [texture=]
      * @param {Boolean} [flipped=]
@@ -315,7 +315,7 @@ cc.Grid3D = cc.GridBase.extend(/** @lends cc.Grid3D# */{
     },
 
     /**
-     * returns the vertex at a given position
+     * 通过给定的位置来返回一个顶点
      * @param {cc.Point} pos
      * @return {cc.Vertex3F}
      */
@@ -328,7 +328,7 @@ cc.Grid3D = cc.GridBase.extend(/** @lends cc.Grid3D# */{
     },
 
     /**
-     * returns the original (non-transformed) vertex at a given position
+     * 返回一个原先给定位置的顶点（未被转换的点）
      * @param {cc.Point} pos
      * @return {cc.Vertex3F}
      */
@@ -341,7 +341,7 @@ cc.Grid3D = cc.GridBase.extend(/** @lends cc.Grid3D# */{
     },
 
     /**
-     * sets a new vertex at a given position
+     * 通过给定坐标来设置顶点的位置
      * @param {cc.Point} pos
      * @param {cc.Vertex3F} vertex
      */
@@ -365,15 +365,15 @@ cc.Grid3D = cc.GridBase.extend(/** @lends cc.Grid3D# */{
 
         var gl = cc._renderContext, locDirty = this._dirty;
         //
-        // Attributes
+        // 属性
         //
-        // position
+        // 位置
         gl.bindBuffer(gl.ARRAY_BUFFER, this._verticesBuffer);
         if (locDirty)
             gl.bufferData(gl.ARRAY_BUFFER, this._vertices, gl.DYNAMIC_DRAW);
         gl.vertexAttribPointer(cc.VERTEX_ATTRIB_POSITION, 3, gl.FLOAT, false, 0, 0);
 
-        // texCoords
+        // 纹理坐标点
         gl.bindBuffer(gl.ARRAY_BUFFER, this._texCoordinateBuffer);
         if (locDirty)
             gl.bufferData(gl.ARRAY_BUFFER, this._texCoordinates, gl.DYNAMIC_DRAW);
@@ -451,7 +451,7 @@ cc.Grid3D = cc.GridBase.extend(/** @lends cc.Grid3D# */{
                 var l2 = [e, f, g, h];
                 var tex1 = [a * 2, b * 2, c * 2, d * 2];
                 var tex2 = [cc.p(x1, y1), cc.p(x2, y1), cc.p(x2, y2), cc.p(x1, y2)];
-                for (i = 0; i < 4; ++i) {
+                for (i = 0; i <  @param {cc.Vertex3F} vertex4; ++i) {
                     locVertices[l1[i]] = l2[i].x;
                     locVertices[l1[i] + 1] = l2[i].y;
                     locVertices[l1[i] + 2] = l2[i].z;
@@ -476,7 +476,7 @@ cc.Grid3D = cc.GridBase.extend(/** @lends cc.Grid3D# */{
 });
 
 /**
- * create one Grid3D object
+ * 创建一个Grid3D类
  * @deprecated
  * @param {cc.Size} gridSize
  * @param {cc.Texture2D} [texture=]
@@ -488,8 +488,8 @@ cc.Grid3D.create = function (gridSize, texture, flipped) {
 };
 
 /**
- * cc.TiledGrid3D is a 3D grid implementation. It differs from Grid3D in that   <br/>
- * the tiles can be separated from the grid.
+ * ccTiledGrid3D是一个3D网格的实现方法。该方法个Grid的不同之处主要在于：<br/>
+ * (标签库)tiles可以独立于网格。
  * @class
  * @extends cc.GridBase
  */
@@ -504,8 +504,8 @@ cc.TiledGrid3D = cc.GridBase.extend(/** @lends cc.TiledGrid3D# */{
     _indicesBuffer:null,
 
     /**
-     * create one TiledGrid3D object
-     * Constructor of cc.TiledGrid3D
+     * 产生一个TiledGrid3D对象
+     * cc.TiledGrid3D对象的构造器
      * @param {cc.Size} gridSize
      * @param {cc.Texture2D} [texture=]
      * @param {Boolean} [flipped=]
@@ -526,7 +526,7 @@ cc.TiledGrid3D = cc.GridBase.extend(/** @lends cc.TiledGrid3D# */{
     },
 
     /**
-     * returns the tile at the given position
+     * 在给定的位置处返回一个标签
      * @param {cc.Point} pos
      * @return {cc.Quad3}
      */
@@ -543,7 +543,7 @@ cc.TiledGrid3D = cc.GridBase.extend(/** @lends cc.TiledGrid3D# */{
     },
 
     /**
-     * returns the original tile (untransformed) at the given position
+     * 返回一个给定位置处的标签（未被转换的）
      * @param {cc.Point} pos
      * @return {cc.Quad3}
      */
@@ -560,7 +560,7 @@ cc.TiledGrid3D = cc.GridBase.extend(/** @lends cc.TiledGrid3D# */{
     },
 
     /**
-     * sets a new tile
+     * 设置一个新的标签
      * @param {cc.Point} pos
      * @param {cc.Quad3} coords
      */
@@ -593,18 +593,18 @@ cc.TiledGrid3D = cc.GridBase.extend(/** @lends cc.TiledGrid3D# */{
         //this._shaderProgram._setUniformsForBuiltinsForRenderer(target);
 
         //
-        // Attributes
+        // 属性
         //
         var gl = cc._renderContext, locDirty = this._dirty;
         cc.glEnableVertexAttribs(cc.VERTEX_ATTRIB_FLAG_POSITION | cc.VERTEX_ATTRIB_FLAG_TEX_COORDS);
 
-        // position
+        // 位置
         gl.bindBuffer(gl.ARRAY_BUFFER, this._verticesBuffer);
         if (locDirty)
             gl.bufferData(gl.ARRAY_BUFFER, this._vertices, gl.DYNAMIC_DRAW);
         gl.vertexAttribPointer(cc.VERTEX_ATTRIB_POSITION, 3, gl.FLOAT, false, 0, this._vertices);
 
-        // texCoords
+        // 纹理坐标点
         gl.bindBuffer(gl.ARRAY_BUFFER, this._texCoordinateBuffer);
         if (locDirty)
             gl.bufferData(gl.ARRAY_BUFFER, this._texCoordinates, gl.DYNAMIC_DRAW);
@@ -715,8 +715,8 @@ cc.TiledGrid3D = cc.GridBase.extend(/** @lends cc.TiledGrid3D# */{
 });
 
 /**
- * create one TiledGrid3D object
- * @deprecated since v3.0, please use new cc.TiledGrid3D(gridSize, texture, flipped) instead
+ * 产生一个TiledGrid3D对象
+ * @deprecated 从3.0版本开始，请使用新的cc.TiledGrid3D(gridSize, texture, flipped)作为原版本的替代	
  * @param {cc.Size} gridSize
  * @param {cc.Texture2D} [texture=]
  * @param {Boolean} [flipped=]

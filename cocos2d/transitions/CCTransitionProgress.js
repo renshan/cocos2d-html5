@@ -25,17 +25,17 @@
  ****************************************************************************/
 
 /**
- * tag for scene redial 
+ * 标记场景的放射状(radial)
  * @constant
  * @type Number
  */
 cc.SCENE_RADIAL = 0xc001;
 
 /**
- * cc.TransitionProgress transition.  TransitionProgress转场
+ * cc.TransitionProgress转场
  * @class
  * @extends cc.TransitionScene
- * @param {Number} t time 时间
+ * @param {Number} t 时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionProgress(time,scene);
@@ -47,7 +47,7 @@ cc.TransitionProgress = cc.TransitionScene.extend(/** @lends cc.TransitionProgre
     _className:"TransitionProgress",
 
     /**
-     * @param {Number} t time 时间
+     * @param {Number} t 时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -66,52 +66,52 @@ cc.TransitionProgress = cc.TransitionScene.extend(/** @lends cc.TransitionProgre
 
     /**
      * @override
-     * custom on enter  自定义onEnter
+     * 自定义onEnter
      */
     onEnter:function () {
         cc.TransitionScene.prototype.onEnter.call(this);
         this._setupTransition();
 
-        // create a transparent color layer  创建一个透明的LayerColor
-        // in which we are going to add our rendertextures  以便要加入rendertexture
+        // 创建一个透明的颜色层(LayerColor)
+        // 以便我们后面添加rendertexture
         var winSize = cc.director.getWinSize();
 
-        // create the second render texture for outScene  为创建出场景加入第二个render texture
+        //为出场景创建第二个渲染纹理(render texture)
         var texture = new cc.RenderTexture(winSize.width, winSize.height);
         texture.sprite.anchorX = 0.5;
 	    texture.sprite.anchorY = 0.5;
         this._setAttrs(texture, winSize.width / 2, winSize.height / 2);
 
-        // render outScene to its texturebuffer 渲染出场景到纹理缓存
+        //渲染传出场景到它自己的纹理缓冲区
         texture.clear(0, 0, 0, 1);
         texture.begin();
         this._sceneToBeModified.visit();
         texture.end();
 
-        //    Since we've passed the outScene to the texture we don't need it. 由于已经渲染到纹理中所以已经不需要了
+        //  因为我们已经传递传出场景到纹理中，所以我们不再需它了。
         if (this._sceneToBeModified == this._outScene)
             this.hideOutShowIn();
 
-        //    We need the texture in RenderTexture. 需要在RenderTexture中的纹理
+        // 我们需要渲染纹理(RenderTexture)中的纹理
         var pNode = this._progressTimerNodeWithRenderTexture(texture);
 
-        // create the blend action 创建混合动作
+        // 创建混合动作
         var layerAction = cc.sequence(
             cc.progressFromTo(this._duration, this._from, this._to),
             cc.callFunc(this.finish, this));
-        // run the blend action 运行混合动作
+        //执行混合动作
         pNode.runAction(layerAction);
 
-        // add the layer (which contains our two rendertextures) to the scene  增加一个Layer(包含两个rendertexture)到场景中
+        //添加前面的Layer(包含两个rendertexture)到场景中
         this.addChild(pNode, 2, cc.SCENE_RADIAL);
     },
 
     /**
      * @override
-     * custom on exit 自定义onExit
+     * 自定义onExit
      */
     onExit:function () {
-        // remove our layer and release all containing objects 删除layer并释放所有含的对象
+        // 移除layer并释放所有含的对象
         this.removeChildByTag(cc.SCENE_RADIAL, true);
         cc.TransitionScene.prototype.onExit.call(this);
     },
@@ -133,10 +133,10 @@ cc.TransitionProgress = cc.TransitionScene.extend(/** @lends cc.TransitionProgre
 });
 
 /**
- * create a cc.TransitionProgress object 创建TransitionProgress对象
- * @deprecated since v3.0,please use new cc.TransitionProgress(t, scene) instead. 从v3.0之后使用 new cc.TransitionProgress(t,scene) 替代
+ * 创建cc.TransitionProgress对象
+ * @deprecated 从v3.0之后,请使用 new cc.TransitionProgress(t,scene) 替代
  * @function
- * @param {Number} t time 时间
+ * @param {Number} t 时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionProgress}
  */
@@ -145,11 +145,11 @@ cc.TransitionProgress.create = function (t, scene) {
 };
 
 /**
- *  cc.TransitionRadialCCW transition.<br/>
- *  A counter clock-wise radial transition to the next scene
+ *  cc.TransitionProgressRadialCCW转场.<br/>
+ *  逆时针放射状过渡到下一个场景的转场
  * @class
  * @extends cc.TransitionProgress
- * @param {Number} t time 时间
+ * @param {Number} t 时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionProgressRadialCCW(t, scene);
@@ -157,7 +157,7 @@ cc.TransitionProgress.create = function (t, scene) {
 cc.TransitionProgressRadialCCW = cc.TransitionProgress.extend(/** @lends cc.TransitionProgressRadialCCW# */{
 
     /**
-     * @param {Number} t time 时间
+     * @param {Number} t 时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -170,12 +170,12 @@ cc.TransitionProgressRadialCCW = cc.TransitionProgress.extend(/** @lends cc.Tran
 
         var pNode = new cc.ProgressTimer(texture.sprite);
 
-        // but it is flipped upside down so we flip the sprite 但是它是已经翻转过的, 所以我们要翻转这个sprite
+        // 由于它已经翻转, 所以我们需要要翻转这个sprite
         if (cc._renderType === cc._RENDER_TYPE_WEBGL)
             pNode.sprite.flippedY = true;
         pNode.type = cc.ProgressTimer.TYPE_RADIAL;
 
-        //    Return the radial type that we want to use   返回需要用的射线类型
+        //返回需要用的放射状类型
         pNode.reverseDir = false;
         pNode.percentage = 100;
         this._setAttrs(pNode, size.width / 2, size.height / 2);
@@ -185,9 +185,9 @@ cc.TransitionProgressRadialCCW = cc.TransitionProgress.extend(/** @lends cc.Tran
 });
 
 /**
- * create a cc.TransitionProgressRadialCCW object 创建一个TransitionProgressRadialCCW对象
- * @deprecated since v3.0,please use new cc.TransitionProgressRadialCCW(t, scene) instead. 从v3.0之后使用 new cc.TransitionProgressRadialCCW(t,scene) 替代
- * @param {Number} t time 时间
+ * 创建一个cc.TransitionProgressRadialCCW对象
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionProgressRadialCCW(t,scene) 替代
+ * @param {Number} t 时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionProgressRadialCCW}
  * @example
@@ -198,18 +198,18 @@ cc.TransitionProgressRadialCCW.create = function (t, scene) {
 };
 
 /**
- * cc.TransitionRadialCW transition.<br/> TransitionRadialCW转场<br/>
- * A counter colock-wise radial transition to the next scene 一个逆时针到下一个场景的转场
+ * cc.TransitionProgressRadialCW转场<br/>
+ * 逆时针放射状转场下一个场景
  * @class
  * @extends cc.TransitionProgress
- * @param {Number} t time 时间
+ * @param {Number} t 时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionProgressRadialCW(t, scene);
  */
 cc.TransitionProgressRadialCW = cc.TransitionProgress.extend(/** @lends cc.TransitionProgressRadialCW# */{
     /**
-     * @param {Number} t time 时间
+     * @param {Number} t 时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -222,12 +222,12 @@ cc.TransitionProgressRadialCW = cc.TransitionProgress.extend(/** @lends cc.Trans
 
         var pNode = new cc.ProgressTimer(texture.sprite);
 
-        // but it is flipped upside down so we flip the sprite
+        // 因为它是已经翻转过的, 所以我们需要要翻转这个sprite
         if (cc._renderType === cc._RENDER_TYPE_WEBGL)
             pNode.sprite.flippedY = true;
         pNode.type = cc.ProgressTimer.TYPE_RADIAL;
 
-        //    Return the radial type that we want to use
+        //返回需要用的放射状类型
         pNode.reverseDir = true;
         pNode.percentage = 100;
         this._setAttrs(pNode, size.width / 2, size.height / 2);
@@ -237,9 +237,9 @@ cc.TransitionProgressRadialCW = cc.TransitionProgress.extend(/** @lends cc.Trans
 });
 
 /**
- * create a cc.TransitionProgressRadialCW object 创建一个TransitionProgressRadialCW对象
- * @deprecated since v3.0,please use cc.TransitionProgressRadialCW(t, scene) instead. 从v3.0之后使用 new cc.TransitionProgressRadialCW(t,scene) 替代
- * @param {Number} t time 时间
+ * 创建一个cc.TransitionProgressRadialCW对象
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionProgressRadialCW(t,scene) 替代
+ * @param {Number} t 时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionProgressRadialCW}
  */
@@ -252,18 +252,18 @@ cc.TransitionProgressRadialCW.create = function (t, scene) {
 };
 
 /**
- * cc.TransitionProgressHorizontal transition.<br/> TransitionProgressHorizontal转场<br/>
- * A  colock-wise radial transition to the next scene 一个顺时针到下一个场景的转场
+ * cc.TransitionProgressHorizontal转场<br/>
+ * 一个顺时针放射状过渡到下一个场景的转场
  * @class
  * @extends cc.TransitionProgress
- * @param {Number} t time 时间
+ * @param {Number} t 时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionProgressHorizontal(t, scene);
  */
 cc.TransitionProgressHorizontal = cc.TransitionProgress.extend(/** @lends cc.TransitionProgressHorizontal# */{
     /**
-     * @param {Number} t time 时间
+     * @param {Number} t 时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -276,7 +276,7 @@ cc.TransitionProgressHorizontal = cc.TransitionProgress.extend(/** @lends cc.Tra
 
         var pNode = new cc.ProgressTimer(texture.sprite);
 
-        // but it is flipped upside down so we flip the sprite  但是它是已经翻转过的, 所以我们要翻转这个sprite  但是它是已经翻转过的, 所以我们要翻转这个sprite
+        //由于它已经翻转过, 所以我们要翻转这个sprite
         if (cc._renderType === cc._RENDER_TYPE_WEBGL)
             pNode.sprite.flippedY = true;
         pNode.type = cc.ProgressTimer.TYPE_BAR;
@@ -292,9 +292,9 @@ cc.TransitionProgressHorizontal = cc.TransitionProgress.extend(/** @lends cc.Tra
 });
 
 /**
- * create a cc.TransitionProgressHorizontal object 创建一个TransitionProgressHorizontal对象
- * @deprecated since v3.0,please use new cc.TransitionProgressHorizontal(t, scene) instead. 从v3.0之后使用 new cc.TransitionProgressHorizontal(t,scene) 替代
- * @param {Number} t time 时间
+ * 创建一个cc.TransitionProgressHorizontal对象
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionProgressHorizontal(t,scene) 替代
+ * @param {Number} t 时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionProgressHorizontal}
  */
@@ -303,10 +303,10 @@ cc.TransitionProgressHorizontal.create = function (t, scene) {
 };
 
 /**
- * cc.TransitionProgressVertical transition.  创建一个TransitionProgressVertical对象
+ * cc.TransitionProgressVertical转场
  * @class
  * @extends cc.TransitionProgress
- * @param {Number} t time 时间
+ * @param {Number} t 时间(秒)
  * @param {cc.Scene} scene
  * @example
  * var trans = new cc.TransitionProgressVertical(t, scene);
@@ -314,7 +314,7 @@ cc.TransitionProgressHorizontal.create = function (t, scene) {
 cc.TransitionProgressVertical = cc.TransitionProgress.extend(/** @lends cc.TransitionProgressVertical# */{
 
     /**
-     * @param {Number} t time 时间
+     * @param {Number} t 时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -327,7 +327,7 @@ cc.TransitionProgressVertical = cc.TransitionProgress.extend(/** @lends cc.Trans
 
         var pNode = new cc.ProgressTimer(texture.sprite);
 
-        // but it is flipped upside down so we flip the sprite  但是它是已经翻转过的, 所以我们要翻转这个sprite
+        //由于它已经翻转, 所以我们要翻转这个sprite
         if (cc._renderType === cc._RENDER_TYPE_WEBGL)
             pNode.sprite.flippedY = true;
         pNode.type = cc.ProgressTimer.TYPE_BAR;
@@ -343,9 +343,9 @@ cc.TransitionProgressVertical = cc.TransitionProgress.extend(/** @lends cc.Trans
 });
 
 /**
- * create a cc.TransitionProgressVertical object 创建一个TransitionProgressVertical对象
- * @deprecated since v3.0,please use new cc.TransitionProgressVertical(t, scene) instead. 从v3.0之后使用 new cc.TransitionProgressVertical(t,scene) 替代
- * @param {Number} t time 时间
+ * 创建一个cc.TransitionProgressVertical对象
+ * @deprecated 从v3.0之后，请使用 new cc.TransitionProgressVertical(t,scene) 替代
+ * @param {Number} t 时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionProgressVertical}
  */
@@ -354,15 +354,15 @@ cc.TransitionProgressVertical.create = function (t, scene) {
 };
 
 /**
- * cc.TransitionProgressInOut transition.
+ * cc.TransitionProgressInOut转场.
  * @class
  * @extends cc.TransitionProgress
  */
 cc.TransitionProgressInOut = cc.TransitionProgress.extend(/** @lends cc.TransitionProgressInOut# */{
 
     /**
-     * The constructor of cc.TransitionProgressInOut. override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function.
-     * @param {Number} t time 时间
+     * cc.TransitionProgressInOut的构造函数. 重写它以扩展它的功能，记得在扩展类的"ctor"中调用"this._super()".
+     * @param {Number} t 时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -374,7 +374,7 @@ cc.TransitionProgressInOut = cc.TransitionProgress.extend(/** @lends cc.Transiti
         var size = cc.director.getWinSize();
         var pNode = new cc.ProgressTimer(texture.sprite);
 
-        // but it is flipped upside down so we flip the sprite  但是它是已经翻转过的, 所以我们要翻转这个sprite
+        // 由于它已经翻转过, 所以我们要翻转这个sprite
         if (cc._renderType === cc._RENDER_TYPE_WEBGL)
             pNode.sprite.flippedY = true;
         pNode.type = cc.ProgressTimer.TYPE_BAR;
@@ -398,10 +398,10 @@ cc.TransitionProgressInOut = cc.TransitionProgress.extend(/** @lends cc.Transiti
 });
 
 /**
- * create a cc.TransitionProgressInOut object
+ * 创建一个cc.TransitionProgressInOut对象
  * @function
  * @deprecated
- * @param {Number} t time 时间
+ * @param {Number} t 时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionProgressInOut}
  */
@@ -410,15 +410,15 @@ cc.TransitionProgressInOut.create = function (t, scene) {
 };
 
 /**
- * cc.TransitionProgressOutIn transition. 一个TransitionProgressOutIn转场
+ * cc.TransitionProgressOutIn转场
  * @class
  * @extends cc.TransitionProgress
  */
 cc.TransitionProgressOutIn = cc.TransitionProgress.extend(/** @lends cc.TransitionProgressOutIn# */{
 
     /**
-     * The constructor of cc.TransitionProgressOutIn. override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. TransitionProgressOutIn的构造函数.如果想要覆盖并扩展功能刻调用"this_super();"
-     * @param {Number} t time 时间
+     * cc.TransitionProgressOutIn的构造函数.如果想要重写并扩展功能记得在扩展的"ctor"中调用"this_super();"
+     * @param {Number} t 时间(秒)
      * @param {cc.Scene} scene
      */
     ctor:function (t, scene) {
@@ -430,7 +430,7 @@ cc.TransitionProgressOutIn = cc.TransitionProgress.extend(/** @lends cc.Transiti
         var size = cc.director.getWinSize();
         var pNode = new cc.ProgressTimer(texture.sprite);
 
-        // but it is flipped upside down so we flip the sprite  但是它是已经翻转过的, 所以我们要翻转这个sprite
+        //由于它是已经翻转过的, 所以我们要翻转这个sprite
         if (cc._renderType === cc._RENDER_TYPE_WEBGL)
             pNode.sprite.flippedY = true;
         pNode.type = cc.ProgressTimer.TYPE_BAR;
@@ -446,10 +446,10 @@ cc.TransitionProgressOutIn = cc.TransitionProgress.extend(/** @lends cc.Transiti
 });
 
 /**
- * create a cc.TransitionProgressOutIn object 创建一个TransitionProgressOutIn对象
+ * 创建一个cc.TransitionProgressOutIn对象
  * @function
  * @deprecated
- * @param {Number} t time 时间
+ * @param {Number} t 时间(秒)
  * @param {cc.Scene} scene
  * @return {cc.TransitionProgressOutIn}
  */

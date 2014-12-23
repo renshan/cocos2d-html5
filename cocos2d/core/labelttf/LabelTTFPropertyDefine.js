@@ -28,13 +28,11 @@
 cc._tmp.PrototypeLabelTTF = function () {
     var _p = cc.LabelTTF.prototype;
 
-    // Override properties
-	// 重写属性
+    // 重写属性
     cc.defineGetterSetter(_p, "color", _p.getColor, _p.setColor);
     cc.defineGetterSetter(_p, "opacity", _p.getOpacity, _p.setOpacity);
 
-    // Extended properties
-	// 扩展属性
+    // 扩展属性
     /** @expose */
     _p.string;
     cc.defineGetterSetter(_p, "string", _p.getString, _p.setString);

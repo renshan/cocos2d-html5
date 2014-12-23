@@ -144,6 +144,7 @@
 ## L
 
 - listener， 监听器
+- lazy initialize 惰性初始化
 
 ## M
 

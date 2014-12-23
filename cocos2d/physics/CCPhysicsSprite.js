@@ -23,29 +23,17 @@
  * SOFTWARE.
  */
 
-/** A CCSprite subclass that is bound to a physics body.
- It works with:
- - Chipmunk: Preprocessor macro CC_ENABLE_CHIPMUNK_INTEGRATION should be defined
- - Objective-Chipmunk: Preprocessor macro CC_ENABLE_CHIPMUNK_INTEGRATION should be defined
- - Box2d: Preprocessor macro CC_ENABLE_BOX2D_INTEGRATION should be defined
-
- Features and Limitations:
- - Scale and Skew properties are ignored.
- - Position and rotation are going to updated from the physics body
- - If you update the rotation or position manually, the physics body will be updated
- - You can't eble both Chipmunk support and Box2d support at the same time. Only one can be enabled at compile time
- */
- /** 继承自CCSprite，绑定到一个物理body
+ /** 精灵(cc.Sprite)的子类，绑定到一个物理Body
  支持以下几个物理引擎：
  - Chipmunk： 需要定义预处理器宏 CC_ENABLE_CHIPMUNK_INTEGRATION
  - ObjectiveChipmunk：需要定义预处理器宏 CC_ENABLE_CHIPMUNK_INTEGRATION
  - Box2d：需要定义预处理器宏 CC_ENABLE_BOX2D_INTEGRATION
  
  特性和限制：
- - 缩放（Scale）和偏移（Skew）属性被忽略
- - 位置（Position）和旋转（Rotation）将从物理刚体更新
- - 如果你手动更新了位置和旋转，物理刚体会被更新
- - 你不能同时启用Chipmunk和Box2d两个引擎的支持，在编译时只能启用一种
+ - 缩放（Scale）和偏移（Skew）属性被忽略；
+ - 位置（Position）和旋转（Rotation）将更新物理刚体；
+ - 如果你手动更新了位置和旋转，物理刚体会被更新；
+ - 你不能同时启用Chipmunk和Box2d两个引擎的支持，在编译时只能启用一种。
  */
 (function () {
     var box2dAPI = {

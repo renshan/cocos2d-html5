@@ -27,19 +27,17 @@
  */
 
 /**
- * A struture that represents an axis-aligned    提供带有轴对齐属性的包含区域最小矩形的一个结构
- * bounding box.
+ * 代表AABB包围盒(Axis Aligned Bounding Box、轴对齐包围盒、矩形包围盒)的结构体
  */
 cc.kmAABB = function (min, max) {
-    /** The max corner of the box    矩形的最大角度*/
+    /** AABB的最小顶点*/
     this.min = min || new cc.kmVec3();
-    /** The min corner of the box    矩形的最小角度*/
+    /** AABB的最大顶点*/
     this.max = max || new cc.kmVec3();
 };
 
 /**
- * Returns KM_TRUE if point is in the specified AABB, Returns    如果点在指定的AABB返回KM_TRUE，否则返回KM_FALSE
- * KM_FALSE otherwise.
+ * 如果点在指定的AABB内则返回KM_TRUE，否则返回KM_FALSE
  */
 cc.kmAABBContainsPoint = function (pPoint, pBox) {
     if (pPoint.x >= pBox.min.x && pPoint.x <= pBox.max.x &&
@@ -51,7 +49,7 @@ cc.kmAABBContainsPoint = function (pPoint, pBox) {
 };
 
 /**
- * Assigns pIn to pOut, returns pOut.    将pIn赋值给pOut并返回pOut
+ * 将pIn赋值给pOut并返回pOut
  */
 cc.kmAABBAssign = function (pOut, pIn) {
     cc.kmVec3Assign(pOut.min, pIn.min);
@@ -60,7 +58,7 @@ cc.kmAABBAssign = function (pOut, pIn) {
 };
 
 /**
- * Scales pIn by s, stores the resulting AABB in pOut. Returns pOut    通过s来缩放pIn，将得到的结果AABB存储在pOut中，并返回pOut
+ * 通过s来缩放pIn，将得到的结果AABB存储在pOut中，并返回pOut
  */
 cc.kmAABBScale = function (pOut, pIn, s) {
     cc.log("cc.kmAABBScale hasn't been supported.");

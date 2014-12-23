@@ -50,7 +50,7 @@ cc.kmRay2IntersectLineSegment = function(ray, p1, p2, intersection){
 
     var denom = (y4 -y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
     var ua, x, y;
-    //If denom is zero, the lines are parallel   如果denom等于0，那么这些行都是平行的
+    //如果denom为0, 那么他们平行
     if(denom > -cc.kmEpsilon && denom < cc.kmEpsilon) {
         return cc.KM_FALSE;
     }
@@ -65,7 +65,7 @@ cc.kmRay2IntersectLineSegment = function(ray, p1, p2, intersection){
         x > cc.kmMax(p1.x, p2.x) + cc.kmEpsilon ||
         y < cc.kmMin(p1.y, p2.y) - cc.kmEpsilon ||
         y > cc.kmMax(p1.y, p2.y) + cc.kmEpsilon) {
-        //Outside of line    除这行
+        //在线外
         //printf("Outside of line, %f %f (%f %f)(%f, %f)\n", x, y, p1.x, p1.y, p2.x, p2.y);
         return cc.KM_FALSE;
     }
@@ -86,13 +86,13 @@ cc.kmRay2IntersectLineSegment = function(ray, p1, p2, intersection){
 
 cc.calculate_line_normal = function(p1, p2, normal_out){
     var tmp = new cc.kmVec2();
-    cc.kmVec2Subtract(tmp, p2, p1); //Get direction vector    获取方向向量
+    cc.kmVec2Subtract(tmp, p2, p1); //获取方向向量
 
     normal_out.x = -tmp.y;
     normal_out.y = tmp.x;
     cc.kmVec2Normalize(normal_out, normal_out);
 
-    //TODO: should check that the normal is pointing out of the triangle    TODO:应该检查normal超出了三角形
+    //TODO:应该检查normal指向三角形外
 };
 
 cc.kmRay2IntersectTriangle = function(ray, p1, p2, p3, intersection, normal_out){

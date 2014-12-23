@@ -28,7 +28,6 @@ var cc = cc || {};
 cc._tmp = cc._tmp || {};
 
 /**
- * Function added for JS bindings compatibility. Not needed in cocos2d-html5.
  * 提高JSB兼容性而添加的方法。cocos2d-html5不需要该方法
  * @function
  * @param {object} jsObj subclass 子类
@@ -38,7 +37,6 @@ cc.associateWithNative = function (jsObj, superclass) {
 };
 
 /**
- * Key map for keyboard event
  * 键盘事件的key值map
  *
  * @constant
@@ -57,9 +55,9 @@ cc.KEY = {
     backspace:8,
     tab:9,
     enter:13,
-    shift:16, //should use shiftkey instead  用shift键代替
-    ctrl:17, //should use ctrlkey  用ctrl键代替
-    alt:18, //should use altkey  用alt键代替
+    shift:16, // 应该用shift键代替
+    ctrl:17, // 应该用ctrl键代替
+    alt:18, // 应该用alt键代替
     pause:19,
     capslock:20,
     escape:27,
@@ -159,7 +157,6 @@ cc.KEY = {
 };
 
 /**
- * Image Format:JPG
  * 图片格式：JPG
  * @constant
  * @type {Number}
@@ -167,7 +164,6 @@ cc.KEY = {
 cc.FMT_JPG = 0;
 
 /**
- * Image Format:PNG
  * 图片格式:PNG
  * @constant
  * @type {Number}
@@ -175,7 +171,6 @@ cc.FMT_JPG = 0;
 cc.FMT_PNG = 1;
 
 /**
- * Image Format:TIFF
  * 图片格式：TIFF
  * @constant
  * @type {Number}
@@ -183,7 +178,6 @@ cc.FMT_PNG = 1;
 cc.FMT_TIFF = 2;
 
 /**
- * Image Format:RAWDATA
  * 图片格式:RAWDATA
  * @constant
  * @type {Number}
@@ -191,7 +185,6 @@ cc.FMT_TIFF = 2;
 cc.FMT_RAWDATA = 3;
 
 /**
- * Image Format:WEBP
  * 图片格式：WEBP
  * @constant
  * @type {Number}
@@ -199,7 +192,6 @@ cc.FMT_RAWDATA = 3;
 cc.FMT_WEBP = 4;
 
 /**
- * Image Format:UNKNOWN
  * 图片格式：未知
  * @constant
  * @type {Number}
@@ -207,14 +199,13 @@ cc.FMT_WEBP = 4;
 cc.FMT_UNKNOWN = 5;
 
 /**
- * get image format by image
  * 从图片数据中获取图片格式
  * @function
  * @param {Array} imgData
  * @returns {Number}
  */
 cc.getImageFormatByData = function (imgData) {
-	// if it is a png file buffer.
+
     // 假如这是png文件缓冲区
     if (imgData.length > 8 && imgData[0] == 0x89
         && imgData[1] == 0x50
@@ -227,7 +218,6 @@ cc.getImageFormatByData = function (imgData) {
         return cc.FMT_PNG;
     }
 
-	// if it is a tiff file buffer.
     // 假如这是tiff文件缓冲区
     if (imgData.length > 2 && ((imgData[0] == 0x49 && imgData[1] == 0x49)
         || (imgData[0] == 0x4d && imgData[1] == 0x4d)
@@ -238,9 +228,7 @@ cc.getImageFormatByData = function (imgData) {
 };
 
 /**
- * Another way to subclass: Using Google Closure.
  * 另一种子类化方法:使用Google Closure
- * The following code was copied + pasted from goog.base / goog.inherits
  * 下面的代码是从goo.base/goog.ingerits复制+粘贴
  * @function
  * @param {Function} childCtor
@@ -253,20 +241,19 @@ cc.inherits = function (childCtor, parentCtor) {
     childCtor.prototype = new tempCtor();
     childCtor.prototype.constructor = childCtor;
 
-    // Copy "static" method, but doesn't generate subclasses.  复制"static"方法,但是没有生成子类
+    //复制"static"方法,但是没有生成子类
 // for( var i in parentCtor ) {
 // childCtor[ i ] = parentCtor[ i ];
 // }
 };
 
 /**
- * @deprecated since v3.0, please use cc.Class.extend and _super 该方法v3.0之后抛弃，请使用cc.Class.extend 和 _super方法
+ * @deprecated  该方法v3.0之后抛弃，请使用cc.Class.extend 和 _super方法
  * @cc.Class.extend
  */
 cc.base = function(me, opt_methodName, var_args) {
     var caller = arguments.callee.caller;
     if (caller.superClass_) {
-        // This is a constructor. Call the superclass constructor.
         // 这是一个构造函数.调用父类的构造函数
         ret = caller.superClass_.constructor.apply( me, Array.prototype.slice.call(arguments, 1));
         return ret;
@@ -282,11 +269,7 @@ cc.base = function(me, opt_methodName, var_args) {
         }
     }
 
-    // If we did not find the caller in the prototype chain,
-    // then one of two things happened:
-    // 1) The caller is an instance method.
-    // 2) This method was not called by the right caller.
-    // 如果caller为空在属性链中，那么可能下面的情况中发生了一个：
+    // 如果我们在原型链(prototype chain)中找不到caller，那么可能是下面的情况中的一个：
     // 1）caller是实例方法
     // 2）这个方法没有正确的被调用
     if (me[opt_methodName] === caller) {

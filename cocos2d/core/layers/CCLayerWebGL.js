@@ -26,16 +26,14 @@
 
 cc._tmp.LayerDefineForWebGL = function(){
     var _p = cc.Layer.prototype;
-    //Layer doesn't support bake function in WebGL
-	//Layer在WebGL中不支持bake功能
+    // Layer在WebGL中不支持bake功能
     _p.bake = function(){};
     _p.unbake = function(){};
     _p.visit = cc.Node.prototype.visit;
 };
 
 cc._tmp.WebGLLayerColor = function () {
-    //cc.LayerColor define start
-	//开始定义cc.LayerColor
+    // 定义cc.LayerColor开始
     var _p = cc.LayerColor.prototype;
     _p._squareVertices = null;
     _p._squareColors = null;
@@ -117,7 +115,7 @@ cc._tmp.WebGLLayerColor = function () {
         cc.glEnableVertexAttribs(cc.VERTEX_ATTRIB_FLAG_POSITION | cc.VERTEX_ATTRIB_FLAG_COLOR);
 
         //
-        // Attributes
+        // 属性
         //
         context.bindBuffer(context.ARRAY_BUFFER, this._verticesFloat32Buffer);
         context.vertexAttribPointer(cc.VERTEX_ATTRIB_POSITION, 2, context.FLOAT, false, 0, 0);
@@ -139,13 +137,11 @@ cc._tmp.WebGLLayerColor = function () {
         glContext.bindBuffer(glContext.ARRAY_BUFFER, this._colorsUint8Buffer);
         glContext.bufferData(glContext.ARRAY_BUFFER, this._squareColorsAB, glContext.STATIC_DRAW);
     };
-    //cc.LayerColor define end
-	//cc.LayerColor定义结束
+    // cc.LayerColor定义结束
 };
 
 cc._tmp.WebGLLayerGradient = function () {
-    //cc.LayerGradient define start
-	//cc.LayerGradient定义开始
+    // cc.LayerGradient定义开始
     var _p = cc.LayerGradient.prototype;
     _p._initRendererCmd = function(){
         this._rendererCmd = new cc.RectRenderCmdWebGL(this);
@@ -160,8 +156,7 @@ cc._tmp.WebGLLayerGradient = function () {
 
         var c = Math.sqrt(2.0), u = cc.p(locAlongVector.x / h, locAlongVector.y / h);
 
-        // Compressed Interpolation mode
-		// 压缩的插值模式
+        // 压缩的插值模式
         if (_t._compressedInterpolation) {
             var h2 = 1 / ( Math.abs(u.x) + Math.abs(u.y) );
             u = cc.pMult(u, h2 * c);
@@ -197,6 +192,5 @@ cc._tmp.WebGLLayerGradient = function () {
 
         _t._bindLayerColorsBufferData();
     };
-    //cc.LayerGradient define end
-	//cc.LayerGradient定义完毕
+    // cc.LayerGradient定义结束
 };

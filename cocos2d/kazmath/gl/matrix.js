@@ -42,9 +42,9 @@ cc.initialized = false;
 
 cc.lazyInitialize = function () {
     if (!cc.initialized) {
-        var identity = new cc.kmMat4(); //Temporary identity matrix    临时恒等矩阵
+        var identity = new cc.kmMat4(); //临时单位矩阵
 
-        //Initialize all 3 stacks    初始化3个堆栈
+        //初始化3个栈
         cc.km_mat4_stack_initialize(cc.modelview_matrix_stack);
         cc.km_mat4_stack_initialize(cc.projection_matrix_stack);
         cc.km_mat4_stack_initialize(cc.texture_matrix_stack);
@@ -53,7 +53,7 @@ cc.lazyInitialize = function () {
         cc.initialized = true;
         cc.kmMat4Identity(identity);
 
-        //Make sure that each stack has the identity matrix    确保每一个堆栈都是很等矩阵
+        //确保每一个栈里都有单位矩阵
         cc.km_mat4_stack_push(cc.modelview_matrix_stack, identity);
         cc.km_mat4_stack_push(cc.projection_matrix_stack, identity);
         cc.km_mat4_stack_push(cc.texture_matrix_stack, identity);
@@ -63,14 +63,14 @@ cc.lazyInitialize = function () {
 cc.lazyInitialize();
 
 cc.kmGLFreeAll = function () {
-    //Clear the matrix stacks   清除矩阵堆栈
+    //清除矩阵堆栈
     cc.km_mat4_stack_release(cc.modelview_matrix_stack);
     cc.km_mat4_stack_release(cc.projection_matrix_stack);
     cc.km_mat4_stack_release(cc.texture_matrix_stack);
 
-    //Delete the matrices    删除堆栈
-    cc.initialized = false; //Set to uninitialized    设置为未初始化
-    cc.current_stack = null; //Set the current stack to point nowhere    设置当前堆栈为空
+    //删除矩阵
+    cc.initialized = false; //设置为未初始化
+    cc.current_stack = null; //设置当前堆栈指针为空
 };
 
 cc.kmGLPushMatrix = function () {
@@ -84,7 +84,7 @@ cc.kmGLPushMatrixWitMat4 = function (saveMat) {
 };
 
 cc.kmGLPopMatrix = function () {
-    //No need to lazy initialize, you shouldnt be popping first anyway!    不要在初始化的时候偷懒，你无论如果都应该在第一步pop掉
+    //不需要惰性初始化，你无论如何都不会先进行出栈(pop)操作 (译者注:意思是在执行这个出栈操作时应该已经初始化过了)
     //cc.km_mat4_stack_pop(cc.current_stack, null);
     cc.current_stack.top = cc.current_stack.stack.pop();
 };
@@ -102,14 +102,14 @@ cc.kmGLMatrixMode = function (mode) {
             cc.current_stack = cc.texture_matrix_stack;
             break;
         default:
-            throw "Invalid matrix mode specified";   //TODO: Proper error handling    TODO:合理的错误处理
+            throw "Invalid matrix mode specified";   //TODO:适当的错误处理
             break;
     }
 };
 
 cc.kmGLLoadIdentity = function () {
     //cc.lazyInitialize();
-    cc.kmMat4Identity(cc.current_stack.top); //Replace the top matrix with the identity matrix    通过恒等矩阵替换掉顶层的矩阵
+    cc.kmMat4Identity(cc.current_stack.top); //用单位矩阵替换掉栈顶的矩阵
 };
 
 cc.kmGLLoadMatrix = function (pIn) {
@@ -125,10 +125,10 @@ cc.kmGLMultMatrix = function (pIn) {
 cc.kmGLTranslatef = function (x, y, z) {
     var translation = new cc.kmMat4();
 
-    //Create a rotation matrix using the axis and the angle    通过坐标轴和角度来创建一个旋转矩阵
+    //用坐标轴和角度来创建一个旋转矩阵
     cc.kmMat4Translation(translation, x, y, z);
 
-    //Multiply the rotation matrix by the current matrix    多次旋转当前矩阵
+    //用当前矩阵乘以旋转矩阵
     cc.kmMat4Multiply(cc.current_stack.top, cc.current_stack.top, translation);
 };
 
@@ -136,10 +136,10 @@ cc.kmGLRotatef = function (angle, x, y, z) {
     var axis = new cc.kmVec3(x, y, z);
     var rotation = new cc.kmMat4();
 
-    //Create a rotation matrix using the axis and the angle    通过坐标轴和角度来创建一个旋转矩阵
+    //用坐标轴和角度来创建一个旋转矩阵
     cc.kmMat4RotationAxisAngle(rotation, axis, cc.kmDegreesToRadians(angle));
 
-    //Multiply the rotation matrix by the current matrix    多次旋转当前矩阵
+    //用当前矩阵乘以旋转矩阵
     cc.kmMat4Multiply(cc.current_stack.top, cc.current_stack.top, rotation);
 };
 
@@ -163,7 +163,7 @@ cc.kmGLGetMatrix = function (mode, pOut) {
             cc.kmMat4Assign(pOut, cc.texture_matrix_stack.top);
             break;
         default:
-            throw "Invalid matrix mode specified"; //TODO: Proper error handling    TODO:合理的错误处理
+            throw "Invalid matrix mode specified"; //TODO:适当的错误处理
             break;
     }
 };

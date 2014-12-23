@@ -26,21 +26,18 @@
 
 /**
  * <p>
- *     A CCCamera is used in every CCNode.                                                                                 <br/>
- *     The OpenGL gluLookAt() function is used to locate the camera.                                                       <br/>
- *                                                                                                                         <br/>
- *     If the object is transformed by any of the scale, rotation or position attributes, then they will override the camera.          <br/>
+ *     CCamera在每个CCNode中被使用                                                                               <br/>            
+ *     OpenGL的gluLookAt()方法用来定位摄影机(camera).                                                       <br/>            
+ *     如果对象被缩放、旋转、位置属性中任意一个改变，那么它们会重写摄影机(camera)                                                                                                             <br/>            
  *                                                                                                                                     <br/>
- *     IMPORTANT: Either your use the camera or the rotation/scale/position properties. You can't use both.                            <br/>
- *     World coordinates won't work if you use the camera.                                                                             <br/>
+ *     重要：要么你使用摄影机(camera)要么你使用缩放、旋转、位置属性，你不能同时使用他们两个。                           <br/> 
+ *      如果你使用摄影机，世界坐标将无效.                                                                               <br/>
  *                                                                                                                                     <br/>
- *     Limitations:                                                                                                                    <br/>
- *     - Some nodes, like CCParallaxNode, CCParticle uses world node coordinates, and they won't work properly if you move them (or any of their ancestors)           <br/>
- *     using the camera.                                                                                                               <br/>
- *                                                                                                                                     <br/>
- *     - It doesn't work on batched nodes like CCSprite objects when they are parented to a CCSpriteBatchNode object.                  <br/>
- *                                                                                                                                     <br/>
- *     - It is recommended to use it ONLY if you are going to create 3D effects. For 2D effecs, use the action CCFollow or position/scale/rotate. *
+ *     限制：                                                                                                                    <br/> 
+ *     - 一些节点，像CCParallaxNode、CCParticle使用世界节点坐标，当你使用摄影机(camera)移动                                  <br/>
+ *     他们（或者他们的父类)时，他们可能不会如你所愿。                                                                      <br/>
+ *     - 它在批处理节点上不工作，比如CCSprite对象当他们被添加到父节点CCSpriteBatchNode对象.                     <br/>                                     
+ *     - 我们强烈建议只有你想在创建3D效果的时候才使用摄影机，其他情况你可以使用动作CCFollow或者位置、缩放、旋转       <br/>
  * </p>
  */
 cc.Camera = cc.Class.extend({
@@ -59,7 +56,7 @@ cc.Camera = cc.Class.extend({
     _dirty:null,
     _lookupMatrix:null,
     /**
-     * constructor of cc.Camera
+     * cc.Camera构造函数
      */
     ctor:function () {
         this._lookupMatrix = new cc.kmMat4();
@@ -67,7 +64,7 @@ cc.Camera = cc.Class.extend({
     },
 
     /**
-     * Description of cc.Camera
+     * cc.Camera的描述
      * @return {String}
      */
     description:function () {
@@ -75,7 +72,7 @@ cc.Camera = cc.Class.extend({
     },
 
     /**
-     * sets the dirty value
+     * 设置dirty的值
      * @param value
      */
     setDirty:function (value) {
@@ -83,7 +80,7 @@ cc.Camera = cc.Class.extend({
     },
 
     /**
-     * get the dirty value
+     * 获得dirty的值 （boolean类型）
      * @return {Boolean}
      */
     isDirty:function () {
@@ -91,7 +88,7 @@ cc.Camera = cc.Class.extend({
     },
 
     /**
-     * sets the camera in the default position
+     * 设置摄影机的默认位置
      */
     restore:function () {
         this._eyeX = this._eyeY = 0.0;
@@ -109,7 +106,7 @@ cc.Camera = cc.Class.extend({
     },
 
     /**
-     * Sets the camera using gluLookAt using its eye, center and up_vector
+     * 通过gluLookAt方法使用eye、center、up_vector 设置摄影机
      */
     locate:function () {
         if (this._dirty) {
@@ -142,18 +139,18 @@ cc.Camera = cc.Class.extend({
     },
 
     /**
-     * sets the eye values in points
-     * @param {Number} eyeX
-     * @param {Number} eyeY
-     * @param {Number} eyeZ
-     * @deprecated This function will be deprecated sooner or later please use setEye instead.
+     * 设置视角(eye)的位置,使用点为单位
+     * @param {Number} eyeX                                     x值
+     * @param {Number} eyeY                                     y值
+     * @param {Number} eyeZ                                     z值
+     * @deprecated 这个方法以后会被废除，所以建议使用setEye方法
      */
     setEyeXYZ:function (eyeX, eyeY, eyeZ) {
         this.setEye(eyeX,eyeY,eyeZ);
     },
 
     /**
-     * sets the eye values in points
+     * 设置eye的位置,使用点为单位
      * @param {Number} eyeX
      * @param {Number} eyeY
      * @param {Number} eyeZ
@@ -167,21 +164,21 @@ cc.Camera = cc.Class.extend({
     },
 
     /**
-     * sets the center values in points
-     * @param {Number} centerX
-     * @param {Number} centerY
-     * @param {Number} centerZ
-     * @deprecated  This function will be deprecated sooner or later please use setCenter instead.
+     * 设置中心位置,使用点为单位
+     * @param {Number} centerX                          中心点x值
+     * @param {Number} centerY                          中心点y值
+     * @param {Number} centerZ                          中心点z值
+     * @deprecated  这个方法以后会被废除，所以建议使用setCenter方法
      */
     setCenterXYZ:function (centerX, centerY, centerZ) {
         this.setCenter(centerX,centerY,centerZ);
     },
-
+    
     /**
-     * sets the center values in points
-     * @param {Number} centerX
-     * @param {Number} centerY
-     * @param {Number} centerZ
+     * 设置中心位置,使用点为单位
+     * @param {Number} centerX                          中心点x值
+     * @param {Number} centerY                          中心点y值
+     * @param {Number} centerZ                          中心点z值
      */
     setCenter:function (centerX, centerY, centerZ) {
         this._centerX = centerX ;
@@ -192,18 +189,18 @@ cc.Camera = cc.Class.extend({
     },
 
     /**
-     * sets the up values
+     * 设置up位置,使用点为单位
      * @param {Number} upX
      * @param {Number} upY
      * @param {Number} upZ
-     * @deprecated This function will be deprecated sooner or later.
+     * @deprecated 这个方法以后会被废除
      */
     setUpXYZ:function (upX, upY, upZ) {
         this.setUp(upX, upY, upZ);
     },
 
     /**
-     * sets the up values
+     * 设置up位置,使用点为单位
      * @param {Number} upX
      * @param {Number} upY
      * @param {Number} upZ
@@ -217,19 +214,19 @@ cc.Camera = cc.Class.extend({
     },
 
     /**
-     * get the eye vector values in points  (return an object like {x:1,y:1,z:1} in HTML5)
+     * 获取视角的位置，使用点为单位（在HTML5中返回一个像{x:1,y:1,z:1}的样的对象）
      * @param {Number} eyeX
      * @param {Number} eyeY
      * @param {Number} eyeZ
      * @return {Object}
-     * @deprecated This function will be deprecated sooner or later, please use getEye instead.
+     * @deprecated 这个方法以后会被废除，所以建议使用getEye方法
      */
     getEyeXYZ:function (eyeX, eyeY, eyeZ) {
         return {x:this._eyeX , y:this._eyeY , z: this._eyeZ };
     },
 
     /**
-     * get the eye vector values in points  (return an object like {x:1,y:1,z:1} in HTML5)
+     * 获取视角的位置，使用点为单位（在HTML5中返回一个像{x:1,y:1,z:1}的样的对象）
      * @return {Object}
      */
     getEye:function () {
@@ -237,19 +234,19 @@ cc.Camera = cc.Class.extend({
     },
 
     /**
-     * get the center vector values int points (return an object like {x:1,y:1,z:1} in HTML5)
+     * 获得中心位置，使用点为单位（在HTML5中返回一个对象如  {x:1,y:1,z:1} ）
      * @param {Number} centerX
      * @param {Number} centerY
      * @param {Number} centerZ
      * @return {Object}
-     * @deprecated This function will be deprecated sooner or later,please use getCenter instead.
+     * @deprecated 这个方法以后会被废除，所以建议使用getCenter方法
      */
     getCenterXYZ:function (centerX, centerY, centerZ) {
         return {x:this._centerX ,y:this._centerY ,z:this._centerZ };
     },
 
     /**
-     * get the center vector values int points (return an object like {x:1,y:1,z:1} in HTML5)
+     * 获得中心位置，使用点为单位（在HTML5中返回一个对象如  {x:1,y:1,z:1} ）
      * @return {Object}
      */
     getCenter:function () {
@@ -257,19 +254,19 @@ cc.Camera = cc.Class.extend({
     },
 
     /**
-     * get the up vector values (return an object like {x:1,y:1,z:1} in HTML5)
+     * 获得up位置，使用点为单位（在HTML5中返回一个对象如  {x:1,y:1,z:1} ）
      * @param {Number} upX
      * @param {Number} upY
      * @param {Number} upZ
      * @return {Object}
-     * @deprecated This function will be deprecated sooner or later,please use getUp instead.
+     * @deprecated 这个方法以后会被废除，所以建议使用getUp方法
      */
     getUpXYZ:function (upX, upY, upZ) {
         return {x:this._upX,y:this._upY,z:this._upZ};
     },
 
     /**
-     * get the up vector values (return an object like {x:1,y:1,z:1} in HTML5)
+     * 获得up位置，使用点为单位（在HTML5中返回一个对象如  {x:1,y:1,z:1} ）
      * @return {Object}
      */
     getUp:function () {
@@ -282,7 +279,7 @@ cc.Camera = cc.Class.extend({
 });
 
 /**
- * returns the Z eye
+ * 返回视角的Z值
  * @return {Number}
  */
 cc.Camera.getZEye = function () {
