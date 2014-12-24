@@ -25,7 +25,7 @@
  ****************************************************************************/
 
 /**
- * Tint a texture using the "multiply" operation
+ * 使用"multiply"操作，为一个纹理着色
  * @param {HTMLImageElement} image
  * @param {cc.Color} color
  * @param {cc.Rect} [rect]
@@ -71,9 +71,9 @@ cc.generateTintImageWithMultiply = function(image, color, rect, renderCanvas){
 };
 
 /**
- * Generate tinted texture with lighter.
- * lighter:    The source and destination colors are added to each other, resulting in brighter colors,
- * moving towards color values of 1 (maximum brightness for that color).
+ * 使用lighter生成着色纹理。
+ * lighter:    将原色以及目标色相加，得到一个更明亮的颜色，
+ * 颜色值加1(那个颜色的最大亮度)。
  * @function
  * @param {HTMLImageElement} texture
  * @param {Array} tintedImgCache
@@ -94,7 +94,7 @@ cc.generateTintImage = function (texture, tintedImgCache, color, rect, renderCan
     var buff = renderCanvas;
     var ctx;
 
-    // Create a new buffer if required
+    //如果条件允许，创建一个新的buffer
     if (!buff) {
         buff = cc.newElement("canvas");
         buff.width = w;
@@ -108,7 +108,7 @@ cc.generateTintImage = function (texture, tintedImgCache, color, rect, renderCan
     ctx.save();
     ctx.globalCompositeOperation = 'lighter';
 
-    // Make sure to keep the renderCanvas alpha in mind in case of overdraw
+    //在心里牢牢记住renderCanvas测试版，防止透支
     var a = ctx.globalAlpha;
     if (r > 0) {
         ctx.globalAlpha = r * a;
@@ -133,7 +133,7 @@ cc.generateTintImage = function (texture, tintedImgCache, color, rect, renderCan
 };
 
 /**
- * Generates texture's cache for texture tint
+ * 为着色创建纹理缓存
  * @function
  * @param {HTMLImageElement} texture
  * @return {Array}
@@ -242,63 +242,64 @@ cc._getCompositeOperationByBlendFunc = function(blendFunc){
 };
 
 /**
- * <p>cc.Sprite is a 2d image ( http://en.wikipedia.org/wiki/Sprite_(computer_graphics) )  <br/>
+ * <p>Sprite是一个二维图像 ( 参见：http://en.wikipedia.org/wiki/Sprite_(computer_graphics)  <br/>
  *
- * cc.Sprite can be created with an image, or with a sub-rectangle of an image.  <br/>
+ * 可以通过一个图像或者一个经过矩形裁剪后的图像创建Sprite。  <br/>
  *
- * If the parent or any of its ancestors is a cc.SpriteBatchNode then the following features/limitations are valid   <br/>
- *    - Features when the parent is a cc.BatchNode: <br/>
- *        - MUCH faster rendering, specially if the cc.SpriteBatchNode has many children. All the children will be drawn in a single batch.  <br/>
+ * 如果父节点或者任一个祖宗节点是cc.SpriteBatchNode，其特点或者限制如下：<br/>
+ *    - 特点：（当父节点是cc.BatchNode）<br/>
+ *        - 渲染快的多，特别是如果cc.SpriteBatchNode有许多的子节点类时，这些子类会在一个批处理内绘制。<br/>
  *
- *    - Limitations   <br/>
- *        - Camera is not supported yet (eg: CCOrbitCamera action doesn't work)  <br/>
- *        - GridBase actions are not supported (eg: CCLens, CCRipple, CCTwirl) <br/>
- *        - The Alias/Antialias property belongs to CCSpriteBatchNode, so you can't individually set the aliased property.  <br/>
- *        - The Blending function property belongs to CCSpriteBatchNode, so you can't individually set the blending function property. <br/>
- *        - Parallax scroller is not supported, but can be simulated with a "proxy" sprite.        <br/>
+ *    - 限制：   <br/>
+ *        - 相机暂时不支持 (例如： CCOrbitCamera 动作不工作)；  <br/>
+ *        - 以GridBase为基类的动作不支持 (例如： CCLens, CCRipple, CCTwirl)； <br/>
+ *        - Alias/Antialias属性属于CCSpriteBatchNode，所以不能分别设置aliased属性； <br/>
+ *        - Blending function属性属于CCSpriteBatchNode，所以不能分别设置blending function属性；<br/>
+ *        - 视差滚动（Parallax scroller）不支持，但是可以通过一个“代理”精灵来模拟      <br/>
  *
- *  If the parent is an standard cc.Node, then cc.Sprite behaves like any other cc.Node:      <br/>
- *    - It supports blending functions    <br/>
- *    - It supports aliasing / antialiasing    <br/>
- *    - But the rendering will be slower: 1 draw per children.   <br/>
+ *  如果父节点是一个标准的cc.Node，那么cc.Sprite的行为类似于其他的cc.Node:      <br/>
+ *    - 支持blending functions    <br/>
+ *    - 支持aliasing / antialiasing    <br/>
+ *    - 但是渲染会慢一些：每个子节点绘制一次 <br/>
  *
- * The default anchorPoint in cc.Sprite is (0.5, 0.5). </p>
+ * 精灵的默认的锚点(anchorPoint)为(0.5, 0.5)。<p/>
+ *
  * @class
  * @extends cc.Node
  *
- * @param {String|cc.SpriteFrame|HTMLImageElement|cc.Texture2D} fileName  The string which indicates a path to image file, e.g., "scene1/monster.png".
- * @param {cc.Rect} rect  Only the contents inside rect of pszFileName's texture will be applied for this sprite.
- * @param {Boolean} [rotated] Whether or not the texture rectangle is rotated.
+ * @param {String|cc.SpriteFrame|HTMLImageElement|cc.Texture2D} fileName  一个表示图片文件路径的字符串 例如："scene1/monster.png"。
+ * @param {cc.Rect} rect  仅在矩形范围内的纹理才用于创建精灵
+ * @param {Boolean} [rotated] 纹理的矩形是否旋转
  * @example
  *
- * 1.Create a sprite with image path and rect
+ * 1.通过图片路径和矩形创建精灵。
  * var sprite1 = new cc.Sprite("res/HelloHTML5World.png");
  * var sprite2 = new cc.Sprite("res/HelloHTML5World.png",cc.rect(0,0,480,320));
  *
- * 2.Create a sprite with a sprite frame name. Must add "#" before frame name.
+ * 2.通过精灵帧名创建精灵，在精灵帧名之前必须加上"#"。
  * var sprite = new cc.Sprite('#grossini_dance_01.png');
  *
- * 3.Create a sprite with a sprite frame
+ * 3.通过精灵帧创建精灵。
  * var spriteFrame = cc.spriteFrameCache.getSpriteFrame("grossini_dance_01.png");
  * var sprite = new cc.Sprite(spriteFrame);
  *
- * 4.Create a sprite with an existing texture contained in a CCTexture2D object
- *      After creation, the rect will be the size of the texture, and the offset will be (0,0).
+ * 4.通过包含于CCTexture2D对象中的一个已经存在的纹理创建精灵，
+ *      创建完成以后，矩形是纹理的尺寸，并且偏移是（0,0)。
  * var texture = cc.textureCache.addImage("HelloHTML5World.png");
  * var sprite1 = new cc.Sprite(texture);
  * var sprite2 = new cc.Sprite(texture, cc.rect(0,0,480,320));
  *
- * @property {Boolean}              dirty               - Indicates whether the sprite needs to be updated.
- * @property {Boolean}              flippedX            - Indicates whether or not the spirte is flipped on x axis.
- * @property {Boolean}              flippedY            - Indicates whether or not the spirte is flipped on y axis.
- * @property {Number}               offsetX             - <@readonly> The offset position on x axis of the sprite in texture. Calculated automatically by editors like Zwoptex.
- * @property {Number}               offsetY             - <@readonly> The offset position on x axis of the sprite in texture. Calculated automatically by editors like Zwoptex.
- * @property {Number}               atlasIndex          - The index used on the TextureAtlas.
- * @property {cc.Texture2D}         texture             - Texture used to render the sprite.
- * @property {Boolean}              textureRectRotated  - <@readonly> Indicate whether the texture rectangle is rotated.
- * @property {cc.TextureAtlas}      textureAtlas        - The weak reference of the cc.TextureAtlas when the sprite is rendered using via cc.SpriteBatchNode.
- * @property {cc.SpriteBatchNode}   batchNode           - The batch node object if this sprite is rendered by cc.SpriteBatchNode.
- * @property {cc.V3F_C4B_T2F_Quad}  quad                - <@readonly> The quad (tex coords, vertex coords and color) information.
+ * @property {Boolean}              dirty               - 表示精灵是否需要更新。
+ * @property {Boolean}              flippedX            - 表示精灵的X轴方向是否翻转。
+ * @property {Boolean}              flippedY            - 表示精灵的Y轴方向是否翻转。
+ * @property {Number}               offsetX             - <@readonly> X轴方向精灵的偏移位置。像Zwoptex一样由编辑器计算。
+ * @property {Number}               offsetY             - <@readonly> Y轴方向精灵的偏移位置。像Zwoptex一样由编辑器计算。
+ * @property {Number}               atlasIndex          - 纹理集（TextureAtlas）使用的序号。
+ * @property {cc.Texture2D}         texture             - 用于渲染精灵的纹理。
+ * @property {Boolean}              textureRectRotated  - <@readonly> 表示纹理矩形是否旋转。
+ * @property {cc.TextureAtlas}      textureAtlas        - 当精灵通过cc.SpriteBatchNode进行渲染时，cc.TextureAtlas的弱引用。
+ * @property {cc.SpriteBatchNode}   batchNode           - 当精灵通过cc.SpriteBatchNode进行渲染时的批处理节点对象。
+ * @property {cc.V3F_C4B_T2F_Quad}  quad                - <@readonly> 返回quad （纹理坐标，顶点坐标和颜色）信息。
  */
 cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 	dirty:false,
@@ -306,43 +307,43 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     textureAtlas:null,
 
     _batchNode:null,
-    _recursiveDirty:null, //Whether all of the sprite's children needs to be updated
-    _hasChildren:null, //Whether the sprite contains children
-    _shouldBeHidden:false, //should not be drawn because one of the ancestors is not visible
+    _recursiveDirty:null, //精灵子节点是否全部都需要更新
+    _hasChildren:null, //精灵是否包含子节点
+    _shouldBeHidden:false, //当祖先节点设置为不可视时不应该绘制
     _transformToBatch:null,
 
     //
-    // Data used when the sprite is self-rendered
-    //
-    _blendFunc:null, //It's required for CCTextureProtocol inheritance
-    _texture:null, //cc.Texture2D object that is used to render the sprite
+    // 在精灵是自传递时使用的数据
+    // 
+    _blendFunc:null, //必须的，为了CCTextureProtocol的继承
+    _texture:null, //用来传递精灵的cc.Texture2D对象
 
     //
-    // Shared data
+    // 共享数据
     //
-    // texture
-    _rect:null, //Rectangle of cc.Texture2D
-    _rectRotated:false, //Whether the texture is rotated
+    // 纹理
+    _rect:null, //cc.Texture2D矩形
+    _rectRotated:false, //纹理是否有旋转
 
-    // Offset Position (used by Zwoptex)
-    _offsetPosition:null, // absolute
+    // 位置偏移量(被Zwoptex所使用)
+    _offsetPosition:null, // 绝对定位
     _unflippedOffsetPositionFromCenter:null,
 
     _opacityModifyRGB:false,
 
-    // image is flipped
-    _flippedX:false, //Whether the sprite is flipped horizontally or not.
-    _flippedY:false, //Whether the sprite is flipped vertically or not.
+    // 图片翻转
+    _flippedX:false, //精灵是否有水平翻转
+    _flippedY:false, //精灵是否有垂直翻转
 
     _textureLoaded:false,
-    _newTextureWhenChangeColor: null,         //hack property for LabelBMFont
+    _newTextureWhenChangeColor: null,         //LabelBMFont的hack属性
     _className:"Sprite",
 
-    //Only for texture update judgment
+    //为了更新纹理调整
     _oldDisplayColor: cc.color.WHITE,
 
     /**
-     * Returns whether the texture have been loaded
+     * 返回纹理是否被加载
      * @returns {boolean}
      */
     textureLoaded:function(){
@@ -350,25 +351,25 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Add a event listener for texture loaded event.
+     * 为加载纹理事件增加一个事件侦听器
      * @param {Function} callback
      * @param {Object} target
-     * @deprecated since 3.1, please use addEventListener instead
+     * @deprecated 自 3.1，使用addEventListener代替
      */
     addLoadedEventListener:function(callback, target){
         this.addEventListener("load", callback, target);
     },
 
     /**
-     * Returns whether or not the Sprite needs to be updated in the Atlas
-     * @return {Boolean} True if the sprite needs to be updated in the Atlas, false otherwise.
+     * 返回精灵在Atlas中是否需要更新
+     * @return {Boolean} 如果精灵在Atlas中需要更新，则返回true，否则返回false。
      */
     isDirty:function () {
         return this.dirty;
     },
 
     /**
-     * Makes the sprite to be updated in the Atlas.
+     * 设置精灵在Atlas中是否需要更新
      * @param {Boolean} bDirty
      */
     setDirty:function (bDirty) {
@@ -376,7 +377,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Returns whether or not the texture rectangle is rotated.
+     * 返回纹理矩形是否旋转
      * @return {Boolean}
      */
     isTextureRectRotated:function () {
@@ -384,7 +385,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Returns the index used on the TextureAtlas.
+     * 返回在纹理集（TextureAtlas）中使用的序号。
      * @return {Number}
      */
     getAtlasIndex:function () {
@@ -392,8 +393,8 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Sets the index used on the TextureAtlas.
-     * @warning Don't modify this value unless you know what you are doing
+     * 设置纹理集（TextureAtlas）使用的序号。
+     * @warning 除非你知道你在做什么，否则不要修改这个值。
      * @param {Number} atlasIndex
      */
     setAtlasIndex:function (atlasIndex) {
@@ -401,7 +402,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Returns the rect of the cc.Sprite in points
+     * 返回精灵的矩形
      * @return {cc.Rect}
      */
     getTextureRect:function () {
@@ -409,7 +410,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Returns the weak reference of the cc.TextureAtlas when the sprite is rendered using via cc.SpriteBatchNode
+     * 返回当精灵通过cc.SpriteBatchNode进行渲染时，cc.TextureAtlas的弱引用。
      * @return {cc.TextureAtlas}
      */
     getTextureAtlas:function () {
@@ -417,7 +418,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Sets the weak reference of the cc.TextureAtlas when the sprite is rendered using via cc.SpriteBatchNode
+     * 设置当精灵通过cc.SpriteBatchNode进行渲染时，cc.TextureAtlas的弱引用。
      * @param {cc.TextureAtlas} textureAtlas
      */
     setTextureAtlas:function (textureAtlas) {
@@ -425,7 +426,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Returns the offset position of the sprite. Calculated automatically by editors like Zwoptex.
+     * 精灵的偏移位置。像Zwoptex一样由编辑器计算。
      * @return {cc.Point}
      */
     getOffsetPosition:function () {
@@ -440,7 +441,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 	},
 
     /**
-     * Returns the blend function
+     * 返回blend function
      * @return {cc.BlendFunc}
      */
     getBlendFunc:function () {
@@ -448,10 +449,10 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Initializes a sprite with an SpriteFrame. The texture and rect in SpriteFrame will be applied on this sprite.<br/>
-     * Please pass parameters to the constructor to initialize the sprite, do not call this function yourself,
-     * @param {cc.SpriteFrame} spriteFrame A CCSpriteFrame object. It should includes a valid texture and a rect
-     * @return {Boolean}  true if the sprite is initialized properly, false otherwise.
+     * 使用精灵帧初始化精灵。精灵帧中包含的纹理和矩形会被应用于这个精灵。<br/>
+     * 请把参数传递给构造函数来初始化精灵，不要自己调用这个方法。
+     * @param {cc.SpriteFrame} spriteFrame 一个cc.SpriteFrame对象. 包含一个可用的纹理和矩形。
+     * @return {Boolean}  如果精灵呗正常的初始化，则返回true，否则返回false。
      */
     initWithSpriteFrame:function (spriteFrame) {
 
@@ -473,12 +474,12 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     _spriteFrameLoadedCallback:null,
 
     /**
-     * Initializes a sprite with a sprite frame name. <br/>
-     * A cc.SpriteFrame will be fetched from the cc.SpriteFrameCache by name.  <br/>
-     * If the cc.SpriteFrame doesn't exist it will raise an exception. <br/>
-     * Please pass parameters to the constructor to initialize the sprite, do not call this function yourself.
-     * @param {String} spriteFrameName A key string that can fected a volid cc.SpriteFrame from cc.SpriteFrameCache
-     * @return {Boolean} true if the sprite is initialized properly, false otherwise.
+     * 使用一个精灵帧名初始化精灵。<br/>
+     * 一个cc.SpriteFrame对象将通过名称从cc.SpriteFrameCache获取。  <br/>
+     * 如果cc.SpriteFrame对象不存在，会抛出一个异常。<br/>
+     * 请把参数传递给构造函数来初始化精灵，不要自己调用这个方法。
+     * @param {String} spriteFrameName 一个可以从cc.SpriteFrameCache获取可用的cc.SpriteFrame对象的关键字。
+     * @return {Boolean}  如果精灵呗正常的初始化，则返回true，否则返回false。
      * @example
      * var sprite = new cc.Sprite();
      * sprite.initWithSpriteFrameName("grossini_dance_01.png");
@@ -491,7 +492,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Tell the sprite to use batch node render.
+     * 通知精灵使用batch node进行渲染。
      * @param {cc.SpriteBatchNode} batchNode
      */
     useBatchNode:function (batchNode) {
@@ -501,11 +502,11 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 
     /**
      * <p>
-     *    set the vertex rect.<br/>
-     *    It will be called internally by setTextureRect.                           <br/>
-     *    Useful if you want to create 2x images from SD images in Retina Display.  <br/>
-     *    Do not call it manually. Use setTextureRect instead.  <br/>
-     *    (override this method to generate "double scale" sprites)
+     *    设置顶点矩形<br/>
+     *    由setTextureRect方法会被内部调用。                      <br/>
+     *    用于在视网膜屏(Retina Display)上显示2倍大小的标清图像。 <br/>
+     *    不能手工调用此方法，应该调用setTextureRect实现相应的功能。 <br/>
+     *    （重载这个方法可以创建"两倍缩放"的精灵）
      * </p>
      * @param {cc.Rect} rect
      */
@@ -518,20 +519,20 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Sort all children of this sprite node.
+     * 重新排序这个精灵节点的所有子节点。
      * @override
      */
     sortAllChildren:function () {
         if (this._reorderChildDirty) {
             var _children = this._children;
 
-            // insertion sort
+            // 插入排序法
             var len = _children.length, i, j, tmp;
             for(i=1; i<len; i++){
                 tmp = _children[i];
                 j = i - 1;
 
-                //continue moving element downwards while zOrder is smaller or when zOrder is the same but mutatedIndex is smaller
+                //当zOrder较小或者zOrder一样大但mutatedIndex较小时向下移动元素
                 while(j >= 0){
                     if(tmp._localZOrder < _children[j]._localZOrder){
                         _children[j+1] = _children[j];
@@ -549,14 +550,14 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
                 this._arrayMakeObjectsPerformSelector(_children, cc.Node._stateCallbackType.sortAllChildren);
             }
 
-            //don't need to check children recursively, that's done in visit of each child
+            //不需要检查子节点递归, 在访问每个子节点时已检查
             this._reorderChildDirty = false;
         }
 
     },
 
     /**
-     * Reorders a child according to a new z value.  (override cc.Node )
+     * 根据新的Z值重新排序子节点。  （重载 cc.Node）
      * @param {cc.Node} child
      * @param {Number} zOrder
      * @override
@@ -579,9 +580,9 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Removes a child from the sprite.
+     * 从精灵中移除一个子节点。
      * @param child
-     * @param cleanup  whether or not cleanup all running actions
+     * @param cleanup  是否清理所有正在运行的动作
      * @override
      */
     removeChild:function (child, cleanup) {
@@ -591,7 +592,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Sets whether the sprite is visible or not.
+     * 设置精灵是否可见。
      * @param {Boolean} visible
      * @override
      */
@@ -601,8 +602,8 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Removes all children from the container.
-     * @param cleanup whether or not cleanup all running actions
+     * 从容器中移除所有的子节点。
+     * @param cleanup 是否清理所有正在运行的动作
      * @override
      */
     removeAllChildren:function (cleanup) {
@@ -617,12 +618,11 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     //
-    // cc.Node property overloads
+    // cc.Node属性过量
     //
-
 	/**
-	 * Sets recursively the dirty flag.
-	 * Used only when parent is cc.SpriteBatchNode
+	 * 递归设置dirty标志。
+	 * 仅在父节点是cc.SpriteBatchNode时使用。
 	 * @param {Boolean} value
 	 */
 	setDirtyRecursively:function (value) {
@@ -637,8 +637,8 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 	},
 
 	/**
-	 * Make the node dirty
-	 * @param {Boolean} norecursive When true children will not be set dirty recursively, by default, they will be.
+	 * 设置节点为dirty
+	 * @param {Boolean} norecursive 当传入true时，子节点不会递归设置为dirty，默认会
 	 * @override
 	 */
 	setNodeDirty: function(norecursive) {
@@ -655,7 +655,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 	},
 
     /**
-     * Sets whether ignore anchor point for positioning
+     * 设置定位时是否忽略锚点
      * @param {Boolean} relative
      * @override
      */
@@ -668,8 +668,8 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Sets whether the sprite should be flipped horizontally or not.
-     * @param {Boolean} flippedX true if the sprite should be flipped horizontally, false otherwise.
+     * 设置精灵横向是否翻转。
+     * @param {Boolean} flippedX 传入true时，精灵会横向翻转，false不会
      */
     setFlippedX:function (flippedX) {
         if (this._flippedX != flippedX) {
@@ -680,8 +680,8 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Sets whether the sprite should be flipped vertically or not.
-     * @param {Boolean} flippedY true if the sprite should be flipped vertically, false otherwise.
+     * 设置精灵纵向是否翻转。
+     * @param {Boolean} flippedY 传入true时，精灵会纵向翻转，false不会
      */
     setFlippedY:function (flippedY) {
         if (this._flippedY != flippedY) {
@@ -693,13 +693,13 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 
     /**
      * <p>
-     * Returns the flag which indicates whether the sprite is flipped horizontally or not.                      <br/>
+     * 返回精灵是否横向翻转的标志。                  <br/>
      *                                                                                                              <br/>
-     * It only flips the texture of the sprite, and not the texture of the sprite's children.                       <br/>
-     * Also, flipping the texture doesn't alter the anchorPoint.                                                    <br/>
-     * If you want to flip the anchorPoint too, and/or to flip the children too use:                                <br/>
+     * 仅仅翻转精灵的纹理，而不是精灵子节点的纹理。                   <br/>
+     * 并且翻转纹理不会修改锚点。                                               <br/>
+     * 如果你想翻转精灵的锚点，并且翻转它的子节点，使用：                            <br/>
      *      sprite.setScaleX(sprite.getScaleX() * -1);  <p/>
-     * @return {Boolean} true if the sprite is flipped horizontally, false otherwise.
+     * @return {Boolean} 如果精灵横向翻转返回true，否则返回false。
      */
     isFlippedX:function () {
         return this._flippedX;
@@ -707,13 +707,13 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 
     /**
      * <p>
-     *     Return the flag which indicates whether the sprite is flipped vertically or not.                         <br/>
+     *     返回精灵是否纵向翻转的标志。                      <br/>
      *                                                                                                              <br/>
-     *      It only flips the texture of the sprite, and not the texture of the sprite's children.                  <br/>
-     *      Also, flipping the texture doesn't alter the anchorPoint.                                               <br/>
-     *      If you want to flip the anchorPoint too, and/or to flip the children too use:                           <br/>
+     * 仅仅翻转精灵的纹理，而不是精灵子节点的纹理。                   <br/>
+     * 并且翻转纹理不会修改锚点。                                               <br/>
+     * 如果你想翻转精灵的锚点，并且翻转它的子节点，使用：                            <br/>
      *         sprite.setScaleY(sprite.getScaleY() * -1); <p/>
-     * @return {Boolean} true if the sprite is flipped vertically, false otherwise.
+     * @return {Boolean} 如果精灵纵向翻转返回true，否则返回false。
      */
     isFlippedY:function () {
         return this._flippedY;
@@ -723,14 +723,14 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     // RGBA protocol
     //
     /**
-     * Sets whether opacity modify color or not.
+     * 设置透明度是否修改颜色。
      * @function
      * @param {Boolean} modify
      */
     setOpacityModifyRGB:null,
 
     /**
-     * Returns whether opacity modify color or not.
+     * 返回透明度是否修改颜色。
      * @return {Boolean}
      */
     isOpacityModifyRGB:function () {
@@ -738,16 +738,15 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Update the display opacity.
+     * 更新显示透明度。
      * @function
      */
     updateDisplayedOpacity: null,
 
-    // Animation
-
+    // 动画
     /**
-     * Changes the display frame with animation name and index.<br/>
-     * The animation name will be get from the CCAnimationCache
+     * 通过动画名和序号修改显示的帧。<br/>
+     * 从CCAnimationCache获取动画名
      * @param {String} animationName
      * @param {Number} frameIndex
      */
@@ -768,8 +767,8 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Returns the batch node object if this sprite is rendered by cc.SpriteBatchNode
-     * @returns {cc.SpriteBatchNode|null} The cc.SpriteBatchNode object if this sprite is rendered by cc.SpriteBatchNode, null if the sprite isn't used batch node.
+     * 如果精灵通过cc.SpriteBatchNode进行渲染，返回批处理节点对象。
+     * @returns {cc.SpriteBatchNode|null} 如果精灵通过cc.SpriteBatchNode进行渲染，则返回cc.SpriteBatchNode对象，否则返回null。
      */
     getBatchNode:function () {
         return this._batchNode;
@@ -787,16 +786,15 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
         }
     },
 
-    // CCTextureProtocol
     /**
-     * Returns the texture of the sprite node
+     * 返回精灵节点的纹理
      * @returns {cc.Texture2D}
      */
     getTexture:function () {
         return this._texture;
     },
 
-    _quad: null, // vertex coords, texture coords and color info
+    _quad: null, // 顶点坐标, 纹理坐标和颜色说明
     _quadWebBuffer: null,
     _quadDirty: false,
     _colorized: false,
@@ -811,23 +809,23 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 			cc.Sprite.prototype.init.call(this);
 		else if (cc.isString(fileName)) {
 			if (fileName[0] === "#") {
-				// Init with a sprite frame name
+				// 用精灵帧名称初始化
 				var frameName = fileName.substr(1, fileName.length - 1);
 				var spriteFrame = cc.spriteFrameCache.getSpriteFrame(frameName);
 				this.initWithSpriteFrame(spriteFrame);
 			} else {
-				// Init  with filename and rect
+				// 用文件名和矩形初始化
 				cc.Sprite.prototype.init.call(this, fileName, rect);
 			}
 		} else if (cc.isObject(fileName)) {
 			if (fileName instanceof cc.Texture2D) {
-				// Init  with texture and rect
+				// 用纹理和矩形初始化
 				this.initWithTexture(fileName, rect, rotated);
 			} else if (fileName instanceof cc.SpriteFrame) {
-				// Init with a sprite frame
+				// 用一个精灵帧初始化
 				this.initWithSpriteFrame(fileName);
 			} else if ((fileName instanceof HTMLImageElement) || (fileName instanceof HTMLCanvasElement)) {
-				// Init with a canvas or image element
+				// 用一个canvas和图片元素初始化
 				var texture2d = new cc.Texture2D();
 				texture2d.initWithElement(fileName);
 				texture2d.handleLoadedTexture();
@@ -837,7 +835,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 	},
 
     /**
-     * Returns the quad (tex coords, vertex coords and color) information.
+     * 返回quad （纹理坐标，顶点坐标和颜色）信息。
      * @return {cc.V3F_C4B_T2F_Quad}
      */
     getQuad:function () {
@@ -845,7 +843,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * conforms to cc.TextureProtocol protocol
+     * cc.TextureProtocol采用的协议
      * @function
      * @param {Number|cc.BlendFunc} src
      * @param {Number} dst
@@ -853,8 +851,8 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     setBlendFunc: null,
 
     /**
-     * Initializes an empty sprite with nothing init.<br/>
-     * Please pass parameters to the constructor to initialize the sprite, do not call this function yourself.
+     * 初始化一个所有信息都未设置的空的精灵节点。<br/>
+     * 使用构造函数初始化精灵，不要自己调用此方法。
      * @function
      * @return {Boolean}
      */
@@ -862,16 +860,16 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 
     /**
      * <p>
-     *     Initializes a sprite with an image filename.<br/>
+     *     通过图片文件名初始化精灵。<br/>
      *
-     *     This method will find pszFilename from local file system, load its content to CCTexture2D,<br/>
-     *     then use CCTexture2D to create a sprite.<br/>
-     *     After initialization, the rect used will be the size of the image. The offset will be (0,0).<br/>
-     *     Please pass parameters to the constructor to initialize the sprite, do not call this function yourself.
+     *     这个方法会在本地文件系统中搜索指定文件名的图片，然后将他加载到CCTexture2D，<br/>
+     *     然后使用这个CCTexture2D创建精灵。<br/>
+     *     初始化完成以后，矩形是图片的尺寸，偏移是(0,0)。<br/>
+     *     请将参数传递给构造函数初始化精灵，不要自己调用此方法。
      * </p>
-     * @param {String} filename The path to an image file in local file system
-     * @param {cc.Rect} rect The rectangle assigned the content area from texture.
-     * @return {Boolean} true if the sprite is initialized properly, false otherwise.
+     * @param {String} filename 在本地文件系统中图片文件名
+     * @param {cc.Rect} rect 用于裁剪纹理的矩形
+     * @return {Boolean} 初始化成功返回true，否则返回false
      */
     initWithFile:function (filename, rect) {
         cc.assert(filename, cc._LogInfos.Sprite_initWithFile);
@@ -890,52 +888,51 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Initializes a sprite with a texture and a rect in points, optionally rotated.  <br/>
-     * After initialization, the rect used will be the size of the texture, and the offset will be (0,0).<br/>
-     * Please pass parameters to the constructor to initialize the sprite, do not call this function yourself.
+     * 通过纹理对象、矩形以及是否旋转初始化精灵 <br/>
+     * 初始化之后，矩形用于裁剪纹理，偏移被置为(0,0)。<br/>
+     *     请将参数传递给构造函数初始化精灵，不要自己调用此方法。
      * @function
-     * @param {cc.Texture2D|HTMLImageElement|HTMLCanvasElement} texture A pointer to an existing CCTexture2D object. You can use a CCTexture2D object for many sprites.
-     * @param {cc.Rect} rect Only the contents inside rect of this texture will be applied for this sprite.
-     * @param {Boolean} [rotated] Whether or not the texture rectangle is rotated.
-     * @return {Boolean} true if the sprite is initialized properly, false otherwise.
+     * @param {cc.Texture2D|HTMLImageElement|HTMLCanvasElement} texture 一个纹理对象，可以使用一个对象创建多个精灵
+     * @param {cc.Rect} rect 在矩形之内的纹理才会用于创建精灵
+     * @param {Boolean} [rotated] 纹理矩形是否旋转
+     * @return {Boolean} 初始化成功返回true，否则返回false
      */
     initWithTexture: null,
 
     _textureLoadedCallback: null,
 
     /**
-     * Updates the texture rect of the CCSprite in points.
+     * 更新裁剪纹理的矩形。
      * @function
-     * @param {cc.Rect} rect a rect of texture
-     * @param {Boolean} [rotated] Whether or not the texture is rotated
-     * @param {cc.Size} [untrimmedSize] The original pixels size of the texture
+     * @param {cc.Rect} rect 裁剪纹理的矩形
+     * @param {Boolean} [rotated] 纹理是否旋转
+     * @param {cc.Size} [untrimmedSize] 纹理的原始像素尺寸
      */
     setTextureRect:null,
 
-    // BatchNode methods
     /**
-     * Updates the quad according the the rotation, position, scale values.
+     * 根据旋转，位置和缩放值更新quad
      * @function
      */
     updateTransform: null,
 
     /**
-     * Add child to sprite (override cc.Node)
+     * 给精灵增加一个子节点(重载 cc.Node)
      * @function
      * @param {cc.Sprite} child
-     * @param {Number} localZOrder  child's zOrder
-     * @param {String} tag child's tag
+     * @param {Number} localZOrder 子节点的绘图顺序
+     * @param {String} tag 子节点的标签
      * @override
      */
     addChild: null,
 
     /**
-     * Update sprite's color
+     * 更新精灵的颜色
      */
     updateColor:function () {
         var locDisplayedColor = this._displayedColor, locDisplayedOpacity = this._displayedOpacity;
         var color4 = {r: locDisplayedColor.r, g: locDisplayedColor.g, b: locDisplayedColor.b, a: locDisplayedOpacity};
-        // special opacity for premultiplied textures
+        // 透明像素纹理的特殊透明度
         if (this._opacityModifyRGB) {
             color4.r *= locDisplayedOpacity / 255.0;
             color4.g *= locDisplayedOpacity / 255.0;
@@ -947,53 +944,53 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
         locQuad.tl.colors = color4;
         locQuad.tr.colors = color4;
 
-        // renders using Sprite Manager
+        // 使用Sprite Manager渲染
         if (this._batchNode) {
             if (this.atlasIndex != cc.Sprite.INDEX_NOT_INITIALIZED) {
                 this.textureAtlas.updateQuad(locQuad, this.atlasIndex)
             } else {
-                // no need to set it recursively
-                // update dirty_, don't update recursiveDirty_
+                // 不需要递归地进行设置
+                // 更新dirty_, 不要更新recursiveDirty_
                 this.dirty = true;
             }
         }
-        // self render
-        // do nothing
+        // 自渲染
+        // 没做什么...
         this._quadDirty = true;
     },
 
     /**
-     * Sets opacity of the sprite
+     * 设置精灵的透明度
      * @function
      * @param {Number} opacity
      */
     setOpacity:null,
 
     /**
-     * Sets color of the sprite
+     * 设置精灵的颜色
      * @function
      * @param {cc.Color} color3
      */
     setColor: null,
 
     /**
-     * Updates the display color
+     * 更新显示的颜色
      * @function
      */
     updateDisplayedColor: null,
 
-    // Frames
+    // 帧
     /**
-     * Sets a new sprite frame to the sprite.
+     * 为精灵设置一个新的精灵帧。
      * @function
      * @param {cc.SpriteFrame|String} newFrame
      */
     setSpriteFrame: null,
 
     /**
-     * Sets a new display frame to the sprite.
+     * 为精灵设置一个新的显示帧。
      * @param {cc.SpriteFrame|String} newFrame
-     * @deprecated
+     * @deprecated 使用setSpriteFrame代替
      */
     setDisplayFrame: function(newFrame){
         cc.log(cc._LogInfos.Sprite_setDisplayFrame);
@@ -1001,7 +998,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Returns whether or not a cc.SpriteFrame is being displayed
+     * 返回cc.SpriteFrame是否被显示
      * @function
      * @param {cc.SpriteFrame} frame
      * @return {Boolean}
@@ -1009,7 +1006,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     isFrameDisplayed: null,
 
     /**
-     * Returns the current displayed frame.
+     * 返回当前显示帧
      * @return {cc.SpriteFrame}
      */
     displayFrame: function () {
@@ -1021,7 +1018,7 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
     },
 
     /**
-     * Sets the batch node to sprite
+     * 给精灵指定一个批处理节点
      * @function
      * @param {cc.SpriteBatchNode|null} spriteBatchNode
      * @example
@@ -1034,20 +1031,20 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 
     // CCTextureProtocol
     /**
-     * Sets the texture of sprite
+     * 设置精灵的纹理
      * @function
      * @param {cc.Texture2D|String} texture
      */
     setTexture: null,
 
-    // Texture protocol
+    // 纹理协议
     _updateBlendFunc:function () {
         if(this._batchNode){
             cc.log(cc._LogInfos.Sprite__updateBlendFunc);
             return;
         }
 
-        // it's possible to have an untextured sprite
+        // 允许拥有没有设置文里的精灵
         if (!this._texture || !this._texture.hasPremultipliedAlpha()) {
             this._blendFunc.src = cc.SRC_ALPHA;
             this._blendFunc.dst = cc.ONE_MINUS_SRC_ALPHA;
@@ -1163,40 +1160,41 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 });
 
 /**
- * Create a sprite with image path or frame name or texture or spriteFrame.
- * @deprecated since v3.0, please use new construction instead
+ * 通过图片文件路径，或者帧名，或者纹理，或者精灵帧来创建精灵
+ * @deprecated 自v3.0弃用，使用新的构造函数代替
  * @see cc.Sprite
- * @param {String|cc.SpriteFrame|HTMLImageElement|cc.Texture2D} fileName  The string which indicates a path to image file, e.g., "scene1/monster.png".
- * @param {cc.Rect} rect  Only the contents inside rect of pszFileName's texture will be applied for this sprite.
- * @param {Boolean} [rotated] Whether or not the texture rectangle is rotated.
- * @return {cc.Sprite} A valid sprite object
+ * @param {String|cc.SpriteFrame|HTMLImageElement|cc.Texture2D} fileName  表示一个图片文件路径的字符串，例如 "scene1/monster.png".
+ * @param {cc.Rect} rect  用于裁剪纹理的矩形。
+ * @param {Boolean} [rotated] 裁剪纹理的矩形是否旋转。
+ * @return {cc.Sprite} 一个有效的精灵对象。
  */
 cc.Sprite.create = function (fileName, rect, rotated) {
     return new cc.Sprite(fileName, rect, rotated);
 };
 
 /**
- * @deprecated since v3.0, please use new construction instead
+ * @deprecated 自v3.0弃用，使用新的构造函数代替
  * @see cc.Sprite
  * @function
  */
 cc.Sprite.createWithTexture = cc.Sprite.create;
 
 /**
- * @deprecated since v3.0, please use new construction instead
+ * @deprecated 自v3.0弃用，使用新的构造函数代替
  * @see cc.Sprite
  * @function
  */
 cc.Sprite.createWithSpriteFrameName = cc.Sprite.create;
 
 /**
- * @deprecated since v3.0, please use new construction instead
+ * @deprecated 自v3.0弃用，使用新的构造函数代替
  * @see cc.Sprite
  * @function
  */
 cc.Sprite.createWithSpriteFrame = cc.Sprite.create;
+
 /**
- * cc.Sprite invalid index on the cc.SpriteBatchNode
+ * 在cc.SpriteBatchNode中错误的cc.Sprite序号
  * @constant
  * @type {Number}
  */
@@ -1273,22 +1271,22 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         _t._blendFunc.src = cc.BLEND_SRC;
         _t._blendFunc.dst = cc.BLEND_DST;
 
-        // update texture (calls _updateBlendFunc)
+        // 更新纹理(调用 _updateBlendFunc)
         _t.texture = null;
         _t._textureLoaded = true;
         _t._flippedX = _t._flippedY = false;
 
-        // default transform anchor: center
+        // 默认转化锚点: 中点
         _t.anchorX = 0.5;
         _t.anchorY = 0.5;
 
-        // zwoptex default values
+        // zwoptex默认值
         _t._offsetPosition.x = 0;
         _t._offsetPosition.y = 0;
         _t._hasChildren = false;
 
-        // updated in "useSelfRender"
-        // Atlas: TexCoords
+        // 在"useSelfRender"里更新
+        // 身负重担的人: TexCoords
         _t.setTextureRect(cc.rect(0, 0, 0, 0), false, cc.size(0, 0));
         return true;
     };
@@ -1323,11 +1321,11 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
 
         _t._flippedX = _t._flippedY = false;
 
-        // default transform anchor: center
+        // 默认转化锚点: 中点
         _t.anchorX = 0.5;
         _t.anchorY = 0.5;
 
-        // zwoptex default values
+        // zwoptex默认值
         _t._offsetPosition.x = 0;
         _t._offsetPosition.y = 0;
         _t._hasChildren = false;
@@ -1367,8 +1365,8 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         _t.texture = texture;
         _t.setTextureRect(rect, rotated);
 
-        // by default use "Self Render".
-        // if the sprite is added to a batchnode, then it will automatically switch to "batchnode Render"
+        // 默认使用"Self Render".
+        // 如果精灵加到了batchnode中,会自动切换到"batchnode Render"
         _t.batchNode = null;
         return true;
     };
@@ -1391,13 +1389,13 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         _t.texture = sender;
         _t.setTextureRect(locRect, _t._rectRotated);
 
-        //set the texture's color after the it loaded
+        //在装载之后设置纹理的颜色
         var locColor = this._displayedColor;
         if(locColor.r != 255 || locColor.g != 255 || locColor.b != 255)
             _t._changeTextureColor();
 
-        // by default use "Self Render".
-        // if the sprite is added to a batchnode, then it will automatically switch to "batchnode Render"
+        // 默认使用"Self Render".
+        // 如果精灵加到了batchnode中,会自动切换到"batchnode Render"
         _t.batchNode = _t._batchNode;
         _t.dispatchEvent("load");
     };
@@ -1425,20 +1423,20 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         _t._offsetPosition.x = relativeOffset.x + (_t._contentSize.width - _t._rect.width) / 2;
         _t._offsetPosition.y = relativeOffset.y + (_t._contentSize.height - _t._rect.height) / 2;
 
-        // rendering using batch node
+        // 用batch node渲染
         if (_t._batchNode) {
-            // update dirty, don't update _recursiveDirty
+            // 更新dirty, 不更新_recursiveDirty
             _t.dirty = true;
         }
     };
 
     _p.updateTransform = function () {
         var _t = this;
-        //cc.assert(_t._batchNode, "updateTransform is only valid when cc.Sprite is being rendered using an cc.SpriteBatchNode");
+        //cc.assert(_t._batchNode, "updateTransform只当cc.Sprite is being用一个cc.SpriteBatchNode"渲染时才有效);
 
-        // re-calculate matrix only if it is dirty
+        // 如果dirty，从新计算矩阵
         if (_t.dirty) {
-            // If it is not visible, or one of its ancestors is not visible, then do nothing:
+            // 如果不可视, 或者某一个祖先节点不可视, 则不作任何操作:
             var locParent = _t._parent;
             if (!_t._visible || ( locParent && locParent != _t._batchNode && locParent._shouldBeHidden)) {
                 _t._shouldBeHidden = true;
@@ -1456,7 +1454,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
             _t.dirty = false;
         }
 
-        // recursively iterate over children
+        // 重复递归子节点
         if (_t._hasChildren)
             _t._arrayMakeObjectsPerformSelector(_t._children, cc.Node._stateCallbackType.updateTransform);
     };
@@ -1469,7 +1467,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         if (tag == null)
             tag = child.tag;
 
-        //cc.Node already sets isReorderChildDirty_ so this needs to be after batchNode check
+        //cc.Node已经设置isReorderChildDirty_ 所以需要在batchNode之后检查
         cc.Node.prototype.addChild.call(this, child, localZOrder, tag);
         this._hasChildren = true;
     };
@@ -1513,7 +1511,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         _t._unflippedOffsetPositionFromCenter.x = frameOffset.x;
         _t._unflippedOffsetPositionFromCenter.y = frameOffset.y;
 
-        // update rect
+        // 更新矩形
         _t._rectRotated = newFrame.isRotated();
 
         var pNewTexture = newFrame.getTexture();
@@ -1529,7 +1527,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
                 _t.dispatchEvent("load");
             }, _t);
         }
-        // update texture before updating texture rect
+        // 在更新矩形纹理时先更新纹理
         if (pNewTexture != _t._texture)
             _t.texture = pNewTexture;
 
@@ -1555,18 +1553,18 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
 
     _p.setBatchNode = function (spriteBatchNode) {
         var _t = this;
-        _t._batchNode = spriteBatchNode; // weak reference
+        _t._batchNode = spriteBatchNode; // 弱参
 
-        // self render
+        // 自传递
         if (!_t._batchNode) {
             _t.atlasIndex = cc.Sprite.INDEX_NOT_INITIALIZED;
             _t.textureAtlas = null;
             _t._recursiveDirty = false;
             _t.dirty = false;
         } else {
-            // using batch
+            // 用batch
             _t._transformToBatch = cc.affineTransformIdentity();
-            _t.textureAtlas = _t._batchNode.textureAtlas; // weak ref
+            _t.textureAtlas = _t._batchNode.textureAtlas; // 弱参
         }
     };
 
@@ -1578,7 +1576,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
             //TODO
             var size = texture.getContentSize();
             _t.setTextureRect(cc.rect(0,0, size.width, size.height));
-            //If image isn't loaded. Listen for the load event.
+            //如果图片没有加载. 监听load事件.
             if(!texture._isLoaded){
                 texture.addEventListener("load", function(){
                     var size = texture.getContentSize();
@@ -1588,7 +1586,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
             return;
         }
 
-        // CCSprite: setTexture doesn't work when the sprite is rendered using a CCSpriteSheet
+        // CCSprite: 当精灵使用CCSpriteSheet渲染时不执行setTexture
         cc.assert(!texture || texture instanceof cc.Texture2D, cc._LogInfos.CCSpriteBatchNode_setTexture);
 
         if (_t._texture != texture) {
@@ -1610,7 +1608,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
                 var cacheTextureForColor = cc.textureCache.getTextureColors(this._originalTexture.getHtmlElementObj());
                 if (cacheTextureForColor) {
                     this._colorized = true;
-                    //generate color texture cache
+                    //创建颜色纹理缓存
                     if (locElement instanceof HTMLCanvasElement && !this._rectRotated && !this._newTextureWhenChangeColor)
                         cc.generateTintImage(locElement, cacheTextureForColor, this._displayedColor, locRect, locElement);
                     else {
