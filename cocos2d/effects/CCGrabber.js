@@ -25,7 +25,7 @@
  ****************************************************************************/
 
 /**
- * FBOÀà£ºÓÃÀ´×¥È¡ÆÁÄ»ÉÏµÄÄÚÈİ
+ * FBOç±»ï¼šç”¨æ¥æŠ“å–å±å¹•ä¸Šçš„å†…å®¹
  * @class
  * @extends cc.Class
  */
@@ -37,7 +37,7 @@ cc.Grabber = cc.Class.extend({
     _gl:null,
 
     /**
-     * cc.GrabberµÄ¹¹ÔìÆ÷     
+     * cc.Grabberçš„æ„é€ å™¨     
      */
     ctor:function () {
         cc._checkWebGLRenderMode();
@@ -49,18 +49,18 @@ cc.Grabber = cc.Class.extend({
     },
 
     /**
-     * ×¥È¡º¯Êı£¨grab£©
+     * æŠ“å–å‡½æ•°ï¼ˆgrabï¼‰
      * @param {cc.Texture2D} texture
      */
     grab:function (texture) {
         var locGL = this._gl;
         this._oldFBO = locGL.getParameter(locGL.FRAMEBUFFER_BINDING);
-        // °ó¶¨
+        // ç»‘å®š
         locGL.bindFramebuffer(locGL.FRAMEBUFFER, this._FBO);
-        // ½«ÎÆÀíÁ¬½Óµ½FBO
+        // å°†çº¹ç†è¿æ¥åˆ°FBO
         locGL.framebufferTexture2D(locGL.FRAMEBUFFER, locGL.COLOR_ATTACHMENT0, locGL.TEXTURE_2D, texture._webTextureObj, 0);
 
-        // ¼ì²é¸Ãº¯ÊıÊÇ·ñ¹¤×÷£¨·Ç³£ÍÆ¼öÕâÃ´×ö :)£©
+        // æ£€æŸ¥è¯¥å‡½æ•°æ˜¯å¦å·¥ä½œï¼ˆéå¸¸æ¨èè¿™ä¹ˆåš :)ï¼‰
         var status = locGL.checkFramebufferStatus(locGL.FRAMEBUFFER);
         if (status != locGL.FRAMEBUFFER_COMPLETE)
             cc.log("Frame Grabber: could not attach texture to frmaebuffer");
@@ -68,7 +68,7 @@ cc.Grabber = cc.Class.extend({
     },
 
     /**
-     * ÔÚ»æÍ¼Ö®Ç°Ó¦¸Ã±»µ÷ÓÃµÄº¯Êı
+     * åœ¨ç»˜å›¾ä¹‹å‰åº”è¯¥è¢«è°ƒç”¨çš„å‡½æ•°
      * @param {cc.Texture2D} texture
      */
     beforeRender:function (texture) {
@@ -76,21 +76,21 @@ cc.Grabber = cc.Class.extend({
         this._oldFBO = locGL.getParameter(locGL.FRAMEBUFFER_BINDING);
         locGL.bindFramebuffer(locGL.FRAMEBUFFER, this._FBO);
 
-        // ½«±£´æÇåÎúµÄÑÕÉ«
+        // å°†ä¿å­˜æ¸…æ™°çš„é¢œè‰²
         this._oldClearColor = locGL.getParameter(locGL.COLOR_CLEAR_VALUE);
 
-        // BUG XXX:ÎŞ·¨Ê¹ÓÃRGB565.
+        // BUG XXX:æ— æ³•ä½¿ç”¨RGB565.
         locGL.clearColor(0, 0, 0, 0);
 
-        // BUG #631:È¡Ïû#631µÄ×¢ÊÍĞĞ¼´¿ÉÊ¹ÓÃ
-        // ¾¯¸æ£ºµ«ÊÇCCGrabberÎŞ·¨Í¬Ê±Ê¹ÓÃÁ½ÖÖÌØĞ§
+        // BUG #631:å–æ¶ˆ#631çš„æ³¨é‡Šè¡Œå³å¯ä½¿ç”¨
+        // è­¦å‘Šï¼šä½†æ˜¯CCGrabberæ— æ³•åŒæ—¶ä½¿ç”¨ä¸¤ç§ç‰¹æ•ˆ
         //  glClearColor(0.0f,0.0f,0.0f,1.0f);    // #631
         locGL.clear(locGL.COLOR_BUFFER_BIT | locGL.DEPTH_BUFFER_BIT);
         //  glColorMask(true, true, true, false);    // #631
     },
 
     /**
-     * ÔÚ»æÍ¼Íê³Éºó±»µ÷ÓÃµÄº¯Êı
+     * åœ¨ç»˜å›¾å®Œæˆåè¢«è°ƒç”¨çš„å‡½æ•°
      * @param {cc.Texture2D} texture
      */
     afterRender:function (texture) {
@@ -100,7 +100,7 @@ cc.Grabber = cc.Class.extend({
     },
 
     /**
-     * É¾³ıFBO
+     * åˆ é™¤FBO
      */
     destroy:function(){
         this._gl.deleteFramebuffer(this._FBO);
