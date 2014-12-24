@@ -46,14 +46,14 @@ cc.MENU_HANDLER_PRIORITY = -128;
 cc.DEFAULT_PADDING = 5;
 
 /**
- * <p> ÌØµãºÍ¾ÖÏŞ£º<br/>
- *  -Äã¿ÉÒÔÔÚÔËĞĞµÄÊ±ºòÊ¹ÓÃaddChildÀ´Ôö¼ÓMenuItem objects
- *  -µ«ÊÇÎ¨Ò»¿ÉÒÔ½ÓÊÜµÄ¾ÍÊÇMenuItem objects
+ * <p> ç‰¹ç‚¹å’Œå±€é™ <br/>
+ *  - ä½ å¯ä»¥åœ¨è¿è¡Œçš„æ—¶å€™ä½¿ç”¨addChildæ¥å¢åŠ MenuItem objects
+ *  - ä½†æ˜¯å”¯ä¸€å¯ä»¥æ¥å—çš„å°±æ˜¯MenuItem objects</p>
  *  @class
  *  @extends cc.Layer
  *  @param {...cc.MenuItem|null} menuItems}
  *  @example
- *   var layer = new cc.Menu(menuitem1, menuitem2, menuitem3);
+ *  var layer = new cc.Menu(menuitem1, menuitem2, menuitem3);
  */
 
 cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
@@ -65,8 +65,8 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     _className: "Menu",
 
     /**
-     * ÖØĞ´cc.MenusµÄ¹¹ÔìÆ÷À´À©³äËûµÄ¹¦ÄÜ£¬µ«ÊÇÔÚÊ¹ÓÃ"ctor"¹¦ÄÜÊ±£¬¼ÇµÃÒªµ÷ÓÃ"this._super()"
-     *  @param {...cc.MenuItem|null} ²Ëµ¥Ïî
+     * é‡å†™cc.Menusçš„æ„é€ å™¨æ¥æ‰©å……ä»–çš„åŠŸèƒ½ï¼Œä½†æ˜¯åœ¨ä½¿ç”¨"ctor"åŠŸèƒ½æ—¶ï¼Œè®°å¾—è¦è°ƒç”¨"this._super()"
+     * @param {...cc.MenuItem|null} èœå•é¡¹
      */
 
     ctor: function (menuItems) {
@@ -110,10 +110,10 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
 
     /**
      * <p>
-     *     Ã¿´Îµ±CCMenu½øÈë'ÎèÌ¨'Ê±ÇëÇóµÄÊÂ¼ş»Øµ÷º¯Êı                                   <br/>
-     *     Èç¹ûCCMenuÓÃ¹ı¶É½øÈëµ½'ÎèÌ¨'£¬ÊÂ¼ş»áÔÚ¹ı¶É¿ªÊ¼Ê±µ÷ÓÃ       <br/>
-     *     ÔÚonEnterÆÚ¼ä²»¿ÉÒÔ½ÓÊÕÆäËû'ĞÖµÜ½ãÃÃ'½Úµã.         <br/>
-     *     Èç¹ûÄãÖØÔØonEnter, Äã±ØĞëÔÚthis._super()Àïµ÷ÓÃ¸¸ÀàµÄonEnter.
+     *     æ¯æ¬¡å½“CCMenuè¿›å…¥'èˆå°'æ—¶è¯·æ±‚çš„äº‹ä»¶å›è°ƒå‡½æ•°                                   <br/>
+     *     å¦‚æœCCMenuç”¨è¿‡æ¸¡è¿›å…¥åˆ°'èˆå°'ï¼Œäº‹ä»¶ä¼šåœ¨è¿‡æ¸¡å¼€å§‹æ—¶è°ƒç”¨       <br/>
+     *     åœ¨onEnteræœŸé—´ä¸å¯ä»¥æ¥æ”¶å…¶ä»–'å…„å¼Ÿå§å¦¹'èŠ‚ç‚¹.         <br/>
+     *     å¦‚æœä½ é‡è½½onEnter, ä½ å¿…é¡»åœ¨this._super()é‡Œè°ƒç”¨çˆ¶ç±»çš„onEnter.
      * </p>
      */
     onEnter: function () {
@@ -124,7 +124,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * ·µ»ØÕâ¸ö²Ëµ¥ÊÇ·ñ»á½ÓÊÕÊÂ¼ş
+     * è¿”å›è¿™ä¸ªèœå•æ˜¯å¦ä¼šæ¥æ”¶äº‹ä»¶
      * @return {Boolean}
      */
     isEnabled: function () {
@@ -132,7 +132,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * ÉèÖÃÕâ¸ö²Ëµ¥ÊÇ·ñ»á½ÓÊÕÊÂ¼ş
+     * è®¾ç½®è¿™ä¸ªèœå•æ˜¯å¦ä¼šæ¥æ”¶äº‹ä»¶
      * @param {Boolean} enabled
      */
     setEnabled: function (enabled) {
@@ -140,7 +140,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * ³õÊ¼»¯cc.Menu
+     * åˆå§‹åŒ–cc.Menu
      * @param {Array} args
      * @return {Boolean}
      */
@@ -157,15 +157,15 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * ³õÊ¼»¯cc.Menu²¢¸³Ò»¸öcc.MenuItem¶ÔÏóµÄÊı×é
-     * @param {Array} cc.MenuItemÊı×é
+     * åˆå§‹åŒ–cc.Menuå¹¶èµ‹ä¸€ä¸ªcc.MenuItemå¯¹è±¡çš„æ•°ç»„
+     * @param {Array} cc.MenuItemæ•°ç»„
      * @return {Boolean}
      */
     initWithArray: function (arrayOfItems) {
         if (cc.Layer.prototype.init.call(this)) {
             this.enabled = true;
 
-            // ÔÚÆÁÄ»ÖĞ¼äµÄ²Ëµ¥
+            // åœ¨å±å¹•ä¸­é—´çš„èœå•
             var winSize = cc.winSize;
             this.setPosition(winSize.width / 2, winSize.height / 2);
             this.setContentSize(winSize);
@@ -180,7 +180,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
             this._selectedItem = null;
             this._state = cc.MENU_STATE_WAITING;
 
-            // ÔÊĞíÔÚ²Ëµ¥Ê¹ÓÃ½¥±äÑÕÉ«ºÍÍ¸Ã÷¶È
+            // å…è®¸åœ¨èœå•ä½¿ç”¨æ¸å˜é¢œè‰²å’Œé€æ˜åº¦
             this.cascadeColor = true;
             this.cascadeOpacity = true;
 
@@ -190,10 +190,10 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * Îªcc.MenuÌí¼Ó×Ó½Úµã	  								
+     * ä¸ºcc.Menuæ·»åŠ å­èŠ‚ç‚¹	  								
      * @param {cc.Node} child
-     * @param {Number|Null} [zOrder=] ×Ó½ÚµãµÄzOrder
-     * @param {Number|Null} [tag=] ×Ó½ÚµãµÄtag
+     * @param {Number|Null} [zOrder=] å­èŠ‚ç‚¹çš„zOrder
+     * @param {Number|Null} [tag=] å­èŠ‚ç‚¹çš„tag
      */
     addChild: function (child, zOrder, tag) {
         if (!(child instanceof cc.MenuItem))
@@ -202,14 +202,14 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * ÓÃÄ¬ÈÏµÄ¼ä¾à´¹Ö±¶ÔÆë²Ëµ¥×ÓÏî
+     * ç”¨é»˜è®¤çš„é—´è·å‚ç›´å¯¹é½èœå•å­é¡¹
      */
     alignItemsVertically: function () {
         this.alignItemsVerticallyWithPadding(cc.DEFAULT_PADDING);
     },
 
     /**
-     * ÓÃÌØ¶¨µÄ¼ä¾à´¹Ö±¶ÔÆë²Ëµ¥×ÓÏî
+     * ç”¨ç‰¹å®šçš„é—´è·å‚ç›´å¯¹é½èœå•å­é¡¹
      * @param {Number} padding
      */
     alignItemsVerticallyWithPadding: function (padding) {
@@ -231,14 +231,14 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * ÓÃÄ¬ÈÏµÄ¼ä¾àË®Æ½¶ÔÆë²Ëµ¥×ÓÏî
+     * ç”¨é»˜è®¤çš„é—´è·æ°´å¹³å¯¹é½èœå•å­é¡¹
      */
     alignItemsHorizontally: function () {
         this.alignItemsHorizontallyWithPadding(cc.DEFAULT_PADDING);
     },
 
     /**
-     * ÓÃÌØ¶¨µÄ¼ä¾àË®Æ½¶ÔÆë²Ëµ¥×ÓÏî
+     * ç”¨ç‰¹å®šçš„é—´è·æ°´å¹³å¯¹é½èœå•å­é¡¹
      * @param {Number} padding
      */
     alignItemsHorizontallyWithPadding: function (padding) {
@@ -260,12 +260,12 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * ²Ëµ¥×ÓÏîÁĞ¶ÔÆë
+     * èœå•å­é¡¹åˆ—å¯¹é½
      * @example
-     * // Ê¾Àı
-     * menu.alignItemsInColumns(3,2,3)// Ìí¼ÓÈıÁĞ, µÚÒ»ÁĞºÍµÚÈıÁĞÈı¸ö×Ó²Ëµ¥Ïî, µÚ¶şÁĞÁ½¸ö×Ó²Ëµ¥Ïî
+     * // ç¤ºä¾‹
+     * menu.alignItemsInColumns(3,2,3)// æ·»åŠ ä¸‰åˆ—, ç¬¬ä¸€åˆ—å’Œç¬¬ä¸‰åˆ—ä¸‰ä¸ªå­èœå•é¡¹, ç¬¬äºŒåˆ—ä¸¤ä¸ªå­èœå•é¡¹
      *
-     * menu.alignItemsInColumns(3,3)//´´½¨Á½ÁĞ£¬¸÷ÓĞÈı¸ö×Ó²Ëµ¥Ïî
+     * menu.alignItemsInColumns(3,3)//åˆ›å»ºä¸¤åˆ—ï¼Œå„æœ‰ä¸‰ä¸ªå­èœå•é¡¹
     alignItemsInColumns: function (/*Multiple Arguments*/) {
         if ((arguments.length > 0) && (arguments[arguments.length - 1] == null))
             cc.log("parameters should not be ending with null in Javascript");
@@ -286,7 +286,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
                     continue;
 
                 rowColumns = rows[row];
-                // Ò»ĞĞÖĞ²»ÄÜÃ»ÓĞÁĞÊı
+                // ä¸€è¡Œä¸­ä¸èƒ½æ²¡æœ‰åˆ—æ•°
                 if (!rowColumns)
                     continue;
 
@@ -303,7 +303,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
                 }
             }
         }
-        // ¼ì²éÊÇ·ñÓĞ¹ı¶àµÄĞĞÊı/ÁĞÊı
+        // æ£€æŸ¥æ˜¯å¦æœ‰è¿‡å¤šçš„è¡Œæ•°/åˆ—æ•°
         //cc.assert(!columnsOccupied, "");  
         var winSize = cc.director.getWinSize();
 
@@ -341,13 +341,13 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
         }
     },
     /**
-     * ²Ëµ¥ÏîĞĞ¶ÔÆë
+     * èœå•é¡¹è¡Œå¯¹é½
      * @param {Number}
      * @example
-     * // Ê¾Àı
-     * menu.alignItemsInRows(5,3)//¶ÔÆäÁ½ĞĞ²Ëµ¥Ïî, µÚÒ»ĞĞÓĞÎå¸ö²Ëµ¥Ïî, µÚ¶şĞĞÓĞÈı¸ö
+     * // ç¤ºä¾‹
+     * menu.alignItemsInRows(5,3)// å¯¹å…¶ä¸¤è¡Œèœå•é¡¹, ç¬¬ä¸€è¡Œæœ‰äº”ä¸ªèœå•é¡¹, ç¬¬äºŒè¡Œæœ‰ä¸‰ä¸ª
      *
-     * menu.alignItemsInRows(4,4,4,4)//´´½¨ËÄĞĞ£¬Ã¿ĞĞÓĞËÄ¸ö²Ëµ¥Ïî
+     * menu.alignItemsInRows(4,4,4,4)// åˆ›å»ºå››è¡Œï¼Œæ¯è¡Œæœ‰å››ä¸ªèœå•é¡¹
      */
     alignItemsInRows: function (/*Multiple arguments*/) {
         if ((arguments.length > 0) && (arguments[arguments.length - 1] == null))
@@ -370,12 +370,12 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
         if (locChildren && locChildren.length > 0) {
             for (i = 0, len = locChildren.length; i < len; i++) {
                 child = locChildren[i];
-                // ¼ì²éÊÇ·ñÓĞ¹ıÁ¿µÄĞĞÊı/ÁĞÊı
+                // æ£€æŸ¥æ˜¯å¦æœ‰è¿‡é‡çš„è¡Œæ•°/åˆ—æ•°
                 if (column >= columns.length)
                     continue;
 
                 columnRows = columns[column];
-                // Ã¿ÁĞ²»¿ÉÒÔÃ»ÓĞĞĞÊı
+                // æ¯åˆ—ä¸å¯ä»¥æ²¡æœ‰è¡Œæ•°
                 if (!columnRows)
                     continue;
 
@@ -398,7 +398,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
                 }
             }
         }
-        // ¼ì²éÊÇ·ñÓĞ³¬¹ıÔÊĞíÖµµÄĞĞÊı/ÁĞÊı.
+        // æ£€æŸ¥ è¡Œæ•°/åˆ—æ•° æ˜¯å¦è¶…è¿‡å…è®¸å€¼.
         //cc.assert(!rowsOccupied, "");
         var winSize = cc.director.getWinSize();
 
@@ -437,9 +437,9 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * ´Ócc.MenuÒ»³öÒ»¸ö×Ó½Úµã
-     * @param {cc.Node} child ÄãÏëÒªÒÆ³ıµÄ×Ó½Úµã
-     * @param {boolean} cleanup ÊÇ·ñÇåÀíÄÚ´æ
+     * ä»cc.Menuç§»é™¤ä¸€ä¸ªå­èŠ‚ç‚¹
+     * @param {cc.Node} child ä½ æƒ³è¦ç§»é™¤çš„å­èŠ‚ç‚¹
+     * @param {boolean} cleanup æ˜¯å¦æ¸…ç†å†…å­˜
      */
     removeChild: function (child, cleanup) {
         if (child == null)
@@ -515,10 +515,10 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
 
     /**
      * <p>
-     * Ã¿´Îcc.MenuÀë¿ª'ÎèÌ¨'Ê±µ÷ÓÃµÄ»Øµ÷º¯Êı.                                         <br/>
-     * Èç¹ûcc.MenuÓÃ¹ı¶ÉÀë¿ª'ÎèÌ¨', »áÔÚ¹ı¶É¿ªÊ¼Ê±½øĞĞµ÷ÓÃ. <br/>
-     * ÔÚonExitÆÚ¼ä£¬ ²»¿ÉÒÔ»ñÈ¡ĞÖµÜ½ãÃÃ½Úµã.                   @return {Boolean}                                          <br/>
-     * Èç¹ûÖØÔØonExit, ÄãÓ¦¸ÃÔÚµ÷ÓÃthis._super()Àï¸¸ÀàµÄonExit.
+     * æ¯æ¬¡cc.Menuç¦»å¼€'èˆå°'æ—¶è°ƒç”¨çš„å›è°ƒå‡½æ•°.                                         <br/>
+     * å¦‚æœcc.Menuç”¨è¿‡æ¸¡ç¦»å¼€'èˆå°', ä¼šåœ¨è¿‡æ¸¡å¼€å§‹æ—¶è¿›è¡Œè°ƒç”¨. <br/>
+     * åœ¨onExitæœŸé—´ï¼Œä¸å¯ä»¥è·å–å…„å¼Ÿå§å¦¹èŠ‚ç‚¹.                   @return {Boolean}     <br/>
+     * å¦‚æœé‡è½½onExit, ä½ åº”è¯¥åœ¨è°ƒç”¨this._super()é‡Œçˆ¶ç±»çš„onExit.
      * </p>
      */
     onExit: function () {
@@ -532,13 +532,13 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
         cc.Node.prototype.onExit.call(this);
     },
     /**
-     * Ö»ÄÜÔÚjsbindingÊ¹ÓÃ
+     * åªèƒ½åœ¨jsbindingä½¿ç”¨
      * @param value
      */
     setOpacityModifyRGB: function (value) {
     },
     /**
-     * Ö»ÄÜÔÚjsbindingÊ¹ÓÃ
+     * åªèƒ½åœ¨jsbindingä½¿ç”¨
      * @returns {boolean}
      */
     isOpacityModifyRGB: function () {
@@ -567,14 +567,14 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
 
 var _p = cc.Menu.prototype;
 
-// @return {cc.Menu}Ôö¼ÓµÄÊôĞÔ
+// @return {cc.Menu} å¢åŠ çš„å±æ€§
 /** @expose */
 _p.enabled;
 
 /**
- * ²úÉúÒ»¸öĞÂµÄ²Ëµ¥
- * @deprecated ´Ó3.0°æ±¾ºó£¬ÇëÊ¹ÓÃĞÂµÄcc.MenuÀ´²úÉúÒ»¸öĞÂµÄ²Ëµ¥
- * @param {...cc.MenuItem|null} menuItems	      todo: ĞèÒªÊ¹ÓÃĞÂµÄ
+ * åˆ›å»ºä¸€ä¸ªæ–°çš„èœå•
+ * @deprecated ä»3.0ç‰ˆæœ¬åï¼Œè¯·ä½¿ç”¨æ–°çš„cc.Menuæ¥åˆ›å»ºæ–°èœå•
+ * @param {...cc.MenuItem|null} menuItems	      todo: éœ€è¦ä½¿ç”¨æ–°çš„
  * @return {cc.Menu}
  */
 cc.Menu.create = function (menuItems) {
