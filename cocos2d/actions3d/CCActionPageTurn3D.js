@@ -26,10 +26,10 @@
 
 /**
  * <p>
- *     This action simulates a page turn from the bottom right hand corner of the screen.     <br/>         这个action将一个页面从右下角的角度模拟成立体的场景
- *     It's not much use by itself but is used by the PageTurnTransition.                     <br/>         这个action本身不常用，但是会被PageTurnTransition调用
+ *     这个action将一个页面从右下角的角度模拟成立体的场景.     <br/>         
+ *     这个action本身不常用，但是会被PageTurnTransition调用.                     <br/>         
  *                                                                                            <br/>
- *     Based on an original paper by L Hong et al.                                            <br/>        基于一个L Hong et al写的原始文件 
+ *     基于一个L Hong et al写的原始文件.                                            <br/>         
  *     http://www.parc.com/publication/1638/turning-pages-of-3d-electronic-books.html
  * </p>
  * @class
@@ -37,8 +37,8 @@
  */
 cc.PageTurn3D = cc.Grid3DAction.extend(/** @lends cc.PageTurn3D# */{
     /**
-     * Update each tick                                         <br/>       在每次tick循环里更新
-     * Time is the percentage of the way through the duration       时间参数是一个通过时长设置的百分比数
+     *  在每次tick循环里更新                                <br/>      
+     * 时间参数是一个通过时长设置的百分比数  
      */
     update:function (time) {
         var tt = Math.max(0, time - 0.25);
@@ -57,7 +57,7 @@ cc.PageTurn3D = cc.Grid3DAction.extend(/** @lends cc.PageTurn3D# */{
             for (var j = 0; j <= locGridSize.height; ++j) {
                 locVer.x = i;
                 locVer.y = j;
-                // Get original vertex          获取原始的顶点
+                // 获取原始的顶点
                 var p = this.originalVertex(locVer);
 
                 var R = Math.sqrt((p.x * p.x) + ((p.y - ay) * (p.y - ay)));
@@ -66,25 +66,25 @@ cc.PageTurn3D = cc.Grid3DAction.extend(/** @lends cc.PageTurn3D# */{
                 var beta = alpha / sinTheta;
                 var cosBeta = Math.cos(beta);
 
-                // If beta > PI then we've wrapped around the cone          如果beta变量大于PI，包裹成圆锥体
-                // Reduce the radius to stop these points interfering with others       减少半径大小防止顶点影响其他顶点
+                // 如果beta变量大于PI，包裹成圆锥体
+                // 减少半径大小防止顶点影响其他顶点
                 if (beta <= Math.PI)
                     p.x = ( r * Math.sin(beta));
                 else
-                    p.x = 0;     //Force X = 0 to stop wrapped points       硬性设置 x=0 去停止包裹顶点
+                    p.x = 0;     //硬性设置 x=0 去停止包裹顶点    
 
                 p.y = ( R + ay - ( r * (1 - cosBeta) * sinTheta));
 
                 // We scale z here to avoid the animation being
-                // too much bigger than the screen due to perspectve transform          缩放z坐标去避免动画因为透镜转换变得比场景大
-                p.z = (r * ( 1 - cosBeta ) * cosTheta) / 7;// "100" didn't work for         如果是100，则没有效果
+                // 缩放z坐标去避免动画因为透镜转换变得比场景大     
+                p.z = (r * ( 1 - cosBeta ) * cosTheta) / 7;//  如果是100，则没有效果        
 
-                //	Stop z coord from dropping beneath underlying page in a transition       在变换过程中，防止z坐标减少到底层页面之下
+                // 在变换过程中，防止z坐标减少到底层页面之下
                 // issue #751
                 if (p.z < 0.5)
                     p.z = 0.5;
 
-                // Set new coords       设置新的坐标
+                // 设置新的坐标     
                 this.setVertex(locVer, p);
             }
         }
@@ -92,7 +92,7 @@ cc.PageTurn3D = cc.Grid3DAction.extend(/** @lends cc.PageTurn3D# */{
 });
 
 /**
- * create PageTurn3D action         创建一个PageTurn3D action
+ * 创建一个PageTurn3D action      
  * @function
  * @param {Number} duration
  * @param {cc.Size} gridSize
@@ -102,7 +102,7 @@ cc.pageTurn3D = function (duration, gridSize) {
     return new cc.PageTurn3D(duration, gridSize);
 };
 /**
- * Please use cc.pageTurn3D instead         3.0后的版本用cc.pageTurn3D代替
+ * 3.0后的版本用cc.pageTurn3D代替
  * create PageTurn3D action
  * @param {Number} duration
  * @param {cc.Size} gridSize

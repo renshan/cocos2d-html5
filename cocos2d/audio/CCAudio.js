@@ -25,13 +25,13 @@
  ****************************************************************************/
 
 /**
- * Audio support in the browser         浏览器的音频支持
+ * 浏览器的音频支持
  *
- * multichannel : Multiple audio while playing - If it doesn't, you can only play background music           多个音频播放：支持播放多个音频 - 如果不播放多个音频，你可以只播放背景音乐
- * webAudio     : Support for WebAudio - Support W3C WebAudio standards, all of the audio can be played         webAudio：支持网络音频 - 支持W3C的webAudio标准，所有音频格式都可以播放
- * auto         : Supports auto-play audio - if Don‘t support it, On a touch detecting background music canvas, and     then replay         自动播放：支持自动播放音频 - 如果不想自动播放，可以监听背景音乐的canvas的触摸事件去重新播放
+ * multichannel : 支持播放多个音频 - 如果不播放多个音频，你可以只播放背景音乐
+ * webAudio     : 支持网络音频 - 支持W3C的webAudio标准，所有音频格式都可以播放
+ * auto         : 支持自动播放音频 - 如果不想自动播放，可以监听背景音乐的canvas的触摸事件去重新播放
  *
- * May be modifications for a few browser version       在一些浏览器版本可能存在限制
+ * 在某些浏览器版本中可能存在限制
  */
 (function(){
 
@@ -58,7 +58,7 @@
     //  APPLE  //
     supportTable[sys.BROWSER_TYPE_SAFARI]  = {multichannel: true , webAudio: true , auto: false};
 
-    /* Determine the browser version number         判断浏览器的版本号*/      
+    /* 判断浏览器的版本号*/      
     var version, tmp;
     try{
         var ua = navigator.userAgent.toLowerCase();
@@ -97,7 +97,7 @@
     }
 
     ///////////////////////////
-    //  Browser compatibility//         如果浏览器适用
+    //  Browser compatibility//    
     ///////////////////////////
     if(version){
         switch(sys.browserType){
@@ -111,7 +111,7 @@
     if(cc.sys.isMobile){
         cc.__audioSupport = supportTable[cc.sys.browserType] || supportTable["common"];
     }else{
-        //Desktop support all       支持所有设备
+        //支持所有设备
         cc.__audioSupport = supportTable["common"];
     }
 
@@ -128,10 +128,10 @@
 })();
 
 /**
- * Encapsulate DOM and webAudio         封装成DOM和webAudio
+ * Encapsulate DOM and webAudio（封装成DOM和webAudio）
  */
 cc.Audio = cc.Class.extend({
-    //TODO Maybe loader shift in will be better        加载时移入会更好
+    //TODO Maybe loader shift in will be better（加载时移入会更好）
     volume: 1,
     loop: false,
     src: null,
@@ -141,7 +141,7 @@ cc.Audio = cc.Class.extend({
     _AUDIO_TYPE: "AUDIO",
     _pause: false,
 
-    //Web Audio         网络音频
+    //Web Audio
     _buffer: null,
     _currentSource: null,
     _startTime: null,
@@ -149,7 +149,7 @@ cc.Audio = cc.Class.extend({
     _context: null,
     _volume: null,
 
-    //DOM Audio         DOM音频
+    //DOM Audio  
     _element: null,
 
     ctor: function(context, volume, url){
@@ -238,12 +238,12 @@ cc.Audio = cc.Class.extend({
         this._currentTime = 0;
 
         /*
-         * Safari on iOS 6 only supports noteOn(), noteGrainOn(), and noteOff() now.(iOS 6.1.3)         iOS 6的Safari浏览器只支持noteOn(), noteGrainOn(), and noteOff()等函数
-         * The latest version of chrome has supported start() and stop()        最新版本的chrome浏览器已经支持start() and stop()函数
-         * start() & stop() are specified in the latest specification (written on 04/26/2013)       在最新的规范里，指定使用start() & stop() (写于 04/26/2013)  
-         *      Reference: https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html        参考：https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html 
-         * noteOn(), noteGrainOn(), and noteOff() are specified in Draft 13 version (03/13/2012)        在13版本的初稿里已经指定noteOn(), noteGrainOn(), and noteOff()
-         *      Reference: http://www.w3.org/2011/audio/drafts/2WD/Overview.html        参考： http://www.w3.org/2011/audio/drafts/2WD/Overview.html
+         * iOS 6的Safari浏览器只支持noteOn(), noteGrainOn(), and noteOff()等函数
+         * 最新版本的chrome浏览器已经支持start() and stop()函数
+         * 在最新的规范里，指定使用start() & stop() (写于 04/26/2013)  
+         *      参考：https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html 
+         * 在13版本的初稿里已经指定noteOn(), noteGrainOn(), and noteOff()
+         *      参考： http://www.w3.org/2011/audio/drafts/2WD/Overview.html
          */
         if(audio.start){
             audio.start(0, offset || 0);
@@ -251,17 +251,17 @@ cc.Audio = cc.Class.extend({
             var duration = audio.buffer.duration;
             if (this.loop) {
                 /*
-                 * On Safari on iOS 6, if loop == true, the passed in @param duration will be the duration from now on.         在iOS 6的Safari浏览器里，如果 loop == true，传递的时长参数会是从当前时间开始算起
-                 * In other words, the sound will keep playing the rest of the music all the time.          换句话说，音乐总是会一直播放知道全部播放完毕
-                 * On latest chrome desktop version, the passed in duration will only be the duration in this cycle.        在最新版本的chrome浏览器，传递的时长参数只是循环播放的时长
-                 * Now that latest chrome would have start() method, it is prepared for iOS here.       最新版本的谷歌浏览器将会有start()函数，这是为IOS系统准备的
+                 * 在iOS 6的Safari浏览器里，如果 loop == true，传递的时长参数会是从当前时间开始算起
+                 * 换句话说，音乐总是会一直播放知道全部播放完毕
+                 * 在最新版本的chrome浏览器，传递的时长参数只是循环播放的时长
+                 * 最新版本的谷歌浏览器将会有start()函数，这是为IOS系统准备的
                  */
                 audio["noteGrainOn"](0, offset, duration);
             } else {
                 audio["noteGrainOn"](0, offset, duration - offset);
             }
         }else {
-            // if only noteOn() is supported, resuming sound will NOT work          如果只支持noteOn()，将不能从新播放音乐
+            // 如果只支持noteOn()，将不能从新播放音乐
             audio["noteOn"](0);
         }
         this._currentSource = audio;
@@ -477,20 +477,20 @@ cc.Audio = cc.Class.extend({
 
             realUrl = cc.path.changeExtname(realUrl, typeList.splice(0, 1));
 
-            if(SWA){//Buffer        缓冲区
+            if(SWA){//Buffer缓冲区
 
                 var request = new XMLHttpRequest();
                 request.open("GET", realUrl, true);
                 request.responseType = "arraybuffer";
 
-                // Our asynchronous callback        我们的异步调用
+                // Our asynchronous callback （我们的异步调用）
                 request.onload = function () {
                     context["decodeAudioData"](request.response, function(buffer){
-                        //success       成功
+                        //成功
                         audio.setBuffer(buffer);
                         cb(null, audio);
                     }, function(){
-                        //error         失败
+                        //失败
                         loader.loadAudioFromExtList(realUrl, typeList, audio, cb);
                     });
                 };
@@ -526,7 +526,7 @@ cc.Audio = cc.Class.extend({
     cc.loader.register(["mp3", "ogg", "wav", "mp4", "m4a"], loader);
 
     /**
-     * cc.audioEngine is the singleton object, it provide simple audio APIs.        cc.audioEngine是一个单独的对象，提供了简单的音频接口
+     * cc.audioEngine是一个单独的对象，提供了简单的音频接口
      * @namespace
      */
     cc.audioEngine = {
@@ -534,17 +534,17 @@ cc.Audio = cc.Class.extend({
         _musicVolume: 1,
 
         /**
-         * Indicates whether any background music can be played or not.         标示背景音乐是否可以播放
-         * @returns {boolean} <i>true</i> if the background music is playing, otherwise <i>false</i>
+         * 标示背景音乐是否可以播放
+         * @returns {boolean} <i>true</i> 假如背景音乐正在播放，否则 <i>false</i>
          */
         willPlayMusic: function(){return false;},
 
         /**
-         * Play music.          播放音乐
-         * @param {String} url The path of the music file without filename extension.
-         * @param {Boolean} loop Whether the music loop or not.
+         * 播放音乐
+         * @param {String} url 不带文件扩展名的音乐文件的路径。
+         * @param {Boolean} loop 是否循环播放音乐.
          * @example
-         * //example        例子
+         * // 例子
          * cc.audioEngine.playMusic(path, false);
          */
         playMusic: function(url, loop){
@@ -563,10 +563,10 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Stop playing music.          停止播放音乐
-         * @param {Boolean} [releaseData] If release the music data or not.As default value is false.
+         * 停止播放音乐
+         * @param {Boolean} [releaseData] 是否释放音乐数据，默认值是false。
          * @example
-         * //example        例子
+         * // 例子
          * cc.audioEngine.stopMusic();
          */
         stopMusic: function(releaseData){
@@ -579,9 +579,9 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Pause playing music.         暂停播放音乐
+         * 暂停播放音乐
          * @example
-         * //example        例子
+         * // 例子
          * cc.audioEngine.pauseMusic();
          */
         pauseMusic: function(){
@@ -591,9 +591,9 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Resume playing music.        重新播放音乐
+         * 重新播放音乐
          * @example
-         * //example        例子
+         * // 例子
          * cc.audioEngine.resumeMusic();
          */
         resumeMusic: function(){
@@ -603,9 +603,9 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Rewind playing music.        回放播放的音乐
+         * 回放播放的音乐
          * @example
-         * //example        例子
+         * // 例子
          * cc.audioEngine.rewindMusic();
          */
         rewindMusic: function(){
@@ -617,10 +617,10 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * The volume of the music max value is 1.0,the min value is 0.0 .          音乐的最大音量是1.0，最小音量是0.0
+         * 音乐的最大音量是1.0，最小音量是0.0
          * @return {Number}
          * @example
-         * //example        例子
+         * // 例子
          * var volume = cc.audioEngine.getMusicVolume();
          */
         getMusicVolume: function(){
@@ -628,10 +628,10 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Set the volume of music.         设置音乐的音量
-         * @param {Number} volume Volume must be in 0.0~1.0 .
+         * 设置音乐的音量
+         * @param {Number} volume 音量必须在0.0~1.0之间.
          * @example
-         * //example        例子
+         * // 例子
          * cc.audioEngine.setMusicVolume(0.5);
          */
         setMusicVolume: function(volume){
@@ -643,10 +643,10 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Whether the music is playing.        判断音乐是否在播放
-         * @return {Boolean} If is playing return true,or return false.
+         * 判断音乐是否在播放
+         * @return {Boolean} 如果正在播放则返回true，否则返回false
          * @example
-         * //example        例子
+         * // 例子
          *  if (cc.audioEngine.isMusicPlaying()) {
          *      cc.log("music is playing");
          *  }
@@ -667,19 +667,19 @@ cc.Audio = cc.Class.extend({
         _maxAudioInstance: 5,
         _effectVolume: 1,
         /**
-         * Play sound effect.       播放音效
-         * @param {String} url The path of the sound effect with filename extension.
-         * @param {Boolean} loop Whether to loop the effect playing, default value is false
-         * @return {Number|null} the audio id
+         * 播放音效
+         * @param {String} url 带文件扩展名的音效文件的路径。
+         * @param {Boolean} loop 是否循环播放音效，默认下时false
+         * @return {Number|null} audio的id
          * @example
-         * //example        例子
+         * // 例子
          * var soundId = cc.audioEngine.playEffect(path);
          */
         playEffect: function(url, loop){
-            //If the browser just support playing single audio          如果浏览器只自持同时播放一个音频
+            //如果浏览器只自持同时播放一个音频
             if(!SWB){
-                //Must be forced to shut down       强力关闭
-                //Because playing multichannel audio will be stuck in chrome 28 (android)       在安卓chrome 28浏览器上会因为播放多个频道的音频而卡住
+                //Must be forced to shut down
+                //Because playing multichannel audio will be stuck in chrome 28 (android)在安卓chrome 28浏览器上会因为播放多个频道的音频而卡住
                 return null;
             }
 
@@ -719,10 +719,10 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Set the volume of sound effects.         设置音效的音量
-         * @param {Number} volume Volume must be in 0.0~1.0 .
+         * 设置音效的音量
+         * @param {Number} volume 音量必须在0.0~1.0之间.
          * @example
-         * //example        例子
+         * // 例子
          * cc.audioEngine.setEffectsVolume(0.5);
          */
         setEffectsVolume: function(volume){
@@ -730,10 +730,10 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * The volume of the effects max value is 1.0,the min value is 0.0 .        音效音量最大是1.0，最小是0.0
+         * 音效音量最大是1.0，最小是0.0
          * @return {Number}
          * @example
-         * //example        例子
+         * // 例子
          * var effectVolume = cc.audioEngine.getEffectsVolume();
          */
         getEffectsVolume: function(){
@@ -741,10 +741,10 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Pause playing sound effect.          暂停播放音效
-         * @param {Number} cc.Audio The return value of function playEffect.
+         * 暂停播放音效
+         * @param {Number} cc.Audio playEffect函数的返回值.
          * @example
-         * //example        例子
+         * // 例子
          * cc.audioEngine.pauseEffect(audioID);
          */
         pauseEffect: function(audio){
@@ -754,9 +754,9 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Pause all playing sound effect.          暂停播放全部音效
+         * 暂停播放全部音效
          * @example
-         * //example
+         * //例子
          * cc.audioEngine.pauseAllEffects();
          */
         pauseAllEffects: function(){
@@ -772,10 +772,10 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Resume playing sound effect.         重新播放音效
-         * @param {Number} cc.Audio The return value of function playEffect.
+         * 重新播放音效
+         * @param {Number} cc.Audio playEffect函数的返回值.
          * @audioID
-         * //example
+         * // 例子
          * cc.audioEngine.resumeEffect(audioID);
          */
         resumeEffect: function(audio){
@@ -784,9 +784,9 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Resume all playing sound effect          重新播放所有音效
+         * 重新播放所有音效
          * @example
-         * //example
+         * // 例子
          * cc.audioEngine.resumeAllEffects();
          */
         resumeAllEffects: function(){
@@ -800,10 +800,10 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Stop playing sound effect.       停止播放音效
-         * @param {Number} cc.Audio The return value of function playEffect.
+         * 停止播放音效
+         * @param {Number} cc.Audio playEffect函数的返回值.
          * @example
-         * //example
+         * // 例子
          * cc.audioEngine.stopEffect(audioID);
          */
         stopEffect: function(audio){
@@ -812,9 +812,9 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Stop all playing sound effects.          停止播放全部音效
+         * 停止播放全部音效
          * @example
-         * //example
+         * // 例子
          * cc.audioEngine.stopAllEffects();
          */
         stopAllEffects: function(){
@@ -828,10 +828,10 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * Unload the preloaded effect from internal buffer         从内部缓冲区预加载音效
+         *  从内部缓冲区预加载音效
          * @param {String} url
          * @example
-         * //example
+         * // 例子
          * cc.audioEngine.unloadEffect(EFFECT_FILE);
          */
         unloadEffect: function(url){
@@ -847,7 +847,7 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * End music and effects.       结束音乐和音效
+         * 结束音乐和音效
          */
         end: function(){
             this.stopMusic();
@@ -883,11 +883,11 @@ cc.Audio = cc.Class.extend({
     };
 
     /**
-     * ome browsers must click on the page          ome浏览器必须在页面点击
+     * ome浏览器必须在页面点击
      */
     if(!SWC){
 
-        //TODO Did not complete loading         不要全部加载
+        //TODO Did not complete loading
         var reBGM = function(){
             var bg = cc.audioEngine._currMusic;
             if(

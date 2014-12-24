@@ -26,8 +26,7 @@
  ****************************************************************************/
 
 /**
- * converts a line to a polygon
- * 将一条直线转化为一个多边形
+ * 将一条线段转化为一个多边形
  * @param {Float32Array} points
  * @param {Number} stroke
  * @param {Float32Array} vertices
@@ -58,7 +57,6 @@ cc.vertexLineToPolygon = function (points, stroke, vertices, offset, nuPoints) {
             var p2p1 = cc.pNormalize(cc.pSub(p2, p1));
             var p0p1 = cc.pNormalize(cc.pSub(p0, p1));
 
-            // Calculate angle between vectors
             // 计算向量的夹角
             var angle = Math.acos(cc.pDot(p2p1, p0p1));
 
@@ -104,8 +102,7 @@ cc.vertexLineToPolygon = function (points, stroke, vertices, offset, nuPoints) {
 };
 
 /**
- * returns whether or not the line intersects
- * 判断直线是否相交
+ * 判断线段是否相交
  * @param {Number} Ax
  * @param {Number} Ay
  * @param {Number} Bx
@@ -119,12 +116,10 @@ cc.vertexLineToPolygon = function (points, stroke, vertices, offset, nuPoints) {
 cc.vertexLineIntersect = function (Ax, Ay, Bx, By, Cx, Cy, Dx, Dy) {
     var distAB, theCos, theSin, newX;
 
-    // FAIL: Line undefined
     // 失败：Line未定义
     if ((Ax == Bx && Ay == By) || (Cx == Dx && Cy == Dy))
         return {isSuccess:false, value:0};
 
-    //  Translate system to make A the origin
     //  将坐标系转换为以A为原点
     Bx -= Ax;
     By -= Ay;
@@ -133,11 +128,9 @@ cc.vertexLineIntersect = function (Ax, Ay, Bx, By, Cx, Cy, Dx, Dy) {
     Dx -= Ax;
     Dy -= Ay;
 
-    // Length of segment AB
     // 线段 AB的长度
     distAB = Math.sqrt(Bx * Bx + By * By);
 
-    // Rotate the system so that point B is on the positive X axis.
     //  旋转坐标系使B点落在X轴上
     theCos = Bx / distAB;
     theSin = By / distAB;
@@ -148,11 +141,9 @@ cc.vertexLineIntersect = function (Ax, Ay, Bx, By, Cx, Cy, Dx, Dy) {
     Dy = Dy * theCos - Dx * theSin;
     Dx = newX;
 
-    // FAIL: Lines are parallel.
     // 失败：如果线段是平行的
     if (Cy == Dy) return {isSuccess:false, value:0};
 
-    // Discover the relative position of the intersection in the line AB
     // 算线段AB的交比
     var t = (Dx + (Cx - Dx) * Dy / (Dy - Cy)) / distAB;
 
@@ -161,7 +152,6 @@ cc.vertexLineIntersect = function (Ax, Ay, Bx, By, Cx, Cy, Dx, Dy) {
 };
 
 /**
- * returns wheter or not polygon defined by vertex list is clockwise
  * 返回是否为顺时针多边形
  * @param {Array} verts
  * @return {Boolean}
