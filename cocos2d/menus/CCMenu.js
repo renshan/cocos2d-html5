@@ -2,19 +2,15 @@
  Copyright (c) 2008-2010 Ricardo Quesada
  Copyright (c) 2011-2012 cocos2d-x.org
  Copyright (c) 2013-2014 Chukong Technologies Inc.
-
  http://www.cocos2d-x.org
-
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
-
  The above copyright notice and this permission notice shall be included in
  all copies or substantial portions of the Software.
-
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -190,7 +186,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * 为cc.Menu添加子节点	  								
+     * 为cc.Menu添加子节点                                    
      * @param {cc.Node} child
      * @param {Number|Null} [zOrder=] 子节点的zOrder
      * @param {Number|Null} [tag=] 子节点的tag
@@ -574,7 +570,7 @@ _p.enabled;
 /**
  * 创建一个新的菜单
  * @deprecated 从3.0版本后，请使用新的cc.Menu来创建新菜单
- * @param {...cc.MenuItem|null} menuItems	      todo: 需要使用新的
+ * @param {...cc.MenuItem|null} menuItems         todo: 需要使用新的
  * @return {cc.Menu}
  */
 cc.Menu.create = function (menuItems) {

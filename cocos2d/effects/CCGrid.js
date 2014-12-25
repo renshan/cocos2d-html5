@@ -26,8 +26,8 @@
  ****************************************************************************/
 
 /**
- * cc.GridµÄ»ù±¾Àà
- * @class			
+ * cc.Gridçš„åŸºæœ¬ç±»
+ * @class           
  * @extends cc.Class
  */
 cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
@@ -44,8 +44,8 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     _dirty:false,
 
     /**
-     * ´´½¨Ò»¸öcc.GridµÄ»ù±¾Àà
-     * cc.GridBaseÀàµÄº¯Êı¹¹Ôìº¯Êı
+     * åˆ›å»ºä¸€ä¸ªcc.Gridçš„åŸºæœ¬ç±»
+     * cc.GridBaseç±»çš„å‡½æ•°æ„é€ å‡½æ•°
      * @param {cc.Size} gridSize
      * @param {cc.Texture2D} [texture=]
      * @param {Boolean} [flipped=]
@@ -68,7 +68,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * Íø¸ñ¿Ø¼şÊÇ·ñ¿ÉÓÃ
+     * ç½‘æ ¼æ§ä»¶æ˜¯å¦å¯ç”¨
      * @return {Boolean}
      */
     isActive:function () {
@@ -76,7 +76,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * Íø¸ñ¿Ø¼şÊÇ·ñ¿ÉÓÃ
+     * ç½‘æ ¼æ§ä»¶æ˜¯å¦å¯ç”¨
      * @param {Number} active
      */
     setActive:function (active) {
@@ -89,14 +89,14 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * »ñÈ¡Íø¸ñ¿Ø¼ş±»ÖØÓÃµÄ´ÎÊı
+     * è·å–ç½‘æ ¼æ§ä»¶è¢«é‡ç”¨çš„æ¬¡æ•°
      * @return {Number}
      */
     getReuseGrid:function () {
         return this._reuseGrid;
     },
     /**
-     * ÉèÖÃÍø¸ñ¿Ø¼ş±»ÖØÓÃµÄ´ÎÊı
+     * è®¾ç½®ç½‘æ ¼æ§ä»¶è¢«é‡ç”¨çš„æ¬¡æ•°
      * @param reuseGrid
      */
     setReuseGrid:function (reuseGrid) {
@@ -104,7 +104,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * »ñÈ¡Íø¸ñµÄ´óĞ¡
+     * è·å–ç½‘æ ¼çš„å¤§å°
      * @return {cc.Size}
      */
     getGridSize:function () {
@@ -112,7 +112,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * ÉèÖÃÍø¸ñµÄ´óĞ¡
+     * è®¾ç½®ç½‘æ ¼çš„å¤§å°
      * @param {cc.Size} gridSize
      */
     setGridSize:function (gridSize) {
@@ -121,7 +121,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * »ñÈ¡Íø¸ñµÄÏñËØ
+     * è·å–ç½‘æ ¼çš„åƒç´ 
      * @return {cc.Point}
      */
     getStep:function () {
@@ -129,7 +129,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * ÉèÖÃÍø¸ñµÄÏñËØ
+     * è®¾ç½®ç½‘æ ¼çš„åƒç´ 
      * @param {cc.Point} step
      */
     setStep:function (step) {
@@ -138,7 +138,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * ÅĞ¶Ï¸ÃÎÆÀíÊÇ·ñ¿ÉÒÔ·­×ª
+     * åˆ¤æ–­è¯¥çº¹ç†æ˜¯å¦å¯ä»¥ç¿»è½¬
      * @return {Boolean}
      */
     isTextureFlipped:function () {
@@ -146,7 +146,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     /**
-     * ÉèÖÃ¸ÃÎÆÀíÊÇ·ñ¿ÉÒÔ·­×ª
+     * è®¾ç½®è¯¥çº¹ç†æ˜¯å¦å¯ä»¥ç¿»è½¬
      * @param {Boolean} flipped
      */
     setTextureFlipped:function (flipped) {
@@ -158,10 +158,10 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
 
     /**
      *
-     * @param {cc.Size} gridSize				@param {cc.Size} Íø¸ñ´óĞ¡
-     * @param {cc.Texture2D} [texture=]				@param {cc.Texture2D} [texture=]
-     * @param {Boolean} [flipped=false]				@param {Boolean} [flipped=false]
-     * @returns {boolean}					@returns {boolean}
+     * @param {cc.Size} gridSize                @param {cc.Size} ç½‘æ ¼å¤§å°
+     * @param {cc.Texture2D} [texture=]             @param {cc.Texture2D} [texture=]
+     * @param {Boolean} [flipped=false]             @param {Boolean} [flipped=false]
+     * @returns {boolean}                   @returns {boolean}
      */
     initWithSize:function (gridSize, texture, flipped) {
         if (!texture) {
@@ -178,7 +178,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
             }
 
             texture = new cc.Texture2D();
-            // Ö»Ê¹ÓÃRGBa8888ÑÕÉ«
+            // åªä½¿ç”¨RGBa8888é¢œè‰²
             texture.initWithData(data, cc.Texture2D.PIXEL_FORMAT_RGBA8888, POTWide, POTHigh, winSize);
             if (!texture) {
                 cc.log("cocos2d: CCGrid: error creating texture");
@@ -207,24 +207,24 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
     },
 
     beforeDraw:function () {
-        // ±£´æÍ¶Ó°
+        // ä¿å­˜æŠ•å½±
         this._directorProjection = cc.director.getProjection();
 
-        //this.set2DProjection();    //TODO why?		µ÷ÓÃÉèÖÃ2dÍ¶Ó°·½·¨
+        //this.set2DProjection();    //TODO why?        è°ƒç”¨è®¾ç½®2dæŠ•å½±æ–¹æ³•
         this._grabber.beforeRender(this._texture);
     },
 
     afterDraw:function (target) {
         this._grabber.afterRender(this._texture);
 
-        // ´¢´æ¸ÃÍ¶Ó°
+        // å‚¨å­˜è¯¥æŠ•å½±
         //cc.director.setProjection(this._directorProjection);
 
         if (target && target.getCamera().isDirty()) {
             var offset = target.getAnchorPointInPoints();
 
             //
-            // XXX:ÉãÓ°»úÓ¦¸Ã±»·ÅÖÃÔÚÃªµãÎ»ÖÃ
+            // XXX:æ‘„å½±æœºåº”è¯¥è¢«æ”¾ç½®åœ¨é”šç‚¹ä½ç½®
             //
             cc.kmGLTranslatef(offset.x, offset.y, 0);
             target.getCamera().locate();
@@ -266,7 +266,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
 });
 
 /**
- * ´´½¨Ò»¸öcc.GridBaseÀà
+ * åˆ›å»ºä¸€ä¸ªcc.GridBaseç±»
  * @deprecated
  * @param {cc.Size} gridSize
  * @param {cc.Texture2D} [texture=]
@@ -278,7 +278,7 @@ cc.GridBase.create = function (gridSize, texture, flipped) {
 };
 
 /**
- * cc.Grid3DÊÇÒ»¸ö3DÍø¸ñµÄÊµÏÖÆ÷¡£Ã¿Ò»¸ö¶¥µã¶¼ÓĞ3¸ö²ÎÊı£ºx,y,z
+ * cc.Grid3Dæ˜¯ä¸€ä¸ª3Dç½‘æ ¼çš„å®ç°å™¨ã€‚æ¯ä¸€ä¸ªé¡¶ç‚¹éƒ½æœ‰3ä¸ªå‚æ•°ï¼šx,y,z
  * @class
  * @extends cc.GridBase
  */
@@ -293,8 +293,8 @@ cc.Grid3D = cc.GridBase.extend(/** @lends cc.Grid3D# */{
     _indicesBuffer:null,
 
     /**
-     * ´´½¨Ò»¸öGrid3DÀà
-     * cc.Grid3DµÄ¹¹ÔìÆ÷
+     * åˆ›å»ºä¸€ä¸ªGrid3Dç±»
+     * cc.Grid3Dçš„æ„é€ å™¨
      * @param {cc.Size} gridSize
      * @param {cc.Texture2D} [texture=]
      * @param {Boolean} [flipped=]
@@ -315,7 +315,7 @@ cc.Grid3D = cc.GridBase.extend(/** @lends cc.Grid3D# */{
     },
 
     /**
-     * Í¨¹ı¸ø¶¨µÄÎ»ÖÃÀ´·µ»ØÒ»¸ö¶¥µã
+     * é€šè¿‡ç»™å®šçš„ä½ç½®æ¥è¿”å›ä¸€ä¸ªé¡¶ç‚¹
      * @param {cc.Point} pos
      * @return {cc.Vertex3F}
      */
@@ -328,7 +328,7 @@ cc.Grid3D = cc.GridBase.extend(/** @lends cc.Grid3D# */{
     },
 
     /**
-     * ·µ»ØÒ»¸öÔ­ÏÈ¸ø¶¨Î»ÖÃµÄ¶¥µã£¨Î´±»×ª»»µÄµã£©
+     * è¿”å›ä¸€ä¸ªåŸå…ˆç»™å®šä½ç½®çš„é¡¶ç‚¹ï¼ˆæœªè¢«è½¬æ¢çš„ç‚¹ï¼‰
      * @param {cc.Point} pos
      * @return {cc.Vertex3F}
      */
@@ -341,7 +341,7 @@ cc.Grid3D = cc.GridBase.extend(/** @lends cc.Grid3D# */{
     },
 
     /**
-     * Í¨¹ı¸ø¶¨×ø±êÀ´ÉèÖÃ¶¥µãµÄÎ»ÖÃ
+     * é€šè¿‡ç»™å®šåæ ‡æ¥è®¾ç½®é¡¶ç‚¹çš„ä½ç½®
      * @param {cc.Point} pos
      * @param {cc.Vertex3F} vertex
      */
@@ -365,15 +365,15 @@ cc.Grid3D = cc.GridBase.extend(/** @lends cc.Grid3D# */{
 
         var gl = cc._renderContext, locDirty = this._dirty;
         //
-        // ÊôĞÔ
+        // å±æ€§
         //
-        // Î»ÖÃ
+        // ä½ç½®
         gl.bindBuffer(gl.ARRAY_BUFFER, this._verticesBuffer);
         if (locDirty)
             gl.bufferData(gl.ARRAY_BUFFER, this._vertices, gl.DYNAMIC_DRAW);
         gl.vertexAttribPointer(cc.VERTEX_ATTRIB_POSITION, 3, gl.FLOAT, false, 0, 0);
 
-        // ÎÆÀí×ø±êµã
+        // çº¹ç†åæ ‡ç‚¹
         gl.bindBuffer(gl.ARRAY_BUFFER, this._texCoordinateBuffer);
         if (locDirty)
             gl.bufferData(gl.ARRAY_BUFFER, this._texCoordinates, gl.DYNAMIC_DRAW);
@@ -476,7 +476,7 @@ cc.Grid3D = cc.GridBase.extend(/** @lends cc.Grid3D# */{
 });
 
 /**
- * ´´½¨Ò»¸öGrid3DÀà
+ * åˆ›å»ºä¸€ä¸ªGrid3Dç±»
  * @deprecated
  * @param {cc.Size} gridSize
  * @param {cc.Texture2D} [texture=]
@@ -488,8 +488,8 @@ cc.Grid3D.create = function (gridSize, texture, flipped) {
 };
 
 /**
- * ccTiledGrid3DÊÇÒ»¸ö3DÍø¸ñµÄÊµÏÖ·½·¨¡£¸Ã·½·¨¸öGridµÄ²»Í¬Ö®´¦Ö÷ÒªÔÚÓÚ£º<br/>
- * (±êÇ©¿â)tiles¿ÉÒÔ¶ÀÁ¢ÓÚÍø¸ñ¡£
+ * ccTiledGrid3Dæ˜¯ä¸€ä¸ª3Dç½‘æ ¼çš„å®ç°æ–¹æ³•ã€‚è¯¥æ–¹æ³•ä¸ªGridçš„ä¸åŒä¹‹å¤„ä¸»è¦åœ¨äºï¼š<br/>
+ * (æ ‡ç­¾åº“)tileså¯ä»¥ç‹¬ç«‹äºç½‘æ ¼ã€‚
  * @class
  * @extends cc.GridBase
  */
@@ -504,8 +504,8 @@ cc.TiledGrid3D = cc.GridBase.extend(/** @lends cc.TiledGrid3D# */{
     _indicesBuffer:null,
 
     /**
-     * ²úÉúÒ»¸öTiledGrid3D¶ÔÏó
-     * cc.TiledGrid3D¶ÔÏóµÄ¹¹ÔìÆ÷
+     * äº§ç”Ÿä¸€ä¸ªTiledGrid3Då¯¹è±¡
+     * cc.TiledGrid3Då¯¹è±¡çš„æ„é€ å™¨
      * @param {cc.Size} gridSize
      * @param {cc.Texture2D} [texture=]
      * @param {Boolean} [flipped=]
@@ -526,7 +526,7 @@ cc.TiledGrid3D = cc.GridBase.extend(/** @lends cc.TiledGrid3D# */{
     },
 
     /**
-     * ÔÚ¸ø¶¨µÄÎ»ÖÃ´¦·µ»ØÒ»¸ö±êÇ©
+     * åœ¨ç»™å®šçš„ä½ç½®å¤„è¿”å›ä¸€ä¸ªæ ‡ç­¾
      * @param {cc.Point} pos
      * @return {cc.Quad3}
      */
@@ -543,7 +543,7 @@ cc.TiledGrid3D = cc.GridBase.extend(/** @lends cc.TiledGrid3D# */{
     },
 
     /**
-     * ·µ»ØÒ»¸ö¸ø¶¨Î»ÖÃ´¦µÄ±êÇ©£¨Î´±»×ª»»µÄ£©
+     * è¿”å›ä¸€ä¸ªç»™å®šä½ç½®å¤„çš„æ ‡ç­¾ï¼ˆæœªè¢«è½¬æ¢çš„ï¼‰
      * @param {cc.Point} pos
      * @return {cc.Quad3}
      */
@@ -560,7 +560,7 @@ cc.TiledGrid3D = cc.GridBase.extend(/** @lends cc.TiledGrid3D# */{
     },
 
     /**
-     * ÉèÖÃÒ»¸öĞÂµÄ±êÇ©
+     * è®¾ç½®ä¸€ä¸ªæ–°çš„æ ‡ç­¾
      * @param {cc.Point} pos
      * @param {cc.Quad3} coords
      */
@@ -593,18 +593,18 @@ cc.TiledGrid3D = cc.GridBase.extend(/** @lends cc.TiledGrid3D# */{
         //this._shaderProgram._setUniformsForBuiltinsForRenderer(target);
 
         //
-        // ÊôĞÔ
+        // å±æ€§
         //
         var gl = cc._renderContext, locDirty = this._dirty;
         cc.glEnableVertexAttribs(cc.VERTEX_ATTRIB_FLAG_POSITION | cc.VERTEX_ATTRIB_FLAG_TEX_COORDS);
 
-        // Î»ÖÃ
+        // ä½ç½®
         gl.bindBuffer(gl.ARRAY_BUFFER, this._verticesBuffer);
         if (locDirty)
             gl.bufferData(gl.ARRAY_BUFFER, this._vertices, gl.DYNAMIC_DRAW);
         gl.vertexAttribPointer(cc.VERTEX_ATTRIB_POSITION, 3, gl.FLOAT, false, 0, this._vertices);
 
-        // ÎÆÀí×ø±êµã
+        // çº¹ç†åæ ‡ç‚¹
         gl.bindBuffer(gl.ARRAY_BUFFER, this._texCoordinateBuffer);
         if (locDirty)
             gl.bufferData(gl.ARRAY_BUFFER, this._texCoordinates, gl.DYNAMIC_DRAW);
@@ -715,8 +715,8 @@ cc.TiledGrid3D = cc.GridBase.extend(/** @lends cc.TiledGrid3D# */{
 });
 
 /**
- * ²úÉúÒ»¸öTiledGrid3D¶ÔÏó
- * @deprecated ´Ó3.0°æ±¾¿ªÊ¼£¬ÇëÊ¹ÓÃĞÂµÄcc.TiledGrid3D(gridSize, texture, flipped)×÷ÎªÔ­°æ±¾µÄÌæ´ú	
+ * äº§ç”Ÿä¸€ä¸ªTiledGrid3Då¯¹è±¡
+ * @deprecated ä»3.0ç‰ˆæœ¬å¼€å§‹ï¼Œè¯·ä½¿ç”¨æ–°çš„cc.TiledGrid3D(gridSize, texture, flipped)ä½œä¸ºåŸç‰ˆæœ¬çš„æ›¿ä»£ 
  * @param {cc.Size} gridSize
  * @param {cc.Texture2D} [texture=]
  * @param {Boolean} [flipped=]
