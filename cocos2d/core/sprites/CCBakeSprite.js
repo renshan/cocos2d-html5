@@ -23,12 +23,6 @@
  ****************************************************************************/
 
 /**
- * cc.BakeSprite is a type of sprite that will be cached.
- * @class
- * @extend cc.Sprite
- */
-
-/**
  * cc.BakeSprite是会缓存的一种精灵.
  * @class
  * @继承 cc.Sprite
@@ -57,12 +51,6 @@ cc.BakeSprite = cc.Sprite.extend(/** @lends cc.BakeSprite# */{
     getCacheCanvas: function(){
         return this._cacheCanvas;
     },
-
-    /**
-     * reset the cache canvas size
-     * @param {cc.Size|Number} sizeOrWidth  size or width
-     * @param {Number} [height]
-     */
     
     /**
      * 从新设置缓存canvas的大小
@@ -76,7 +64,7 @@ cc.BakeSprite = cc.Sprite.extend(/** @lends cc.BakeSprite# */{
         }
         var locCanvas = this._cacheCanvas;
         locCanvas.width = sizeOrWidth;
-        locCanvas.height = height;   //TODO note baidu browser      reset the context after set width or height             百度浏览器注意，在设置宽度和高度后要重新设置context
+        locCanvas.height = height;   //TODO 百度浏览器注意，在设置宽度和高度后要重新设置context
         this.getTexture().handleLoadedTexture();
         this.setTextureRect(cc.rect(0,0, sizeOrWidth, height), false);
     }
