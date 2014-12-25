@@ -2,15 +2,19 @@
  Copyright (c) 2008-2010 Ricardo Quesada
  Copyright (c) 2011-2012 cocos2d-x.org
  Copyright (c) 2013-2014 Chukong Technologies Inc.
+
  http://www.cocos2d-x.org
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
+
  The above copyright notice and this permission notice shall be included in
  all copies or substantial portions of the Software.
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -42,16 +46,15 @@ cc.MENU_HANDLER_PRIORITY = -128;
 cc.DEFAULT_PADDING = 5;
 
 /**
- * <p> 特点和局限 <br/>
+ *<p> 特点和局限：<br/>
  *  - 你可以在运行的时候使用addChild来增加MenuItem objects
  *  - 但是唯一可以接受的就是MenuItem objects</p>
- *  @class
- *  @extends cc.Layer
- *  @param {...cc.MenuItem|null} menuItems}
- *  @example
- *  var layer = new cc.Menu(menuitem1, menuitem2, menuitem3);
+ * @class
+ * @extends cc.Layer
+ * @param {...cc.MenuItem|null} menuItems}
+ * @example
+ * var layer = new cc.Menu(menuitem1, menuitem2, menuitem3);
  */
-
 cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     enabled: false,
 
@@ -62,9 +65,8 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
 
     /**
      * 重写cc.Menus的构造器来扩充他的功能，但是在使用"ctor"功能时，记得要调用"this._super()"
-     * @param {...cc.MenuItem|null} 菜单项
+     * @param {...cc.MenuItem|null} menuItems
      */
-
     ctor: function (menuItems) {
         cc.Layer.prototype.ctor.call(this);
         this._color = cc.color.WHITE;
@@ -103,12 +105,11 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
         }
         this.initWithArray(items);
     },
-
     /**
      * <p>
-     *     每次当CCMenu进入'舞台'时请求的事件回调函数                                   <br/>
-     *     如果CCMenu用过渡进入到'舞台'，事件会在过渡开始时调用       <br/>
-     *     在onEnter期间不可以接收其他'兄弟姐妹'节点.         <br/>
+     *     每次当CCMenu进入'舞台'时该事件回调函数会被执行. <br/>
+     *     如果CCMenu用过渡进入到'舞台'，事件会在过渡开始时调用.        <br/>
+     *     在onEnter期间，你不可以访问其他'兄弟姐妹'节点.                                                    <br/>
      *     如果你重载onEnter, 你必须在this._super()里调用父类的onEnter.
      * </p>
      */
@@ -136,7 +137,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * 初始化cc.Menu
+     * 使用菜单项初始化一个cc.Menu
      * @param {Array} args
      * @return {Boolean}
      */
@@ -153,8 +154,8 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * 初始化cc.Menu并赋一个cc.MenuItem对象的数组
-     * @param {Array} cc.MenuItem数组
+     * 使用一个cc.MenuItem对象数组初始化一个cc.Menu
+     * @param {Array} arrayOfItems cc.MenuItem数组
      * @return {Boolean}
      */
     initWithArray: function (arrayOfItems) {
@@ -186,9 +187,9 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
 
     /**
-     * 为cc.Menu添加子节点                                    
+     * 为cc.Menu添加子节点
      * @param {cc.Node} child
-     * @param {Number|Null} [zOrder=] 子节点的zOrder
+     * @param {Number|Null} [zOrder=] zOrder 子节点的zOrder
      * @param {Number|Null} [tag=] 子节点的tag
      */
     addChild: function (child, zOrder, tag) {
@@ -258,10 +259,11 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     /**
      * 菜单子项列对齐
      * @example
-     * // 示例
+     * // Example
      * menu.alignItemsInColumns(3,2,3)// 添加三列, 第一列和第三列三个子菜单项, 第二列两个子菜单项
      *
      * menu.alignItemsInColumns(3,3)//创建两列，各有三个子菜单项
+     */
     alignItemsInColumns: function (/*Multiple Arguments*/) {
         if ((arguments.length > 0) && (arguments[arguments.length - 1] == null))
             cc.log("parameters should not be ending with null in Javascript");
@@ -300,7 +302,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
             }
         }
         // 检查是否有过多的行数/列数
-        //cc.assert(!columnsOccupied, "");  
+        //cc.assert(!columnsOccupied, "");    //?
         var winSize = cc.director.getWinSize();
 
         row = 0;
@@ -340,10 +342,10 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
      * 菜单项行对齐
      * @param {Number}
      * @example
-     * // 示例
-     * menu.alignItemsInRows(5,3)// 对其两行菜单项, 第一行有五个菜单项, 第二行有三个
+     * // Example
+     * menu.alignItemsInRows(5,3)//对其两行菜单项, 第一行有五个菜单项, 第二行有三个
      *
-     * menu.alignItemsInRows(4,4,4,4)// 创建四行，每行有四个菜单项
+     * menu.alignItemsInRows(4,4,4,4)//创建四行，每行有四个菜单项
      */
     alignItemsInRows: function (/*Multiple arguments*/) {
         if ((arguments.length > 0) && (arguments[arguments.length - 1] == null))
@@ -366,7 +368,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
         if (locChildren && locChildren.length > 0) {
             for (i = 0, len = locChildren.length; i < len; i++) {
                 child = locChildren[i];
-                // 检查是否有过量的行数/列数
+                // 检查是否有过量的菜单项
                 if (column >= columns.length)
                     continue;
 
@@ -434,7 +436,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
 
     /**
      * 从cc.Menu移除一个子节点
-     * @param {cc.Node} child 你想要移除的子节点
+     * @param {cc.Node} 你想要移除的子节点
      * @param {boolean} cleanup 是否清理内存
      */
     removeChild: function (child, cleanup) {
@@ -512,8 +514,8 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     /**
      * <p>
      * 每次cc.Menu离开'舞台'时调用的回调函数.                                         <br/>
-     * 如果cc.Menu用过渡离开'舞台', 会在过渡开始时进行调用. <br/>
-     * 在onExit期间，不可以获取兄弟姐妹节点.                   @return {Boolean}     <br/>
+     * 如果cc.Menu用过渡离开'舞台', 会在过渡结束时进行调用. <br/>
+     * 在onExit期间，不可以获取兄弟姐妹节点.                                                            <br/>
      * 如果重载onExit, 你应该在调用this._super()里父类的onExit.
      * </p>
      */
@@ -535,7 +537,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
     },
     /**
      * 只能在jsbinding使用
-     * @returns {boolean}
+      * @returns {boolean}
      */
     isOpacityModifyRGB: function () {
         return false;
@@ -563,14 +565,15 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
 
 var _p = cc.Menu.prototype;
 
-// @return {cc.Menu} 增加的属性
+// 扩展属性
 /** @expose */
 _p.enabled;
 
 /**
  * 创建一个新的菜单
- * @deprecated 从3.0版本后，请使用新的cc.Menu来创建新菜单
- * @param {...cc.MenuItem|null} menuItems         todo: 需要使用新的
+ * @deprecated  从3.0版本后，请使用new cc.Menu(menuitem1, menuitem2, menuitem3)来创建新菜单
+ * @param {...cc.MenuItem|null} menuItems
+ * todo: 需要使用新的
  * @return {cc.Menu}
  */
 cc.Menu.create = function (menuItems) {
