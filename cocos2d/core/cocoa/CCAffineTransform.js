@@ -25,7 +25,7 @@
  ****************************************************************************/
 
 /**
- * <p>cc.AffineTransform类表示一个仿射变换矩阵.它包括基本的变换,旋转,缩放变换.<br/>
+ * <p>cc.AffineTransform类表示一个仿射变换矩阵.它包括基本的位移,旋转,缩放变换.<br/>
  * 请不要直接使用它的构造函数,使用cc.affineTransformMake函数代替
  * </p>
  * @class cc.AffineTransform
@@ -80,7 +80,7 @@ cc._pointApplyAffineTransform = function (x, y, t) {
 };
 
 /**
- * 对尺寸使用仿射变换
+ * 对size使用仿射变换
  * @function
  * 
  * @param {cc.Size} size
@@ -111,7 +111,7 @@ cc.affineTransformMakeIdentity = function () {
  * @function
  * 
  * @return {cc.AffineTransform}
- * @deprecated 自v3.0, 请使用cc.affineTransformMakeIdentity()代替
+ * @deprecated 自v3.0以后请使用cc.affineTransformMakeIdentity()代替
  * @see cc.affineTransformMakeIdentity
  */
 cc.affineTransformIdentity = function () {

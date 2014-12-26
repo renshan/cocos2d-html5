@@ -111,7 +111,7 @@
     if(cc.sys.isMobile){
         cc.__audioSupport = supportTable[cc.sys.browserType] || supportTable["common"];
     }else{
-        //支持所有设备
+        // 支持所有设备
         cc.__audioSupport = supportTable["common"];
     }
 
@@ -239,7 +239,7 @@ cc.Audio = cc.Class.extend({
 
         /*
          * iOS 6的Safari浏览器只支持noteOn(), noteGrainOn(), and noteOff()等函数
-         * 最新版本的chrome浏览器已经支持start() and stop()函数
+         * 最新版本的chrome浏览器已经支持start() 和 stop()函数
          * 在最新的规范里，指定使用start() & stop() (写于 04/26/2013)  
          *      参考：https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html 
          * 在13版本的初稿里已经指定noteOn(), noteGrainOn(), and noteOff()
@@ -526,7 +526,7 @@ cc.Audio = cc.Class.extend({
     cc.loader.register(["mp3", "ogg", "wav", "mp4", "m4a"], loader);
 
     /**
-     * cc.audioEngine是一个单独的对象，提供了简单的音频接口
+     * cc.audioEngine是一个单例对象，它提供了简单的音频接口
      * @namespace
      */
     cc.audioEngine = {
@@ -754,7 +754,7 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * 暂停播放全部音效
+         * 暂停播放所有音效
          * @example
          * //例子
          * cc.audioEngine.pauseAllEffects();
@@ -812,7 +812,7 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         * 停止播放全部音效
+         * 停止播放所有音效
          * @example
          * // 例子
          * cc.audioEngine.stopAllEffects();
@@ -828,7 +828,7 @@ cc.Audio = cc.Class.extend({
         },
 
         /**
-         *  从内部缓冲区预加载音效
+         * 从内部缓冲区释放预加载的音效
          * @param {String} url
          * @example
          * // 例子
