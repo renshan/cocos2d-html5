@@ -84,8 +84,8 @@ cc.__getListenerID = function (event) {
     if(getType === eventType.MOUSE)
         return cc._EventListenerMouse.LISTENER_ID;
     if(getType === eventType.TOUCH){
-        // Touch listener is very special, it contains two kinds of listeners, EventListenerTouchOneByOne and EventListenerTouchAllAtOnce. 触摸监听者非常特殊，它包括两种监听者：EventListenerTouchOneByOne 和 EventListenerTouchAllAtOnce。
-        // return UNKNOWN instead. 返回UNKNOWN
+        // 触摸监听者非常特殊，它包括两种监听者：EventListenerTouchOneByOne 和 EventListenerTouchAllAtOnce。
+        // 返回UNKNOWN
         cc.log(cc._LogInfos.__getListenerID);
     }
     return "";
@@ -93,16 +93,15 @@ cc.__getListenerID = function (event) {
 
 /**
  * <p>
- *  cc.eventManager is a singleton object which manages event listener subscriptions and event dispatching. <br/> cc.eventManager是一个单例对象，它管理事件监听者的订阅和事件的调度。
+ *  cc.eventManager是一个单例对象，它管理事件监听者的订阅和事件的调度。 <br/> 
  *                                                                                                              <br/>
- *  The EventListener list is managed in such way so that event listeners can be added and removed          <br/>
- *  while events are being dispatched.EventListener列表以这种方式被管理，因此事件监听者能在事件被调度的时候被加入和移除。
+ *  EventListener列表以这种方式被管理，因此事件监听者能在事件被调度的时候被加入和移除。
  * </p>
  * @class
  * @name cc.eventManager
  */
 cc.eventManager = /** @lends cc.eventManager# */{
-    //Priority dirty flag 优先级污点标志
+    //Priority dirty flag （优先级污点标志）
     DIRTY_NONE:0,
     DIRTY_FIXED_PRIORITY:1 <<0,
     DIRTY_SCENE_GRAPH_PRIORITY : 1<< 1,
@@ -131,7 +130,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     /**
-     * Pauses all listeners which are associated the specified target. 暂停所有与特定的目标相关联的监听者。
+     * 暂停所有与特定的目标相关联的监听者。
      * @param {cc.Node} node
      * @param {Boolean} [recursive=false]
      */
@@ -149,7 +148,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     /**
-     * Resumes all listeners which are associated the specified target. 继续所有与特定的目标相关联的监听者。
+     * 唤醒所有与特定的目标相关联的监听者。
      * @param {cc.Node} node
      * @param {Boolean} [recursive=false]
      */
@@ -247,8 +246,8 @@ cc.eventManager = /** @lends cc.eventManager# */{
             this._removeAllListenersInVector(sceneGraphPriorityListeners);
             this._removeAllListenersInVector(fixedPriorityListeners);
 
-            // Remove the dirty flag according the 'listenerID'. 根据listenerID来移除污点标识。
-            // No need to check whether the dispatcher is dispatching event. 不需要检查调度起是否正在调度事件。
+            // 根据listenerID来移除污点标识。
+            // 不需要检查调度起是否正在调度事件。
             delete this._priorityDirtyFlagMap[listenerID];
 
             if (!this._inDispatch) {
@@ -273,7 +272,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
             dirtyFlag = locFlagMap[listenerID];
 
         if (dirtyFlag != this.DIRTY_NONE) {
-            // Clear the dirty flag first, if `rootNode` is null, then set its dirty flag of scene graph priority 如果rootNode是NULL,先清楚所有的污点标识,然后设置场景图优先级的污点标识
+            // 如果rootNode是NULL,先清楚所有的污点标识,然后设置场景图优先级的污点标识
             locFlagMap[listenerID] = this.DIRTY_NONE;
 
             if (dirtyFlag & this.DIRTY_FIXED_PRIORITY)
@@ -298,13 +297,13 @@ cc.eventManager = /** @lends cc.eventManager# */{
         if(!sceneGraphListener || sceneGraphListener.length === 0)
             return;
 
-        // Reset priority index 重新设置优先级索引
+        // 重新设置优先级索引
         this._nodePriorityIndex = 0;
         this._nodePriorityMap = {};
 
         this._visitTarget(rootNode, true);
 
-        // After sort: priority < 0, > 0 分类后：优先级< 0, > 0
+        // 分类后：优先级< 0, > 0
         listeners.getSceneGraphPriorityListeners().sort(this._sortEventListenersOfSceneGraphPriorityDes);
     },
 
@@ -323,10 +322,10 @@ cc.eventManager = /** @lends cc.eventManager# */{
         var fixedListeners = listeners.getFixedPriorityListeners();
         if(!fixedListeners || fixedListeners.length === 0)
             return;
-        // After sort: priority < 0, > 0 分类后：优先级< 0, > 0
+        // 分类后：优先级< 0, > 0
         fixedListeners.sort(this._sortListenersOfFixedPriorityAsc);
 
-        // FIXME: Should use binary search // FIXME: 应该用二分搜索
+        // FIXME: 应该用二分搜索
         var index = 0;
         for (var len = fixedListeners.length; index < len;) {
             if (fixedListeners[index]._getFixedPriority() >= 0)
@@ -406,7 +405,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     _onTouchEventCallback: function(listener, argsObj){
-        // Skip if the listener was removed. 跳过如果监听者被移除。
+        // 跳过如果监听者被移除。
         if (!listener._isRegistered)
             return false;
 
@@ -439,7 +438,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
             }
         }
 
-        // If the event was stopped, return directly. 如果事件被停止，直接返回。
+        // 如果事件被停止，直接返回。
         if (event.isStopped()) {
             cc.eventManager._updateListeners(event);
             return true;
@@ -460,7 +459,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
         var oneByOneListeners = this._getListeners(cc._EventListenerTouchOneByOne.LISTENER_ID);
         var allAtOnceListeners = this._getListeners(cc._EventListenerTouchAllAtOnce.LISTENER_ID);
 
-        // If there aren't any touch listeners, return directly. 如果没有任何触摸监听者，直接返回。
+        // 如果没有任何触摸监听者，直接返回。
         if (null == oneByOneListeners && null == allAtOnceListeners)
             return;
 
@@ -468,7 +467,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
         var oneByOneArgsObj = {event: event, needsMutableSet: (oneByOneListeners && allAtOnceListeners), touches: mutableTouches, selTouch: null};
 
         //
-        // process the target handlers 1st 首先处理目标处理程序
+        // 首先处理目标处理程序
         //
         if (oneByOneListeners) {
             for (var i = 0; i < originalTouches.length; i++) {
@@ -480,7 +479,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
         }
 
         //
-        // process standard handlers 2nd 然后处理标准处理程序
+        // 然后处理标准处理程序
         //
         if (allAtOnceListeners && mutableTouches.length > 0) {
             this._dispatchEventToListeners(allAtOnceListeners, this._onTouchesEventCallback, {event: event, touches: mutableTouches});
@@ -491,7 +490,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     _onTouchesEventCallback: function (listener, callbackParams) {
-        // Skip if the listener was removed. 跳过如果监听者被移除。
+        // 跳过如果监听者被移除。
         if (!listener._registered)
             return false;
 
@@ -506,7 +505,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
         else if(getCode == eventCode.CANCELLED && listener.onTouchesCancelled)
             listener.onTouchesCancelled(touches, event);
 
-        // If the event was stopped, return directly. 如果事件被停止，直接返回。
+        // 如果事件被停止，直接返回。
         if (event.isStopped()) {
             cc.eventManager._updateListeners(event);
             return true;
@@ -636,17 +635,17 @@ cc.eventManager = /** @lends cc.eventManager# */{
 
     /**
      * <p>
-     * Adds a event listener for a specified event.  为特定时间添加一个事件监听者。                                                                                                          <br/>
-     * if the parameter "nodeOrPriority" is a node, it means to add a event listener for a specified event with the priority of scene graph.                   <br/> 如果参数"nodeOrPriority"是一个节点，这意味着为一个带有场景图优先级的特定事件添加一个事件监听者。
-     * if the parameter "nodeOrPriority" is a Number, it means to add a event listener for a specified event with the fixed priority.                          <br/> 如果参数"nodeOrPriority"是一个数字，这意味着为一个带有固定优先级的特定事件添加一个事件监听者。
+     * 为特定时间添加一个事件监听者。                                                                                                          <br/>
+     * 如果参数"nodeOrPriority"是一个节点，这意味着为一个带有场景图优先级的特定事件添加一个事件监听者。               <br/> 
+     * 如果参数"nodeOrPriority"是一个数字，这意味着为一个带有固定优先级的特定事件添加一个事件监听者。   <br/> 
      * </p>
-     * @param {cc.EventListener|Object} listener The listener of a specified event or a object of some event parameters. 一个特定事件的监听者，或者一个有一些时间参数的对象。
-     * @param {cc.Node|Number} nodeOrPriority The priority of the listener is based on the draw order of this node or fixedPriority The fixed priority of the listener. 监听者的优先级是基于这个节点绘制的顺序，或者这个监听者的固定优先级。
-     * @note  The priority of scene graph will be fixed value 0. So the order of listener item in the vector will be ' <0, scene graph (0 priority), >0'. 场景图的优先级将被固定为0. 所以监听者在矢量中的顺序为' <0, scene graph (0 priority), >0'。
-     *         A lower priority will be called before the ones that have a higher value. 0 priority is forbidden for fixed priority since it's used for scene graph based priority. 低优先级将先于高优先级被调用。0优先级对固定优先级时被禁止的，因为它被用语基于优先级的场景图。
-     *         The listener must be a cc.EventListener object when adding a fixed priority listener, because we can't remove a fixed priority listener without the listener handler,
-     *         except calls removeAllListeners(). 当添加一个固定优先级的监听者时，监听者必须是一个cc.EventListener对象，因为我们在没有监听者处理器的情况下不能移除一个固定优先级的监听者，除非调用removeAllListeners()。
-     * @return {cc.EventListener} Return the listener. Needed in order to remove the event from the dispatcher. 返回监听者。为了从调度器中移除事件。
+     * @param {cc.EventListener|Object} listener 一个特定事件的监听者，或者一个有一些事件参数的对象。
+     * @param {cc.Node|Number} nodeOrPriority 监听者的优先级是基于这个节点绘制的顺序，或者这个监听者的固定优先级。
+     * @note  场景图的优先级将被固定为0. 所以监听者在矢量中的顺序为' <0, scene graph (0 priority), >0'。
+     *         低优先级将先于高优先级被调用。0优先级对固定优先级时被禁止的，因为它被用语基于优先级的场景图。
+     *         当添加一个固定优先级的监听者时，监听者必须是一个cc.EventListener对象，
+     *         因为我们在没有监听者处理器的情况下不能移除一个固定优先级的监听者，除非调用removeAllListeners()。
+     * @return {cc.EventListener} 返回监听者。为了从调度器中移除事件。
      */
     addListener: function (listener, nodeOrPriority) {
         cc.assert(listener && nodeOrPriority, cc._LogInfos.eventManager_addListener_2);
@@ -685,10 +684,10 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     /**
-     * Adds a Custom event listener. It will use a fixed priority of 1. 添加一个自定义事件监听者。它将用一个固定优先级1。
+     * 添加一个自定义事件监听者。它将用一个固定优先级1。
      * @param {string} eventName
      * @param {function} callback
-     * @return {cc.EventListener} the generated event. Needed in order to remove the event from the dispatcher 为了从调度器中移除事件。
+     * @return {cc.EventListener} the generated event. 需要从调度器中移除事件。
      */
     addCustomListener: function (eventName, callback) {
         var listener = new cc._EventListenerCustom(eventName, callback);
@@ -697,8 +696,8 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     /**
-     * Remove a listener 移除一个监听者。
-     * @param {cc.EventListener} listener an event listener or a registered node target 一个事件监听者或者一个注册了的节点目标。
+     * 移除一个监听者。
+     * @param {cc.EventListener} listener 一个事件监听者或者一个注册了的节点目标。
      */
     removeListener: function (listener) {
         if (listener == null)
@@ -762,15 +761,15 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     /**
-     * Removes all listeners with the same event listener type or removes all listeners of a node 移除有相同事件监听者类型的所有监听者，或者一个节点的所有监听者
-     * @param {Number|cc.Node} listenerType listenerType or a node
+     * 移除有相同事件监听者类型的所有监听者，或者一个节点的所有监听者
+     * @param {Number|cc.Node} listenerType listenerType或一个节点
      * @param {Boolean} [recursive=false]
      */
     removeListeners: function (listenerType, recursive) {
         var _t = this;
         if (listenerType instanceof cc.Node) {
-            // Ensure the node is removed from these immediately also. 确定节点被立即移除。
-            // Don't want any dangling pointers or the possibility of dealing with deleted objects.. 不想有任何的dangling指针和需要处理已被删除的对象的可能性。
+            // 确定节点被立即移除。
+            // 不想有任何的dangling指针和需要处理已被删除的对象的可能性。
             delete _t._nodePriorityMap[listenerType.__instanceId];
             cc.arrayRemoveObject(_t._dirtyNodes, listenerType);
             var listeners = _t._nodeListenersMap[listenerType.__instanceId], i;
@@ -781,16 +780,15 @@ cc.eventManager = /** @lends cc.eventManager# */{
                 listenersCopy.length = 0;
             }
 
-            // Bug fix: ensure there are no references to the node in the list of listeners to be added. 修正错误：确定在被加入的监听者列表里没有reference到node
-            // If we find any listeners associated with the destroyed node in this list then remove them. 如果在这个列表中，我们发现任何和已销毁的节点有关的监听者，那么删除它们。
-            // This is to catch the scenario where the node gets destroyed before it's listener
-            // is added into the event dispatcher fully. This could happen if a node registers a listener
-            // and gets destroyed while we are dispatching an event (touch etc.) 在监听者被完全加入到调度起钱，捕捉节点被销毁的场景。当我们正在调度一个事件（比如触碰）时，如果一个节点注册了一个监听者而且被销毁，这个就会发生。
+            // 修正错误：确定在被加入的监听者列表里没有reference到node
+            // 如果在这个列表中，我们发现任何和已销毁的节点有关的监听者，那么删除它们。
+            // 在监听者被完全加入到调度起钱，捕捉节点被销毁的场景。当我们正在调度一个事件（比如触碰）时，
+            // 如果一个节点注册了一个监听者而且被销毁，这个就会发生。
             var locToAddedListeners = _t._toAddedListeners;
             for (i = 0; i < locToAddedListeners.length; ) {
                 var listener = locToAddedListeners[i];
                 if (listener._getSceneGraphPriority() == listenerType) {
-                    listener._setSceneGraphPriority(null);                      // Ensure no dangling ptr to the target node. 确定没有dangling指针指向目标节点。
+                    listener._setSceneGraphPriority(null);                      // 确定没有dangling指针指向目标节点。
                     listener._setRegistered(false);
                     locToAddedListeners.splice(i, 1);
                 } else
@@ -819,7 +817,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     /**
-     * Removes all custom listeners with the same event name 移除有同样事件名字的所有自定义监听者
+     * 移除有同样事件名字的所有自定义监听者
      * @param {string} customEventName
      */
     removeCustomListeners: function (customEventName) {
@@ -827,7 +825,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     /**
-     * Removes all listeners 移除所有监听者
+     * 移除所有监听者
      */
     removeAllListeners: function () {
         var locListeners = this._listenersMap, locInternalCustomEventIDs = this._internalCustomListenerIDs;
@@ -838,7 +836,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     /**
-     * Sets listener's priority with fixed value. 设置监听者的有固定数值的有限制。
+     * 设置监听者的有固定数值的有限制。
      * @param {cc.EventListener} listener
      * @param {Number} fixedPriority
      */
@@ -866,7 +864,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     /**
-     * Whether to enable dispatching events 是否开启调度事件
+     * 是否开启调度事件
      * @param {boolean} enabled
      */
     setEnabled: function (enabled) {
@@ -874,7 +872,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     /**
-     * Checks whether dispatching events is enabled 检测调度事件是否被开启
+     * 检测调度事件是否被开启
      * @returns {boolean}
      */
     isEnabled: function () {
@@ -882,7 +880,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     /**
-     * Dispatches the event, also removes all EventListeners marked for deletion from the event dispatcher list. 调度事件，也从事件调度列表中移除所有标志为删除的事件监听者。
+     * 调度事件，也从事件调度列表中移除所有标志为删除的事件监听者。
      * @param {cc.Event} event
      */
     dispatchEvent: function (event) {
@@ -916,7 +914,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     /**
-     * Dispatches a Custom Event with a event name an optional user data 调度一个有事件名字，有可选用户数据的自定义事件
+     * 调度一个有事件名字，有可选用户数据的自定义事件
      * @param {string} eventName
      * @param {*} optionalUserData
      */
@@ -927,7 +925,7 @@ cc.eventManager = /** @lends cc.eventManager# */{
     }
 };
 
-// The event helper 事件助手
+// 事件助手
 cc.EventHelper = function(){};
 
 cc.EventHelper.prototype = {

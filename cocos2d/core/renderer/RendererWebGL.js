@@ -25,16 +25,16 @@
 if(cc._renderType === cc._RENDER_TYPE_WEBGL){
     cc.rendererWebGL = {
         childrenOrderDirty: true,
-        _transformNodePool: [],                              //save nodes transform dirty 保存节点变换污点
-        _renderCmds: [],                                     //save renderer commands 保存渲染器的命令
+        _transformNodePool: [],                              //save nodes transform dirty
+        _renderCmds: [],                                     //save renderer commands
 
-        _isCacheToBufferOn: false,                          //a switch that whether cache the rendererCmd to cacheToCanvasCmds 一个控制是否缓存rendererCmd到cacheToCanvasCmds的开关
-        _cacheToBufferCmds: {},                              // an array saves the renderer commands need for cache to other canvas 一个保存用于缓存到其它油布的渲染器命令
+        _isCacheToBufferOn: false,                          //a switch that whether cache the rendererCmd to cacheToCanvasCmds
+        _cacheToBufferCmds: {},                              // an array saves the renderer commands need for cache to other canvas
         _cacheInstanceIds:[],
         _currentID: 0,
 
         /**
-         * drawing all renderer command to context (default is cc._renderContext) 绘制所有的渲染器命令到情景中（默认是cc._renderContext）
+         * drawing all renderer command to context (default is cc._renderContext)
          * @param {WebGLRenderingContext} [ctx=cc._renderContext]
          */
         rendering: function (ctx) {
@@ -60,7 +60,7 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
         },
 
         /**
-         * drawing all renderer command to cache canvas' context 绘制所有的渲染器命令去缓存油布的场景
+         * drawing all renderer command to cache canvas' context
          * @param {Number} [renderTextureId]
          */
         _renderingToBuffer: function (renderTextureId) {
@@ -80,18 +80,18 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
                 this._currentID = locIDs[locIDs.length - 1];
         },
 
-        //reset renderer's flag 重置渲染器的标志
+        //reset renderer's flag
         resetFlag: function () {
             this.childrenOrderDirty = false;
             this._transformNodePool.length = 0;
         },
 
-        //update the transform data 更新转换数据
+        //update the transform data
         transform: function () {
             var locPool = this._transformNodePool;
-            //sort the pool 对池进行分类
+            //sort the pool
             locPool.sort(this._sortNodeByLevelAsc);
-            //transform node 转换节点
+            //transform node
             for (var i = 0, len = locPool.length; i < len; i++) {
                 if (locPool[i]._renderCmdDiry)
                     locPool[i]._transformForRenderer();
@@ -130,7 +130,7 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
     };
     cc.renderer = cc.rendererWebGL;
 
-    //sprite renderer command 精灵渲染器命令
+    //sprite renderer command
     cc.TextureRenderCmdWebGL = function(node){
         this._node = node;
     };
@@ -149,7 +149,7 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
                 _t._shaderProgram._setUniformForMVPMatrixWithMat4(_t._stackMatrix);
 
                 cc.glBlendFunc(_t._blendFunc.src, _t._blendFunc.dst);
-                //optimize performance for javascript 优化javascript的性能
+                //optimize performance for javascript
                 cc.glBindTexture2DN(0, locTexture);                   // = cc.glBindTexture2D(locTexture);
                 cc.glEnableVertexAttribs(cc.VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
 
@@ -185,7 +185,7 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
         cc.g_NumberOfDraws++;
     };
 
-    //LayerColor render command LayerColor渲染命令
+    //LayerColor render command
     cc.RectRenderCmdWebGL = function(node){
         this._node = node;
     };
@@ -199,7 +199,7 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
         cc.glEnableVertexAttribs(cc.VERTEX_ATTRIB_FLAG_POSITION | cc.VERTEX_ATTRIB_FLAG_COLOR);
 
         //
-        // Attributes 属性
+        // Attributes
         //
         context.bindBuffer(context.ARRAY_BUFFER, node._verticesFloat32Buffer);
         context.vertexAttribPointer(cc.VERTEX_ATTRIB_POSITION, 2, context.FLOAT, false, 0, 0);
@@ -241,17 +241,17 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
 
             cc.glBindTexture2D(_t.texture);
 
-            //position 位置
+            //position
             ctx.bindBuffer(ctx.ARRAY_BUFFER, _t._verticesBuffer);
             ctx.bufferData(ctx.ARRAY_BUFFER, _t._vertices, ctx.DYNAMIC_DRAW);
             ctx.vertexAttribPointer(cc.VERTEX_ATTRIB_POSITION, 2, ctx.FLOAT, false, 0, 0);
 
-            //texcoords tex坐标
+            //texcoords
             ctx.bindBuffer(ctx.ARRAY_BUFFER, _t._texCoordsBuffer);
             ctx.bufferData(ctx.ARRAY_BUFFER, _t._texCoords, ctx.DYNAMIC_DRAW);
             ctx.vertexAttribPointer(cc.VERTEX_ATTRIB_TEX_COORDS, 2, ctx.FLOAT, false, 0, 0);
 
-            //colors 颜色
+            //colors
             ctx.bindBuffer(ctx.ARRAY_BUFFER, _t._colorPointerBuffer);
             ctx.bufferData(ctx.ARRAY_BUFFER, _t._colorPointer, ctx.DYNAMIC_DRAW);
             ctx.vertexAttribPointer(cc.VERTEX_ATTRIB_COLOR, 4, ctx.UNSIGNED_BYTE, true, 0, 0);
@@ -325,14 +325,14 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
         //cc.assert(this._particleIdx == this.particleCount, "Abnormal error in particle quad");
 
         //
-        // Using VBO without VAO 在没有VAO情况下是使用VBO
+        // Using VBO without VAO
         //
         cc.glEnableVertexAttribs(cc.VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
 
         gl.bindBuffer(gl.ARRAY_BUFFER, _t._buffersVBO[0]);
-        gl.vertexAttribPointer(cc.VERTEX_ATTRIB_POSITION, 3, gl.FLOAT, false, 24, 0);               // vertices 顶点
-        gl.vertexAttribPointer(cc.VERTEX_ATTRIB_COLOR, 4, gl.UNSIGNED_BYTE, true, 24, 12);          // colors 颜色
-        gl.vertexAttribPointer(cc.VERTEX_ATTRIB_TEX_COORDS, 2, gl.FLOAT, false, 24, 16);            // tex coords tex坐标
+        gl.vertexAttribPointer(cc.VERTEX_ATTRIB_POSITION, 3, gl.FLOAT, false, 24, 0);               // vertices
+        gl.vertexAttribPointer(cc.VERTEX_ATTRIB_COLOR, 4, gl.UNSIGNED_BYTE, true, 24, 12);          // colors
+        gl.vertexAttribPointer(cc.VERTEX_ATTRIB_TEX_COORDS, 2, gl.FLOAT, false, 24, 16);            // tex coords
 
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, _t._buffersVBO[1]);
         gl.drawElements(gl.TRIANGLES, _t._particleIdx * 6, gl.UNSIGNED_SHORT, 0);
@@ -353,7 +353,7 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
         _t.textureAtlas.drawQuads();
     };
 
-    //RenderTexture render command  RenderTexture渲染命令
+    //RenderTexture render command
     cc.RenderTextureRenderCmdWebGL = function(node){
         this._node = node;
     };
@@ -370,7 +370,7 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
                 var oldDepthClearValue = 0.0;
                 var oldStencilClearValue = 0;
 
-                // backup and set  备份并且设置
+                // backup and set
                 if (locClearFlags & gl.COLOR_BUFFER_BIT) {
                     oldClearColor = gl.getParameter(gl.COLOR_CLEAR_VALUE);
                     gl.clearColor(node._clearColor.r/255, node._clearColor.g/255, node._clearColor.b/255, node._clearColor.a/255);
@@ -386,10 +386,10 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
                     gl.clearStencil(node.clearStencilVal);
                 }
 
-                // clear 清除
+                // clear
                 gl.clear(locClearFlags);
 
-                // restore 还原
+                // restore
                 if (locClearFlags & gl.COLOR_BUFFER_BIT)
                     gl.clearColor(oldClearColor[0], oldClearColor[1], oldClearColor[2], oldClearColor[3]);
 
@@ -400,7 +400,7 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
                     gl.clearStencil(oldStencilClearValue);
             }
 
-            //! make sure all children are drawn  确认所有子类都被绘制
+            //! make sure all children are drawn
             node.sortAllChildren();
             var locChildren = node._children;
             for (var i = 0; i < locChildren.length; i++) {
@@ -424,7 +424,7 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
         //cc.nodeDrawSetup(this);
         node._shaderProgram.use();
         node._shaderProgram._setUniformForMVPMatrixWithMat4(node._stackMatrix);
-        node._arrayMakeObjectsPerformSelector(node._children, cc.Node._stateCallbackType.updateTransform);
+        node._arrayMakeObjectsPerformSelector(node._children, cc.Node._StateCallbackType.updateTransform);
         cc.glBlendFunc(node._blendFunc.src, node._blendFunc.dst);
 
         node.textureAtlas.drawQuads();
@@ -550,7 +550,7 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
             var drawingUtil = cc._drawingUtil;
 
             if (node._debugSlots) {
-                // Slots. 缝隙
+                // Slots.
                 drawingUtil.setDrawColor(0, 0, 255, 255);
                 drawingUtil.setLineWidth(1);
 
@@ -573,7 +573,7 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
             }
 
             if (node._debugBones) {
-                // Bone lengths. 骨骼长度。
+                // Bone lengths.
                 var bone;
                 drawingUtil.setLineWidth(2);
                 drawingUtil.setDrawColor(255, 0, 0, 255);
@@ -585,7 +585,7 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
                     drawingUtil.drawLine(cc.p(bone.worldX, bone.worldY), cc.p(x, y));
                 }
 
-                // Bone origins. 骨骼原点。
+                // Bone origins.
                 drawingUtil.setPointSize(4);
                 drawingUtil.setDrawColor(0, 0, 255, 255); // Root bone is blue.
 
@@ -613,7 +613,7 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
         cc.kmGLPushMatrix();
         cc.kmGLLoadMatrix(_t._stackMatrix);
 
-        //TODO REMOVE THIS FUNCTION TODO移除这个函数
+        //TODO REMOVE THIS FUNCTION
         if (_t._parentBone == null && _t._batchNode == null) {
             //        CC_NODE_DRAW_SETUP();
         }
@@ -652,11 +652,11 @@ if(cc._renderType === cc._RENDER_TYPE_WEBGL){
                         node.draw(ctx);
                         break;
                     default:
-                        node.visit(ctx);                           //TODO need fix soon TODO 需要很快修正
+                        node.visit(ctx);                           //TODO need fix soon
                         break;
                 }
             } else if(selBone instanceof cc.Node) {
-                selBone.setShaderProgram(_t._shaderProgram);       //TODO need fix soon 需要很快修正
+                selBone.setShaderProgram(_t._shaderProgram);       //TODO need fix soon
                 selBone.visit(ctx);
                 //            CC_NODE_DRAW_SETUP();
             }

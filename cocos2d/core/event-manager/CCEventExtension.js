@@ -24,7 +24,7 @@
  ****************************************************************************/
 
 /**
- * The acceleration event 加速事件
+ * 加速事件类
  * @class
  * @extends cc.Event
  */
@@ -37,7 +37,7 @@ cc.EventAcceleration = cc.Event.extend(/** @lends cc.EventAcceleration# */{
 });
 
 /**
- * The keyboard event 键盘事件
+ * 键盘事件类
  * @class
  * @extends cc.Event
  */
@@ -52,7 +52,7 @@ cc.EventKeyboard = cc.Event.extend(/** @lends cc.EventKeyboard# */{
 });
 
 
-//Acceleration 加速
+// 加速
 cc._EventListenerAcceleration = cc.EventListener.extend({
     _onAccelerationEvent: null,
 
@@ -84,7 +84,7 @@ cc._EventListenerAcceleration.create = function (callback) {
 };
 
 
-//Keyboard 键盘
+// 键盘
 cc._EventListenerKeyboard = cc.EventListener.extend({
     onKeyPressed: null,
     onKeyReleased: null,

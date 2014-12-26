@@ -25,17 +25,17 @@
 if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
     cc.rendererCanvas = {
         childrenOrderDirty: true,
-        _transformNodePool: [],                              //save nodes transform dirty 保存节点变换污点
-        _renderCmds: [],                                     //save renderer commands 保存渲染命令
+        _transformNodePool: [],                              // 保存节点变换污点
+        _renderCmds: [],                                     // 保存渲染命令
 
-        _isCacheToCanvasOn: false,                          //a switch that whether cache the rendererCmd to cacheToCanvasCmds 一个是否缓存rendererCmd到cacheToCanvasCmds的开关
-        _cacheToCanvasCmds: {},                              // an array saves the renderer commands need for cache to other canvas 一个存放为缓存到其它油布所需要的渲染命令的数组
+        _isCacheToCanvasOn: false,                           // 一个记录是否将渲染指令缓存到画布指令缓存中的标识
+        _cacheToCanvasCmds: {},                              // 一个缓存其他画布(canvas)所需要的渲染指令的数组
         //contextSession: { globalAlpha:1 },
         _cacheInstanceIds:[],
         _currentID: 0,
 
         /**
-         * drawing all renderer command to context (default is cc._renderContext) 绘制所有的渲染器命令用语情景中
+         * 将所有的渲染指令绘制到context中(默认的context是cc._renderContext)
          * @param {CanvasRenderingContext2D} [ctx=cc._renderContext]
          */
         rendering: function (ctx) {
@@ -51,7 +51,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         },
 
         /**
-         * drawing all renderer command to cache canvas' context 绘制所有渲染器命令用于缓存油布情景
+         * 绘制所有渲染器命令用于缓存油布情景
          * @param {CanvasRenderingContext2D} ctx
          * @param {Number} [instanceID]
          * @param {Number} [scaleX]
@@ -101,9 +101,9 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
             //sort the pool 对池进行分类
             locPool.sort(this._sortNodeByLevelAsc);
 
-            //transform node 转换节点
+            //转换节点
             for (var i = 0, len = locPool.length; i < len; i++) {
-                if (locPool[i]._renderCmdDiry)        //TODO need modify name for LabelTTF TODO需要为LabelTTF修改名字
+                if (locPool[i]._renderCmdDiry)        //TODO 需要为LabelTTF修改名字
                     locPool[i]._transformForRenderer();
             }
             locPool.length = 0;
@@ -143,10 +143,10 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
     cc.TextureRenderCmdCanvas = function (node) {
         this._node = node;
         this._textureCoord = {
-            renderX: 0,                             //the x of texture coordinate for render, when texture tinted, its value doesn't equal x. 用于渲染的纹理坐标的x值，当纹理是着色的，它的值不等于x
-            renderY: 0,                             //the y of texture coordinate for render, when texture tinted, its value doesn't equal y. 用于渲染的纹理坐标的y值，当纹理是着色的，它的值不等于y
-            x: 0,                                   //the x of texture coordinate for node. 节点的在纹理坐标系中的x值。
-            y: 0,                                   //the y of texture coordinate for node. 节点的在纹理坐标系中的y值.
+            renderX: 0,                             // 用于渲染的纹理坐标的x值，当纹理是着色的，它的值不等于x
+            renderY: 0,                             // 用于渲染的纹理坐标的y值，当纹理是着色的，它的值不等于y
+            x: 0,                                   // 节点纹理坐标的x值。
+            y: 0,                                   // 节点纹理坐标的y值。
             width: 0,
             height: 0,
             validRect: false
@@ -165,7 +165,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         if (!locTextureCoord.validRect && node._displayedOpacity === 0)
             return;  //draw nothing 什么也不画
 
-        if(node._texture && !node._texture._isLoaded)  //set texture but the texture isn't loaded. 设置纹理，但是纹理还没被加载。
+        if(node._texture && !node._texture._isLoaded)  // 设置纹理，但是纹理还没被加载。
             return;
 
         var t = node._transformWorld,
@@ -181,7 +181,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
             context.save();
 
             context.globalAlpha = alpha;
-            //transform 变换
+            // 变换
             context.transform(t.a, t.c, t.b, t.d, t.tx * scaleX, -t.ty * scaleY);
             if (blendChange)
                 context.globalCompositeOperation = node._blendFuncStr;
@@ -204,7 +204,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
                     context.fillRect(locX * scaleX, locY * scaleY, locWidth * scaleX, locHeight * scaleY);
                     context.restore();
                 } else {
-                    //TODO should move '* scaleX/scaleY' to transforming TODO应该移动'* scaleX/scaleY'去转换
+                    //TODO应该移动'* scaleX/scaleY'去转换
                     if (node._colorized) {
                         context.drawImage(image,
                             0,
@@ -382,7 +382,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
             pointRect = node._pointRect;
 
         context.save();
-        //transform 转换变形
+        // 转换变形
         context.transform(t.a, t.c, t.b, t.d, t.tx * scaleX, -t.ty * scaleY);
         if (node.isBlendAdditive())
             context.globalCompositeOperation = 'lighter';
@@ -427,8 +427,8 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
                 if (particle.isChangeColor) {
                     var cacheTextureForColor = textureCache.getTextureColors(element);
                     if (cacheTextureForColor) {
-                        // Create another cache for the tinted version 为着色的版本新建另外一个缓存
-                        // This speeds up things by a fair bit 起到了一定的加速作用
+                        // 为着色的版本新建另外一个缓存
+                        // 起到了一定的加速作用
                         if (!cacheTextureForColor.tintCache) {
                             cacheTextureForColor.tintCache = cc.newElement('canvas');
                             cacheTextureForColor.tintCache.width = element.width;
@@ -465,7 +465,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         cc.g_NumberOfDraws++;
     };
 
-    // the canvas implement of renderCommand for cc.ProgressTimer 用于cc.ProgressTimer的画布renderCommand的实现
+    // 用于cc.ProgressTimer的画布renderCommand的实现
     cc.ProgressRenderCmdCanvas = function (node) {
         this._PI180 = Math.PI / 180;
 
@@ -515,7 +515,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         flipXOffset *= scaleX;
         flipYOffset *= scaleY;
 
-        //clip 修剪
+        //修剪
         if (this._type == cc.ProgressTimer.TYPE_BAR) {
             var locBarRect = this._barRect;
             context.beginPath();
@@ -532,7 +532,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
             context.closePath();
         }
 
-        //draw sprite 绘制精灵
+        //绘制精灵
         var image = locSprite._texture.getHtmlElementObj();
         if (locSprite._colorized) {
             context.drawImage(image,
@@ -721,7 +721,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         if (node._clipElemType) {
             context.restore();
 
-            // Redraw the cached canvas, so that the cliped area shows the background etc. 重新绘制被缓存的画布，使被剪过的区域显示背景。
+            // 重新绘制被缓存的画布，使被剪过的区域显示背景。
             context.save();
             context.setTransform(1, 0, 0, 1, 0, 0);
             context.globalCompositeOperation = "destination-over";
@@ -754,7 +754,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
     cc.PhysicsDebugNodeRenderCmdCanvas.prototype._drawSegment = cc.DrawNodeRenderCmdCanvas.prototype._drawSegment;
     cc.PhysicsDebugNodeRenderCmdCanvas.prototype._drawPoly = cc.DrawNodeRenderCmdCanvas.prototype._drawPoly;
 
-    //--- TMXLayer's render command --- TMXLayer的渲染命令
+    //--- TMXLayer的渲染命令
     cc.TMXLayerRenderCmdCanvas = function (tmxLayer) {
         this._node = tmxLayer;
         this._childrenRenderCmds = [];
@@ -803,10 +803,10 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         context.globalAlpha = alpha;
         var posX = 0 | ( -node._anchorPointInPoints.x), posY = 0 | ( -node._anchorPointInPoints.y);
         var locCacheCanvas = node._cacheCanvas, t = node._transformWorld;
-        //direct draw image by canvas drawImage 直接用画布drawImage绘制图片
+        //直接用画布drawImage绘制图片
         if (locCacheCanvas && locCacheCanvas.width !== 0 && locCacheCanvas.height !== 0) {
             context.save();
-            //transform 变换
+            //变换
             context.transform(t.a, t.c, t.b, t.d, t.tx * scaleX, -t.ty * scaleY);
 
             var locCanvasHeight = locCacheCanvas.height * scaleY;
@@ -852,7 +852,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         var locSkeleton = node._skeleton;
         var attachment,slot, i, n, drawingUtil = cc._drawingUtil;
         if (node._debugSlots) {
-            // Slots. 缝隙。
+            // 缝隙。
             drawingUtil.setDrawColor(0, 0, 255, 255);
             drawingUtil.setLineWidth(1);
 
@@ -868,7 +868,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
         }
 
         if (node._debugBones) {
-            // Bone lengths. 骨骼长度
+            // 骨骼长度
             var bone;
             drawingUtil.setLineWidth(2);
             drawingUtil.setDrawColor(255, 0, 0, 255);
@@ -882,7 +882,7 @@ if (cc._renderType === cc._RENDER_TYPE_CANVAS) {
                     {x:x, y:y});
             }
 
-            // Bone origins. 骨骼原点。
+            // 骨骼原点。
             drawingUtil.setPointSize(4);
             drawingUtil.setDrawColor(0, 0, 255, 255); // Root bone is blue. 根骨骼为蓝色。
 

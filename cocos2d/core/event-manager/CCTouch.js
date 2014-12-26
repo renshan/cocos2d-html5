@@ -24,7 +24,7 @@
  ****************************************************************************/
 
 /**
- * The touch event class 触摸事件类
+ * 触摸事件类
  * @class
  * @extends cc.Class
  *
@@ -45,7 +45,7 @@ cc.Touch = cc.Class.extend(/** @lends cc.Touch# */{
     },
 
     /**
-     * Returns the current touch location in OpenGL coordinates 返回在OpenGL坐标系中当前的触摸位置
+     * 返回在OpenGL坐标系中当前的触摸位置
      * @return {cc.Point}
      */
     getLocation:function () {
@@ -55,7 +55,7 @@ cc.Touch = cc.Class.extend(/** @lends cc.Touch# */{
     },
 
 	/**
-	 * Returns X axis location value 返回X轴位置数值
+	 * 返回X轴位置数值
 	 * @returns {number}
 	 */
 	getLocationX: function () {
@@ -63,7 +63,7 @@ cc.Touch = cc.Class.extend(/** @lends cc.Touch# */{
 	},
 
 	/**
-     * Returns Y axis location value 返回Y轴位置数值
+     * 返回Y轴位置数值
 	 * @returns {number}
 	 */
 	getLocationY: function () {
@@ -71,7 +71,7 @@ cc.Touch = cc.Class.extend(/** @lends cc.Touch# */{
 	},
 
     /**
-     * Returns the previous touch location in OpenGL coordinates 返回在OpenGL坐标系中以前的触摸位置
+     * 返回在OpenGL坐标系中以前的触摸位置
      * @return {cc.Point}
      */
     getPreviousLocation:function () {
@@ -81,7 +81,7 @@ cc.Touch = cc.Class.extend(/** @lends cc.Touch# */{
     },
 
     /**
-     * Returns the start touch location in OpenGL coordinates 返回在OpenGL坐标系中开始的触摸位置
+     * 返回在OpenGL坐标系中开始的触摸位置
      * @returns {cc.Point}
      */
     getStartLocation: function() {
@@ -91,7 +91,7 @@ cc.Touch = cc.Class.extend(/** @lends cc.Touch# */{
     },
 
     /**
-     * Returns the delta distance from the previous touche to the current one in screen coordinates 在屏幕坐标系中，返回从前一个触摸点到当前点的delta距离。
+     * 在屏幕坐标系中，返回从前一个触摸点到当前点的delta距离。
      * @return {cc.Point}
      */
     getDelta:function () {
@@ -99,7 +99,7 @@ cc.Touch = cc.Class.extend(/** @lends cc.Touch# */{
     },
 
     /**
-     * Returns the current touch location in screen coordinates 返回当前触摸点在屏幕坐标系中的位置
+     * 返回当前触摸点在屏幕坐标系中的位置
      * @return {cc.Point}
      */
     getLocationInView: function() {
@@ -107,7 +107,7 @@ cc.Touch = cc.Class.extend(/** @lends cc.Touch# */{
     },
 
     /**
-     * Returns the previous touch location in screen coordinates 返回前一个触摸点在屏幕坐标系中的位置
+     * 返回前一个触摸点在屏幕坐标系中的位置
      * @return {cc.Point}
      */
     getPreviousLocationInView: function(){
@@ -115,7 +115,7 @@ cc.Touch = cc.Class.extend(/** @lends cc.Touch# */{
     },
 
     /**
-     * Returns the start touch location in screen coordinates 返回开始的触摸点在屏幕坐标系中的位置
+     * 返回开始的触摸点在屏幕坐标系中的位置
      * @return {cc.Point}
      */
     getStartLocationInView: function(){
@@ -123,7 +123,7 @@ cc.Touch = cc.Class.extend(/** @lends cc.Touch# */{
     },
 
     /**
-     * Returns the id of cc.Touch
+     * 返回cc.Touch的id
      * @return {Number}
      */
     getID:function () {
@@ -131,9 +131,9 @@ cc.Touch = cc.Class.extend(/** @lends cc.Touch# */{
     },
 
     /**
-     * Returns the id of cc.Touch
+     * 返回cc.Touch的id
      * @return {Number}
-     * @deprecated since v3.0, please use getID() instead
+     * @deprecated 自v3.0以后，使用getID()代替
      */
     getId:function () {
         cc.log("getId is deprecated. Please use getID instead.")
@@ -141,7 +141,7 @@ cc.Touch = cc.Class.extend(/** @lends cc.Touch# */{
     },
 
     /**
-     * Sets information to touch 设置触摸点的信息
+     * 设置触摸点的信息
      * @param {Number} id
      * @param  {Number} x
      * @param  {Number} y

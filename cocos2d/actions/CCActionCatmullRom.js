@@ -33,8 +33,8 @@
  ****************************************************************************/
 
 /**
- * Returns the Cardinal Spline position for a given set of control points, tension and time. <br />                  通过给定的控制点, 时间,张力返回一个基数样条 <br />
- * CatmullRom Spline formula. <br />                                                                                 Catmull-Rom样条公式
+ * 通过给定的控制点, 时间,张力返回一个基数样条 <br />
+ * Catmull-Rom样条公式 <br />                                                                                 
  * s(-ttt + 2tt - t)P1 + s(-ttt + tt)P2 + (2ttt - 3tt + 1)P2 + s(ttt - 2tt + t)P3 + (-2ttt + 3tt)P3 + s(ttt - tt)P4
  *
  * @function
@@ -66,7 +66,7 @@ cc.cardinalSplineAt = function (p0, p1, p2, p3, tension, t) {
 };
 
 /**
- * returns a new copy of the array reversed.     返回一个数组反转的拷贝
+ * 返回一个数组反转的拷贝
  *
  * @return {Array}
  */
@@ -80,9 +80,9 @@ cc.reverseControlPoints = function (controlPoints) {
 
 
 /**
- * returns a new clone of the controlPoints      返回控制点数组的拷贝
+ * 返回控制点数组的拷贝
  *
- * @param controlPoints                          控制点数组
+ * @param controlPoints
  * @returns {Array}
  */
 cc.cloneControlPoints = function (controlPoints) {
@@ -93,18 +93,18 @@ cc.cloneControlPoints = function (controlPoints) {
 };
 
 /**
- * returns a new clone of the controlPoints                            返回控制点数组的拷贝
- * @deprecated since v3.0 please use cc.cloneControlPoints() instead.  从v3.0之后请使用cc.cloneControlPoints()代替
- * @param controlPoints                                                控制点数组
+ * 返回控制点数组的拷贝
+ * @deprecated 从v3.0之后请使用cc.cloneControlPoints()代替
+ * @param controlPoints
  * @returns {Array}
  */
 cc.copyControlPoints = cc.cloneControlPoints;
 
 /**
- * returns a point from the array                                     从数组中返回一个坐标
+ * 从数组中返回一个坐标
  *
- * @param {Array} controlPoints                                       控制点数组
- * @param {Number} pos                                                位置
+ * @param {Array} controlPoints   
+ * @param {Number} pos                          
  * @return {Array}
  */
 cc.getControlPointAt = function (controlPoints, pos) {
@@ -113,9 +113,9 @@ cc.getControlPointAt = function (controlPoints, pos) {
 };
 
 /**
- * reverse the current control point array inline, without generating a new one <br />   反转控制点数组并返回, 不会返回新的拷贝<br/>
+ * 反转控制点数组并返回, 不会返回新的拷贝<br/>
  *
- * @param controlPoints                                                                  控制点数组
+ * @param controlPoints             
  */
 cc.reverseControlPointsInline = function (controlPoints) {
     var len = controlPoints.length;
@@ -129,17 +129,17 @@ cc.reverseControlPointsInline = function (controlPoints) {
 
 
 /**
- * Cardinal Spline path. {@link http://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline}   基数样条路径
- * Absolute coordinates.                                                                             绝对坐标
+ * 基数样条路径 {@link http://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline}   
+ * 绝对坐标
  *
  * @class
  * @extends cc.ActionInterval
  * @param {Number} duration
- * @param {Array} points array of control points                                                     控制点数组
+ * @param {Array} points 控制点数组
  * @param {Number} tension
  *
  * @example
- * //create a cc.CardinalSplineTo
+ * //创建一个cc.CardinalSplineTo
  * var action1 = cc.cardinalSplineTo(3, array, 0);
  */
 cc.CardinalSplineTo = cc.ActionInterval.extend(/** @lends cc.CardinalSplineTo# */{
@@ -151,10 +151,10 @@ cc.CardinalSplineTo = cc.ActionInterval.extend(/** @lends cc.CardinalSplineTo# *
     _accumulatedDiff:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />     构造函数, 如果要覆盖并去扩展这个函数, 记得调用this._super()在ctor的函数中<br/>
-	 * Creates an action with a Cardinal Spline array of points and tension.  通过基数样条数组和张力去创建一个Action
+    	 * 构造函数, 如果要覆盖并去扩展这个函数, 记得调用this._super()在ctor的函数中<br/>
+	 * 通过基数样条数组和张力去创建一个Action
 	 * @param {Number} duration
-	 * @param {Array} points array of control points                          控制点数组
+	 * @param {Array} points 控制点数组
 	 * @param {Number} tension
 	 */
     ctor: function (duration, points, tension) {
@@ -165,10 +165,10 @@ cc.CardinalSplineTo = cc.ActionInterval.extend(/** @lends cc.CardinalSplineTo# *
     },
 
     /**
-     * initializes the action with a duration and an array of points          通过持续时间和位置数组去初始化Action
+     * 通过持续时间和位置数组去初始化Action
      *
      * @param {Number} duration
-     * @param {Array} points array of control points                          控制点数组
+     * @param {Array} points 控制点数组
      * @param {Number} tension
      *
      * @return {Boolean}
@@ -186,7 +186,7 @@ cc.CardinalSplineTo = cc.ActionInterval.extend(/** @lends cc.CardinalSplineTo# *
     },
 
     /**
-     * returns a new clone of the action    返回一个Action的拷贝
+     * 返回一个Action的拷贝
      *
      * @returns {cc.CardinalSplineTo}
      */
@@ -197,7 +197,7 @@ cc.CardinalSplineTo = cc.ActionInterval.extend(/** @lends cc.CardinalSplineTo# *
     },
 
     /**
-     * called before the action start. It will also set the target.            设置Target,在Action开始前调用
+     * 设置Target,在Action开始前调用
      *
      * @param {cc.Node} target
      */
@@ -210,7 +210,7 @@ cc.CardinalSplineTo = cc.ActionInterval.extend(/** @lends cc.CardinalSplineTo# *
     },
 
     /**
-     * Called once per frame. Time is the number of seconds of a frame interval.   每一帧调用一次, Time表示每帧的时间间隔
+     * 每一帧调用一次, Time表示每帧的时间间隔
      *
      * @param {Number}  dt
      */
@@ -256,8 +256,8 @@ cc.CardinalSplineTo = cc.ActionInterval.extend(/** @lends cc.CardinalSplineTo# *
     },
 
     /**
-     * reverse a new cc.CardinalSplineTo. <br />       反转CardinalSplineTo<br />
-     * Along the track of movement in the opposite.    沿着这个动作路径的反向
+     * 反转CardinalSplineTo<br />
+     * 沿着这个动作路径的相反方向
      *
      * @return {cc.CardinalSplineTo}
      */
@@ -267,7 +267,7 @@ cc.CardinalSplineTo = cc.ActionInterval.extend(/** @lends cc.CardinalSplineTo# *
     },
 
     /**
-     * update position of target                       更新对象的位置
+     * 更新对象的位置
      *
      * @param {cc.Point} newPos
      */
@@ -277,7 +277,7 @@ cc.CardinalSplineTo = cc.ActionInterval.extend(/** @lends cc.CardinalSplineTo# *
     },
 
     /**
-     * Points getter                                   获取位置
+     * 获取points
      *
      * @return {Array}
      */
@@ -286,7 +286,7 @@ cc.CardinalSplineTo = cc.ActionInterval.extend(/** @lends cc.CardinalSplineTo# *
     },
 
     /**
-     * Points setter                                  设置位置
+     * 设置points
      *
      * @param {Array} points
      */
@@ -296,11 +296,11 @@ cc.CardinalSplineTo = cc.ActionInterval.extend(/** @lends cc.CardinalSplineTo# *
 });
 
 /**
- * creates an action with a Cardinal Spline array of points and tension.  通过基数样条数组和张力去创建一个Action
+ * 通过基数样条数组和张力去创建一个Action
  *
  * @function
  * @param {Number} duration
- * @param {Array} points array of control points                          控制点数组
+ * @param {Array} points  控制点数组
  * @param {Number} tension
  * @return {cc.CardinalSplineTo}
  *
@@ -313,22 +313,22 @@ cc.cardinalSplineTo = function (duration, points, tension) {
 };
 
 /**
- * Please use cc.cardinalSplineTo instead. <br />                         请使用cc.cardinalSplineTo代替<br />
- * creates an action with a Cardinal Spline array of points and tension   通过基数样条数组和张力去创建一个Action
+ * 请使用cc.cardinalSplineTo代替<br />
+ * 通过基数样条数组和张力去创建一个Action
  *
  * @function
  * @param {Number} duration
- * @param {Array} points array of control points                          控制点数组
+ * @param {Array} points 控制点数组
  * @param {Number} tension
  * @return {cc.CardinalSplineTo}
  * @static
- * @deprecated since v3.0 please use cc.cardinalSplineTo(duration, points, tension) instead. 从v3.0之后使用 cc.cardinalSplineTo(duration, points, tension)代替
+ * @deprecated 从v3.0之后使用 cc.cardinalSplineTo(duration, points, tension)代替
  */
 cc.CardinalSplineTo.create = cc.cardinalSplineTo;
 
 /**
- * Cardinal Spline path. {@link http://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline}   基数样条路径
- * Relative coordinates.                                                                             相对坐标
+ * 基数样条路径 {@link http://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline}   
+ * 相对坐标
  *
  * @class
  * @extends cc.CardinalSplineTo
@@ -337,15 +337,15 @@ cc.CardinalSplineTo.create = cc.cardinalSplineTo;
  * @param {Number} tension
  *
  * @example
- * //create a cc.CardinalSplineBy
+ * //创建一个cc.CardinalSplineBy
  * var action1 = cc.cardinalSplineBy(3, array, 0);
  */
 cc.CardinalSplineBy = cc.CardinalSplineTo.extend(/** @lends cc.CardinalSplineBy# */{
     _startPosition:null,
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />     构造函数, 如果要覆盖并去扩展这个函数, 记得调用this._super()在ctor的函数中 <br />
-	 * creates an action with a Cardinal Spline array of points and tension.    通过基数样条数组和张力去创建一个Action
+    	 * 构造函数, 如果要覆盖并去扩展这个函数, 记得调用this._super()在ctor的函数中 <br />
+	 * 通过基数样条数组和张力去创建一个Action
 	 * @param {Number} duration
 	 * @param {Array} points
 	 * @param {Number} tension
@@ -358,7 +358,7 @@ cc.CardinalSplineBy = cc.CardinalSplineTo.extend(/** @lends cc.CardinalSplineBy#
     },
 
     /**
-     * called before the action start. It will also set the target.   设置Target,在Action开始前调用
+     * 设置Target,在Action开始前调用
      *
      * @param {cc.Node} target
      */
@@ -369,7 +369,7 @@ cc.CardinalSplineBy = cc.CardinalSplineTo.extend(/** @lends cc.CardinalSplineBy#
     },
 
     /**
-     * reverse a new cc.CardinalSplineBy   反转并生成一个新的cc.CardinalSplineBy
+     * 反转并生成一个新的cc.CardinalSplineBy
      *
      * @return {cc.CardinalSplineBy}
      */
@@ -377,7 +377,7 @@ cc.CardinalSplineBy = cc.CardinalSplineTo.extend(/** @lends cc.CardinalSplineBy#
         var copyConfig = this._points.slice();
         var current;
         //
-        // convert "absolutes" to "diffs"           绝对值数组转换为差值数组
+        // 绝对值数组转换为差值数组
         //
         var p = copyConfig[0];
         for (var i = 1; i < copyConfig.length; ++i) {
@@ -386,10 +386,10 @@ cc.CardinalSplineBy = cc.CardinalSplineTo.extend(/** @lends cc.CardinalSplineBy#
             p = current;
         }
 
-        // convert to "diffs" to "reverse absolute"    从差值数组转换为反转绝对值数组
+        // 从差值数组转换为反转绝对值数组
         var reverseArray = cc.reverseControlPoints(copyConfig);
 
-        // 1st element (which should be 0,0) should be here too  第一个元素(应该为0,0)应该也在这
+        // 第一个元素(应该为0,0)应该也在这
         p = reverseArray[ reverseArray.length - 1 ];
         reverseArray.pop();
 
@@ -410,7 +410,7 @@ cc.CardinalSplineBy = cc.CardinalSplineTo.extend(/** @lends cc.CardinalSplineBy#
     },
 
     /**
-     * update position of target        更新Target的位置
+     * 更新Target的位置
      *
      * @param {cc.Point} newPos
      */
@@ -424,7 +424,7 @@ cc.CardinalSplineBy = cc.CardinalSplineTo.extend(/** @lends cc.CardinalSplineBy#
     },
 
     /**
-     * returns a new clone of the action   返回这个action的拷贝
+     * 返回这个action的拷贝
      *
      * @returns {cc.CardinalSplineBy}
      */
@@ -436,7 +436,7 @@ cc.CardinalSplineBy = cc.CardinalSplineTo.extend(/** @lends cc.CardinalSplineBy#
 });
 
 /**
- * creates an action with a Cardinal Spline array of points and tension.   通过基数样条数组和张力去创建一个Action
+ * 通过基数样条数组和张力去创建一个Action
  *
  * @function
  * @param {Number} duration
@@ -450,23 +450,23 @@ cc.cardinalSplineBy = function (duration, points, tension) {
 };
 
 /**
- * Please use cc.cardinalSplineBy instead.                                 请使用cc.cardinalSplineBy代替
- * creates an action with a Cardinal Spline array of points and tension.   通过基数样条数组和张力去创建一个Action
+ * 请使用cc.cardinalSplineBy代替
+ * 通过基数样条数组和张力去创建一个Action
  * @function
  * @param {Number} duration
  * @param {Array} points
  * @param {Number} tension
  * @return {cc.CardinalSplineBy}
  * @static
- * @deprecated since v3.0 please use cc.cardinalSplineBy(duration, points, tension);  从v3.0之后使用cc.cardinalSplineBy(duration, points, tension)代替
+ * @deprecated 从v3.0之后使用cc.cardinalSplineBy(duration, points, tension)代替
  */
 cc.CardinalSplineBy.create = cc.cardinalSplineBy;
 
 /**
- * An action that moves the target with a CatmullRom curve to a destination point.<br/>    一个使用Catmull-Rom曲线的动作使用Target移动到目标点
- * A Catmull Rom is a Cardinal Spline with a tension of 0.5.  <br/>                        Catmull-Rom是一个张力为0.5的基数样条
+ * 一个使用Catmull-Rom曲线的动作使用Target移动到目标点<br/>    
+ * Catmull-Rom是一个张力为0.5的基数样条 <br/>                       
  * {@link http://en.wikipedia.org/wiki/Cubic_Hermite_spline#Catmull.E2.80.93Rom_spline}
- * Absolute coordinates.
+ * 绝对坐标
  *
  * @class
  * @extends cc.CardinalSplineTo
@@ -479,8 +479,8 @@ cc.CardinalSplineBy.create = cc.cardinalSplineBy;
 cc.CatmullRomTo = cc.CardinalSplineTo.extend(/** @lends cc.CatmullRomTo# */{
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />     构造函数, 如果要覆盖并去扩展这个函数, 记得调用this._super()在ctor的函数中 <br />
-	 * creates an action with a Cardinal Spline array of points and tension.     通过基数样条数组和张力去创建一个Action
+    	 * 构造函数, 如果要覆盖并去扩展这个函数, 记得调用this._super()在ctor的函数中 <br />
+	 * 通过基数样条数组和张力去创建一个Action
 	 * @param {Number} dt
 	 * @param {Array} points
 	 */
@@ -489,7 +489,7 @@ cc.CatmullRomTo = cc.CardinalSplineTo.extend(/** @lends cc.CatmullRomTo# */{
 	},
 
     /**
-     * initializes the action with a duration and an array of points          通过持续时间和位置数组去初始化Action
+     * 通过持续时间和位置数组去初始化Action
      *
      * @param {Number} dt
      * @param {Array} points
@@ -499,7 +499,7 @@ cc.CatmullRomTo = cc.CardinalSplineTo.extend(/** @lends cc.CatmullRomTo# */{
     },
 
     /**
-     * returns a new clone of the action                                     返回这个action的拷贝
+     * 返回这个action的拷贝
      * @returns {cc.CatmullRomTo}
      */
     clone:function () {
@@ -510,7 +510,7 @@ cc.CatmullRomTo = cc.CardinalSplineTo.extend(/** @lends cc.CatmullRomTo# */{
 });
 
 /**
- * creates an action with a Cardinal Spline array of points and tension. 通过基数样条数组和张力去创建一个Action
+ * 通过基数样条数组和张力去创建一个Action
  *
  * @function
  * @param {Number} dt
@@ -524,22 +524,22 @@ cc.catmullRomTo = function (dt, points) {
     return new cc.CatmullRomTo(dt, points);
 };
 /**
- * Please use cc.catmullRomTo instead.                                     请使用cc.catmullRomTo代替
- * creates an action with a Cardinal Spline array of points and tension.   通过基数样条数组和张力去创建一个Action
+ * 请使用cc.catmullRomTo代替
+ * 通过基数样条数组和张力去创建一个Action
  *
  * @param {Number} dt
  * @param {Array} points
  * @return {cc.CatmullRomTo}
  * @static
- * @deprecated since v3.0 please use cc.catmullRomTo(dt, points) instead.  从v3.0请使用cc.catmullRomTo(dt, points)代替
+ * @deprecated 从v3.0请使用cc.catmullRomTo(dt, points)代替
  */
 cc.CatmullRomTo.create = cc.catmullRomTo;
 
 /**
- * An action that moves the target with a CatmullRom curve by a certain distance.  <br/>
- * A Catmull Rom is a Cardinal Spline with a tension of 0.5.<br/>
+ * 这个动作将按CatmullRom曲线路径移动目标到一定的距离 <br/>
+ * CatmullRom是张力为0.5的基数样条 <br/>
  * http://en.wikipedia.org/wiki/Cubic_Hermite_spline#Catmull.E2.80.93Rom_spline
- * Relative coordinates.
+ * 相对坐标
  *
  * @class
  * @extends cc.CardinalSplineBy
@@ -552,8 +552,8 @@ cc.CatmullRomTo.create = cc.catmullRomTo;
 cc.CatmullRomBy = cc.CardinalSplineBy.extend({
 
 	/**
-     * Constructor function, override it to extend the construction behavior, remember to call "this._super()" in the extended "ctor" function. <br />     构造函数, 如果要覆盖并去扩展这个函数, 记得调用this._super()在ctor的函数中 <br />
-	 * Creates an action with a Cardinal Spline array of points and tension.  通过基数样条数组和张力去创建一个Action
+    	 * 构造函数, 如果要覆盖并去扩展这个函数, 记得调用this._super()在ctor的函数中 <br />
+	 * 通过基数样条数组和张力去创建一个Action
 	 * @param {Number} dt
 	 * @param {Array} points
 	 */
@@ -563,7 +563,7 @@ cc.CatmullRomBy = cc.CardinalSplineBy.extend({
 	},
 
     /**
-     * initializes the action with a duration and an array of points          通过持续时间和位置数组去初始化Action
+     * 通过持续时间和位置数组去初始化Action
      *
      * @function
      * @param {Number} dt
@@ -574,7 +574,7 @@ cc.CatmullRomBy = cc.CardinalSplineBy.extend({
     },
 
     /**
-     * returns a new clone of the action
+     * 返回动作的克隆对象
      * @returns {cc.CatmullRomBy}
      */
     clone:function () {
@@ -585,7 +585,7 @@ cc.CatmullRomBy = cc.CardinalSplineBy.extend({
 });
 
 /**
- * Creates an action with a Cardinal Spline array of points and tension     使用一个曲线坐标数组和张力创建一个Action
+ * 使用一个曲线坐标数组和张力创建一个Action
  * @function
  * @param {Number} dt
  * @param {Array} points
@@ -597,9 +597,9 @@ cc.catmullRomBy = function (dt, points) {
     return new cc.CatmullRomBy(dt, points);
 };
 /**
- * Please use cc.catmullRomBy instead                                         请使用cc.catmullRomBy代替
- * Creates an action with a Cardinal Spline array of points and tension       使用一个曲线坐标数组和张力创建一个Action
+ * 请使用cc.catmullRomBy代替
+ * 使用一个曲线坐标数组和张力创建一个Action
  * @static
- * @deprecated since v3.0 please cc.catmullRomBy(dt, points) instead.         从v3.0之后请使用 cc.catmullRomBy(dt, points) 代替
+ * @deprecated 从v3.0之后请使用 cc.catmullRomBy(dt, points) 代替
  */
 cc.CatmullRomBy.create = cc.catmullRomBy;

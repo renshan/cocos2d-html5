@@ -25,27 +25,27 @@
 
 /**
  * <p>
- *     The base class of event listener. 事件监听者的基础类。                                                                       <br/>
- *     If you need custom listener which with different callback, you need to inherit this class. 如果你需要自定义不同回调的监听者， 那你需要继承这个类。              <br/>
- *     For instance, you could refer to EventListenerAcceleration, EventListenerKeyboard,                       <br/>
- *      EventListenerTouchOneByOne, EventListenerCustom. 比如，你可能会用到EventListenerAcceleration, EventListenerKeyboard,EventListenerTouchOneByOne, EventListenerCustom。
+ *     事件监听者的基础类。                                <br/>
+ *     如果你需要自定义不同回调的监听者， 那你需要继承这个类。              <br/>
+ *     比如，你可能会用到EventListenerAcceleration, <br/> 
+ *     EventListenerKeyboard,EventListenerTouchOneByOne, EventListenerCustom。
  * </p>
  * @class
  * @extends cc.Class
  */
 cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
-    _onEvent: null,                          // Event callback function 事件回调函数
-    _type: 0,                                 // Event listener type 事件监听类型
-    _listenerID: null,                       // Event listener ID 事件监听ID
-    _registered: false,                     // Whether the listener has been added to dispatcher. 监听者是否已被加入到调度中。
+    _onEvent: null,                          	// 事件回调函数
+    _type: 0,                                 	// 事件监听类型
+    _listenerID: null,                       	// 事件监听ID
+    _registered: false,                     	// 监听者是否已被加入到调度中。
 
-    _fixedPriority: 0,                      // The higher the number, the higher the priority, 0 is for scene graph base priority. 数字越高，则优先权越高，0是场景途中的最低优先权。
-    _node: null,                           // scene graph based priority 已优先权为基础的场景图
-    _paused: true,                        // Whether the listener is paused 监听者是否被暂停
-    _isEnabled: true,                      // Whether the listener is enabled 监听者是否被启动
+    _fixedPriority: 0,                      	// 数字越高，则优先权越高，0代表场景图中的最低优先权。
+    _node: null,                           	// 已优先权为基础的场景图
+    _paused: true,                        	// 监听者是否被暂停
+    _isEnabled: true,                      	// 监听者是否被启动
 
     /**
-     * Initializes event with type and callback function 初始化事件及它的类型和回调函数
+     * 初始化事件及它的类型和回调函数
      * @param {number} type
      * @param {string} listenerID
      * @param {function} callback
@@ -58,13 +58,12 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
 
     /**
      * <p>
-     *     Sets paused state for the listener 把监听者设置为暂停状态
-     *     The paused state is only used for scene graph priority listeners. 暂停状态仅仅可用于场景图的有优先级的监听者。
-     *     `EventDispatcher::resumeAllEventListenersForTarget(node)` will set the paused state to `true`,
-     *     while `EventDispatcher::pauseAllEventListenersForTarget(node)` will set it to `false`. `EventDispatcher::resumeAllEventListenersForTarget(node)` 将把暂停状态设置为'true'， `EventDispatcher::pauseAllEventListenersForTarget(node)` 将把暂停状态设置为'false'。
-     *     @note 1) Fixed priority listeners will never get paused. If a fixed priority doesn't want to receive events,
-     *              call `setEnabled(false)` instead. 固定优先级的监听者将永远不会被暂停。如果固定的优先级不想接受事件，就调用`setEnabled(false)`
-     *            2) In `Node`'s onEnter and onExit, the `paused state` of the listeners which associated with that node will be automatically updated. 在`Node`的onEnter和onExit中，和这个节点相关的监听者的暂停状态将自动更新。
+     *     把监听者设置为暂停状态
+     *     暂停状态仅仅可用于场景图的有优先级的监听者。
+     *     `EventDispatcher::resumeAllEventListenersForTarget(node)` 将把暂停状态设置为'true'，
+     *     `EventDispatcher::pauseAllEventListenersForTarget(node)` 将把暂停状态设置为'false'。  
+     *     @note 1) 固定优先级的监听者将永远不会被暂停。如果固定的优先级不想接受事件，就调用`setEnabled(false)`
+     *           2) 在`Node`的onEnter和onExit中，和这个节点相关的监听者的暂停状态将自动更新。
      * </p>
      * @param {boolean} paused
      * @private
@@ -74,7 +73,7 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     },
 
     /**
-     * Checks whether the listener is paused 检测监听者是否被暂停
+     * 检测监听者是否被暂停
      * @returns {boolean}
      * @private
      */
@@ -83,7 +82,7 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     },
 
     /**
-     * Marks the listener was registered by EventDispatcher 标记监听者被EventDispatcher注册
+     * 标记监听者被EventDispatcher注册
      * @param {boolean} registered
      * @private
      */
@@ -92,7 +91,7 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     },
 
     /**
-     * Checks whether the listener was registered by EventDispatcher 测试监听者是否被EventDispatcher注册
+     * 测试监听者是否被EventDispatcher注册
      * @returns {boolean}
      * @private
      */
@@ -101,8 +100,8 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     },
 
     /**
-     * Gets the type of this listener 获取本监听者的类型
-     * @note It's different from `EventType`, e.g. TouchEvent has two kinds of event listeners - EventListenerOneByOne, EventListenerAllAtOnce 这个和`EventType`不同，比如，触摸事件有两种事件监听者－EventListenerOneByOne,EventListenerAllAtOnce
+     * 获取本监听者的类型
+     * @note 这个和`EventType`不同，比如，触摸事件有两种事件监听者－EventListenerOneByOne,EventListenerAllAtOnce
      * @returns {number}
      * @private
      */
@@ -111,8 +110,8 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     },
 
     /**
-     *  Gets the listener ID of this listener 获取本监听者的监听者ID
-     *  When event is being dispatched, listener ID is used as key for searching listeners according to event type. 当事件在被调度时，监听者ID被作为键用语根据事件类型搜索监听者。
+     * 获取本监听者的监听者ID
+     * 当事件在被调度时，监听者ID被作为键用语根据事件类型搜索监听者。
      * @returns {string}
      * @private
      */
@@ -121,8 +120,8 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     },
 
     /**
-     * Sets the fixed priority for this listener 为本监听者设置固定优先权
-     *  @note This method is only used for `fixed priority listeners`, it needs to access a non-zero value. 0 is reserved for scene graph priority listeners 这个方法仅被用语‘固定优先权的监听者’，需要访问非零值。0为场景图优先权的监听者预留。
+     * 为本监听者设置固定优先权
+     * @note 这个方法仅被用语‘固定优先权的监听者’，需要访问非零值。0为场景图优先权的监听者预留。
      * @param {number} fixedPriority
      * @private
      */
@@ -131,8 +130,8 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     },
 
     /**
-     * Gets the fixed priority of this listener 获取本监听者的固定优先权
-     * @returns {number} 0 if it's a scene graph priority listener, non-zero for fixed priority listener 返回0，如果这是一个场景图优先级监听者，并且他的固定优先级为非零。
+     * 获取本监听者的固定优先权
+     * @returns {number} 0 如果这是一个场景图优先级监听者，并且他的固定优先级为非零。
      * @private
      */
     _getFixedPriority: function () {
@@ -140,7 +139,7 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     },
 
     /**
-     * Sets scene graph priority for this listener 为本监听者设置场景图优先级
+     * 为本监听者设置场景图优先级
      * @param {cc.Node} node
      * @private
      */
@@ -149,8 +148,8 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     },
 
     /**
-     * Gets scene graph priority of this listener 获取本监听者的场景图优先级
-     * @returns {cc.Node} if it's a fixed priority listener, non-null for scene graph priority listener 返回{cc.Node}如果它是一个固定优先级的监听者，并且场景图优先级监听者为非空
+     * 获取本监听者的场景图优先级
+     * @returns {cc.Node} 如果它是一个固定优先级的监听者，并且场景图优先级监听者为非空
      * @private
      */
     _getSceneGraphPriority: function () {
@@ -158,7 +157,7 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     },
 
     /**
-     * Checks whether the listener is available. 检查监听者是否空闲。
+     * 检查监听者是否空闲。
      * @returns {boolean}
      */
     checkAvailable: function () {
@@ -166,7 +165,7 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     },
 
     /**
-     * Clones the listener, its subclasses have to override this method. 克隆监听者，它的子类必须重写此方法。
+     * 克隆监听者，它的子类必须重写此方法。
      * @returns {cc.EventListener}
      */
     clone: function () {
@@ -174,11 +173,11 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     },
 
     /**
-     *  Enables or disables the listener 开启或关闭监听者
-     *  @note Only listeners with `enabled` state will be able to receive events. 只有时开启状态的监听者才能接收事件。
-     *          When an listener was initialized, it's enabled by default. 当一个监听者被初始化时，它的状态默认设置为开启。
-     *          An event listener can receive events when it is enabled and is not paused. 监听者能接收事件当它是开启的并且不是暂停状态。
-     *          paused state is always false when it is a fixed priority listener. 如果它是固定优先级监听者，暂停状态永远为假。
+     * 开启或关闭监听者
+     * @note 只有时开启状态的监听者才能接收事件。
+     *       当一个监听者被初始化时，它的状态默认设置为开启。
+     *       监听者能接收事件当它是开启的并且不是暂停状态。
+     *       如果它是固定优先级监听者，暂停状态永远为假。
      * @param {boolean} enabled
      */
     setEnabled: function(enabled){
@@ -194,30 +193,28 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     },
 
     /**
-     * <p>Currently JavaScript Bindings (JSB), in some cases, needs to use retain and release. This is a bug in JSB,
-     * and the ugly workaround is to use retain/release. So, these 2 methods were added to be compatible with JSB.
-     * This is a hack, and should be removed once JSB fixes the retain/release bug<br/> 当前的JavaScript Bindings (JSB)在有些情况下需要用retain和release. 这是JSB的一个bug, 用retain/release是个丑陋的方法。因此，这两个方法被加入与JSB兼容。这是不安全的，应该被移除一旦JSB修正这个retain/release bug.
-     * You will need to retain an object if you created a listener and haven't added it any target node during the same frame.<br/> 你需要retain一个对象，如果你建立一个监听者，并且在同一个帧中没有给它加任何目标节点。
-     * Otherwise, JSB's native autorelease pool will consider this object a useless one and release it directly,<br/>否则，JSB本身的自动释放池讲认为这个对象是无用的并且直接释放掉，
-     * when you want to use it later, a "Invalid Native Object" error will be raised.<br/> 当你以后再想使用它是，错误“无效的原生对象“错误将会出现。
-     * The retain function can increase a reference count for the native object to avoid it being released,<br/> retain函数增加原生对象的计数器，以此来避免它被释放掉。
-     * you need to manually invoke release function when you think this object is no longer needed, otherwise, there will be memory learks.<br/> 当你认为不再需要这个对象是，你需要手动激活释放函数，否则会出现内存泄漏。
-     * retain and release function call should be paired in developer's game code.</p> retain和release函数的脚用需要在开发者的游戏代码中成对出现。
+     * <p> 当前的JavaScript Bindings (JSB)在有些情况下需要用retain和release. 这是JSB的一个bug, 用retain/release是个丑陋的方法。<br/>
+     * 因此，这两个方法被加入与JSB兼容。这是不安全的，应该被移除一旦JSB修正这个retain/release bug.<br/>
+     * 你需要retain一个对象，如果你建立一个监听者，并且在同一个帧中没有给它加任何目标节点。<br/> 
+     * 否则，JSB本身的自动释放池讲认为这个对象是无用的并且直接释放掉，<br/>
+     * 当你以后再想使用它是，错误“无效的原生对象“错误将会出现。<br/> 
+     * retain函数增加原生对象的计数器，以此来避免它被释放掉。<br/> 
+     * 当你认为不再需要这个对象是，你需要手动激活释放函数，否则会出现内存泄漏。<br/> 
+     * retain和release函数的脚用需要在开发者的游戏代码中成对出现。</p> 
      * @function
      * @see cc.EventListener#release
      */
     retain:function () {
     },
     /**
-     * <p>Currently JavaScript Bindings (JSB), in some cases, needs to use retain and release. This is a bug in JSB,
-     * and the ugly workaround is to use retain/release. So, these 2 methods were added to be compatible with JSB.
-     * This is a hack, and should be removed once JSB fixes the retain/release bug<br/>
-     * You will need to retain an object if you created a listener and haven't added it any target node during the same frame.<br/>
-     * Otherwise, JSB's native autorelease pool will consider this object a useless one and release it directly,<br/>
-     * when you want to use it later, a "Invalid Native Object" error will be raised.<br/>
-     * The retain function can increase a reference count for the native object to avoid it being released,<br/>
-     * you need to manually invoke release function when you think this object is no longer needed, otherwise, there will be memory learks.<br/>
-     * retain and release function call should be paired in developer's game code.</p>
+     * <p> 当前的JavaScript Bindings (JSB)在有些情况下需要用retain和release. 这是JSB的一个bug, 用retain/release是个丑陋的方法。<br/>
+     * 因此，这两个方法被加入与JSB兼容。这是不安全的，应该被移除一旦JSB修正这个retain/release bug.<br/>
+     * 你需要retain一个对象，如果你建立一个监听者，并且在同一个帧中没有给它加任何目标节点。<br/> 
+     * 否则，JSB本身的自动释放池讲认为这个对象是无用的并且直接释放掉，<br/>
+     * 当你以后再想使用它是，错误“无效的原生对象“错误将会出现。<br/> 
+     * retain函数增加原生对象的计数器，以此来避免它被释放掉。<br/> 
+     * 当你认为不再需要这个对象是，你需要手动激活释放函数，否则会出现内存泄漏。<br/> 
+     * retain和release函数的脚用需要在开发者的游戏代码中成对出现。</p> 
      * @function
      * @see cc.EventListener#retain
      */
@@ -225,45 +222,45 @@ cc.EventListener = cc.Class.extend(/** @lends cc.EventListener# */{
     }
 });
 
-// event listener type 事件监听者类型
+// 事件监听者类型
 /**
- * The type code of unknown event listener. 不知的事件监听者的类型代码。
+ * 未知的事件监听者的类型标识码。
  * @constant
  * @type {number}
  */
 cc.EventListener.UNKNOWN = 0;
 /**
- * The type code of one by one touch event listener. 逐个触摸事件监听者的类型代码。
+ * 逐个触摸事件监听者的类型标识码。
  * @constant
  * @type {number}
  */
 cc.EventListener.TOUCH_ONE_BY_ONE = 1;
 /**
- * The type code of all at once touch event listener. 所有同时触摸事件监听者的类型代码。
+ * 所有同时触摸事件监听者的类型标识码。
  * @constant
  * @type {number}
  */
 cc.EventListener.TOUCH_ALL_AT_ONCE = 2;
 /**
- * The type code of keyboard event listener. 键盘事件监听者的类型代码。
+ * 键盘事件监听者的类型标识码。
  * @constant
  * @type {number}
  */
 cc.EventListener.KEYBOARD = 3;
 /**
- * The type code of mouse event listener. 鼠标事件监听者的类型代码。
+ * 鼠标事件监听者的类型标识码。
  * @constant
  * @type {number}
  */
 cc.EventListener.MOUSE = 4;
 /**
- * The type code of acceleration event listener. 加速事件监听者的类型代码。
+ * 加速事件监听者的类型标识码。
  * @constant
  * @type {number}
  */
 cc.EventListener.ACCELERATION = 5;
 /**
- * The type code of custom event listener. 自定义事件监听者的类型代码。
+ * 自定义事件监听者的类型标识码。
  * @constant
  * @type {number}
  */
@@ -427,12 +424,12 @@ cc._EventListenerTouchAllAtOnce.create = function(){
 };
 
 /**
- * Create a EventListener object by json object 通过JSON对象建立一个EventListener对象
+ * 通过JSON对象建立一个EventListener对象
  * @function
  * @static
- * @param {object} argObj a json object
+ * @param {object} argObj 一个json对象
  * @returns {cc.EventListener}
- * todo: It should be the direct use new
+ * todo: 应该直接使用新的
  * @example
  * cc.EventListener.create({
  *       event: cc.EventListener.TOUCH_ONE_BY_ONE,
