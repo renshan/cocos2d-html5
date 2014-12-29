@@ -26,28 +26,6 @@
  ****************************************************************************/
 
 /**
- * cc.Progresstimer is a subclass of cc.Node.   <br/>
- * It renders the inner sprite according to the percentage.<br/>
- * The progress can be Radial, Horizontal or vertical.
- * @class
- * @extends cc.Node
- *
- * @property {cc.Point}     midPoint        <p>- Midpoint is used to modify the progress start position.<br/>
- *                                          If you're using radials type then the midpoint changes the center point<br/>
- *                                          If you're using bar type the the midpoint changes the bar growth<br/>
- *                                              it expands from the center but clamps to the sprites edge so:<br/>
- *                                              you want a left to right then set the midpoint all the way to cc.p(0,y)<br/>
- *                                              you want a right to left then set the midpoint all the way to cc.p(1,y)<br/>
- *                                              you want a bottom to top then set the midpoint all the way to cc.p(x,0)<br/>
- *                                              you want a top to bottom then set the midpoint all the way to cc.p(x,1)</p>
- * @property {cc.Point}     barChangeRate   - This allows the bar type to move the component at a specific rate.
- * @property {enum}         type            - Type of the progress timer: cc.ProgressTimer.TYPE_RADIAL|cc.ProgressTimer.TYPE_BAR.
- * @property {Number}       percentage      - Percentage to change progress, from 0 to 100.
- * @property {cc.Sprite}    sprite          - The sprite to show the progress percentage.
- * @property {Boolean}      reverseDir      - Indicate whether the direction is reversed.
- *
- */
-/**
  * cc.Progresstimer是cc.Node的子类。   <br/>
  * 它根据百分比来渲染内部的精灵对象。<br/>
  * 进度条可以是圆形、水平或者竖直的
@@ -78,18 +56,7 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
     _barChangeRate:null,
     _reverseDirection:false,
     _className:"ProgressTimer",
-
-    /**
-     *    Midpoint is used to modify the progress start position.
-     *    If you're using radials type then the midpoint changes the center point
-     *    If you're using bar type the the midpoint changes the bar growth
-     *        it expands from the center but clamps to the sprites edge so:
-     *        you want a left to right then set the midpoint all the way to cc.p(0,y)
-     *        you want a right to left then set the midpoint all the way to cc.p(1,y)
-     *        you want a bottom to top then set the midpoint all the way to cc.p(x,0)
-     *        you want a top to bottom then set the midpoint all the way to cc.p(x,1)
-     *  @return {cc.Point}
-     */    
+ 
     /**
      *    中点（Midpoint）用于改变进度条的起始位置
      *    如果进度条是径向变化，中点代表其中心点
@@ -106,10 +73,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
     },
 
     /**
-     * Midpoint setter
-     * @param {cc.Point} mpoint
-     */
-    /**
      * 设置中点属性
      * @param {cc.Point} mpoint
      */
@@ -118,17 +81,10 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
     },
 
     /**
-     *    This allows the bar type to move the component at a specific rate
-     *    Set the component to 0 to make sure it stays at 100%.
-     *    For example you want a left to right bar but not have the height stay 100%
-     *    Set the rate to be cc.p(0,1); and set the midpoint to = cc.p(0,.5f);
-     *  @return {cc.Point}
-     */
-    /**
-     *    通过本方法设置条形模式的进度条非变化方向的显示比例。
-     *    设为0可以另进度条的非变化方向显示100%.
-     *    例如，如果你需要一个从左往右的进度条，但是上下方向不需要显示100%
-     *    设置BarChangeRate为cc.p(0,1)；并且设置midpoint为cc.p(0,.5f)。
+     *    通过本方法设置条形模式的进度条显示特定的比例
+     *    设为0可以使其始终显示100%.
+     *    例如，如果你需要一个进度条从左往右的方向始终显示100%，上下方向可变
+     *    设置rate为cc.p(0,1); 并且设置midpoint为cc.p(0,.5f)。
      *  @return {cc.Point}
      */
     getBarChangeRate:function () {
@@ -143,10 +99,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
     },
 
     /**
-     *  Change the percentage to change progress
-     * @return {cc.ProgressTimer.TYPE_RADIAL|cc.ProgressTimer.TYPE_BAR}
-     */
-    /**
      * 获取进度条的类型
      * @return {cc.ProgressTimer.TYPE_RADIAL|cc.ProgressTimer.TYPE_BAR}
      */
@@ -154,10 +106,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
         return this._type;
     },
 
-    /**
-     * Percentages are from 0 to 100
-     * @return {Number}
-     */
     /**
      * 百分比为0到100
      * @return {Number}
@@ -167,10 +115,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
     },
 
     /**
-     * The image to show the progress percentage, retain
-     * @return {cc.Sprite}
-     */
-    /**
      * 显示该进度条的精灵对象, retain
      * @return {cc.Sprite}
      */
@@ -178,10 +122,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
         return this._sprite;
     },
 
-    /**
-     * from 0-100
-     * @param {Number} percentage
-     */
     /**
      * 从0到100
      * @param {Number} percentage
@@ -193,19 +133,11 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
         }
     },
     /**
-     * only use for jsbinding
-     * @param bValue
-     */
-    /**
      * 仅用于 jsbinding
      * @param bValue
      */
     setOpacityModifyRGB:function (bValue) {
     },
-    /**
-     * only use for jsbinding
-     * @returns {boolean}
-     */
     /**
      * 仅用于 jsbinding
      * @param bValue
@@ -213,10 +145,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
     isOpacityModifyRGB:function () {
         return false;
     },
-    /**
-     * return if reverse direction
-     * @returns {boolean}
-     */
     /**
      * 返回是否反向
      * @returns {boolean}
@@ -242,11 +170,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
     _vertexWebGLBuffer:null,
     _vertexDataDirty:false,
 
-    /**
-     * constructor of cc.cc.ProgressTimer
-     * @function
-     * @param {cc.Sprite} sprite
-     */
     /**
      * cc.cc.ProgressTimer的构造函数
      * @function
@@ -289,10 +212,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
     },
 
     /**
-     * set color of sprite
-     * @param {cc.Color} color
-     */
-    /**
      * 设置精灵的颜色
      * @param {cc.Color} color
      */
@@ -301,10 +220,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
         this._updateColor();
     },
 
-    /**
-     *  set opacity of sprite
-     * @param {Number} opacity
-     */
     /**
      *  设置精灵的透明度
      * @param {Number} opacity
@@ -315,10 +230,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
     },
 
     /**
-     * return color of sprite
-     * @return {cc.Color}
-     */
-    /**
      * 返回精灵的颜色
      * @return {cc.Color}
      */
@@ -327,10 +238,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
     },
 
     /**
-     * return Opacity of sprite
-     * @return {Number}
-     */
-    /**
      * 返回精灵的透明度
      * @return {Number}
      */
@@ -338,11 +245,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
         return this._sprite.opacity;
     },
 
-    /**
-     * set reverse cc.ProgressTimer
-     * @function
-     * @param {Boolean} reverse
-     */
     /**
      * 设置 cc.ProgressTimer 反向
      * @function
@@ -367,11 +269,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
     },
 
     /**
-     * set sprite for cc.ProgressTimer
-     * @function
-     * @param {cc.Sprite} sprite
-     */
-    /**
      * 为 cc.ProgressTimer 指定精灵
      * @function
      * @param {cc.Sprite} sprite
@@ -393,7 +290,7 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
             this.width = sprite.width;
 	        this.height = sprite.height;
 
-            //	Everytime we set a new sprite, we free the current vertex data
+            // 每次我们设置新的精灵时, 释放当前顶点数据
             if (this._vertexData) {
                 this._vertexData = null;
                 this._vertexArrayBuffer = null;
@@ -402,11 +299,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
         }
     },
 
-    /**
-     * set Progress type of cc.ProgressTimer
-     * @function
-     * @param {cc.ProgressTimer.TYPE_RADIAL|cc.ProgressTimer.TYPE_BAR} type
-     */
     /**
      * 设置cc.ProgressTimer的类型
      * @function
@@ -423,7 +315,7 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
 
     _setTypeForWebGL:function (type) {
         if (type !== this._type) {
-            //	release all previous information
+            //	释放之前的数据
             if (this._vertexData) {
                 this._vertexData = null;
                 this._vertexArrayBuffer = null;
@@ -433,11 +325,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
         }
     },
 
-    /**
-     * Reverse Progress setter
-     * @function
-     * @param {Boolean} reverse
-     */
     /**
      * 设置进度条反向
      * @function
@@ -453,7 +340,7 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
     _setReverseDirectionForWebGL: function (reverse) {
         if (this._reverseDirection !== reverse) {
             this._reverseDirection = reverse;
-            //release all previous information
+            //释放之前的数据
             this._vertexData = null;
             this._vertexArrayBuffer = null;
             this._vertexDataCount = 0;
@@ -462,12 +349,7 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
 
     /**
      * @param {cc.Point} alpha
-     * @return {cc.Vertex2F | Object} the vertex position from the texture coordinate
-     * @private
-     */
-    /**
-     * @param {cc.Point} alpha
-     * @return {cc.Vertex2F | Object} 从纹理坐标到alpha的向量
+     * @return {cc.Vertex2F | Object} 纹理坐标系中的顶点位置
      * @private
      */
     _textureCoordFromAlphaPoint:function (alpha) {
@@ -479,7 +361,7 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
         var min = cc.p(quad.bl.texCoords.u, quad.bl.texCoords.v);
         var max = cc.p(quad.tr.texCoords.u, quad.tr.texCoords.v);
 
-        //  Fix bug #1303 so that progress timer handles sprite frame texture rotation
+        //  Fix bug #1303 progress timer 可以处理精灵帧纹理的旋转了
         if (locSprite.textureRectRotated) {
             var temp = alpha.x;
             alpha.x = alpha.y;
@@ -498,12 +380,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
         return {x: min.x * (1 - alpha.x) + max.x * alpha.x, y: min.y * (1 - alpha.y) + max.y * alpha.y};
     },
 
-    /**
-     * Initializes a progress timer with the sprite as the shape the timer goes through
-     * @function
-     * @param {cc.Sprite} sprite
-     * @return {Boolean}
-     */
     /**
      * 以精灵对象作为进度条图形初始化进度条
      * @function
@@ -546,12 +422,7 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
     },
 
     /**
-     * Stuff gets drawn here
-     * @function
-     * @param {CanvasRenderingContext2D} ctx
-     */
-    /**
-     * 重写该方法以绘制节点
+     * 显示内容在这里被绘制
      * @function
      * @param {CanvasRenderingContext2D} ctx
      */
@@ -595,17 +466,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
         cc.g_NumberOfDraws++;
     },
 
-    /**
-     * <p>
-     *    Update does the work of mapping the texture onto the triangles            <br/>
-     *    It now doesn't occur the cost of free/alloc data every update cycle.      <br/>
-     *    It also only changes the percentage point but no other points if they have not been modified.       <br/>
-     *                                                                              <br/>
-     *    It now deals with flipped texture. If you run into this problem, just use the                       <br/>
-     *    sprite property and enable the methods flipX, flipY.                      <br/>
-     * </p>
-     * @private
-     */
     /**
      * <p>
      *    更新操作将纹理映射到进度条的三角形上。                          <br/>
@@ -739,17 +599,6 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
         locVertexData[this._vertexDataCount - 1].vertices = this._vertexFromAlphaPoint(hit);
     },
 
-    /**
-     * <p>
-     *    Update does the work of mapping the texture onto the triangles for the bar                            <br/>
-     *    It now doesn't occur the cost of free/alloc data every update cycle.                                  <br/>
-     *    It also only changes the percentage point but no other points if they have not been modified.         <br/>
-     *                                                                                                          <br/>
-     *    It now deals with flipped texture. If you run into this problem, just use the                         <br/>
-     *    sprite property and enable the methods flipX, flipY.                                                  <br/>
-     * </p>
-     * @private
-     */
     /**
      * <p>
      *    更新操作将纹理映射到进度条的三角形上。                          <br/>
@@ -1020,12 +869,6 @@ cc.defineGetterSetter(_p, "reverseDir", _p.isReverseDirection, _p.setReverseDire
 
 
 /**
- * create a progress timer object with image file name that renders the inner sprite according to the percentage
- * @deprecated since v3.0,please use new cc.ProgressTimer(sprite) instead.
- * @param {cc.Sprite} sprite
- * @return {cc.ProgressTimer}
- */
-/**
  * 通过根据百分比渲染内部精灵的图片文件创建一个进度条对象
  * @deprecated 自v3.0弃用，使用new cc.ProgressTimer(sprite) 代替.
  * @param {cc.Sprite} sprite
@@ -1048,22 +891,12 @@ cc.ProgressTimer.TEXTURE_COORDS_COUNT = 4;
 cc.ProgressTimer.TEXTURE_COORDS = 0x4b;
 
 /**
- * Radial Counter-Clockwise
- * @type Number
- * @constant
- */
-/**
  * 圆形，逆时针
  * @type Number
  * @constant
  */
 cc.ProgressTimer.TYPE_RADIAL = 0;
 
-/**
- * Bar
- * @type Number
- * @constant
- */
 /**
  * 条形
  * @type Number

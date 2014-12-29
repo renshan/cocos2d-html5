@@ -26,32 +26,17 @@
  ****************************************************************************/
 
 /**
- * enum for jpg
- * @constant
- * @type Number
- */
-/**
  * jpg 枚举
  * @constant
  * @type Number
  */
 cc.IMAGE_FORMAT_JPEG = 0;
 /**
- * enum for png
- * @constant
- * @type Number
- */
-/**
  * png 枚举
  * @constant
  * @type Number
  */
 cc.IMAGE_FORMAT_PNG = 1;
-/**
- * enum for raw
- * @constant
- * @type Number
- */
 /**
  * raw 枚举
  * @constant
@@ -74,23 +59,6 @@ cc.NextPOT = function (x) {
     return x + 1;
 };
 
-/**
- * cc.RenderTexture is a generic rendering target. To render things into it,<br/>
- * simply construct a render target, call begin on it, call visit on any cocos<br/>
- * scenes or objects to render them, and call end. For convenience, render texture<br/>
- * adds a sprite as it's display child with the results, so you can simply add<br/>
- * the render texture to your scene and treat it like any other CocosNode.<br/>
- * There are also functions for saving the render texture to disk in PNG or JPG format.
- * @class
- * @extends cc.Node
- *
- * @property {cc.Sprite}    sprite          - The sprite.
- * @property {cc.Sprite}    clearFlags      - Code for "auto" update.
- * @property {Number}       clearDepthVal   - Clear depth value.
- * @property {Boolean}      autoDraw        - Indicate auto draw mode activate or not.
- * @property {Number}       clearStencilVal - Clear stencil value.
- * @property {cc.Color}     clearColorVal   - Clear color value, valid only when "autoDraw" is true.
- */
 /**
  * cc.RenderTexture是一个通用的渲染目标。执行以步骤，可以把相应的节点渲染到该目标上。<br/>
  * 创建一个渲染目标，调用它的begin方法，想要渲染cocos场景（senes）或者对象，调用visit方法， <br/>
@@ -137,10 +105,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     //
     _cacheCanvas:null,
     /**
-     * stores a reference to the canvas context object
-     * @type CanvasRenderingContext2D
-     */
-    /**
      * 保存一个canvas 2d环境对象的引用
      * @type CanvasRenderingContext2D
      */
@@ -168,18 +132,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     _beginCommand: null,
     _endCommand: null,
 
-    /**
-     * creates a RenderTexture object with width and height in Points and a pixel format, only RGB and RGBA formats are valid
-     * Constructor of cc.RenderTexture for Canvas
-     * @param {Number} width
-     * @param {Number} height
-     * @param {cc.IMAGE_FORMAT_JPEG|cc.IMAGE_FORMAT_PNG|cc.IMAGE_FORMAT_RAWDATA} format
-     * @param {Number} depthStencilFormat
-     * @example
-     * // Example
-     * var rt = new cc.RenderTexture(width, height, format, depthStencilFormat)
-     * @function
-     */
      /**
      * 指定宽高（以point为单位）、像素格式（仅支持RGB和RGBA）以及深度模板格式，创建一个RenderTexture对象
      * @param {Number} width
@@ -231,11 +183,7 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
             this.initWithWidthAndHeight(width, height, format, depthStencilFormat);
         }
     },
-
-    /**
-     * Clear RenderTexture.
-     * @function
-     */    
+  
     /**
      * 清理 RenderTexture.
      * @function
@@ -264,10 +212,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     },
 
     /**
-     * Gets the sprite
-     * @return {cc.Sprite}
-     */
-    /**
      * 获取精灵
      * @return {cc.Sprite}
      */
@@ -276,10 +220,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     },
 
     /**
-     * Set the sprite
-     * @param {cc.Sprite} sprite
-     */
-    /**
      * 设置精灵
      * @param {cc.Sprite} sprite
      */
@@ -287,15 +227,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         this.sprite = sprite;
     },
 
-    /**
-     * Initializes the instance of cc.RenderTexture
-     * @function
-     * @param {Number} width
-     * @param {Number} height
-     * @param {cc.IMAGE_FORMAT_JPEG|cc.IMAGE_FORMAT_PNG|cc.IMAGE_FORMAT_RAWDATA} [format]
-     * @param {Number} [depthStencilFormat]
-     * @return {Boolean}
-     */    
     /**
      * 初始化cc.RenderTexture的实例
      * @function
@@ -414,10 +345,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         return true;
     },
 
-    /**
-     * starts grabbing
-     * @function
-     */
      /**
      * 开始抓取
      * @function
@@ -484,16 +411,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         }
     },
 
-    /**
-     * starts rendering to the texture while clearing the texture first.<br/>
-     * This is more efficient then calling -clear first and then -begin
-     * @param {Number} r red 0-255
-     * @param {Number} g green 0-255
-     * @param {Number} b blue 0-255
-     * @param {Number} a alpha 0-255 0 is transparent
-     * @param {Number} [depthValue=]
-     * @param {Number} [stencilValue=]
-     */
     /**
      * 开始渲染纹理，并且首先清除之前的纹理。<br/>
      * 比首先调用clear方法然后调用begin要高效的多
@@ -576,10 +493,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     },
 
     /**
-     * ends grabbing
-     * @function
-     */
-    /**
      * 抓取结束
      * @function
      */
@@ -630,13 +543,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     },
 
     /**
-     * clears the texture with a color
-     * @param {Number|cc.Rect} r red 0-1
-     * @param {Number} g green 0-1
-     * @param {Number} b blue 0-1
-     * @param {Number} a alpha 0-1
-     */
-    /**
      * 使用颜色清理一个纹理
      * @param {Number|cc.Rect} r red 0-1
      * @param {Number} g green 0-1
@@ -648,14 +554,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         this.end();
     },
 
-    /**
-     * clears the texture with rect.
-     * @function
-     * @param {number} x
-     * @param {number} y
-     * @param {number} width
-     * @param {number} height
-     */
     /**
      * 使用矩形清除纹理
      * @function
@@ -674,11 +572,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         //TODO need to implement
     },
 
-    /**
-     * clears the texture with a specified depth value
-     * @function
-     * @param {Number} depthValue
-     */
     /**
      * 使用指定的深度值清除纹理
      * @function
@@ -706,11 +599,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     },
 
     /**
-     * clears the texture with a specified stencil value
-     * @function
-     * @param {Number} stencilValue
-     */
-    /**
      * 使用指定的模板值清除纹理
      * @function
      * @param {Number} stencilValue
@@ -733,11 +621,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         gl.clearStencil(stencilClearValue);
     },
 
-    /**
-     * Recursive method that visit its children and draw them
-     * @function
-     * @param {CanvasRenderingContext2D|WebGLRenderingContext} ctx
-     */
     /**
      * 递归访问子节点并且绘制他们
      * @function
@@ -785,11 +668,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         cc.kmGLPopMatrix();
     },
 
-    /**
-     * Render function using the canvas 2d context or WebGL context, internal usage only, please do not call this function
-     * @function
-     * @param {CanvasRenderingContext2D | WebGLRenderingContext} ctx The render context
-     */
     /**
      * 渲染方法，使用Canvas2d环境或者WebGL环境，仅限内部使用，不要调用此方法
      * @function
@@ -880,10 +758,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     },
 
     /**
-     * creates a new CCImage from with the texture's data. Caller is responsible for releasing it by calling delete.
-     * @return {*}
-     */
-    /**
      * 使用纹理数据创建一个新的CCImage对象。调用此方法的类需要调用delete释放这个新的CCImage
      * @return {*}
      */
@@ -899,13 +773,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     },
 
     /**
-     * saves the texture into a file using JPEG format. The file will be saved in the Documents folder.
-     * Returns YES if the operation is successful.
-     * (doesn't support in HTML5)
-     * @param {Number} filePath
-     * @param {Number} format
-     */
-    /**
      * 将纹使用JPEG格式保存到文件，文件会被保存到Documents目录。
      * 操作成功后返回YES
      * 在Cocos2d-HTML5不支持此方法
@@ -917,10 +784,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     },
 
     /**
-     * Listen "come to background" message, and save render texture. It only has effect on Android.
-     * @param {cc.Class} obj
-	 * (doesn't support in HTML5)
-     */    /**
      * 监听"come to background" 消息，并且保存渲染纹理，只在安卓上有效。
      * 在Cocos2d-HTML5不支持此方法
      * @param {cc.Class} obj
@@ -929,11 +792,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         cc.log("listenToBackground isn't supported on Cocos2d-Html5");
     },
 
-    /**
-     * Listen "come to foreground" message and restore the frame buffer object. It only has effect on Android.
-     * @param {cc.Class} obj
-	 * (doesn't support in HTML5)
-     */
     /**
      * 监听"come to foreground"消息，并且恢复缓存对象，仅在安卓上有效。
      * 在Cocos2d-HTML5不支持此方法
@@ -944,10 +802,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     },
 
     /**
-     * Valid flags: GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_STENCIL_BUFFER_BIT. They can be OR'ed. Valid when "autoDraw is YES.
-     * @return {Number}
-     */
-    /**
      * 有效标志: GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_STENCIL_BUFFER_BIT. 
      * 可以通过“或”同时使用。仅在autoDraw为true时有效。
      * @return {Number}
@@ -957,10 +811,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     },
 
     /**
-     * Set the clearFlags
-     * @param {Number} clearFlags
-     */
-    /**
      * 设置clearFlags
      * @param {Number} clearFlags
      */
@@ -968,11 +818,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         this.clearFlags = clearFlags;
     },
 
-    /**
-     * Clear color value. Valid only when "autoDraw" is true.
-     * @function
-     * @return {cc.Color}
-     */
     /**
      * 清理颜色值，仅在autoDraw为true时有效。
      * @function
@@ -982,11 +827,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         return this._clearColor;
     },
 
-	/**
-	 * Set the clear color value. Valid only when "autoDraw" is true.
-	 * @function
-	 * @param {cc.Color} clearColor The clear color
-	 */
 	/**
 	 * 设置清理颜色值，仅在autoDraw为true时有效。
 	 * @function
@@ -1013,10 +853,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     },
 
     /**
-     * Value for clearDepth. Valid only when autoDraw is true.
-     * @return {Number}
-     */
-    /**
      * 清理深度的值。仅在autoDraw为true时有效。
      * @return {Number}
      */
@@ -1024,10 +860,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         return this.clearDepthVal;
     },
 
-    /**
-     * Set value for clearDepth. Valid only when autoDraw is true.
-     * @param {Number} clearDepth
-     */
     /**
      * 设置清理深度的值。仅在autoDraw为true时有效。
      * @param {Number} clearDepth
@@ -1037,10 +869,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     },
 
     /**
-     * Value for clear Stencil. Valid only when autoDraw is true
-     * @return {Number}
-     */
-    /**
      * 清理模板的值。仅在autoDraw为true时有效。
      * @return {Number}
      */
@@ -1048,10 +876,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         return this.clearStencilVal;
     },
 
-    /**
-     * Set value for clear Stencil. Valid only when autoDraw is true
-     * @return {Number}
-     */
     /**
      * 设置清理模板的值。仅在autoDraw为true时有效。
      * @return {Number}
@@ -1061,11 +885,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
     },
 
     /**
-     * When enabled, it will render its children into the texture automatically. Disabled by default for compatiblity reasons. <br/>
-     * Will be enabled in the future.
-     * @return {Boolean}
-     */
-    /**
      * 启用时，会自动渲染子节点的纹理。因为兼容性原因，默认禁用。<br/>
      * 在将来版本会默认启用。
      * @return {Boolean}
@@ -1074,11 +893,6 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         return this.autoDraw;
     },
 
-    /**
-     * When enabled, it will render its children into the texture automatically. Disabled by default for compatiblity reasons. <br/>
-     * Will be enabled in the future.
-     * @return {Boolean}
-     */
     /**
      * 启用时，会自动渲染子节点的纹理。因为兼容性原因，默认禁用。<br/>
      * 在将来版本会默认启用。
@@ -1125,15 +939,6 @@ _p.clearColorVal;
 cc.defineGetterSetter(_p, "clearColorVal", _p.getClearColor, _p.setClearColor);
 
 
-/**
- * creates a RenderTexture object with width and height in Points and a pixel format, only RGB and RGBA formats are valid
- * @deprecated since v3.0 please use new cc.RenderTexture() instead.
- * @param {Number} width
- * @param {Number} height
- * @param {cc.IMAGE_FORMAT_JPEG|cc.IMAGE_FORMAT_PNG|cc.IMAGE_FORMAT_RAWDATA} format
- * @param {Number} depthStencilFormat
- * @return {cc.RenderTexture}
- */
  /**
  * 指定宽高（以point为单位）、像素格式（仅支持RGB和RGBA）以及深度模板格式，创建一个RenderTexture对象
  * @deprecated 自v3.0弃用，使用new cc.RenderTexture()代替。
