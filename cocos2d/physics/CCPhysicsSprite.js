@@ -41,31 +41,6 @@
         _body:null,
         _PTMRatio:32,
         _rotation:1,
-        /**
-         * Create a PhysicsSprite with filename and rect
-         * Constructor of cc.PhysicsSprite for Box2d
-         * @param {String|cc.Texture2D|cc.SpriteFrame} fileName
-         * @param {cc.Rect} rect
-         * @example
-         *
-         * 1.Create a sprite with image path and rect
-         * var physicsSprite1 = new cc.PhysicsSprite("res/HelloHTML5World.png");
-         * var physicsSprite2 = new cc.PhysicsSprite("res/HelloHTML5World.png",cc.rect(0,0,480,320));
-         *
-         * 2.Create a sprite with a sprite frame name. Must add "#" before fame name.
-         * var physicsSprite = new cc.PhysicsSprite('#grossini_dance_01.png');
-         *
-         * 3.Create a sprite with a sprite frame
-         * var spriteFrame = cc.spriteFrameCache.getSpriteFrame("grossini_dance_01.png");
-         * var physicsSprite = new cc.PhysicsSprite(spriteFrame);
-         *
-         * 4.Creates a sprite with an exsiting texture contained in a CCTexture2D object
-         *      After creation, the rect will be the size of the texture, and the offset will be (0,0).
-         * var texture = cc.textureCache.addImage("HelloHTML5World.png");
-         * var physicsSprite1 = new cc.PhysicsSprite(texture);
-         * var physicsSprite2 = new cc.PhysicsSprite(texture, cc.rect(0,0,480,320));
-         *
-         */
          /**
          * 通过文件名和矩形创建物理精灵
          * 针对Box2d的cc.PhysicsSprite构造函数
@@ -98,20 +73,20 @@
                 cc.PhysicsSprite.prototype.init.call(this);
             }else if (cc.isString(fileName)) {
                 if (fileName[0] === "#") {
-                    //init with a sprite frame name
+                    //用精灵帧（sprite frame）名初始化
                     var frameName = fileName.substr(1, fileName.length - 1);
                     var spriteFrame = cc.spriteFrameCache.getSpriteFrame(frameName);
                     this.initWithSpriteFrame(spriteFrame);
                 } else {
-                    //init  with filename and rect
+                    //用文件名和矩形初始化
                     this.init(fileName, rect);
                 }
             }else if (cc.isObject(fileName)) {
                 if (fileName instanceof cc.Texture2D) {
-                    //init  with texture and rect
+                    //用纹理和矩形初始化
                     this.initWithTexture(fileName, rect);
                 } else if (fileName instanceof cc.SpriteFrame) {
-                    //init with a sprite frame
+                    //用精灵帧初始化
                     this.initWithSpriteFrame(fileName);
                 }
             }
@@ -125,10 +100,6 @@
         //},
 
         /**
-         * set body
-         * @param {Box2D.Dynamics.b2Body} body
-         */
-        /**
          * 设置物理body
          * @param {Box2D.Dynamics.b2Body} body
          */
@@ -136,10 +107,6 @@
             this._body = body;
         },
 
-        /**
-         * get body
-         * @return {Box2D.Dynamics.b2Body}
-         */
         /**
          * 获取物理body
          * @return {Box2D.Dynamics.b2Body}
@@ -149,10 +116,6 @@
         },
 
         /**
-         * set PTM ratio
-         * @param {Number} r
-         */
-        /**
          * 设置 PTM ratio
          * @param {Number} r
          */
@@ -161,10 +124,6 @@
         },
 
         /**
-         * get PTM ration
-         * @return {Number}
-         */
-        /**
          * 获取 PTM ration
          * @return {Number}
          */
@@ -172,10 +131,6 @@
             return this._PTMRatio;
         },
 
-        /**
-         * get position
-         * @return {cc.Point}
-         */
         /**
          * 获取位置
          * @return {cc.Point}
@@ -186,10 +141,6 @@
             return cc.p(pos.x * locPTMRatio, pos.y * locPTMRatio);
         },
 
-        /**
-         * set position
-         * @param {cc.Point} p
-         */
          /**
          * 设置位置
          * @param {cc.Point} p
@@ -201,10 +152,6 @@
             this.setNodeDirty();
         },
 
-        /**
-         * get rotation
-         * @return {Number}
-         */
          /**
          * 获取旋转
          * @return {Number}
@@ -213,10 +160,6 @@
             return (this._ignoreBodyRotation ? cc.radiansToDegrees(this._rotationRadians) : cc.radiansToDegrees(this._body.GetAngle()));
         },
 
-        /**
-         * set rotation
-         * @param {Number} r
-         */
          /**
          * 设置旋转
          * @param {Number} r
@@ -255,10 +198,6 @@
             this._super();
         },
 
-        /**
-         * set whether to ingore body's rotation
-         * @param {Boolean} b
-         */
          /**
          * 设置是否忽略body的旋转
          * @param {Boolean} b
@@ -273,31 +212,6 @@
         _body:null, //physics body
         _rotation:1,
 
-        /**
-         * Create a PhysicsSprite with filename and rect
-         * Constructor of cc.PhysicsSprite for chipmunk
-         * @param {String|cc.Texture2D|cc.SpriteFrame} fileName
-         * @param {cc.Rect} rect
-         * @example
-         *
-         * 1.Create a sprite with image path and rect
-         * var physicsSprite1 = new cc.PhysicsSprite("res/HelloHTML5World.png");
-         * var physicsSprite2 = new cc.PhysicsSprite("res/HelloHTML5World.png",cc.rect(0,0,480,320));
-         *
-         * 2.Create a sprite with a sprite frame name. Must add "#" before frame name.
-         * var physicsSprite = new cc.PhysicsSprite('#grossini_dance_01.png');
-         *
-         * 3.Create a sprite with a sprite frame
-         * var spriteFrame = cc.spriteFrameCache.getSpriteFrame("grossini_dance_01.png");
-         * var physicsSprite = new cc.PhysicsSprite(spriteFrame);
-         *
-         * 4.Creates a sprite with an exsiting texture contained in a CCTexture2D object
-         *      After creation, the rect will be the size of the texture, and the offset will be (0,0).
-         * var texture = cc.textureCache.addImage("HelloHTML5World.png");
-         * var physicsSprite1 = new cc.PhysicsSprite(texture);
-         * var physicsSprite2 = new cc.PhysicsSprite(texture, cc.rect(0,0,480,320));
-         *
-         */
          /**
          * 通过文件名和矩形创建物理精灵
          * 针对Chipmunk的cc.PhysicsSprite构造函数
@@ -330,20 +244,20 @@
                 cc.PhysicsSprite.prototype.init.call(this);
             }else if (cc.isString(fileName)) {
                 if (fileName[0] === "#") {
-                    //init with a sprite frame name
+                    //用精灵帧（sprite frame）名初始化
                     var frameName = fileName.substr(1, fileName.length - 1);
                     var spriteFrame = cc.spriteFrameCache.getSpriteFrame(frameName);
                     this.initWithSpriteFrame(spriteFrame);
                 } else {
-                    //init  with filename and rect
+                    //用文件名和矩形初始化
                     this.init(fileName, rect);
                 }
             }else if (cc.isObject(fileName)) {
                 if (fileName instanceof cc.Texture2D) {
-                    //init  with texture and rect
+                    //用纹理和矩形初始化
                     this.initWithTexture(fileName, rect);
                 } else if (fileName instanceof cc.SpriteFrame) {
-                    //init with a sprite frame
+                    //用精灵帧初始化
                     this.initWithSpriteFrame(fileName);
                 }
             }
@@ -369,10 +283,6 @@
         },
 
         /**
-         * set body
-         * @param {cp.Body} body
-         */
-        /**
          * 设置 body
          * @param {cp.Body} body
          */
@@ -381,10 +291,6 @@
         },
 
         /**
-         * get body
-         * @returns {cp.Body}
-         */
-        /**
          * 获取 body
          * @returns {cp.Body}
          */
@@ -392,10 +298,6 @@
             return this._body;
         },
 
-        /**
-         * get position
-         * @return {cc.Point}
-         */
         /**
          * 获取位置
          * @return {cc.Point}
@@ -406,10 +308,6 @@
         },
 
         /**
-         * get position x
-         * @return {Number}
-         */
-        /**
          * 获取位置的x坐标
          * @return {Number}
          */
@@ -418,10 +316,6 @@
         },
 
         /**
-         * get position y
-         * @return {Number}
-         */
-        /**
          * 获取位置的y坐标
          * @return {Number}
          */
@@ -429,11 +323,6 @@
             return this._body.p.y;
         },
 
-        /**
-         * set position
-         * @param {cc.Point|Number}newPosOrxValue
-         * @param {Number}yValue
-         */
         /**
          * 设置位置
          * @param {cc.Point|Number}newPosOrxValue
@@ -451,10 +340,6 @@
         },
 
         /**
-         * set position x
-         * @param {Number} xValue
-         */
-        /**
          * 设置位置的x坐标
          * @param {Number} xValue
          */
@@ -463,10 +348,6 @@
             //this._syncPosition();
         },
 
-        /**
-         * set position y
-         * @param {Number} yValue
-         */
         /**
          * 设置位置的y坐标
          * @param {Number} yValue
@@ -484,10 +365,6 @@
         },
 
         /**
-         * get rotation
-         * @return {Number}
-         */
-        /**
          * 获取旋转
          * @return {Number}
          */
@@ -495,10 +372,6 @@
             return this._ignoreBodyRotation ? cc.radiansToDegrees(this._rotationRadiansX) : -cc.radiansToDegrees(this._body.a);
         },
 
-        /**
-         * set rotation
-         * @param {Number} r
-         */
         /**
          * 设置旋转
          * @param {Number} r
@@ -517,9 +390,6 @@
             }
         },
         /**
-         * @deprecated since v3.0, please use getNodeToParentTransform instead
-         */
-        /**
          * @deprecated 自v3.0弃用,使用 getNodeToParentTransform 代替
          */
         nodeToParentTransform: function(){
@@ -527,16 +397,12 @@
         },
 
         /**
-         * get the affine transform matrix of node to parent coordinate frame
-         * @return {cc.AffineTransform}
-         */
-        /**
          * 获取将节点坐标变换到父节点坐标系的仿射变换矩阵
          * @return {cc.AffineTransform}
          */
         getNodeToParentTransform:function () {
             var _t = this;
-            if(_t._usingNormalizedPosition && _t._parent){        //TODO need refactor
+            if(_t._usingNormalizedPosition && _t._parent){        //TODO 需重构
                 var conSize = _t._parent._contentSize;
                 _t._position.x = _t._normalizedPosition.x * conSize.width;
                 _t._position.y = _t._normalizedPosition.y * conSize.height;
@@ -555,20 +421,19 @@
                 y += locAnchorPIP.y;
             }
 
-            // Make matrix
+            // 制造矩阵
             var radians = locBody.a;
             var c = Math.cos(radians);
             var s = Math.sin(radians);
 
-            // Although scale is not used by physics engines, it is calculated just in case
-            // the sprite is animated (scaled up/down) using actions.
-            // For more info see: http://www.cocos2d-iphone.org/forum/topic/68990
+            // 尽管物理引擎中没有用到缩放, 但我们还是算出它（缩放矩阵）以防精灵在动作中放大/缩小
+            // 更多信息见: http://www.cocos2d-iphone.org/forum/topic/68990
             if (!cc._rectEqualToZero(locAnchorPIP)) {
                 x += c * -locAnchorPIP.x * locScaleX + -s * -locAnchorPIP.y * locScaleY;
                 y += s * -locAnchorPIP.x * locScaleX + c * -locAnchorPIP.y * locScaleY;
             }
 
-            // Rot, Translate Matrix
+            // Rot, 平移矩阵
             this._transform = cc.affineTransformMake(c * locScaleX, s * locScaleX,
                 -s * locScaleY, c * locScaleY,
                 x, y);
@@ -578,13 +443,13 @@
 
         _nodeToParentTransformForCanvas: function () {
             if (this.dirty) {
-                var t = this._transform;// quick reference
+                var t = this._transform;// 快捷引用
                 // base position
                 var locBody = this._body, locScaleX = this._scaleX, locScaleY = this._scaleY, locAnchorPIP = this._anchorPointInPoints;
                 t.tx = locBody.p.x;
                 t.ty = locBody.p.y;
 
-                // rotation Cos and Sin
+                // 旋转的 Cos 和 Sin
                 var radians = -locBody.a;
                 var Cos = 1, Sin = 0;
                 if (radians) {
@@ -597,7 +462,7 @@
                 t.b = -Sin;
                 t.c = Sin;
 
-                // scale
+                // 缩放
                 if (locScaleX !== 1 || locScaleY !== 1) {
                     t.a *= locScaleX;
                     t.c *= locScaleX;
@@ -605,11 +470,11 @@
                     t.d *= locScaleY;
                 }
 
-                // adjust anchorPoint
+                // 适应锚点
                 t.tx += Cos * -locAnchorPIP.x * locScaleX + -Sin * locAnchorPIP.y * locScaleY;
                 t.ty -= Sin * -locAnchorPIP.x * locScaleX + Cos * locAnchorPIP.y * locScaleY;
 
-                // if ignore anchorPoint
+                // 是否忽略锚点
                 if (this._ignoreAnchorPointForPosition) {
                     t.tx += locAnchorPIP.x;
                     t.ty += locAnchorPIP.y;
@@ -620,11 +485,7 @@
         },
 
         /**
-         * whether dirty
-         * @return {Boolean}
-         */
-        /**
-         * 判断精灵在Atlas中是否需要更新
+         * 是否dirty
          * @return {Boolean}
          */
         isDirty:function(){
@@ -632,10 +493,6 @@
         },
         setDirty: function(){ },
 
-        /**
-         * set whether to ignore rotation of body
-         * @param {Boolean} b
-         */
         /**
          * 设置是否忽略body的旋转
          * @param {Boolean} b
@@ -647,7 +504,7 @@
     cc.PhysicsSprite = cc.Sprite.extend(chipmunkAPI);
     cc.PhysicsSprite._className = "PhysicsSprite";
     var _p = cc.PhysicsSprite.prototype;
-    // Extended properties
+    // 扩展属性
     /** @expose */
     _p.body;
     cc.defineGetterSetter(_p, "body", _p.getBody, _p.setBody);
@@ -656,13 +513,6 @@
     cc.defineGetterSetter(_p, "dirty", _p.isDirty, _p.setDirty);
 
 
-    /**
-     * Create a PhysicsSprite with filename and rect
-     * @deprecated since v3.0, please use new cc.PhysicsSprite(fileName, rect) instead
-     * @param {String|cc.Texture2D|cc.SpriteFrame} fileName
-     * @param {cc.Rect} rect
-     * @return {cc.PhysicsSprite}
-     */
     /**
      * 通过文件名和矩形创建一个PhysicsSprite
      * @deprecated 自v3.0弃用, 使用new cc.PhysicsSprite(fileName, rect) 代替
@@ -675,19 +525,11 @@
     };
 
     /**
-     * @deprecated since v3.0, please use new cc.PhysicsSprite(spriteFrameName) instead
-     * @type {Function}
-     */
-    /**
      * @deprecated 自v3.0弃用, 使用new cc.PhysicsSprite(spriteFrameName) 代替
      * @type {Function}
      */
     cc.PhysicsSprite.createWithSpriteFrameName = cc.PhysicsSprite.create;
 
-    /**
-     * @deprecated since v3.0, please use new cc.PhysicsSprite(spriteFrame) instead
-     * @type {Function}
-     */
     /**
      * @deprecated 自v3.0弃用, 使用new cc.PhysicsSprite(spriteFrame) 代替
      * @type {Function}

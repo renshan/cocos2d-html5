@@ -26,16 +26,7 @@
  ****************************************************************************/
 
 /**
- * Progress to percentage
- * @class
- * @extends cc.ActionInterval
- * @param {Number} duration duration in seconds
- * @param {Number} percent
- * @example
- * var to = new cc.ProgressTo(2, 100);
- */
-/**
- * 到某个百分比的进度条
+ * 百分比进度条
  * @class
  * @extends cc.ActionInterval
  * @param {Number} duration 以秒为单位
@@ -47,12 +38,6 @@ cc.ProgressTo = cc.ActionInterval.extend(/** @lends cc.ProgressTo# */{
     _to:0,
     _from:0,
 
-	/**
-	 * Creates a ProgressTo action with a duration and a percent
-	 * Constructor of cc.ProgressTo
-     * @param {Number} duration duration in seconds
-     * @param {Number} percent
-	 */
 	/**
 	 * 使用持续时间和百分比创建一个ProgressTo action
 	 * cc.ProgressTo构造函数
@@ -67,11 +52,6 @@ cc.ProgressTo = cc.ActionInterval.extend(/** @lends cc.ProgressTo# */{
 		percent !== undefined && this.initWithDuration(duration, percent);
     },
 
-    /** Initializes with a duration and a percent
-     * @param {Number} duration duration in seconds
-     * @param {Number} percent
-     * @return {Boolean}
-     */
     /** 使用持续时间和百分比进行初始化
      * @param {Number} duration 以秒为单位
      * @param {Number} percent
@@ -85,10 +65,6 @@ cc.ProgressTo = cc.ActionInterval.extend(/** @lends cc.ProgressTo# */{
         return false;
     },
     /**
-     * return a new cc.ProgressTo, all the configuration is the same as the original
-     * @returns {cc.ProgressTo}
-     */
-    /**
      * 返回一个cc.ProgressTo的克隆对象，所有的属性都和原对象相同
      * @returns {cc.ProgressTo}
      */
@@ -97,10 +73,6 @@ cc.ProgressTo = cc.ActionInterval.extend(/** @lends cc.ProgressTo# */{
         action.initWithDuration(this._duration, this._to);
         return action;
     },
-    /**
-     * reverse hasn't been supported
-     * @returns {null}
-     */
     /**
      * 反转未实现
      * @returns {null}
@@ -111,11 +83,7 @@ cc.ProgressTo = cc.ActionInterval.extend(/** @lends cc.ProgressTo# */{
     },
 
     /**
-     * start with a target
-     * @param {cc.Node} target
-     */
-    /**
-     * 从一个target开始
+     * 在一个target上启动
      * @param {cc.Node} target
      */
     startWithTarget:function (target) {
@@ -125,10 +93,6 @@ cc.ProgressTo = cc.ActionInterval.extend(/** @lends cc.ProgressTo# */{
 
     /**
      * custom update
-     * @param {Number} time time in seconds
-     */
-    /**
-     * 定制更新
      * @param {Number} time 以秒为单位
      */
     update:function (time) {
@@ -137,16 +101,6 @@ cc.ProgressTo = cc.ActionInterval.extend(/** @lends cc.ProgressTo# */{
     }
 });
 
-/**
- * Creates and initializes with a duration and a percent
- * @function
- * @param {Number} duration duration in seconds
- * @param {Number} percent
- * @return {cc.ProgressTo}
- * @example
- * // example
- * var to = cc.progressTo(2, 100);
- */
 /**
  * 通过持续时间和百分比创建并初始化
  * @function
@@ -161,15 +115,6 @@ cc.progressTo = function (duration, percent) {
     return new cc.ProgressTo(duration, percent);
 };
 /**
- * Please use cc.progressTo instead
- * Creates and initializes with a duration and a percent
- * @static
- * @deprecated since v3.0,please use cc.progressTo instead.
- * @param {Number} duration duration in seconds
- * @param {Number} percent
- * @return {cc.ProgressTo}
- */
-/**
  * 请使用 cc.progressTo 代替
  * 通过持续时间和百分比创建并初始化
  * @static
@@ -180,16 +125,6 @@ cc.progressTo = function (duration, percent) {
  */
 cc.ProgressTo.create = cc.progressTo;
 
-/**
- * Progress from a percentage to another percentage
- * @class
- * @extends cc.ActionInterval
- * @param {Number} duration duration in seconds
- * @param {Number} fromPercentage
- * @param {Number} toPercentage
- * @example
- *  var fromTo = new cc.ProgressFromTo(2, 100.0, 0.0);
- */
 /**
  * 从起始百分比到结束百分比的进度条
  * @class
@@ -205,13 +140,6 @@ cc.ProgressFromTo = cc.ActionInterval.extend(/** @lends cc.ProgressFromTo# */{
     _from:0,
 
 	/**
-	 * Creates and initializes the action with a duration, a "from" percentage and a "to" percentage
-	 * Constructor of cc.ProgressFromTo
-     * @param {Number} duration duration in seconds
-     * @param {Number} fromPercentage
-     * @param {Number} toPercentage
-	 */
-	/**
 	 * 通过持续时间，起始百分比和结束百分比创建并初始化一个action
 	 * cc.ProgressFromTo构造函数
      * @param {Number} duration duration in seconds
@@ -226,12 +154,6 @@ cc.ProgressFromTo = cc.ActionInterval.extend(/** @lends cc.ProgressFromTo# */{
 		toPercentage !== undefined && this.initWithDuration(duration, fromPercentage, toPercentage);
     },
 
-    /** Initializes the action with a duration, a "from" percentage and a "to" percentage
-     * @param {Number} duration duration in seconds
-     * @param {Number} fromPercentage
-     * @param {Number} toPercentage
-     * @return {Boolean}
-     */
     /** 通过持续时间，起始百分比和结束百分比初始化这个action
      * @param {Number} duration 以秒为单位
      * @param {Number} fromPercentage
@@ -246,10 +168,6 @@ cc.ProgressFromTo = cc.ActionInterval.extend(/** @lends cc.ProgressFromTo# */{
         }
         return false;
     },
-    /**
-     * return a new cc.ProgressFromTo, all the configuration is the same as the original
-     * @returns {cc.ProgressFromTo}
-     */
     /**
      * 返回一个cc.ProgressFromTo的克隆对象，所有的属性都和原对象相同
      * @returns {cc.ProgressFromTo}
@@ -268,20 +186,13 @@ cc.ProgressFromTo = cc.ActionInterval.extend(/** @lends cc.ProgressFromTo# */{
     },
 
     /**
-     * start with a target
-     * @param {cc.Node} target
-     */
-    /**
-     * 从一个target开始
+     * 在一个target上启动
      * @param {cc.Node} target
      */
     startWithTarget:function (target) {
         cc.ActionInterval.prototype.startWithTarget.call(this, target);
     },
 
-    /**
-     * @param {Number} time time in seconds
-     */
     /**
      * @param {Number} time 以秒为单位
      */
@@ -291,16 +202,6 @@ cc.ProgressFromTo = cc.ActionInterval.extend(/** @lends cc.ProgressFromTo# */{
     }
 });
 
-/** Creates and initializes the action with a duration, a "from" percentage and a "to" percentage
- * @function
- * @param {Number} duration duration in seconds
- * @param {Number} fromPercentage
- * @param {Number} toPercentage
- * @return {cc.ProgressFromTo}
- * @example
- * // example
- *  var fromTo = cc.progressFromTo(2, 100.0, 0.0);
- */
 /** 通过持续时间，起始百分比和结束百分比创建并初始化一个action
  * @function
  * @param {Number} duration 以秒为单位
@@ -308,21 +209,12 @@ cc.ProgressFromTo = cc.ActionInterval.extend(/** @lends cc.ProgressFromTo# */{
  * @param {Number} toPercentage
  * @return {cc.ProgressFromTo}
  * @example
- * // example
+ * // 示例
  *  var fromTo = cc.progressFromTo(2, 100.0, 0.0);
  */
 cc.progressFromTo = function (duration, fromPercentage, toPercentage) {
     return new cc.ProgressFromTo(duration, fromPercentage, toPercentage);
 };
-/**
- * Creates and initializes the action with a duration, a "from" percentage and a "to" percentage
- * @static
- * @deprecated since v3.0,please use cc.ProgressFromTo(duration, fromPercentage, toPercentage) instead.
- * @param {Number} duration duration in seconds
- * @param {Number} fromPercentage
- * @param {Number} toPercentage
- * @return {cc.ProgressFromTo}
- */
 /**
  * 通过持续时间，起始百分比和结束百分比创建并初始化一个action
  * @static

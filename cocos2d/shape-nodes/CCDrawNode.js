@@ -82,14 +82,6 @@ cc.__t = function (v) {
 
 /**
  * <p>CCDrawNode                                                <br/>
- * Node that draws dots, segments and polygons.                        <br/>
- * Faster than the "drawing primitives" since they it draws everything in one single batch.</p>
- * @class
- * @name cc.DrawNode
- * @extends cc.Node
- */
-/**
- * <p>CCDrawNode                                                <br/>
  * Node在一个单独的批处理过程中绘制所有的点、线段和多边形，<br/>
  * 因此比"drawing primitives"快。</p>
  * @class
@@ -103,11 +95,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
     _drawColor: null,
     _className:"DrawNodeCanvas",
 
-    /**
-     * <p>The cc.DrawNodeCanvas's constructor. <br/>
-     * This function will automatically be invoked when you create a node using new construction: "var node = new cc.DrawNodeCanvas()".<br/>
-     * Override it to extend its behavior, remember to call "this._super()" in the extended "ctor" function.</p>
-     */
     /**
      * <p>cc.DrawNodeCanvas的构造函数。<br/>
      * 当你使用new关键字创建新实例时，这个方法会自动被调用: "var node = new cc.DrawNodeCanvas()".<br/>
@@ -129,10 +116,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
 
     // ----common function start ----
     /**
-     * Gets the blend func
-     * @returns {Object}
-     */
-    /**
      * 获取blend func
      * @returns {Object}
      */
@@ -140,11 +123,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
         return this._blendFunc;
     },
 
-    /**
-     * Set the blend func
-     * @param blendFunc
-     * @param dst
-     */
     /**
      * 设置blend func
      * @param blendFunc
@@ -161,11 +139,7 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
     },
 
     /**
-     * line width setter
-     * @param {Number} width
-     */
-    /**
-     * 获取线宽
+     * 设置线宽
      * @param {Number} width
      */
     setLineWidth: function (width) {
@@ -173,21 +147,13 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
     },
 
     /**
-     * line width getter
-     * @returns {Number}
-     */
-    /**
-     * 设置线宽
+     * 获取线宽
      * @returns {Number}
      */
     getLineWidth: function () {
         return this._lineWidth;
     },
 
-    /**
-     * draw color setter
-     * @param {cc.Color} color
-     */
     /**
      * 设置绘制颜色
      * @param {cc.Color} color
@@ -201,10 +167,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
     },
 
     /**
-     * draw color getter
-     * @returns {cc.Color}
-     */
-    /**
      * 获取绘制颜色
      * @returns {cc.Color}
      */
@@ -214,14 +176,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
     // ----common function end ----
 
 
-    /**
-     * draws a rectangle given the origin and destination point measured in points.
-     * @param {cc.Point} origin
-     * @param {cc.Point} destination
-     * @param {cc.Color} fillColor
-     * @param {Number} lineWidth
-     * @param {cc.Color} lineColor
-     */
     /**
      * 根据起点和终点（以point为单位），绘制矩形
      * @param {cc.Point} origin
@@ -258,17 +212,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
         this._buffer.push(element);
     },
 
-    /**
-     * draws a circle given the center, radius and number of segments.
-     * @override
-     * @param {cc.Point} center center of circle
-     * @param {Number} radius
-     * @param {Number} angle angle in radians
-     * @param {Number} segments
-     * @param {Boolean} drawLineToCenter
-     * @param {Number} lineWidth
-     * @param {cc.Color} color
-     */
     /**
      * 根据圆心，半径和线段的个数绘制圆
      * @override
@@ -308,16 +251,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
     },
 
     /**
-     * draws a quad bezier path
-     * @override
-     * @param {cc.Point} origin
-     * @param {cc.Point} control
-     * @param {cc.Point} destination
-     * @param {Number} segments
-     * @param {Number} lineWidth
-     * @param {cc.Color} color
-     */
-    /**
      * 绘制二次贝塞尔曲线
      * @override
      * @param {cc.Point} origin
@@ -351,17 +284,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
         this._buffer.push(element);
     },
 
-    /**
-     * draws a cubic bezier path
-     * @override
-     * @param {cc.Point} origin
-     * @param {cc.Point} control1
-     * @param {cc.Point} control2
-     * @param {cc.Point} destination
-     * @param {Number} segments
-     * @param {Number} lineWidth
-     * @param {cc.Color} color
-     */
     /**
      * 绘制三次贝塞尔曲线
      * @override
@@ -398,15 +320,7 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
     },
 
     /**
-     * draw a CatmullRom curve
-     * @override
-     * @param {Array} points
-     * @param {Number} segments
-     * @param {Number} lineWidth
-     * @param {cc.Color} color
-     */
-    /**
-     * 绘制卡特莫尔罗曲线
+     * 绘制卡特莫尔罗(CatmullRom)曲线
      * @override
      * @param {Array} points
      * @param {Number} segments
@@ -418,16 +332,7 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
     },
 
     /**
-     * draw a cardinal spline path
-     * @override
-     * @param {Array} config
-     * @param {Number} tension
-     * @param {Number} segments
-     * @param {Number} lineWidth
-     * @param {cc.Color} color
-     */
-    /**
-     * 绘制基样条曲线
+     * 绘制Cardinal样条曲线
      * @override
      * @param {Array} config
      * @param {Number} tension
@@ -473,12 +378,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
     },
 
     /**
-     * draw a dot at a position, with a given radius and color
-     * @param {cc.Point} pos
-     * @param {Number} radius
-     * @param {cc.Color} color
-     */
-    /**
      * 根据半径、颜色在给定位置绘制点
      * @param {cc.Point} pos
      * @param {Number} radius
@@ -496,13 +395,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
     },
 
     /**
-     * draws an array of points.
-     * @override
-     * @param {Array} points point of array
-     * @param {Number} radius
-     * @param {cc.Color} color
-     */
-    /**
      * 绘制点阵列
      * @override
      * @param {Array} points 点阵
@@ -519,13 +411,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
            this.drawDot(points[i], radius, color);
     },
 
-    /**
-     * draw a segment with a radius and color
-     * @param {cc.Point} from
-     * @param {cc.Point} to
-     * @param {Number} lineWidth
-     * @param {cc.Color} color
-     */
     /**
      * 根据起止点以及线宽绘制线段
      * @param {cc.Point} from
@@ -547,13 +432,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
         this._buffer.push(element);
     },
 
-    /**
-     * draw a polygon with a fill color and line color without copying the vertex list
-     * @param {Array} verts
-     * @param {cc.Color} fillColor
-     * @param {Number} lineWidth
-     * @param {cc.Color} color
-     */
     /**
      * 在不拷贝顶点列表的情况下，根据给定的填充颜色，边线颜色绘制多边形
      * @param {Array} verts
@@ -581,13 +459,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
     },
     
     /**
-     * draw a polygon with a fill color and line color, copying the vertex list
-     * @param {Array} verts
-     * @param {cc.Color} fillColor
-     * @param {Number} lineWidth
-     * @param {cc.Color} color
-     */
-    /**
      * 根据填充颜色和边线颜色绘制多边形，并且拷贝顶点列表
      * @param {Array} verts
      * @param {cc.Color} fillColor
@@ -602,10 +473,6 @@ cc.DrawNodeCanvas = cc.Node.extend(/** @lends cc.DrawNode# */{
         return this.drawPoly_(vertsCopy, fillColor, lineWidth, color);     
     },
 
-    /**
-     * Render function using the canvas 2d context or WebGL context, internal usage only, please do not call this function
-     * @param {CanvasRenderingContext2D | WebGLRenderingContext} ctx The render context
-     */
     /**
      *使用canvas 2d环境或者WebGL环境进行渲染，仅限内部使用，请不要调用此方法
      * @param {CanvasRenderingContext2D | WebGLRenderingContext} ctx The render context
@@ -1149,11 +1016,6 @@ cc.DrawNodeWebGL = cc.Node.extend({
 
 cc.DrawNode = cc._renderType == cc._RENDER_TYPE_WEBGL ? cc.DrawNodeWebGL : cc.DrawNodeCanvas;
 
-/**
- * Creates a DrawNode
- * @deprecated since v3.0 please use new cc.DrawNode() instead.
- * @return {cc.DrawNode}
- */
 /**
  * 创建DrawNode
  * @deprecated 自v3.0弃用，使用new cc.DrawNode()代替
